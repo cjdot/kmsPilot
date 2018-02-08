@@ -8,29 +8,6 @@ var lastName;
 var email;
 var password;
 
-//Might not need
-/*module.exports.function User = function(firstName, lastName, email, password){
-	this.firstName = firstName;
-	this.lastName = lastName;
-	this.email = email;
-	this.password = password;
-}/*
-
-/*var UserSchema = {
-	firstName: {
-		type: String,
-	},
-	firstName: {
-		type: String,
-	},
-	password: {
-		type: String
-	},
-	email: {
-		type: String,
-		index: true
-	}
-} */
 
 //var User = module.exports = mongoose.model('User', UserSchema);
 
@@ -39,19 +16,33 @@ module.exports.createUser = function(newUser, callback){
 	firstName = newUser.firstName;
 	lastName = newUser.lastName;
 	email = newUser.email;
-	password = newUser.password;
 	
 	
-	queryDatabase(firstName, lastName, email, password);
+	
+	
 	//This code below hashes the password to store in database
 
-	/*bcrypt.genSalt(10, function(err, salt) {
+	bcrypt.genSalt(10, function(err, salt) {
 	    bcrypt.hash(newUser.password, salt, function(err, hash) {
-	        newUser.password = hash;
-	        newUser.save(callback);
-	    });
+			
+			newUser.password = hash;
+
+			//newUser.save(callback);
+			console.log('This happened');
+			console.log(newUser.password + ' ' + hash);
+
+			//This executes the insert statement
+			
+			queryDatabase(newUser.firstName, newUser.lastName, newUser.email, newUser.password)
+		});
+		
 	});
-	*/
+	
+	
+	
+	//password = newUser.password;
+	
+	//queryDatabase(firstName, lastName, email, password);
 }
 
 module.exports.getUserByUsername = function(username, callback){
