@@ -58,6 +58,53 @@ router.post('/register', function(req, res){
 	}
 });
 
+
+
+router.post('/login', function(req, res) {
+	
+	
+	var email
+	var pass
+
+	var emailPass = {
+		email: req.body.email,
+		pass: req.body.password
+	}
+	
+	User.tryLogin(emailPass, function(err, tryEmailPass){
+		if(err) throw err;		
+	})
+	res.locals.user = req.body.email
+	console.log(req.session.user)
+	res.render('index');
+
+});
+
+/*
+router.post('/login', passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login',failureFlash: true}),
+  function(req, res) {
+    res.redirect('/');
+	});
+*/
+
+router.get('/project', function(req, res) {
+	if(!req.session.user) {
+		return res.status(401).send();
+	}
+
+	return res.status(200).send("Super secret");
+})
+
+router.get('/logout', function(req, res){
+	req.logout();
+
+	req.flash('success_msg', 'You are logged out');
+
+	res.redirect('/users/login');
+});
+
+module.exports = router;
+
 //This is the passport code that we will use to securel authenticate our
 
 /*passport.use(new LocalStrategy(
@@ -89,18 +136,3 @@ passport.deserializeUser(function(id, done) {
   });
 });
 */
-router.post('/login',
-  passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login',failureFlash: true}),
-  function(req, res) {
-    res.redirect('/');
-  });
-
-router.get('/logout', function(req, res){
-	req.logout();
-
-	req.flash('success_msg', 'You are logged out');
-
-	res.redirect('/users/login');
-});
-
-module.exports = router;

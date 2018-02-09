@@ -19,6 +19,7 @@
     "express-messages": "*",
     "express-session": "*",
     "express-validator": "*",
+    "express-mysql-session": "*",
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",

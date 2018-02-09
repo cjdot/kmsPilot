@@ -25,11 +25,7 @@ module.exports.createUser = function(newUser, callback){
 	bcrypt.genSalt(10, function(err, salt) {
 	    bcrypt.hash(newUser.password, salt, function(err, hash) {
 			
-			newUser.password = hash;
-
-			//newUser.save(callback);
-			console.log('This happened');
-			console.log(newUser.password + ' ' + hash);
+			newUser.password = hash;			
 
 			//This executes the insert statement
 			
@@ -43,6 +39,17 @@ module.exports.createUser = function(newUser, callback){
 	//password = newUser.password;
 	
 	//queryDatabase(firstName, lastName, email, password);
+}
+
+
+var loginEmail;
+var loginPass;
+
+module.exports.tryLogin = function(emailPass, callback){
+	loginEmail = emailPass.email
+	loginPass = emailPass.pass
+	var retrievedCreds = retrieveLogin(loginEmail, loginPass)
+	
 }
 
 module.exports.getUserByUsername = function(username, callback){
@@ -63,12 +70,31 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
 
 function queryDatabase(firstName, lastName, email, password){
 	var qry = 'INSERT INTO account (firstName, lastName, email, password) VALUES(\'' + firstName + '\', \'' + lastName + '\', \'' + email + '\', \'' + password + '\')'
-	console.log(qry)
+	
 	conn.query( qry, function(err, results, fields){
 		if (err) throw err;
 		console.log('Query Executed', results);
 	})
 
+}
+
+function retrieveLogin(email, password){
+	var qry = 'SELECT email, password FROM account WHERE email = \'' + email + '\''
+	
+	conn.query( qry, function(err, results, fields){
+		
+		if (err) throw err;
+		/*if (!err) {
+
+			
+			bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
+				if(err) throw err;
+				callback(null, isMatch);
+			});
+		} */
+		return results;
+	})
+	
 }
 
 var config = {

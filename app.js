@@ -4,8 +4,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 var expressValidator = require('express-validator');
-var flash = require('connect-flash');
 var session = require('express-session');
+var MySQLStore = require('express-mysql-session') (session);
+var flash = require('connect-flash');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -29,11 +30,29 @@ app.use(cookieParser());
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Session options and setup for MYSQL store
+var options = {
+
+  host: 'kmspilot.mysql.database.azure.com',
+	user: 'kmsadmin@kmspilot',
+	password: 'KMSproject1',
+	database: 'kmspilot',
+	port: 3306,
+	ssl: true
+
+}
+
+var sessionStore = new MySQLStore(options);
+
 // Express Session
 app.use(session({
+
+    //NEED TO CHANGE THE 'secret' VARIABLE AND STORE IN ENCRYPTED CONFIG FILE NOT IN THIS FILE HERE
+    //NEEDS TO BE SOMETHING THAT NO ONE CAN GUESS 'asdlfkhj34087yfkjasf023rhb'
     secret: 'secret',
-    saveUninitialized: true,
-    resave: true
+    store: sessionStore,
+    saveUninitialized: false,
+    resave: false
 }));
 
 // Passport init
