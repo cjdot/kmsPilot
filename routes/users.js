@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var mysql = require('mysql2');
+var bcrypt = require('bcryptjs');
 
 var User = require('../models/user');
 
@@ -14,6 +16,7 @@ router.get('/register', function(req, res){
 router.get('/login', function(req, res){
 	res.render('login');
 });
+
 
 // Register User
 router.post('/register', function(req, res){
@@ -62,21 +65,58 @@ router.post('/register', function(req, res){
 
 router.post('/login', function(req, res) {
 	
-	
-	var email
-	var pass
+	var config = {
 
-	var emailPass = {
-		email: req.body.email,
-		pass: req.body.password
-	}
+		host: 'kmspilot.mysql.database.azure.com',
+		user: 'kmsadmin@kmspilot',
+		password: 'KMSproject1',
+		database: 'kmspilot',
+		port: 3306,
+		ssl: true
 	
-	User.tryLogin(emailPass, function(err, tryEmailPass){
-		if(err) throw err;		
-	})
-	res.locals.user = req.body.email
-	console.log(req.session.user)
-	res.render('index');
+	};
+	
+	const conn = new mysql.createConnection(config);
+	
+	conn.connect(
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!! Error:");
+				throw err;
+			}
+			else {
+				console.log("Connection established.");
+			}
+		}
+	
+	)
+	
+	var qry = 'SELECT email, password FROM account WHERE email = \'' + req.body.email + '\' limit 1'
+	console.log(qry);
+	conn.query( qry, function(err, results, fields){
+		
+		if (err) throw err;
+		console.log(results[0].password);
+
+		/*bcrypt.compare(results[0].password, hash, function(err, isMatch) {
+			if(err) throw err;
+			callback(null, isMatch);
+		}); */	
+
+		req.login(results[0].email, function(err) {
+			
+			res.redirect('/');
+		})
+		/*if (!err) {
+
+			
+			bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
+				if(err) throw err;
+				callback(null, isMatch);
+			});
+		} */
+		//req.login()
+	});
 
 });
 
@@ -125,14 +165,23 @@ module.exports = router;
    	});
    });
   }));
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.getUserById(id, function(err, user) {
-    done(err, user);
-  });
-});
 */
+passport.serializeUser(function(email, done) {
+  done(null, email);
+});
+
+passport.deserializeUser(function(email, done) {
+    done(null, email);
+});
+
+var config = {
+
+	host: 'kmspilot.mysql.database.azure.com',
+	user: 'kmsadmin@kmspilot',
+	password: 'KMSproject1',
+	database: 'kmspilot',
+	port: 3306,
+	ssl: true
+
+};
+

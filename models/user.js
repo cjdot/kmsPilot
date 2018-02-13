@@ -22,15 +22,12 @@ module.exports.createUser = function(newUser, callback){
 	
 	//This code below hashes the password to store in database
 
-	bcrypt.genSalt(10, function(err, salt) {
-	    bcrypt.hash(newUser.password, salt, function(err, hash) {
-			
+	
+	    bcrypt.hash(newUser.password, 10, function(err, hash) {			
 			newUser.password = hash;			
-
-			//This executes the insert statement
-			
+			//This executes the insert statement			
 			queryDatabase(newUser.firstName, newUser.lastName, newUser.email, newUser.password)
-		});
+		
 		
 	});
 	
@@ -80,7 +77,7 @@ function queryDatabase(firstName, lastName, email, password){
 
 function retrieveLogin(email, password){
 	var qry = 'SELECT email, password FROM account WHERE email = \'' + email + '\''
-	
+	console.log(qry);
 	conn.query( qry, function(err, results, fields){
 		
 		if (err) throw err;
@@ -92,6 +89,7 @@ function retrieveLogin(email, password){
 				callback(null, isMatch);
 			});
 		} */
+		//req.login()
 		return results;
 	})
 	
