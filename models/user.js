@@ -16,26 +16,22 @@ module.exports.createUser = function(newUser, callback){
 	firstName = newUser.firstName;
 	lastName = newUser.lastName;
 	email = newUser.email;
-	
-	
-	
-	
+	console.log(newUser.password)
 	//This code below hashes the password to store in database
 
+	let hash = bcrypt.hashSync(newUser.password, 10);
+	console.log(hash)		
+	//This executes the insert statement			
+	queryDatabase(newUser.firstName, newUser.lastName, newUser.email, hash)
+
 	
-	    bcrypt.hash(newUser.password, 10, function(err, hash) {			
-			newUser.password = hash;			
-			//This executes the insert statement			
-			queryDatabase(newUser.firstName, newUser.lastName, newUser.email, newUser.password)
-		
-		
-	});
+	/*bcrypt.hashSync(newUser.password, 10, function(err, hash) {			
+		newUser.password = hash;	
+		console.log(newUser.password)		
+		//This executes the insert statement			
+		queryDatabase(newUser.firstName, newUser.lastName, newUser.email, newUser.password)		
+	}); */
 	
-	
-	
-	//password = newUser.password;
-	
-	//queryDatabase(firstName, lastName, email, password);
 }
 
 

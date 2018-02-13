@@ -7,9 +7,16 @@ var bcrypt = require('bcryptjs');
 
 var User = require('../models/user');
 
+
+
 // Register
 router.get('/register', function(req, res){
 	res.render('register');
+});
+
+//PDF Builder
+router.get('/builder', ensureAuthenticated, function(req, res){
+	res.render('builder');
 });
 
 // Login
@@ -18,18 +25,28 @@ router.get('/login', function(req, res){
 });
 
 
+//This function ensures that every route is authenticated with a user
+function ensureAuthenticated(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	} else {
+		req.flash('error_msg','You are not logged in');
+		res.redirect('/users/login');
+	}
+}
+
 // Register User
 router.post('/register', function(req, res){
 		
 	var firstName = req.body.firstName;
-  var lastName = req.body.lastName;
+  	var lastName = req.body.lastName;
 	var email = req.body.email;
-  var password = req.body.password;
+  	var password = req.body.password;
 	var password2 = req.body.password2;
 
 	// Validation
-  req.checkBody('firstName', 'First name is required').notEmpty();
-  req.checkBody('lastName', 'Last name is required').notEmpty();
+  	req.checkBody('firstName', 'First name is required').notEmpty();
+  	req.checkBody('lastName', 'Last name is required').notEmpty();
 	req.checkBody('email', 'Email is required').notEmpty();
 	req.checkBody('email', 'Email is not valid').isEmail();
 	req.checkBody('password', 'Password is required').notEmpty();
@@ -50,14 +67,12 @@ router.post('/register', function(req, res){
 					password: password
 				}
 
-				User.createUser(newUser, function(err, user){
-				if(err) throw err;
-				console.log(user);
-				});
-
-				req.flash('success_msg', 'You are registered and can now login');
-
-				res.redirect('/users/login');
+		User.createUser(newUser, function(err, user){
+		if(err) throw err;
+		console.log(user);
+		});
+		req.flash('success_msg', 'You are registered and can now login');
+		res.redirect('/users/login');
 	}
 });
 
@@ -65,6 +80,12 @@ router.post('/register', function(req, res){
 
 router.post('/login', function(req, res) {
 	
+	
+	
+	req.checkBody('email', 'Email is required').notEmpty();
+	req.checkBody('password', 'Password is required').notEmpty();
+
+
 	var config = {
 
 		host: 'kmspilot.mysql.database.azure.com',
@@ -75,49 +96,66 @@ router.post('/login', function(req, res) {
 		ssl: true
 	
 	};
-	
+
+
 	const conn = new mysql.createConnection(config);
 	
-	conn.connect(
-		function (err) {
-			if (err) {
-				console.log("!!!! Cannot Connect !!! Error:");
-				throw err;
+	var errors = req.validationErrors();
+
+	if(errors){
+		res.render('login',{
+			errors:errors
+		});
+	} else {
+        
+        conn.connect(
+			function (err) {
+				if (err) {
+					console.log("!!!! Cannot Connect !!! Error:");
+					throw err;
+				}
+				else {
+					console.log("Connection established.");
+				}
 			}
-			else {
-				console.log("Connection established.");
-			}
-		}
-	
-	)
-	
-	var qry = 'SELECT email, password FROM account WHERE email = \'' + req.body.email + '\' limit 1'
-	console.log(qry);
-	conn.query( qry, function(err, results, fields){
 		
-		if (err) throw err;
-		console.log(results[0].password);
-
-		/*bcrypt.compare(results[0].password, hash, function(err, isMatch) {
-			if(err) throw err;
-			callback(null, isMatch);
-		}); */	
-
-		req.login(results[0].email, function(err) {
+		)
+		
+		var qry = 'SELECT email, password FROM account WHERE email = \'' + req.body.email + '\' limit 1'
+		console.log(qry);
+		conn.query( qry, function(err, results, fields){
 			
-			res.redirect('/');
-		})
-		/*if (!err) {
-
+			if (err) throw err;
+			console.log(results[0].password);
+			console.log(req.body.password);
+	
 			
-			bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
-				if(err) throw err;
-				callback(null, isMatch);
-			});
-		} */
-		//req.login()
-	});
+			if (bcrypt.compareSync(req.body.password, results[0].password)){
+				res.redirect('/users/login')
+				
+			} else {
+				req.login(results[0].email, results[0].password, function(err) {
+				
+					res.redirect('/');
+				})
+			} 
+			
+			
+			/*if (!err) {
+	
+				
+				bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
+					if(err) throw err;
+					callback(null, isMatch);
+				});
+			} */
+			//req.login()
+		});
+	
+	}
 
+
+	
 });
 
 /*
