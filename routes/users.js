@@ -102,6 +102,8 @@ router.post('/login', function(req, res) {
 	
 	var errors = req.validationErrors();
 
+	
+
 	if(errors){
 		res.render('login',{
 			errors:errors
@@ -130,14 +132,18 @@ router.post('/login', function(req, res) {
 			console.log(req.body.password);
 	
 			
+
+
 			if (bcrypt.compareSync(req.body.password, results[0].password)){
-				res.redirect('/users/login')
 				
-			} else {
 				req.login(results[0].email, results[0].password, function(err) {
 				
 					res.redirect('/');
 				})
+				
+			} else {
+				res.redirect('/users/login')
+				
 			} 
 			
 			
