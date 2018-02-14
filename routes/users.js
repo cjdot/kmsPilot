@@ -128,11 +128,8 @@ router.post('/login', function(req, res) {
 		conn.query( qry, function(err, results, fields){
 			
 			if (err) throw err;
-			console.log(results[0].password);
-			console.log(req.body.password);
-	
-			
 
+			if (results.len > 1){
 
 			if (bcrypt.compareSync(req.body.password, results[0].password)){
 				
@@ -140,22 +137,17 @@ router.post('/login', function(req, res) {
 				
 					res.redirect('/');
 				})
-				
+
 			} else {
+				req.flash('error_msg', 'Incorrect Username or Password');
 				res.redirect('/users/login')
 				
 			} 
+		} else {
 			
-			
-			/*if (!err) {
-	
-				
-				bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
-					if(err) throw err;
-					callback(null, isMatch);
-				});
-			} */
-			//req.login()
+			req.flash('error_msg', 'Incorrect Username or Password');
+			res.redirect('/users/login');
+		}
 		});
 	
 	}
