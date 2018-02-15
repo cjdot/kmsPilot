@@ -1,18 +1,9 @@
 <h2 class="page-header">Form Builder</h2>
 
-{{!-- PDF Generator --}}
+{{!-- PDF Generator, forked from https://codepen.io/massimo-cassandro/pen/qOrJNx --}}
+
 <div class="container-fluid flyer-builder">
     <p>Development Note: the current format is just an example we can build from</p>
-   
-    {{!-- Forked from https://codepen.io/massimo-cassandro/pen/qOrJNx --}}
-
-    {{!--
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js">
-        var pdf = new jsPDF();
-        pdf.text(30, 30, 'Hello world!');
-        pdf.save('hello_world.pdf');
-    </script>
-    --}}
 
 		<div class="row">
 				<div class="col-sm-6 loc_form">
@@ -92,3 +83,8 @@
 
 		</div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.12.0/jquery.qrcode.min.js"></script>
+<script type="text/javascript" src="public/javascript/pdf_build.js"></script>

@@ -15,7 +15,7 @@ router.get('/register', function(req, res){
 });
 
 //PDF Builder
-router.get('/builder', ensureAuthenticated, function(req, res){
+router.get('/builder', /*ensureAuthenticated, */function(req, res){
 	res.render('builder');
 });
 
