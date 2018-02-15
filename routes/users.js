@@ -24,6 +24,48 @@ router.get('/login', function(req, res){
 	res.render('login');
 });
 
+router.get('/userss', function(req, res){
+	var config = {
+
+		host: 'kmspilot.mysql.database.azure.com',
+		user: 'kmsadmin@kmspilot',
+		password: 'KMSproject1',
+		database: 'kmspilot',
+		port: 3306,
+		ssl: true
+	
+	};
+
+
+	const conn = new mysql.createConnection(config);
+	conn.connect(
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!! Error:");
+				throw err;
+			}
+			else {
+				console.log("Connection established.");
+			}
+		}
+	
+	)
+	
+	var qry = 'SELECT * FROM user'
+	console.log(qry);
+
+	conn.query( qry, function(err, results, fields){
+		//var userss = res.json(results);
+		//console.log(results);
+		res.render('userss', {results
+		});	
+		
+	});
+
+		
+});
+
+
 
 //This function ensures that every route is authenticated with a user
 function ensureAuthenticated(req, res, next){
@@ -43,6 +85,8 @@ router.post('/register', function(req, res){
 	var email = req.body.email;
   	var password = req.body.password;
 	var password2 = req.body.password2;
+	var phoneNumber = req.body.phoneNumber;
+	var permission = req.body.permission;
 
 	// Validation
   	req.checkBody('firstName', 'First name is required').notEmpty();
@@ -51,6 +95,8 @@ router.post('/register', function(req, res){
 	req.checkBody('email', 'Email is not valid').isEmail();
 	req.checkBody('password', 'Password is required').notEmpty();
 	req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
+	req.checkBody('phoneNumber', 'Phone Number is required').notEmpty();
+	req.checkBody('permission', 'Permission Level is required').notEmpty();
 
 	var errors = req.validationErrors();
 
@@ -64,7 +110,9 @@ router.post('/register', function(req, res){
 					firstName: firstName,
 					lastName: lastName,
 					email: email,
-					password: password
+					password: password,
+					phoneNumber: phoneNumber,
+					permission: permission
 				}
 
 		User.createUser(newUser, function(err, user){
@@ -81,24 +129,12 @@ router.post('/register', function(req, res){
 router.post('/login', function(req, res) {
 	
 	
-	
+	//Login form validation
 	req.checkBody('email', 'Email is required').notEmpty();
 	req.checkBody('password', 'Password is required').notEmpty();
 
 
-	var config = {
-
-		host: 'kmspilot.mysql.database.azure.com',
-		user: 'kmsadmin@kmspilot',
-		password: 'KMSproject1',
-		database: 'kmspilot',
-		port: 3306,
-		ssl: true
 	
-	};
-
-
-	const conn = new mysql.createConnection(config);
 	
 	var errors = req.validationErrors();
 
@@ -109,7 +145,19 @@ router.post('/login', function(req, res) {
 			errors:errors
 		});
 	} else {
-        
+
+        var config = {
+
+			host: 'kmspilot.mysql.database.azure.com',
+			user: 'kmsadmin@kmspilot',
+			password: 'KMSproject1',
+			database: 'kmspilot',
+			port: 3306,
+			ssl: true
+		
+		};
+
+		const conn = new mysql.createConnection(config);
         conn.connect(
 			function (err) {
 				if (err) {
@@ -123,14 +171,13 @@ router.post('/login', function(req, res) {
 		
 		)
 		
-		var qry = 'SELECT email, password FROM account WHERE email = \'' + req.body.email + '\' limit 1'
+		var qry = 'SELECT email, password FROM user WHERE email = ?'
 		console.log(qry);
-		conn.query( qry, function(err, results, fields){
+		conn.query( qry, req.body.email, function(err, results, fields){
 			
 			if (err) throw err;
-
-			if (results.len > 1){
-
+			if (results.length > 0){
+				
 			if (bcrypt.compareSync(req.body.password, results[0].password)){
 				
 				req.login(results[0].email, results[0].password, function(err) {
@@ -141,6 +188,7 @@ router.post('/login', function(req, res) {
 			} else {
 				req.flash('error_msg', 'Incorrect Username or Password');
 				res.redirect('/users/login')
+				
 				
 			} 
 		} else {

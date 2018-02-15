@@ -1,37 +1,18 @@
 var bcrypt = require('bcryptjs');
 var mysql = require('mysql2');
 
-// User Schema
-
-var firstName;
-var lastName;
-var email;
-var password;
-
-
-//var User = module.exports = mongoose.model('User', UserSchema);
 
 module.exports.createUser = function(newUser, callback){
 	
-	firstName = newUser.firstName;
-	lastName = newUser.lastName;
-	email = newUser.email;
-	console.log(newUser.password)
+	var firstName = newUser.firstName;
+	var lastName = newUser.lastName;
+	var email = newUser.email;
+
 	//This code below hashes the password to store in database
-
 	let hash = bcrypt.hashSync(newUser.password, 10);
-	console.log(hash)		
-	//This executes the insert statement			
-	queryDatabase(newUser.firstName, newUser.lastName, newUser.email, hash)
 
-	
-	/*bcrypt.hashSync(newUser.password, 10, function(err, hash) {			
-		newUser.password = hash;	
-		console.log(newUser.password)		
-		//This executes the insert statement			
-		queryDatabase(newUser.firstName, newUser.lastName, newUser.email, newUser.password)		
-	}); */
-	
+	//This executes the insert statement			
+	queryDatabase(newUser.firstName, newUser.lastName, newUser.email, hash, newUser.phoneNumber, newUser.permission)
 }
 
 
@@ -61,34 +42,17 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
 	});
 }
 
-function queryDatabase(firstName, lastName, email, password){
-	var qry = 'INSERT INTO account (firstName, lastName, email, password) VALUES(\'' + firstName + '\', \'' + lastName + '\', \'' + email + '\', \'' + password + '\')'
+function queryDatabase(firstName, lastName, email, password, phoneNumber, permission){
+	var qry = 'INSERT INTO user (firstName, lastName, email, password, cellNumber, permissionLevel) VALUES(\'' + firstName + '\', \'' + lastName + '\', \'' + email + '\', \'' + password + '\', \'' + phoneNumber + '\', \'' + permission + '\')'
+	var qry2= 'INSERT INTO user (firstName, lastName, email, password, cellNumber, permissionLevel) VALUES( ? ? ? ? ? ?)'
 	
+	//USE qry2 in production to prevent SQL injection
+	console.log(qry);
 	conn.query( qry, function(err, results, fields){
 		if (err) throw err;
 		console.log('Query Executed', results);
 	})
 
-}
-
-function retrieveLogin(email, password){
-	var qry = 'SELECT email, password FROM account WHERE email = \'' + email + '\''
-	console.log(qry);
-	conn.query( qry, function(err, results, fields){
-		
-		if (err) throw err;
-		/*if (!err) {
-
-			
-			bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
-				if(err) throw err;
-				callback(null, isMatch);
-			});
-		} */
-		//req.login()
-		return results;
-	})
-	
 }
 
 var config = {
