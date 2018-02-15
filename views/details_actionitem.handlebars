@@ -1,0 +1,43 @@
+<nav>
+        <ul class="nav nav-pills pull-right">
+          <li role="presentation" class="active">
+            <a href="/users/details_actionItem" >KMS Action Items</a>
+          </li>        
+          <li role="presentation" class="active">
+            <a href="/users/details_costSummary">Cost Summary</a>
+          </li>
+           <li role="presentation" class="active">
+            <a href="/users/details_externalAction">External Action Items</a>
+          </li>
+          <li role="presentation" class="active">
+            <a href="/users/details_projectInfo">Project Information</a>
+          </li>
+          </li>  
+        </ul>
+</nav>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Action Item Description</th>
+            <th>Actvity Owner</th>
+            <th>Activity Start Date</th>
+            <th>Target Completion Date</th>
+            <th>Actual Completion Date</th>
+            <th>Action Item Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+           
+        {{#each results}}
+        <tr>
+            <td>{{actionItemDescription}}</td>
+            <td>{{activityOwner}}</td>
+            <td>{{activityStartDate}}</td>
+            <td>{{targetCompletionDate}}</td>
+            <td>{{actualCompletionDate}}</td>
+            <td>{{actualItemNotes}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

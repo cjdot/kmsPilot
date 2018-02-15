@@ -24,6 +24,84 @@ router.get('/login', function(req, res){
 	res.render('login');
 });
 
+router.get('/details_actionItem', function(req, res){
+	
+	var config = {
+
+		host: 'kmspilot.mysql.database.azure.com',
+		user: 'kmsadmin@kmspilot',
+		password: 'KMSproject1',
+		database: 'kmspilot',
+		port: 3306,
+		ssl: true
+	
+	};
+
+
+	const conn = new mysql.createConnection(config);
+	conn.connect(
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!! Error:");
+				throw err;
+			}
+			else {
+				console.log("Connection established.");
+			}
+		}
+	
+	)
+	
+	var qry = 'SELECT * FROM kmsactionitem WHERE activityOwner = \'' + req.user + '\''
+	var qry2 = 'SELECT * FROM kmsactionitem'
+	console.log(qry2);
+
+	conn.query( qry2, function(err, results, fields){
+		//var userss = res.json(results);
+		//console.log(results);
+		res.render('details_actionitem', {results:results});
+		
+	});
+});
+
+router.get('/project', function(req, res){
+	var config = {
+
+		host: 'kmspilot.mysql.database.azure.com',
+		user: 'kmsadmin@kmspilot',
+		password: 'KMSproject1',
+		database: 'kmspilot',
+		port: 3306,
+		ssl: true
+	
+	};
+
+
+	const conn = new mysql.createConnection(config);
+	conn.connect(
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!! Error:");
+				throw err;
+			}
+			else {
+				console.log("Connection established.");
+			}
+		}
+	
+	)
+	
+	var qry = 'SELECT * FROM project'
+	console.log(qry);
+
+	conn.query( qry, function(err, results, fields){
+		//var userss = res.json(results);
+		//console.log(results);
+		res.render('project', {results:results});
+		
+	});
+});
+
 router.get('/userss', function(req, res){
 	var config = {
 

@@ -1,0 +1,18 @@
+
+
+{{#each results}}
+
+<div class="panel panel-primary">
+          
+          <div class="panel-heading">Client: {{clientName}}</div>
+          <a href="/users/details_actionItem">
+          <div class="panel-body">
+              <strong>Project Name:</strong> {{projectname}} <br>
+              <strong>Budget:</strong> {{projectedBudget}} <br>
+              <strong>Service Type:</strong> {{serviceType}} <br>
+              <strong>Location:</strong> {{location}} <br>
+              <strong>Target Start Date:</strong> {{targetStartDate}}  Target Completion Date: {{targetCompletionDate}}
+            </div>
+            </a>
+</div>
+{{/each}}
