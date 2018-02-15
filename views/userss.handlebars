@@ -1,21 +1,25 @@
-{{#if employees}}
+
 <table class="table">
     <thead>
         <tr>
-            <td>FirstName</td>
-            <td>LastName</td>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone #</th>
+            <th>Password</th>
         </tr>
     </thead>
     <tbody>
-        {{/if}}    
-        {{#each employees}}
+           
+        {{#each results}}
         <tr>
-            <td>{{@index}}</td>
+            <td>{{email}}</td>
             <td>{{firstName}}</td>
             <td>{{lastName}}</td>
+            <td>{{cellNumber}}</td>
+            <td>{{password}}</td>
         </tr>
         {{/each}}
-        {{#if employees}}
     </tbody>
 </table>
-{{/if}} 
+

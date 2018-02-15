@@ -57,8 +57,7 @@ router.get('/userss', function(req, res){
 	conn.query( qry, function(err, results, fields){
 		//var userss = res.json(results);
 		//console.log(results);
-		res.render('userss', {results
-		});	
+		res.render('userss', {results:results});	
 		
 	});
 

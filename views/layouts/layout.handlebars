@@ -61,25 +61,25 @@
       <nav>
         <ul class="nav nav-pills pull-right">
           {{#if user}}
-          <li role="presentation" class="active">
+          <li role="presentation">
             <a href="/">Dashboard</a>
           </li>
-          <li role="presentation">
-            <a href="/users/logout">Logout</a>
-          </li>
+         
           <li role="presentation">
             <a href="/users/builder">Form Builder</a>
+          </li>        
+          <li role="presentation">
+            <a href="/users/userss">Users</a>
           </li>
-          
+           <li role="presentation" class="active">
+            <a href="/users/logout">Logout</a>
+          </li>
           {{else}}
           <li role="presentation" class="active">
             <a href="/users/login">Login</a>
           </li>
           <li role="presentation">
             <a href="/users/register">Register</a>
-          </li>
-          <li role="presentation">
-            <a href="/users/userss">Users</a>
           </li>
           {{/if}}
         </ul>
