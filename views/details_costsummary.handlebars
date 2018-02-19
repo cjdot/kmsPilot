@@ -27,24 +27,31 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Action Item Description</th>
-            <th>Actvity Owner</th>
-            <th>Activity Start Date</th>
-            <th>Target Completion Date</th>
-            <th>Actual Completion Date</th>
-            <th>Action Item Notes</th>
+            <th>Division Category</th>
+            <th>Line Item</th>
+            <th>Line Item Totals</th>
+            <th>Budget</th>
+            <th>Committed</th>
+            <th>Change Orders</th>
+            <th>Anticipated Cost</th>
+            <th>Variance</th>
+            <th>Actual Cost To Date</th>
+            <th>Dollars Remaining</th>
         </tr>
     </thead>
     <tbody>
            
         {{#each results}}
         <tr>
-            <td>{{actionItemDescription}}</td>
-            <td>{{activityOwner}}</td>
-            <td>{{activityStartDate}}</td>
-            <td>{{targetCompletionDate}}</td>
-            <td>{{actualCompletionDate}}</td>
-            <td>{{actualItemNotes}}</td>
+            <td>{{divisionCategory}}</td>
+            <td>{{lineItem}}</td>
+            <td>{{lineItemTotals}}</td>
+            <td>{{budget}}</td>
+            <td>{{committed}}</td>
+            <td>{{changeOrders}}</td>
+            <td>{{anticipatedCost}}</td>
+            <td>{{variance}}</td>
+            <td>{{dollarsRemaining}}</td>
         </tr>
         {{/each}}
     </tbody>

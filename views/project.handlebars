@@ -1,17 +1,18 @@
 
-
+<button type="button" class="btn btn-warning"><a href="/projects/myProjects">My Projects</a></button>
+<button type="button" class="btn btn-warning"><a href="/projects/project" style="text-decoration: none;">All Projects</a></button>
+<br> <br>
 {{#each results}}
 
 <div class="panel panel-primary">
           
           <div class="panel-heading">Client: {{clientName}}</div>
-          <a href="/users/details_actionItem">
+          <a class="projectss" href="/projects/details_projectoverview" style="color: black">
           <div class="panel-body">
               <strong>Project Name:</strong> {{projectname}} <br>
               <strong>Budget:</strong> {{projectedBudget}} <br>
               <strong>Service Type:</strong> {{serviceType}} <br>
               <strong>Location:</strong> {{location}} <br>
-              <strong>Target Start Date:</strong> {{targetStartDate}}  Target Completion Date: {{targetCompletionDate}}
             </div>
             </a>
 </div>

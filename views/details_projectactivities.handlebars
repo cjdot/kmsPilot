@@ -27,24 +27,26 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Action Item Description</th>
-            <th>Actvity Owner</th>
-            <th>Activity Start Date</th>
+            <th>Activity Description</th>
+            <th>Target Start Date</th>
+            <th>Actual Start Date</th>
             <th>Target Completion Date</th>
             <th>Actual Completion Date</th>
-            <th>Action Item Notes</th>
+            <th>Progress</th>
+            <th>Activity Notes</th>
         </tr>
     </thead>
     <tbody>
            
         {{#each results}}
         <tr>
-            <td>{{actionItemDescription}}</td>
-            <td>{{activityOwner}}</td>
-            <td>{{activityStartDate}}</td>
+            <td>{{activityDescription}}</td>
+            <td>{{targetStartDate}}</td>
+            <td>{{actualStartDate}}</td>
             <td>{{targetCompletionDate}}</td>
             <td>{{actualCompletionDate}}</td>
-            <td>{{actualItemNotes}}</td>
+            <td>{{progress}}</td>
+            <td>{{activityNotes}}</td>
         </tr>
         {{/each}}
     </tbody>

@@ -13,6 +13,7 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var projects = require('./routes/projects');
 
 // Init App
 var app = express();
@@ -86,6 +87,7 @@ app.use(function (req, res, next) {
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
   res.locals.user = req.user || null;
+  res.locals.project = req.user || null;
   next();
 });
 
@@ -93,6 +95,7 @@ app.use(function (req, res, next) {
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/projects', projects);
 
 app.use(express.static('public/css'));
 

@@ -143,6 +143,10 @@ h1 {
   border-radius: 0;
 }
 
+.projectss {
+  hover: black;
+}
+
 .card {
   float: left;
   width: 33.333%;
@@ -151,7 +155,6 @@ h1 {
   border: 0;
   background: grey;
 }
-
 
 .card-text {
   font-size: 85%;

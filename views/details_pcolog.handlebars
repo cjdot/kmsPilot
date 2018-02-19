@@ -27,24 +27,34 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Action Item Description</th>
-            <th>Actvity Owner</th>
-            <th>Activity Start Date</th>
-            <th>Target Completion Date</th>
-            <th>Actual Completion Date</th>
-            <th>Action Item Notes</th>
+            <th>PCO Number</th>
+            <th>PCO Description</th>
+            <th>Due Date</th>
+            <th>To KMS Date</th>
+            <th>KMS Reviewed Date</th>
+            <th>Bank Approved Date</th>
+            <th>PCO Value</th>
+            <th>Contingency Amount</th>
+            <th>Cost Savings Amount</th>
+            <th>Change Orders</th>
+            <th>Status</th>
+            <th>Comments</th>
         </tr>
     </thead>
     <tbody>
            
         {{#each results}}
         <tr>
-            <td>{{actionItemDescription}}</td>
-            <td>{{activityOwner}}</td>
-            <td>{{activityStartDate}}</td>
-            <td>{{targetCompletionDate}}</td>
-            <td>{{actualCompletionDate}}</td>
-            <td>{{actualItemNotes}}</td>
+            <td>{{pcoNumber}}</td>
+            <td>{{pcoDescription}}</td>
+            <td>{{toKMSDate}}</td>
+            <td>{{kmsReviewdDate}}</td>
+            <td>{{pcoValue}}</td>
+            <td>{{contingencyAmount}}</td>
+            <td>{{costSavingsAmount}}</td>
+            <td>{{changeOrders}}</td>
+            <td>{{status}}</td>
+            <td>{{comments}}</td>
         </tr>
         {{/each}}
     </tbody>

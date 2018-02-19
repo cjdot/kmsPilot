@@ -22,7 +22,11 @@
             <a href="/projects/details_clientreport">Client Report</a>
           </li>
         </ul>
+
+        
 </nav>
+
+
 
 <table class="table">
     <thead>
@@ -33,18 +37,20 @@
             <th>Target Completion Date</th>
             <th>Actual Completion Date</th>
             <th>Action Item Notes</th>
+            <th>Action Item Notes</th>
         </tr>
     </thead>
     <tbody>
            
         {{#each results}}
         <tr>
-            <td>{{actionItemDescription}}</td>
-            <td>{{activityOwner}}</td>
-            <td>{{activityStartDate}}</td>
+            <td>{{clientName}}</td>
+            <td>{{projectName}}</td>
+            <td>{{location}}</td>
+            <td>{{targetStartDate}}</td>
             <td>{{targetCompletionDate}}</td>
-            <td>{{actualCompletionDate}}</td>
-            <td>{{actualItemNotes}}</td>
+            <td>{{projectedBudget}}</td>
+            <td>{{serviceType}}</td>
         </tr>
         {{/each}}
     </tbody>
