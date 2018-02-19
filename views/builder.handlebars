@@ -9,7 +9,7 @@
 				<div class="col-sm-6 loc_form">
 
 						<div class="form-group">
-								<label for="flyer-image" class="control-label">Image</label>
+								<label for="flyer-image" class="control-label">Client Logo</label>
 								<input id="flyer-image" type="file" tabindex="1">
 						</div>
 
@@ -23,7 +23,7 @@
 								<div class="col-sm-3">
 										<div class="form-group">
 												<label for="flyer-title-size" class="control-label">Size (pt)</label>
-												<input required class="form-control" id="flyer-title-size" value="60" min="1" step="1" type="number" tabindex="3" title="Title size: tune it to fit the available space">
+												<input required class="form-control" id="flyer-title-size" value="30" min="1" step="1" type="number" tabindex="3" title="Title size: tune it to fit the available space">
 										</div>
 								</div>
 								<div class="col-sm-2">
@@ -35,8 +35,8 @@
 						</div>
 
 						<div class="form-group">
-								<label class="control-label" for="flyer-description">Description</label>
-								<textarea class="form-control" id="flyer-description" placeholder="Insert a short description taking care of the available space"></textarea>
+								<label class="control-label" for="flyer-description">Executive Summary</label>
+								<textarea class="form-control" id="flyer-description" rows="3" placeholder="Insert a short description taking care of the available space"></textarea>
 						</div>
 
 						<div class="row">
@@ -87,4 +87,365 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.12.0/jquery.qrcode.min.js"></script>
-<script type="text/javascript" src="public/javascript/pdf_build.js"></script>
+<script type="text/javascript">
+/* jshint undef:false, newcap: false, unused:false */
+
+(function(API){
+    API.textAlign = function(txt, options, x, y) {
+        options = options ||{};
+        // Use the options align property to specify desired text alignment
+        // Param x will be ignored if desired text alignment is 'center'.
+        // Usage of options can easily extend the function to apply different text
+        // styles and sizes
+
+		// Get current font size
+        var fontSize = this.internal.getFontSize();
+
+        // Get page width
+        var pageWidth = this.internal.pageSize.width;
+
+        // Get the actual text's width
+        // You multiply the unit width of your string by your font size and divide
+        // by the internal scale factor. The division is necessary
+        // for the case where you use units other than 'pt' in the constructor
+        // of jsPDF.
+
+        var txtWidth = this.getStringUnitWidth(txt)*fontSize/this.internal.scaleFactor;
+
+        if( options.align === "center" ){
+
+            // Calculate text's x coordinate
+            x = ( pageWidth - txtWidth ) / 2;
+
+        } else if( options.align === "centerAtX" ){ // center on X value
+
+	        x = x - (txtWidth/2);
+
+        } else if(options.align === "right") {
+
+	        x = x - txtWidth;
+        }
+
+        // Draw text at x,y
+        this.text(txt,x,y);
+    };
+/*
+    API.textWidth = function(txt) {
+	    var fontSize = this.internal.getFontSize();
+        return this.getStringUnitWidth(txt)*fontSize / this.internal.scaleFactor;
+    };
+*/
+
+    API.getLineHeight = function(txt) {
+        return this.internal.getLineHeight();
+    };
+
+})(jsPDF.API);
+
+
+
+(function() {
+	"use strict";
+
+	// some variables
+	var agency_logo		 = {
+			src : 'data:image/png;base64,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',
+			w  : 180,
+			h  : 80
+		},
+		agency_name      = 'KMS',
+		agency_site_url  = 'www.kempmanagementsolutions.net',
+		footer           = agency_name + ' - ' + agency_site_url,
+
+		page_size        = 'a4',
+		page_width       = 210, // mm
+		page_margin      = 10,  // mm
+		content_width    = page_width - (page_margin * 2), // available width for the content
+
+		_y, _x, // drawing coord
+		color_array, _string, lineHeight, y_correction, // some variables
+
+		vspace = 10 // standard vertical space between elements
+
+	;
+
+
+	// some variables
+	var can_display_preview    = true, // if true a preview of the PDF can be displayed in the iframe,
+									   // this value is set to false if the browser can't display the preview
+		preview_container      = $('#pdf_preview'),
+		update_preview_button  = $('#flyer_preview_btn'),
+		download_button        = $('#flyer_download_btn')
+	;
+
+	// preview can be displayed?
+	if (navigator.msSaveBlob) { // older IE
+		update_preview_button.prop('disabled', true);
+		can_display_preview = false;
+		preview_container.replaceWith(
+			'<div class="no_iframe">'+
+				'<div>'+
+					"The preview can't be displayed"+
+				'</div>'+
+			'</div>'
+		);
+	}
+
+	// utilities
+	var hex2rgb = function ( hex_string ) {
+		if( /^#/.test(hex_string)) {
+			hex_string = hex_string.substr(1);
+		}
+		if(hex_string.length === 3 ) {
+			hex_string = hex_string.replace(/\w/, function(match) {
+		        return String(match) + String(match);
+		    });
+		}
+
+		return {
+			red      : parseInt(hex_string.substr(0, 2), 16),
+			green    : parseInt(hex_string.substr(2, 2), 16),
+			blue     : parseInt(hex_string.substr(4, 2), 16)
+		};
+	},
+
+	px2mm = function (pixel) {
+		// px to inches
+		var inches = pixel / 72;
+		return inches * 25.4;
+	},
+
+	mm2px = function (millimeters) {
+		// mm to inches
+		var inches = millimeters / 25.4;
+		return inches * 72;
+	},
+
+	// function to calculate and check img sizes
+	imgSizes = function (img_w, img_h, img_mm_w) {
+		/*
+			img_w and img_h represent the original image size, in pixel
+			img_mm_w is the desidered rendered image size, in millimeters
+
+		*/
+
+		if( img_mm_w > content_width ) { // this should be never used...
+			img_mm_w = content_width;
+		}
+
+		if(mm2px (img_mm_w) > img_w ) {
+			throw 'The `img_mm_w` parameter is too big';
+		}
+
+		var img_mm_h = Math.round( (px2mm(img_h) * img_mm_w) / px2mm(img_w) );
+
+		return {
+			w            : img_mm_w,
+			h            : img_mm_h,
+			centered_x   : (page_width - img_mm_w) / 2
+		};
+	};
+
+
+	try {
+
+		var flyer_img = $('#flyer-image'),
+			img_data = null
+		;
+
+		$('#flyer-image').change(function () {
+
+			// temporary disabling buttons while parsing image
+			update_preview_button.prop('disabled', true);
+			download_button.prop('disabled', true);
+
+			var user_file = flyer_img[0].files[0];
+
+			img_data = {
+				type: user_file.type === 'image/jpeg' ? 'JPEG' : 'PNG' // maybe you should add some controls to prevent loading of other file types
+			};
+
+			var reader = new FileReader();
+			reader.onload = function(event){
+				img_data.src = event.target.result;
+
+				// we need this to get img dimensions
+				var user_img = new Image();
+				user_img.onload = function () {
+					img_data.w = user_img.width;
+					img_data.h = user_img.height;
+
+					// restoring buttons
+					download_button.prop('disabled', false);
+					if(can_display_preview) { update_preview_button.prop('disabled', false); }
+				};
+				user_img.src = img_data.src;
+			};
+
+			//when the file is read it triggers the onload event above.
+			reader.readAsDataURL(user_file);
+		});
+
+		//!pdf builder
+		var createPDF = function (update_preview) {
+
+			_y = page_margin; // vertical starting point
+
+			// form data
+			var flyer_title             = $('#flyer-title').val(),
+				flyer_title_size        = $('#flyer-title-size').val(),
+				flyer_title_color       = $('#flyer-title-color').val(),
+				flyer_description       = $('#flyer-description').val(),
+				flyer_price             = $('#flyer-price').val(),
+				flyer_price_currency    = $('#flyer-price-currency').val(),
+				flyer_price_color       = $('#flyer-price-color').val()
+			;
+
+			var pdf = new jsPDF('p', 'mm', page_size),
+				text_baseline,
+
+				// some colors:
+				light_grey = 237,
+				grey       = 128,
+				black      = 0,
+				white 	   = 255
+			;
+
+			// Optional - set properties of the document
+			pdf.setProperties({
+				title   : flyer_title,
+				subject : footer,
+				author  : 'me',
+				creator : 'jsPDF'
+			});
+
+			// !logo
+			var logo_sizes = imgSizes (agency_logo.w, agency_logo.h, 60);
+			pdf.addImage(agency_logo.src, 'PNG', logo_sizes.centered_x, _y, logo_sizes.w, logo_sizes.h);
+
+			// fonts initializing
+			pdf.setFont("helvetica");
+			pdf.setFontType("bold");
+
+
+			// !main title
+			color_array = hex2rgb(flyer_title_color);
+			pdf.setTextColor(color_array.red, color_array.green, color_array.blue);
+
+			pdf.setFontSize(flyer_title_size);
+
+			lineHeight = px2mm(pdf.getLineHeight(flyer_title));
+
+			_y += (logo_sizes.h + vspace + lineHeight);
+
+			pdf.textAlign(flyer_title, {align: "center"}, 0, _y);
+
+			_y += vspace;
+
+			// !user image
+			if(img_data) {
+				var img_sizes = imgSizes (img_data.w, img_data.h, content_width);
+				pdf.addImage(img_data.src, img_data.type, img_sizes.centered_x, _y, img_sizes.w, img_sizes.h);
+				_y += img_sizes.h;
+
+			} else {
+				// if we haven't an image, a grey box with a text is added
+
+				var box_height = 80;
+
+				pdf.setFillColor(light_grey);
+				pdf.roundedRect(page_margin, _y, content_width, box_height, 5, 5, 'F');
+				pdf.setFontSize(60);
+				pdf.setTextColor(white);
+				_string = 'SPECIAL OFFER';
+				lineHeight = px2mm(pdf.getLineHeight(_string));
+
+				// y_correction: value to be added to y coord of the grey box to have text vertically centered
+				// it is empirically calculated adding 1/3 of text line height to half box height
+				y_correction = box_height/2 + lineHeight/3;
+
+				pdf.textAlign(_string, {align: "center"}, 0, _y + y_correction );
+
+				_y += box_height;
+			}
+
+			// !price
+			// first: creating a circle that overlaps the bottom side of the image
+			var circle_radius = 30;
+			color_array = hex2rgb(flyer_price_color);
+			pdf.setFillColor(color_array.red, color_array.green, color_array.blue);
+
+			// _x and _y refer to center of the circle
+			_x = content_width - circle_radius;      // circle ends at `page_margin` millimeters from the image right side
+
+			pdf.circle( _x, _y, circle_radius, 'F'); // circle overlaps image for 1/2 of its height
+
+			pdf.setFontSize(60);
+			pdf.setFont("times");
+			pdf.setFontType("bold");
+
+			_string = flyer_price_currency + parseInt(flyer_price); // decimals are removed
+
+			lineHeight = px2mm(pdf.getLineHeight(_string));
+			y_correction = lineHeight/3;
+
+			pdf.setTextColor(white);
+			pdf.textAlign(_string, {align: "centerAtX"}, _x, _y + y_correction );
+
+
+			// !description
+			if(flyer_description) {
+				pdf.setFontSize(20);
+				pdf.setFont("helvetica");
+				pdf.setFontType("italic");
+				pdf.setTextColor(grey);
+
+				var lineWidth = content_width - (circle_radius * 2) - (page_margin * 2);
+				_y += page_margin;
+
+				var line_height = 12; // mm
+
+				var description_lines = pdf.splitTextToSize(flyer_description, lineWidth);
+				//pdf.text(page_margin, _y, description_lines); // doesn't allows to change line spacing
+
+				for (var i = 0 ; i < description_lines.length ; i++ ) {
+					pdf.text(page_margin, _y, description_lines[i]);
+					_y += line_height;
+				}
+
+			}
+
+
+			// !footer
+			_y = 287;
+			pdf.setFontSize(9);
+			pdf.setFontType("normal");
+			pdf.setTextColor(black);
+			pdf.textAlign(footer, {align: "center"}, 0, _y);
+
+
+			// ****************************
+			// output
+			if(update_preview) {
+				preview_container.attr('src', pdf.output('datauristring') );
+			} else {
+				pdf.save('flyer ' + flyer_title + '.pdf');
+			}
+
+		}; // end createPDF
+
+		// !buttons
+		update_preview_button.click(function () {
+			createPDF(true);
+		});
+
+		$('#flyer_download_btn').click(function () {
+			createPDF(false);
+		});
+
+	} catch (e) {
+		console.log(e);
+	}
+
+})();
+</script>
