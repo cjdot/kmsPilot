@@ -1,19 +1,30 @@
 
-<button type="button" class="btn btn-warning"><a href="/projects/myProjects">My Projects</a></button>
-<button type="button" class="btn btn-warning"><a href="/projects/project" style="text-decoration: none;">All Projects</a></button>
+<button type="button" class="btn btn-active"><a href="/projects/myProjects">My Projects</a></button>
+<button type="button" class="btn btn-active"><a href="/projects/project" style="text-decoration: none;">All Projects</a></button>
 <br> <br>
+
+<form class="form-inline mt-2 mt-md-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search">
+          <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+</form>
+<br>
+<section class="row text-left">
 {{#each results}}
 
-<div class="panel panel-primary">
+<div class="col-6 col-sm-3 placeholder">
+
           
-          <div class="panel-heading">Client: {{clientName}}</div>
+
+          <h4>Client: {{clientName}}</h4>
+          <div class="text-muted" >
           <a class="projectss" href="/projects/details_projectoverview" style="color: black">
-          <div class="panel-body">
-              <strong>Project Name:</strong> {{projectname}} <br>
+              <strong>Project Name:</strong> {{projectName}} <br>
               <strong>Budget:</strong> {{projectedBudget}} <br>
               <strong>Service Type:</strong> {{serviceType}} <br>
               <strong>Location:</strong> {{location}} <br>
-            </div>
-            </a>
-</div>
+              </a>
+        </div>
+  </div> 
+            
 {{/each}}
+</section>

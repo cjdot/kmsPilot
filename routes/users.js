@@ -164,20 +164,6 @@ router.post('/login', function(req, res) {
 	
 });
 
-/*
-router.post('/login', passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login',failureFlash: true}),
-  function(req, res) {
-    res.redirect('/');
-	});
-*/
-
-router.get('/project', function(req, res) {
-	if(!req.session.user) {
-		return res.status(401).send();
-	}
-
-	return res.status(200).send("Super secret");
-})
 
 router.get('/logout', function(req, res){
 	req.logout();
@@ -187,7 +173,7 @@ router.get('/logout', function(req, res){
 	res.redirect('/users/login');
 });
 
-module.exports = router;
+
 
 //This is the passport code that we will use to securel authenticate our
 
@@ -210,6 +196,10 @@ module.exports = router;
    });
   }));
 */
+
+
+module.exports = router;
+
 passport.serializeUser(function(email, done) {
   done(null, email);
 });

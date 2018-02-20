@@ -15,7 +15,7 @@ var config = {
 
 };
 
-router.get('/project', function(req, res){
+router.get('/project', ensureAuthenticated, function(req, res){
 
 
 	const conn = new mysql.createConnection(config);
@@ -43,7 +43,7 @@ router.get('/project', function(req, res){
 	});
 });
 
-router.get('/myProjects', function(req, res){
+router.get('/myProjects', ensureAuthenticated, function(req, res){
 
 
 	const conn = new mysql.createConnection(config);
@@ -71,7 +71,7 @@ router.get('/myProjects', function(req, res){
 	});
 });
 
-router.get('/details_actionItem', function(req, res){
+router.get('/details_actionItem', ensureAuthenticated, function(req, res){
 
 
 	const conn = new mysql.createConnection(config);
@@ -102,7 +102,7 @@ router.get('/details_actionItem', function(req, res){
 
 
 
-router.get('/details_clientreport', function(req, res){
+router.get('/details_clientreport', ensureAuthenticated, function(req, res){
 	
 	
 
@@ -133,7 +133,7 @@ router.get('/details_clientreport', function(req, res){
 	});
 });
 
-router.get('/details_costsummary', function(req, res){
+router.get('/details_costsummary', ensureAuthenticated, function(req, res){
 	
 	
 
@@ -163,7 +163,7 @@ router.get('/details_costsummary', function(req, res){
 	});
 });
 
-router.get('/details_externalactionitem', function(req, res){
+router.get('/details_externalactionitem', ensureAuthenticated, function(req, res){
 	
 	
 
@@ -193,7 +193,7 @@ router.get('/details_externalactionitem', function(req, res){
 	});
 });
 
-router.get('/details_pcolog', function(req, res){
+router.get('/details_pcolog', ensureAuthenticated, function(req, res){
 	
 	
 
@@ -223,7 +223,7 @@ router.get('/details_pcolog', function(req, res){
 	});
 });
 
-router.get('/details_projectactivities', function(req, res){
+router.get('/details_projectactivities', ensureAuthenticated, function(req, res){
 	
 	
 
@@ -253,7 +253,7 @@ router.get('/details_projectactivities', function(req, res){
 	});
 });
 
-router.get('/details_projectoverview', function(req, res){
+router.get('/details_projectoverview', ensureAuthenticated, function(req, res){
 	
 	
 
@@ -283,7 +283,7 @@ router.get('/details_projectoverview', function(req, res){
 	});
 });
 
-router.get('/userss', function(req, res){
+router.get('/userss', ensureAuthenticated, function(req, res){
 
 
 	const conn = new mysql.createConnection(config);
