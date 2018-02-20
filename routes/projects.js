@@ -15,6 +15,36 @@ var config = {
 
 };
 
+router.post('/updateProjectActivity', ensureAuthenticated, function(req, res){
+
+	const conn = new mysql.createConnection(config);
+	conn.connect(
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!! Error:");
+				throw err;
+			}
+			else {
+				console.log("Connection established.");
+			}
+		}
+	
+	)
+	console.log(req.body.projectActivityID)
+	var qry = 'UPDATE projectactivity SET activityDescription = ?, targetStartDate = ?, actualStartDate = ?, targetCompletionDate = ? WHERE projectActivityID = ?'
+	var qry2 = 'SELECT * FROM projectactivity'
+	console.log(qry);
+
+	conn.query( qry, [req.body.activityDescription, req.body.targetStartDate, req.body.actualStartDate, req.body.targetCompletionDate, req.body.projectActivityID], function(err, results, fields){
+		if(err){console.log(err)};
+	});
+
+	conn.query( qry2, function(err, results, fields){
+		res.render('details_projectactivities', {results:results});
+	});
+	
+});
+
 router.get('/project', ensureAuthenticated, function(req, res){
 
 

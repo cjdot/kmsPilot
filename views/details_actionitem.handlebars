@@ -38,12 +38,40 @@
     <tbody>
            
         {{#each results}}
+        <form action="/">
+        <tr>
+            <td><input type="text" class="form-control" name="actionItemDescription" placeholder="{{actionItemDescription}}" value="{{actionItemDescription}}"></td>
+            <td>{{activityOwner}}</td>
+            <td><input type="date" class="form-control" name="activityStartDate" placeholder="{{formatDate activityStartDate}}" value="{{formatDate activityStartDate}}"> </td>
+            <td><input type="date" class="form-control" name="targetCompletionDate" placeholder="{{formatDate targetCompletionDate}}" value="{{formatDate targetCompletionDate}}"> </td>
+            <td><input type="date" class="form-control" name="actualCompletionDate" placeholder="{{formatDate actualCompletionDate}}" value="{{formatDate actualCompletionDate}}"> </td>
+            <td>{{actualItemNotes}}</td>
+        </tr>
+        </form>
+        {{/each}}
+    </tbody>
+</table>
+
+<table class="table-responsive">
+    <thead>
+        <tr>
+            <th>Action Item Description</th>
+            <th>Actvity Owner</th>
+            <th>Activity Start Date</th>
+            <th>Target Completion Date</th>
+            <th>Actual Completion Date</th>
+            <th>Action Item Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+           
+        {{#each results}}
         <tr>
             <td>{{actionItemDescription}}</td>
             <td>{{activityOwner}}</td>
-            <td>{{activityStartDate}}</td>
-            <td>{{targetCompletionDate}}</td>
-            <td>{{actualCompletionDate}}</td>
+            <td>{{formatDate activityStartDate}}</td>
+            <td>{{formatDate targetCompletionDate}}</td>
+            <td>{{formatDate actualCompletionDate}}</td>
             <td>{{actualItemNotes}}</td>
         </tr>
         {{/each}}

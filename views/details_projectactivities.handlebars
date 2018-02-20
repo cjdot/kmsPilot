@@ -23,8 +23,42 @@
           </li>
         </ul>
 </nav>
+<table class="table table-sm table-dark">
+    <thead>
+        <tr>
+            
+            <th>Activity Description</th>
+            <th>Target Start Date</th>
+            <th>Actual Start Date</th>
+            <th>Target Completion Date</th>
+            <th>Actual Completion Date</th>
+            <th>Progress</th>
+            <th>Activity Notes</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+           
+        {{#each results}}
+        <form action="/projects/update" method="post">
+        <tr >
+            <input type="hidden" class="form-control" id="projectActivityID" name="projectActivityID" value="{{projectActivityID}}">
+            <td><input type="text" class="form-control" name="activityDescription" value="{{activityDescription}}"> </td>
+            <td><input type="date" class="form-control" name="targetStartDate" placeholder="{{formatDate targetStartDate}}" value="{{formatDate targetStartDate}}"></td>
+            <td><input type="date" class="form-control" name="actualStartDate" placeholder="{{formatDate actualStartDate}}" value="{{formatDate actualStartDate}}" ></td>
+            <td><input type="date" class="form-control" name="targetCompletionDate" placeholder="{{formatDate targetCompletionDate}}" value="{{formatDate targetCompletionDate}}" > </td>
+            <td><input type="date" class="form-control" name="actualCompletionDate" placeholder="{{formatDate actualCompletionDate}}" value="{{formatDate actualCompletionDate}}"> </td>
+            <td><input type="text" class="form-control" name="actualCompletionDate" placeholder="{{#if progress}}{{progress}}{{else}}0%{{/if}}" value="{{#if progress}}{{progress}}{{else}}0%{{/if}}"></td>
+            <td><input type="text" class="form-control" namne="activityNotes" placeholder="{{activityNotes}}" value="{{activityNotes}}" > </td>
+            <td><button type="submit" name="actionType" class="form-control" value="Update" formaction="/projects/updateProjectActivity">Update</button></td>
+            <td><button type="submit" name="actionType" class="form-control" value="Delete" formaction="/projects/deleteProjectActivity">Delete</button></td>
+        </tr>
+        </form>
+        {{/each}}
+    </tbody>
+</table>
 
-<table class="table-responsive">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Activity Description</th>
@@ -41,11 +75,11 @@
         {{#each results}}
         <tr>
             <td>{{activityDescription}}</td>
-            <td>{{targetStartDate}}</td>
-            <td>{{actualStartDate}}</td>
-            <td>{{targetCompletionDate}}</td>
-            <td>{{actualCompletionDate}}</td>
-            <td>{{progress}}</td>
+            <td>{{formatDate targetStartDate}}</td>
+            <td>{{formatDate actualStartDate}}</td>
+            <td>{{formatDate targetCompletionDate}}</td>
+            <td>{{formatDate actualCompletionDate}}</td>
+            <td>{{#if progress}}{{progress}}{{else}}0%{{/if}}</td>
             <td>{{activityNotes}}</td>
         </tr>
         {{/each}}

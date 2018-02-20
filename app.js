@@ -3,6 +3,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
+var Handlebars = require('handlebars');
+var HandlebarsIntl = require('handlebars-intl');
 var expressValidator = require('express-validator');
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session') (session);
@@ -42,6 +44,8 @@ var options = {
 	ssl: true
 
 }
+
+HandlebarsIntl.registerWith(Handlebars);
 
 var sessionStore = new MySQLStore(options);
 

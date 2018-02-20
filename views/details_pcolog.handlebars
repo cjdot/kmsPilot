@@ -47,11 +47,11 @@
         <tr>
             <td>{{pcoNumber}}</td>
             <td>{{pcoDescription}}</td>
-            <td>{{toKMSDate}}</td>
-            <td>{{kmsReviewdDate}}</td>
-            <td>{{pcoValue}}</td>
-            <td>{{contingencyAmount}}</td>
-            <td>{{costSavingsAmount}}</td>
+            <td>{{formatDate toKMSDate}}</td>
+            <td>{{formatDate kmsReviewDate}}</td>
+            <td>${{formatNumber pcoValue price="USD"}}</td>
+            <td>${{formatNumber contingencyAmount price="USD"}}</td>
+            <td>${{formatNumber costSavingsAmount price="USD"}}</td>
             <td>{{changeOrders}}</td>
             <td>{{status}}</td>
             <td>{{comments}}</td>

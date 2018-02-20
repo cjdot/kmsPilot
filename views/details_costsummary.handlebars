@@ -46,12 +46,12 @@
             <td>{{divisionCategory}}</td>
             <td>{{lineItem}}</td>
             <td>{{lineItemTotals}}</td>
-            <td>{{budget}}</td>
-            <td>{{committed}}</td>
+            <td>${{formatNumber budget price="USD"}}</td>
+            <td>${{formatNumber committed price="USD"}}</td>
             <td>{{changeOrders}}</td>
-            <td>{{anticipatedCost}}</td>
-            <td>{{variance}}</td>
-            <td>{{dollarsRemaining}}</td>
+            <td>${{formatNumber anticipatedCost price="USD"}}</td>
+            <td>${{formatNumber variance price="USD"}}</td>
+            <td>${{formatNumber dollarsRemaining price="USD"}}</td>
         </tr>
         {{/each}}
     </tbody>

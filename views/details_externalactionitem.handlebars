@@ -41,9 +41,9 @@
         <tr>
             <td>{{actionItemDescription}}</td>
             <td>{{activityOwner}}</td>
-            <td>{{activityStartDate}}</td>
-            <td>{{targetCompletionDate}}</td>
-            <td>{{actualCompletionDate}}</td>
+            <td>{{formatDate activityStartDate}}</td>
+            <td>{{formatDate targetCompletionDate}}</td>
+            <td>{{formatDate actualCompletionDate}}</td>
             <td>{{actualItemNotes}}</td>
         </tr>
         {{/each}}

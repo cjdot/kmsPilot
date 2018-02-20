@@ -28,13 +28,13 @@
 <table class="table-responsive">
     <thead>
         <tr>
-            <th>Action Item Description</th>
-            <th>Actvity Owner</th>
-            <th>Activity Start Date</th>
+            <th>Client Name</th>
+            <th>Project Name</th>
+            <th>Location</th>
+            <th>Target Start Date</th>
             <th>Target Completion Date</th>
-            <th>Actual Completion Date</th>
-            <th>Action Item Notes</th>
-            <th>Action Item Notes</th>
+            <th>Projected Budget</th>
+            <th>Service Type</th>
         </tr>
     </thead>
     <tbody>
@@ -44,11 +44,14 @@
             <td>{{clientName}}</td>
             <td>{{projectName}}</td>
             <td>{{location}}</td>
-            <td>{{targetStartDate}}</td>
-            <td>{{targetCompletionDate}}</td>
-            <td>{{projectedBudget}}</td>
+            <td>{{formatDate targetStartDate}}</td>
+            <td>{{formatDate targetCompletionDate}}</td>
+            <td>${{formatNumber projectedBudget price="USD"}}</td>
             <td>{{serviceType}}</td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+
+<script src="handlebars/dist/handlebars.min.js"></script>
+<script src="handlebars-intl/dist/handlebars-intl.min.js"></script>

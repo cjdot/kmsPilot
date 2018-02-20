@@ -23,6 +23,7 @@
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
-    "mysql2": "*"
+    "mysql2": "*",
+    "handlebars-intl": "*"
   }
 }
