@@ -3,7 +3,7 @@
 {{!-- PDF Generator, forked from https://codepen.io/massimo-cassandro/pen/qOrJNx --}}
 
 <div class="container-fluid flyer-builder">
-    <p>Development Note: the current format is just an example we can build from</p>
+    <p>Development Note: the current format is very much a work in progress</p>
 
 		<div class="row">
 				<div class="col-sm-6 loc_form">
@@ -14,38 +14,48 @@
 						</div>
 
 						<div class="row">
-								<div class="col-sm-7">
+								<div class="col-sm-6">
 										<div class="form-group">
 												<label for="flyer-title" class="control-label">Title</label>
 												<input required class="form-control" id="flyer-title" placeholder="Main title" value="" maxlength="255" type="text" tabindex="2">
 										</div>
 								</div>
+
 								<div class="col-sm-3">
 										<div class="form-group">
 												<label for="flyer-title-size" class="control-label">Size (pt)</label>
 												<input required class="form-control" id="flyer-title-size" value="30" min="1" step="1" type="number" tabindex="3" title="Title size: tune it to fit the available space">
 										</div>
 								</div>
+
+								<div class="col-sm-3">
+										<label class="control-label" for="flyer-projectid">Project ID</label>
+										<input required class="form-control" id="flyer-projectid" placeholder="№" maxlength="5" type="text">
+								</div>
+{{!--
 								<div class="col-sm-2">
 										<div class="form-group">
 												<label for="flyer-title-color" class="control-label">Color</label>
-												<input required class="form-control" id="flyer-title-color" value="#8fea95" type="color" tabindex="4" title="Title color">
+												<input required class="form-control" id="flyer-title-color" value="000000" type="color" tabindex="4" title="Title color">
 										</div>
 								</div>
+--}}
 						</div>
 
 						<div class="form-group">
 								<label class="control-label" for="flyer-description">Executive Summary</label>
-								<textarea class="form-control" id="flyer-description" rows="3" placeholder="Insert a short description taking care of the available space"></textarea>
+								<textarea class="form-control" id="flyer-description" rows="3" placeholder="Insert executive summary here."></textarea>
 						</div>
 
 						<div class="row">
+{{!--
 								<div class="col-sm-4">
 										<div class="form-group">
 												<label for="flyer-price" class="control-label">Price</label>
 												<input required class="form-control" id="flyer-price" placeholder="Enter price (w/o decimals)" value="100" type="number" tabindex="5" step="any" min="0">
 										</div>
 								</div>
+
 								<div class="col-sm-3">
 										<div class="form-group">
 												<label for="flyer-price-currency" class="control-label">Currency</label>
@@ -54,6 +64,7 @@
 												</select>
 										</div>
 								</div>
+--}}
 								<div class="col-sm-2">
 										<div class="form-group">
 												<label for="flyer-price-color" class="control-label">Color</label>
@@ -61,6 +72,24 @@
 										</div>
 								</div>
 						</div>
+
+						<div class="form-group">
+								<label class="control-label" for="flyer-quality">Quality Summary</label>
+								<textarea class="form-control" id="flyer-quality" rows="3" placeholder="Insert quality summary here."></textarea>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6">
+									<label for="flyer-quality1" class="control-label">Quality Image 1</label>
+									<input id="flyer-quality1" type="file">
+							</div>
+
+							<div class="col-sm-6">
+									<label for="flyer-quality2" class="control-label">Quality Image 2</label>
+									<input id="flyer-quality2" type="file">
+							</div>
+						</div>
+
 						<hr>
 						<div class="row">
 								<div class="col-sm-6">
@@ -153,10 +182,8 @@
 			w  : 180,
 			h  : 80
 		},
-		agency_name      = 'KMS',
-		agency_site_url  = 'www.kempmanagementsolutions.net',
-		footer           = agency_name + ' - ' + agency_site_url,
 
+		footer           = 'KMS - www.kempmanagementsolutions.net',
 		page_size        = 'a4',
 		page_width       = 210, // mm
 		page_margin      = 10,  // mm
@@ -168,7 +195,6 @@
 		vspace = 10 // standard vertical space between elements
 
 	;
-
 
 	// some variables
 	var can_display_preview    = true, // if true a preview of the PDF can be displayed in the iframe,
@@ -292,13 +318,20 @@
 			_y = page_margin; // vertical starting point
 
 			// form data
+				//Forked variables
 			var flyer_title             = $('#flyer-title').val(),
 				flyer_title_size        = $('#flyer-title-size').val(),
-				flyer_title_color       = $('#flyer-title-color').val(),
+				//flyer_title_color       = $('#flyer-title-color').val(),
 				flyer_description       = $('#flyer-description').val(),
-				flyer_price             = $('#flyer-price').val(),
-				flyer_price_currency    = $('#flyer-price-currency').val(),
-				flyer_price_color       = $('#flyer-price-color').val()
+				//flyer_price             = $('#flyer-price').val(),
+				//flyer_price_currency    = $('#flyer-price-currency').val(),
+				flyer_price_color       = $('#flyer-price-color').val(),
+
+				//Our variables
+				flyer_projectid			=$('#flyer-projectid').val(),
+				flyer_quality			=$('flyer-quality').val(),
+				flyer_quality1			=$('#flyer-quality1').val(),
+				flyer_quality2			=$('#flyer-quality2').val()
 			;
 
 			var pdf = new jsPDF('p', 'mm', page_size),
@@ -319,55 +352,57 @@
 				creator : 'jsPDF'
 			});
 
-			// !logo
+			// !kmslogo
 			var logo_sizes = imgSizes (agency_logo.w, agency_logo.h, 60);
-			pdf.addImage(agency_logo.src, 'PNG', logo_sizes.centered_x, _y, logo_sizes.w, logo_sizes.h);
+			pdf.addImage(agency_logo.src, 'PNG', 150, 10, 50, 15);
+
+			// !clientlogo
+			if(img_data) {
+				var img_sizes = imgSizes (img_data.w, img_data.h, content_width);
+				pdf.addImage(img_data.src, img_data.type, 10, 10, 50, 15);
+
+			} else {
+				pdf.setFillColor(light_grey);
+				pdf.roundedRect(10, 10, 50, 15, 1, 1, 'F');
+				
+				_string = 'No Logo';
+
+				pdf.setFontSize(20);
+				pdf.setFont("helvetica");
+				pdf.setFontType("bold");
+
+				lineHeight = px2mm(pdf.getLineHeight(_string));
+				y_correction = lineHeight/3;
+
+				pdf.setTextColor(white);
+				pdf.textAlign(_string, {align: "centerAtX"}, 35, 17 + y_correction );
+			}
 
 			// fonts initializing
 			pdf.setFont("helvetica");
 			pdf.setFontType("bold");
 
-
-			// !main title
-			color_array = hex2rgb(flyer_title_color);
-			pdf.setTextColor(color_array.red, color_array.green, color_array.blue);
+			// !Title
+			pdf.setTextColor(black);
 
 			pdf.setFontSize(flyer_title_size);
 
 			lineHeight = px2mm(pdf.getLineHeight(flyer_title));
 
-			_y += (logo_sizes.h + vspace + lineHeight);
+			_y += (25 + lineHeight);
 
 			pdf.textAlign(flyer_title, {align: "center"}, 0, _y);
 
-			_y += vspace;
+			// !Execuve Summary Header
+			pdf.setTextColor(black);
+			pdf.setFontSize(flyer_title_size);
+			pdf.setFont("helvetica");
+			pdf.setFontType("bold");
 
-			// !user image
-			if(img_data) {
-				var img_sizes = imgSizes (img_data.w, img_data.h, content_width);
-				pdf.addImage(img_data.src, img_data.type, img_sizes.centered_x, _y, img_sizes.w, img_sizes.h);
-				_y += img_sizes.h;
+			lineHeight = px2mm(pdf.getLineHeight(flyer_title));
+			_y += (vspace + lineHeight/2);
 
-			} else {
-				// if we haven't an image, a grey box with a text is added
-
-				var box_height = 80;
-
-				pdf.setFillColor(light_grey);
-				pdf.roundedRect(page_margin, _y, content_width, box_height, 5, 5, 'F');
-				pdf.setFontSize(60);
-				pdf.setTextColor(white);
-				_string = 'SPECIAL OFFER';
-				lineHeight = px2mm(pdf.getLineHeight(_string));
-
-				// y_correction: value to be added to y coord of the grey box to have text vertically centered
-				// it is empirically calculated adding 1/3 of text line height to half box height
-				y_correction = box_height/2 + lineHeight/3;
-
-				pdf.textAlign(_string, {align: "center"}, 0, _y + y_correction );
-
-				_y += box_height;
-			}
+			pdf.textAlign('Executive Summary', {align: "center"}, 0, _y);
 
 			// !price
 			// first: creating a circle that overlaps the bottom side of the image
@@ -377,14 +412,13 @@
 
 			// _x and _y refer to center of the circle
 			_x = content_width - circle_radius;      // circle ends at `page_margin` millimeters from the image right side
-
 			pdf.circle( _x, _y, circle_radius, 'F'); // circle overlaps image for 1/2 of its height
-
+			_string = 'Test';
 			pdf.setFontSize(60);
 			pdf.setFont("times");
 			pdf.setFontType("bold");
 
-			_string = flyer_price_currency + parseInt(flyer_price); // decimals are removed
+			//_string = flyer_price_currency + parseInt(flyer_price); // decimals are removed
 
 			lineHeight = px2mm(pdf.getLineHeight(_string));
 			y_correction = lineHeight/3;
@@ -393,17 +427,17 @@
 			pdf.textAlign(_string, {align: "centerAtX"}, _x, _y + y_correction );
 
 
-			// !description
+			// !description / executive summary
 			if(flyer_description) {
-				pdf.setFontSize(20);
+				pdf.setFontSize(12);
 				pdf.setFont("helvetica");
-				pdf.setFontType("italic");
-				pdf.setTextColor(grey);
+				pdf.setFontType("normal");
+				pdf.setTextColor(black);
 
-				var lineWidth = content_width - (circle_radius * 2) - (page_margin * 2);
+				var lineWidth = content_width - (page_margin);
 				_y += page_margin;
 
-				var line_height = 12; // mm
+				var line_height = 7; // mm
 
 				var description_lines = pdf.splitTextToSize(flyer_description, lineWidth);
 				//pdf.text(page_margin, _y, description_lines); // doesn't allows to change line spacing
@@ -412,9 +446,39 @@
 					pdf.text(page_margin, _y, description_lines[i]);
 					_y += line_height;
 				}
-
 			}
 
+			pdf.addPage(); //Page 2
+
+			// !Quality Header
+			_y = 0;
+			pdf.setTextColor(black);
+			pdf.setFontSize(flyer_title_size);
+			pdf.setFont("helvetica");
+			pdf.setFontType("bold");
+
+			lineHeight = px2mm(pdf.getLineHeight(flyer_title));
+			_y += (vspace + lineHeight);
+
+			pdf.textAlign('Quality', {align: "center"}, 0, _y);
+
+			// !Quality Summary, doesn't work right now
+			if (flyer_quality) {
+				pdf.setFontSize(12);
+				pdf.setFont("helvetica");
+				pdf.setFontType("normal");
+				pdf.setTextColor(black);
+
+				lineWidth = content_width - (page_margin);
+				_y += page_margin;
+				line_height = 7; // mm
+				description_lines = pdf.splitTextToSize(flyer_quality, lineWidth);
+
+				for (var i = 0 ; i < description_lines.length ; i++ ) {
+					pdf.text(page_margin, _y, description_lines[i]);
+					_y += line_height;
+				}
+			}
 
 			// !footer
 			_y = 287;
