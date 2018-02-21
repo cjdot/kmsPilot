@@ -8,10 +8,22 @@
 		<div class="row">
 				<div class="col-sm-6 loc_form">
 
-						<div class="form-group">
+						<div class="row">
+							<div class="col-sm-6">
 								<label for="flyer-image" class="control-label">Client Logo</label>
 								<input id="flyer-image" type="file" tabindex="1">
+							</div>
+							
+							<div class="col-sm-6">
+								<label for="flyer-frequency" class="control-label">Frequency</label><br>
+								<input id="flyer-frequency" type="radio" name="gender" value="Weekly"> Weekly
+  								<input id="flyer-frequency" type="radio" name="gender" value="Bi-Weely"> Bi-Weekly
+								<input id="flyer-frequency" type="radio" name="gender" value="Monthly"> Monthly
+								<input id="flyer-frequency" type="radio" name="gender" value="Yearly"> Yearly
+							</div>
 						</div>
+
+						<br>
 
 						<div class="row">
 								<div class="col-sm-6">
@@ -24,7 +36,7 @@
 								<div class="col-sm-3">
 										<div class="form-group">
 												<label for="flyer-title-size" class="control-label">Size (pt)</label>
-												<input required class="form-control" id="flyer-title-size" value="30" min="1" step="1" type="number" tabindex="3" title="Title size: tune it to fit the available space">
+												<input required class="form-control" id="flyer-title-size" value="20" min="1" step="1" type="number" tabindex="3" title="Title size: tune it to fit the available space">
 										</div>
 								</div>
 
@@ -32,14 +44,7 @@
 										<label class="control-label" for="flyer-projectid">Project ID</label>
 										<input required class="form-control" id="flyer-projectid" placeholder="№" maxlength="5" type="text">
 								</div>
-{{!--
-								<div class="col-sm-2">
-										<div class="form-group">
-												<label for="flyer-title-color" class="control-label">Color</label>
-												<input required class="form-control" id="flyer-title-color" value="000000" type="color" tabindex="4" title="Title color">
-										</div>
-								</div>
---}}
+
 						</div>
 
 						<div class="form-group">
@@ -114,7 +119,8 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script> {{!-- jsPDF base --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script> {{!-- jsPDF AutoTable plugin --}}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.12.0/jquery.qrcode.min.js"></script>
 <script type="text/javascript">
 /* jshint undef:false, newcap: false, unused:false */
@@ -122,22 +128,12 @@
 (function(API){
     API.textAlign = function(txt, options, x, y) {
         options = options ||{};
-        // Use the options align property to specify desired text alignment
-        // Param x will be ignored if desired text alignment is 'center'.
-        // Usage of options can easily extend the function to apply different text
-        // styles and sizes
 
 		// Get current font size
         var fontSize = this.internal.getFontSize();
 
         // Get page width
         var pageWidth = this.internal.pageSize.width;
-
-        // Get the actual text's width
-        // You multiply the unit width of your string by your font size and divide
-        // by the internal scale factor. The division is necessary
-        // for the case where you use units other than 'pt' in the constructor
-        // of jsPDF.
 
         var txtWidth = this.getStringUnitWidth(txt)*fontSize/this.internal.scaleFactor;
 
@@ -158,12 +154,6 @@
         // Draw text at x,y
         this.text(txt,x,y);
     };
-/*
-    API.textWidth = function(txt) {
-	    var fontSize = this.internal.getFontSize();
-        return this.getStringUnitWidth(txt)*fontSize / this.internal.scaleFactor;
-    };
-*/
 
     API.getLineHeight = function(txt) {
         return this.internal.getLineHeight();
@@ -321,15 +311,12 @@
 				//Forked variables
 			var flyer_title             = $('#flyer-title').val(),
 				flyer_title_size        = $('#flyer-title-size').val(),
-				//flyer_title_color       = $('#flyer-title-color').val(),
 				flyer_description       = $('#flyer-description').val(),
-				//flyer_price             = $('#flyer-price').val(),
-				//flyer_price_currency    = $('#flyer-price-currency').val(),
 				flyer_price_color       = $('#flyer-price-color').val(),
 
 				//Our variables
 				flyer_projectid			=$('#flyer-projectid').val(),
-				flyer_quality			=$('flyer-quality').val(),
+				flyer_quality			=$('#flyer-quality').val(),
 				flyer_quality1			=$('#flyer-quality1').val(),
 				flyer_quality2			=$('#flyer-quality2').val()
 			;
@@ -405,7 +392,6 @@
 			pdf.textAlign('Executive Summary', {align: "center"}, 0, _y);
 
 			// !price
-			// first: creating a circle that overlaps the bottom side of the image
 			var circle_radius = 30;
 			color_array = hex2rgb(flyer_price_color);
 			pdf.setFillColor(color_array.red, color_array.green, color_array.blue);
@@ -415,10 +401,8 @@
 			pdf.circle( _x, _y, circle_radius, 'F'); // circle overlaps image for 1/2 of its height
 			_string = 'Test';
 			pdf.setFontSize(60);
-			pdf.setFont("times");
+			pdf.setFont("helvetica");
 			pdf.setFontType("bold");
-
-			//_string = flyer_price_currency + parseInt(flyer_price); // decimals are removed
 
 			lineHeight = px2mm(pdf.getLineHeight(_string));
 			y_correction = lineHeight/3;
@@ -440,7 +424,6 @@
 				var line_height = 7; // mm
 
 				var description_lines = pdf.splitTextToSize(flyer_description, lineWidth);
-				//pdf.text(page_margin, _y, description_lines); // doesn't allows to change line spacing
 
 				for (var i = 0 ; i < description_lines.length ; i++ ) {
 					pdf.text(page_margin, _y, description_lines[i]);
@@ -448,13 +431,28 @@
 				}
 			}
 
+			// !Schedule Recap Header
+			pdf.setFontSize(flyer_title_size);
+			pdf.setFontType("bold");
+
+			lineHeight = px2mm(pdf.getLineHeight(flyer_title));
+			_y += (vspace + lineHeight);
+
+			pdf.textAlign('Schedule Recap', {align: "center"}, 0, _y);
+
+			// !Page 1 footer
+			_y = 287;
+			pdf.setFontSize(9);
+			pdf.setFontType("normal");
+			pdf.setTextColor(black);
+			pdf.textAlign(footer, {align: "center"}, 0, _y)
+
 			pdf.addPage(); //Page 2
 
 			// !Quality Header
 			_y = 0;
 			pdf.setTextColor(black);
 			pdf.setFontSize(flyer_title_size);
-			pdf.setFont("helvetica");
 			pdf.setFontType("bold");
 
 			lineHeight = px2mm(pdf.getLineHeight(flyer_title));
@@ -462,7 +460,7 @@
 
 			pdf.textAlign('Quality', {align: "center"}, 0, _y);
 
-			// !Quality Summary, doesn't work right now
+			// !Quality Summary
 			if (flyer_quality) {
 				pdf.setFontSize(12);
 				pdf.setFont("helvetica");
@@ -472,21 +470,39 @@
 				lineWidth = content_width - (page_margin);
 				_y += page_margin;
 				line_height = 7; // mm
-				description_lines = pdf.splitTextToSize(flyer_quality, lineWidth);
+				var quality_lines = pdf.splitTextToSize(flyer_quality, lineWidth);
 
-				for (var i = 0 ; i < description_lines.length ; i++ ) {
-					pdf.text(page_margin, _y, description_lines[i]);
+				for (var i = 0 ; i < quality_lines.length ; i++ ) {
+					pdf.text(page_margin, _y, quality_lines[i]);
 					_y += line_height;
 				}
 			}
 
-			// !footer
+			// !Page 2 footer
+			_y = 287;
+			pdf.setFontSize(9);
+			pdf.setFontType("normal");
+			pdf.setTextColor(black);
+			pdf.textAlign(footer, {align: "center"}, 0, _y)
+
+			pdf.addPage(); //Page 3
+
+			// !Field Report Tracking Log Header
+			_y = 0;
+			pdf.setFontSize(flyer_title_size);
+			pdf.setFontType("bold");
+
+			lineHeight = px2mm(pdf.getLineHeight(flyer_title));
+			_y += (vspace + lineHeight);
+
+			pdf.textAlign('Field Report Tracking Log', {align: "center"}, 0, _y);
+
+			// !Page 3 footer
 			_y = 287;
 			pdf.setFontSize(9);
 			pdf.setFontType("normal");
 			pdf.setTextColor(black);
 			pdf.textAlign(footer, {align: "center"}, 0, _y);
-
 
 			// ****************************
 			// output

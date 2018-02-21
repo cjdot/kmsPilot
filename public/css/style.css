@@ -181,7 +181,7 @@ h1 {
 .flyer-builder iframe,
 .flyer-builder .no_iframe {
   width: 100%;
-  height: 400px;
+  height: 100%;
   border: 1px solid #666;
   background-color: #ddd;
   display: block;
