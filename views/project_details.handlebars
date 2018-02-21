@@ -24,12 +24,15 @@
 
 <div class="tab-content">
     {{#ifEquals updateType 'updateProjectOverview'}}
-    <div id="home" class="tab-pane fade in active">
+    <div id="home" class="tab-pane fade in active"></div>
+    {{/ifEquals}}
+    {{#ifEquals updateType null}}
+        <div id="home" class="tab-pane fade in active">
     {{else}}
     <div id="home" class="tab-pane fade in">
     {{/ifEquals}}
         <br><h3>Project Overview</h3>
-        <table class="table table-responsive table-striped ">
+        <table class="table table-striped ">
             <thead>
                 <tr>
                     <th>Client Name</th>
@@ -64,7 +67,11 @@
     <div id="menu2" class="tab-pane fade in">
     {{/ifEquals}}
         <br><h3>Project Activities</h3>
-        <table class="table table-striped table-responsive">
+
+    
+   
+
+        <table class="table table-striped ">
     <thead>
         <tr>
             
@@ -98,7 +105,7 @@
         {{/each}}
     </tbody>
 </table>
-        <table class="table table-responsive table-striped ">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Activity Description</th>
@@ -130,7 +137,7 @@
     <div id="menu3" class="tab-pane fade">
 
         <br><h3>KMS Action Items</h3>
-        <table class="table table-responsive table-striped ">
+        <table class="table table-striped ">
             <thead>
                 <tr>
                     <th>Action Item Description</th>
@@ -159,7 +166,7 @@
     </div>
     <div id="menu4" class="tab-pane fade">
         <br><h3>External Action Items</h3>
-        <table class="table table-responsive table-striped ">
+        <table class="table table-striped ">
             <thead>
                 <tr>
                     <th>Action Item Description</th>
@@ -188,7 +195,7 @@
 
     <div id="menu5" class="tab-pane fade">
         <br><h3>Cost Summary</h3>
-        <table class="table table-responsive table-striped ">
+        <table class="table table-striped ">
             <thead>
                 <tr>
                     <th>Division Category</th>
@@ -224,7 +231,7 @@
 
     <div id="menu6" class="tab-pane fade">
         <br><h3>PCO Log</h3>
-        <table class="table table-responsive table-striped ">
+        <table class="table table-striped ">
             <thead>
                 <tr>
                     <th>PCO Number</th>

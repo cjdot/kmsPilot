@@ -18,13 +18,17 @@
             
           <h4>Client: {{clientName}}</h4>
           <div class="text-muted" name="{{projectID}}" value="{{projectID}}">
-          <a class="projectss" href="/projects/project_details" style="color: black">
               <strong>Project Name:</strong> {{projectName}} <br>
               <strong>Budget:</strong> ${{formatNumber projectedBudget price="USD"}} <br>
               <strong>Service Type:</strong> {{serviceType}} <br>
               <strong>Location:</strong> {{location}} <br>
-              </a>
+              <br>
+            <form action= "/projects/project_details" method="POST">
+                  <input type= "hidden" name="projectID", id="projectID" value="{{projectID}}">
+                  <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Select Project</button>
+            </form>
         </div>
+
   </div> 
             
 {{/each}}
