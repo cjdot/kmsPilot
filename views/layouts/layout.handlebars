@@ -25,12 +25,12 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="#">KMS Project Management</a>
-
+    
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         {{#if user}}
-        <li class="nav-item active">
-          <a class="nav-link" href="https://www.kempmanagementsolutions.net/">Home
+        <li class="nav-item">
+          <a class="nav-link" href="http://www.kempmanagementsolutions.net/" target="_blank">Home
             <span class="sr-only">(current)</span>
           </a>
         </li>
@@ -58,6 +58,7 @@
     <div class="row">
       {{#if user}}
       <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+        <img src='/images/kms.jpg' alt='KMS Logo' height="100" style="margin : 20px"/>
         <ul class="nav nav-pills flex-column">
 
           <li class="nav-item">
@@ -73,7 +74,7 @@
             <a class="nav-link" href="#">Reports</a>
           </li>
         </ul>
-
+        
       </nav>
       {{/if}}
       <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
@@ -112,6 +113,7 @@
   <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 
   <!-- Changes -->
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
