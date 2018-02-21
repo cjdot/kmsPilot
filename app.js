@@ -46,7 +46,9 @@ var options = {
 }
 
 HandlebarsIntl.registerWith(Handlebars);
-
+Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+  return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
 var sessionStore = new MySQLStore(options);
 
 // Express Session

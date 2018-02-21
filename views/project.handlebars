@@ -3,6 +3,7 @@
 <button type="button" class="btn btn-active"><a href="/projects/project" style="text-decoration: none;">All Projects</a></button>
 <br> <br>
 
+
 <form class="form-inline mt-2 mt-md-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Search">
           <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
@@ -14,12 +15,12 @@
 <div class="col-6 col-sm-3 placeholder">
 
           
-
+            
           <h4>Client: {{clientName}}</h4>
-          <div class="text-muted" >
-          <a class="projectss" href="/projects/details_projectoverview" style="color: black">
+          <div class="text-muted" name="{{projectID}}" value="{{projectID}}">
+          <a class="projectss" href="/projects/project_details" style="color: black">
               <strong>Project Name:</strong> {{projectName}} <br>
-              <strong>Budget:</strong> {{projectedBudget}} <br>
+              <strong>Budget:</strong> ${{formatNumber projectedBudget price="USD"}} <br>
               <strong>Service Type:</strong> {{serviceType}} <br>
               <strong>Location:</strong> {{location}} <br>
               </a>
@@ -28,3 +29,6 @@
             
 {{/each}}
 </section>
+
+<script src="handlebars/dist/handlebars.min.js"></script>
+<script src="handlebars-intl/dist/handlebars-intl.min.js"></script>
