@@ -11,7 +11,7 @@ var MySQLStore = require('express-mysql-session') (session);
 var flash = require('connect-flash');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-
+var moment = require('moment');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -49,6 +49,12 @@ HandlebarsIntl.registerWith(Handlebars);
 Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
+
+Handlebars.registerHelper('formatTime', function (date, format) {
+  var mmnt = moment(date);
+  return mmnt.format(format);
+});
+
 var sessionStore = new MySQLStore(options);
 
 // Express Session

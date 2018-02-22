@@ -1,10 +1,8 @@
 {{#each results}}
 
-<h2>
-    <strong>Project Name:</strong> {{projectName}}</h2>
+<h2><strong>Project Name:</strong> {{projectName}}</h2>
 <br>
-<h3>
-    <strong>Client:</strong> {{clientName}}</h3>
+<h3><strong>Client:</strong> {{clientName}}</h3>
 
 {{/each}}
 
@@ -37,34 +35,34 @@
     <!-- Project Overview Tab -->
     {{#ifEquals updateType 'updateProjectOverview'}}
     <div id="home" class="tab-pane fade in active"></div>
-    {{/ifEquals}} {{#ifEquals updateType null}}
+    {{/ifEquals}} 
+    {{#ifEquals updateType null}}
     <div id="home" class="tab-pane fade in active">
-        {{else}}
-        <div id="home" class="tab-pane fade in">
-            {{/ifEquals}}
-            <br>
-            <h3>Project Overview</h3>
-            <br>
-            <div class="col-6 col-sm-3 placeholder">
-                {{#each results}}
-                <h2>Client Name: </h2>
-                <p>{{clientName}}</p>
-                <h2>Project Name: </h2>
-                <p>{{projectName}}</p>
-                <h2>Location: </h2>
-                <p>{{location}}</p>
-                <h2>Target Start Date: </h2>
-                <p>{{formatDate targetStartDate}}</p>
-                <h2>Target Completion Date: </h2>
-                <p>{{formatDate targetCompletionDate}}</p>
-                <h2>Projected Budget: </h2>
-                <p>${{formatNumber projectedBudget}}</p>
-                <h2>Service Type: </h2>
-                <p>{{serviceType}}</p>
-                {{/each}}
-            </div>
+    {{else}}
+    <div id="home" class="tab-pane fade in">
+    {{/ifEquals}}
+    <br>
+    <h3>Project Overview</h3>
+    <br>
+        <div class="col-6 col-sm-3 placeholder">
+            {{#each results}}
+            <h2>Client Name: </h2>
+            <p>{{clientName}}</p>
+            <h2>Project Name: </h2>
+            <p>{{projectName}}</p>
+            <h2>Location: </h2>
+            <p>{{location}}</p>
+            <h2>Target Start Date: </h2>
+            <p>{{formatDate targetStartDate}}</p>
+            <h2>Target Completion Date: </h2>
+            <p>{{formatDate targetCompletionDate}}</p>
+            <h2>Projected Budget: </h2>
+            <p>${{formatNumber projectedBudget}}</p>
+            <h2>Service Type: </h2>
+            <p>{{serviceType}}</p>
+            {{/each}}
         </div>
-
+    </div>
     <!-- Project Activities Tab -->
     {{#ifEquals updateType 'updateProjectActivity'}}
     <div id="menu2" class="tab-pane fade in active">
@@ -72,111 +70,106 @@
     <div id="menu2" class="tab-pane fade in">
     {{/ifEquals}}
     <br>
-    <h3>Project Activities</h3>
+    <h3>Project Activities</h3>      
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#read" role="tab">Read</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#update" role="tab">Update</a>
+            </li>
+        </ul>
 
-
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#home1" role="tab">Read</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Update</a>
-                    </li>
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div class="tab-pane active" id="home1" role="tabpanel">
-                        <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Activity Description</th>
-                            <th>Target Start Date</th>
-                            <th>Actual Start Date</th>
-                            <th>Target Completion Date</th>
-                            <th>Actual Completion Date</th>
-                            <th>Progress</th>
-                            <th>Activity Notes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        {{#each results1}}
-                        <tr>
-                            <td>{{activityDescription}}</td>
-                            <td>{{formatDate targetStartDate}}</td>
-                            <td>{{formatDate actualStartDate}}</td>
-                            <td>{{formatDate targetCompletionDate}}</td>
-                            <td>{{formatDate actualCompletionDate}}</td>
-                            <td>{{#if progress}}{{progress}}{{else}}0%{{/if}}</td>
-                            <td>{{activityNotes}}</td>
-                        </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
-                    </div>
-                    <div class="tab-pane" id="profile" role="tabpanel">
-                        <table class="table table-striped ">
-                    <thead>
-                        <tr>
-
-                            <th>Activity Description</th>
-                            <th>Target Start Date</th>
-                            <th>Actual Start Date</th>
-                            <th>Target Completion Date</th>
-                            <th>Actual Completion Date</th>
-                            <th>Progress</th>
-                            <th>Activity Notes</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        {{#each results1}}
-                        <form action="/projects/update" method="post">
-                            <tr>
-                                <input type="hidden" class="form-control" id="projectActivityID" name="projectActivityID" value="{{projectActivityID}}">
-                                <input type="hidden" class="form-control" id="projectID" name="projectID" value="{{projectID}}">
-                                <td>
-                                    <input type="text" class="form-control" id="activityDescription" name="activityDescription"
-                                        value={{activityDescription}}> </td>
-                                <td>
-                                    <input type="date" class="form-control" id="targetStartDate" name="targetStartDate" value={{formatDate
-                                        targetStartDate}}>
-                                </td>
-                                <td>
-                                    <input type="date" class="form-control" id="actualStartDate" name="actualStartDate" value={{actualStartDate}}>
-                                </td>
-                                <td>
-                                    <input type="date" class="form-control" id="targetCompletionDate" name="targetCompletionDate"
-                                        value={{targetCompletionDate}}> </td>
-                                <td>
-                                    <input type="date" class="form-control" id="actualCompletionDate" name="actualCompletionDate"
-                                        value={{actualCompletionDate}}> </td>
-                                <td>
-                                    <input type="text" class="form-control" id="progress" name="progress" placeholder="{{#if progress}}{{progress}}{{else}}0%{{/if}}"
+    <!-- Tab panes -->
+    <div class="tab-content">
+    <div class="tab-pane active" id="read" role="tabpanel">
+      <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Activity Description</th>
+                    <th>Target Start Date</th>
+                    <th>Actual Start Date</th>
+                    <th>Target Completion Date</th>
+                    <th>Actual Completion Date</th>
+                    <th>Progress</th>
+                    <th>Activity Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each results1}}
+                <tr>
+                    <td>{{activityDescription}}</td>
+                    <td>{{#if targetStartDate}}{{formatDate targetStartDate}}{{/if}}</td>
+                    <td>{{#if actualStartDate}}{{formatDate actualStartDate}}{{/if}}</td>
+                    <td>{{#if targetCompletionDate}}{{formatDate targetCompletionDate}}{{/if}}</td>
+                    <td>{{#if actualCompletionDate}}{{formatDate actualCompletionDate}}{{/if}}</td>
+                    <td>{{#if progress}}{{progress}}{{else}}0%{{/if}}</td>
+                    <td>{{activityNotes}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane" id="update" role="tabpanel">
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th>Activity Description</th>
+                    <th>Target Start Date</th>
+                    <th>Actual Start Date</th>
+                    <th>Target Completion Date</th>
+                    <th>Actual Completion Date</th>
+                    <th>Progress</th>
+                    <th>Activity Notes</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each results1}}
+                <form action="/projects/updateProjectActivity" method="post">
+                    <tr>
+                        <input type="hidden" class="form-control" id="projectActivityID" name="projectActivityID" value="{{projectActivityID}}">
+                        <input type="hidden" class="form-control" id="projectID" name="projectID" value="{{projectID}}">
+                            <td>
+                                <input type="text" class="form-control" id="activityDescription" name="activityDescription" value="{{activityDescription}}"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="targetStartDate" name="targetStartDate" value="{{#if targetStartDate}}{{formatTime targetStartDate "YYYY-MM-DD"}}{{/if}}">
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="actualStartDate" name="actualStartDate" value="{{#if actualStartDate}}{{formatTime actualStartDate "YYYY-MM-DD"}}{{/if}}"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="targetCompletionDate" name="targetCompletionDate" value="{{#if targetCompletionDate}}{{formatTime targetCompletionDate "YYYY-MM-DD"}}{{/if}}"> </td>
+                            <td>
+                                <input type="date" class="form-control" id="actualCompletionDate" name="actualCompletionDate" value="{{#if actualCompletionDate}}{{formatTime actualCompletionDate "YYYY-MM-DD"}}{{/if}}"> </td>
+                            <td>
+                                <input type="text" class="form-control" id="progress" name="progress" placeholder="{{#if progress}}{{progress}}{{else}}0%{{/if}}"
                                         value="{{#if progress}}{{progress}}{{else}}0%{{/if}}">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" id="activityNotes" placeholder="{{activityNotes}}"
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="activityNotes" placeholder="{{activityNotes}}"
                                         value="{{activityNotes}}"> </td>
-                                <td>
-                                    <button type="submit" name="actionType" class="form-control" value="Update" formaction="/projects/updateProjectActivity">Update</button>
-                                </td>
-                                <td>
-                                    <button type="submit" name="actionType" class="form-control" value="Delete" formaction="/projects/deleteProjectActivity">Delete</button>
-                                </td>
-                            </tr>
-                        </form>
-                        {{/each}}
-                    </tbody>
-                </table>
-                    </div>
-                </div>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Update">Update</button>
+                            </td>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Delete">Delete</button>
+                            </td>
+                    </tr>
+                </form>
+                {{/each}}
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+        
+    </div>
 
                 
                 
-            </div>
+            
 
             <div id="menu3" class="tab-pane fade">
 
@@ -321,6 +314,6 @@
             </div>
         </div>
     </div>
-
+</div>
     <script src="handlebars/dist/handlebars.min.js"></script>
     <script src="handlebars-intl/dist/handlebars-intl.min.js"></script>

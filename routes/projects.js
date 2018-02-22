@@ -16,7 +16,7 @@ var config = {
 };
 
 router.post('/updateProjectActivity', ensureAuthenticated, function (req, res) {
-
+	
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -33,24 +33,17 @@ router.post('/updateProjectActivity', ensureAuthenticated, function (req, res) {
 	console.log(req.body.projectActivityID)
 	var qry1 = 'UPDATE projectactivity SET activityDescription = ?, targetStartDate = ?, actualStartDate = ?, targetCompletionDate = ?, actualCompletionDate = ?, progress = ? WHERE projectActivityID = ?'
 
-
-	/*
-		conn.query( qry, [req.body.activityDescription, req.body.targetStartDate, req.body.actualStartDate, req.body.targetCompletionDate, req.body.projectActivityID], function(err, results, fields){
-			if(err){console.log(err)};
-		});
-	
-		conn.query( qry2, function(err, results, fields){
-			res.render('project_details', {results:results});
-		}); */
-
 	var qry = 'SELECT * FROM project WHERE projectID = ?'
-
+	console.log(qry);
 	var qry2 = 'SELECT * FROM projectactivity WHERE projectID = ?'
 	var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
 	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
 	var qry5 = 'SELECT * FROM costsummary WHERE projectID = ?'
 	var qry6 = 'SELECT * FROM pcolog WHERE projectID = ?'
 	var updateType = 'updateProjectActivity'
+	console.log('This is happening :' + req.body.actualCompletionDate);
+	//if (req.body.actualCompletionDate = '');
+
 	console.log(qry);
 	conn.query(qry1, [req.body.activityDescription, req.body.targetStartDate, req.body.actualStartDate, req.body.targetCompletionDate, req.body.actualCompletionDate, req.body.progress, req.body.projectActivityID], function (err, results0, fields) {
 		conn.query(qry, req.body.projectID, function (err, results, fields) {
@@ -59,6 +52,7 @@ router.post('/updateProjectActivity', ensureAuthenticated, function (req, res) {
 					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
 						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
+								
 								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
 							});
 						});
