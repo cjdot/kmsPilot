@@ -16,10 +16,10 @@
 							
 							<div class="col-sm-6">
 								<label for="flyer-frequency" class="control-label">Frequency</label><br>
-								<input id="flyer-frequency" type="radio" name="gender" value="Weekly"> Weekly
-  								<input id="flyer-frequency" type="radio" name="gender" value="Bi-Weely"> Bi-Weekly
-								<input id="flyer-frequency" type="radio" name="gender" value="Monthly"> Monthly
-								<input id="flyer-frequency" type="radio" name="gender" value="Yearly"> Yearly
+								<input id="flyer-frequency" type="radio" name="freq" value="Weekly"> Weekly
+  								<input id="flyer-frequency" type="radio" name="freq" value="Bi-Weekly"> Bi-Weekly
+								<input id="flyer-frequency" type="radio" name="freq" value="Monthly"> Monthly
+								<input id="flyer-frequency" type="radio" name="freq" value="Yearly"> Yearly
 							</div>
 						</div>
 
@@ -262,9 +262,9 @@
 		};
 	};
 
-
 	try {
 
+		//Client Logo Check
 		var flyer_img = $('#flyer-image'),
 			img_data = null
 		;
@@ -301,6 +301,68 @@
 			//when the file is read it triggers the onload event above.
 			reader.readAsDataURL(user_file);
 		});
+
+		//Quality Image 1 Check
+        var q1_img = $('#flyer-quality1'),
+            q1_data = null
+        ;
+
+        $('#flyer-quality1').change(function () {
+
+            var q1_file = q1_img[0].files[0];
+
+            q1_data = {
+                type: q1_file.type === 'image/jpeg' ? 'JPEG' : 'PNG'
+            };
+
+            var q1_reader = new FileReader();
+            q1_reader.onload = function(event){
+                q1_data.src = event.target.result;
+
+                // we need this to get img dimensions
+                var q1_userimg = new Image();
+                q1_userimg.onload = function () {
+                    q1_data.w = q1_userimg.width;
+                    q1_data.h = q1_userimg.height;
+
+                };
+                q1_userimg.src = q1_data.src;
+            };
+
+            //when the file is read it triggers the onload event above.
+            q1_reader.readAsDataURL(q1_file);
+    	});
+
+		//Quality Image 2 Check
+        var q2_img = $('#flyer-quality2'),
+            q2_data = null
+        ;
+
+        $('#flyer-quality2').change(function () {
+
+            var q2_file = q2_img[0].files[0];
+
+            q2_data = {
+                type: q2_file.type === 'image/jpeg' ? 'JPEG' : 'PNG'
+            };
+
+            var q2_reader = new FileReader();
+            q2_reader.onload = function(event){
+                q2_data.src = event.target.result;
+
+                // we need this to get img dimensions
+                var q2_userimg = new Image();
+                q2_userimg.onload = function () {
+                    q2_data.w = q2_userimg.width;
+                    q2_data.h = q2_userimg.height;
+
+                };
+                q2_userimg.src = q2_data.src;
+            };
+
+            //when the file is read it triggers the onload event above.
+            q2_reader.readAsDataURL(q2_file);
+        });
 
 		//!pdf builder
 		var createPDF = function (update_preview) {
@@ -369,15 +431,22 @@
 			pdf.setFont("helvetica");
 			pdf.setFontType("bold");
 
-			// !Title
+			// Get radio  and time values
+			var frequency = document.querySelector('input[name="freq"]:checked').value;
+			var date = new Date();
+			var gen_date = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+
+			// !Header
 			pdf.setTextColor(black);
+			pdf.setFontSize(15);
+			pdf.textAlign('Client Company', {align: "center"}, 0, _y += 5);
+			pdf.textAlign(frequency + ' Project Summary Report', {align: "center"}, 0, _y += 5);
+			pdf.textAlign(gen_date, {align: "center"}, 0, _y += 5);
 
+			// !Title
 			pdf.setFontSize(flyer_title_size);
-
 			lineHeight = px2mm(pdf.getLineHeight(flyer_title));
-
-			_y += (25 + lineHeight);
-
+			_y = 45;
 			pdf.textAlign(flyer_title, {align: "center"}, 0, _y);
 
 			// !Execuve Summary Header
@@ -476,6 +545,32 @@
 					pdf.text(page_margin, _y, quality_lines[i]);
 					_y += line_height;
 				}
+			}
+
+			// !Universal content image sizes
+			var content_img_w = 90;
+			var content_img_h = 60;
+
+			if(_y > 287 - content_img_h) {
+				pdf.addPage();
+				_y = 0;
+				pdf.setFontSize(flyer_title_size);
+				pdf.setFontType("bold");
+				lineHeight = px2mm(pdf.getLineHeight(flyer_title));
+				_y += (vspace + lineHeight);
+				pdf.textAlign('Quality (Continued)', {align: "center"}, 0, _y);
+				y += page_margin;
+			}
+
+			// !Quality Images
+			if(q1_data) {
+				var img_sizes = imgSizes (q1_data.w, q1_data.h, content_width);
+				pdf.addImage(q1_data.src, q1_data.type, 10, _y, content_img_w, content_img_h);
+			}
+
+			if(q2_data) {
+				var img_sizes = imgSizes (q2_data.w, q2_data.h, content_width);
+				pdf.addImage(q2_data.src, q2_data.type, 200 - content_img_w, _y, content_img_w, content_img_h);
 			}
 
 			// !Page 2 footer
