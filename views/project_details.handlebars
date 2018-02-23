@@ -63,6 +63,8 @@
             {{/each}}
         </div>
     </div>
+
+
     <!-- Project Activities Tab -->
     {{#ifEquals updateType 'updateProjectActivity'}}
     <div id="menu2" class="tab-pane fade in active">
@@ -80,7 +82,7 @@
             </li>
         </ul>
 
-    <!-- Tab panes -->
+        <!-- Tab panes -->
     <div class="tab-content">
     <div class="tab-pane active" id="read" role="tabpanel">
       <table class="table table-striped">
@@ -111,6 +113,56 @@
         </table>
     </div>
     <div class="tab-pane" id="update" role="tabpanel">
+        <br><br><h4>Add new Project Activity</h4>
+
+        
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th>Activity Description</th>
+                    <th>Target Start Date</th>
+                    <th>Actual Start Date</th>
+                    <th>Target Completion Date</th>
+                    <th>Actual Completion Date</th>
+                    <th>Progress</th>
+                    <th>Activity Notes</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <form action="/projects/newProjectActivity" method="post">
+                    <tr>
+                        
+                        <input type="hidden" class="form-control" id="projectID" name="projectID" value={{#each results}}"{{projectID}}"{{/each}}>
+                            <td>
+                                <input type="text" class="form-control" id="activityDescription" name="activityDescription"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="targetStartDate" name="targetStartDate">
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="actualStartDate" name="actualStartDate"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="targetCompletionDate" name="targetCompletionDate"> </td>
+                            <td>
+                                <input type="date" class="form-control" id="actualCompletionDate" name="actualCompletionDate"> </td>
+                            <td>
+                                <input type="text" class="form-control" id="progress" name="progress">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="activityNotes">
+                            </td>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Update">Insert</button>
+                            </td>
+                    </tr>
+                </form>
+                
+            </tbody>
+        </table>
+        <br><br><h4>Update Project Activity</h4>
         <table class="table table-striped ">
             <thead>
                 <tr>
@@ -126,7 +178,7 @@
             </thead>
             <tbody>
                 {{#each results1}}
-                <form action="/projects/updateProjectActivity" method="post">
+                <form method="post">
                     <tr>
                         <input type="hidden" class="form-control" id="projectActivityID" name="projectActivityID" value="{{projectActivityID}}">
                         <input type="hidden" class="form-control" id="projectID" name="projectID" value="{{projectID}}">
@@ -151,10 +203,10 @@
                                 <input type="text" class="form-control" id="activityNotes" placeholder="{{activityNotes}}"
                                         value="{{activityNotes}}"> </td>
                             <td>
-                                <button type="submit" name="actionType" class="form-control" value="Update">Update</button>
+                                <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updateProjectActivity">Update</button>
                             </td>
                             <td>
-                                <button type="submit" name="actionType" class="form-control" value="Delete">Delete</button>
+                                <button type="submit" name="actionType" class="form-control" value="Delete" formAction="/projects/deleteProjectActivity">Delete</button>
                             </td>
                     </tr>
                 </form>
@@ -162,20 +214,35 @@
             </tbody>
         </table>
         </div>
-    </div>
-
-        
+    </div>      
     </div>
 
                 
                 
             
 
-            <div id="menu3" class="tab-pane fade">
-
+            
+            {{#ifEquals updateType 'updateActionItem'}}
+            <div id="menu3" class="tab-pane fade in active">
+            {{else}}
+            <div id="menu3" class="tab-pane fade in">
+            {{/ifEquals}}
                 <br>
                 <h3>KMS Action Items</h3>
-                <table class="table table-striped ">
+
+                <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#read1" role="tab">Read</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#update1" role="tab">Update</a>
+            </li>
+        </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+    <div class="tab-pane active" id="read1" role="tabpanel">
+      <table class="table table-striped ">
                     <thead>
                         <tr>
                             <th>Action Item Description</th>
@@ -192,20 +259,134 @@
                         <tr>
                             <td>{{actionItemDescription}}</td>
                             <td>{{activityOwner}}</td>
-                            <td>{{formatDate activityStartDate}}</td>
-                            <td>{{formatDate targetCompletionDate}}</td>
-                            <td>{{formatDate actualCompletionDate}}</td>
+                            <td>{{#if activityStartDate}}{{formatDate activityStartDate}}{{/if}}</td>
+                            <td>{{#if targetCompletionDate}}{{formatDate targetCompletionDate}}{{/if}}</td>
+                            <td>{{#if actualCompletionDate}}{{formatDate actualCompletionDate}}{{/if}}</td>
                             <td>{{actionItemNotes}}</td>
                         </tr>
                         {{/each}}
                     </tbody>
                 </table>
+    </div>
+    <div class="tab-pane" id="update1" role="tabpanel">
+        <br><br><h4>Add new KMS Action Item</h4>
+
+        
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th>Action Item Description</th>
+                    <th>Actvity Owner</th>
+                    <th>Activity Start Date</th>
+                    <th>Target Completion Date</th>
+                    <th>Actual Completion Date</th>
+                    <th>Action Item Notes</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <form action="/projects/newActionItem" method="post">
+                    <tr>
+                        
+                        <input type="hidden" class="form-control" id="projectID" name="projectID" value={{#each results}}"{{projectID}}"{{/each}}>
+                            <td>
+                                <input type="text" class="form-control" id="actionItemDescription" name="actionItemDescription"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="activityOwner" name="activityOwner">
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="activityStartDate" name="actualStartDate"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="targetCompletionDate" name="targetCompletionDate"> </td>
+                            <td>
+                                <input type="date" class="form-control" id="actualCompletionDate" name="actualCompletionDate"> </td>
+                            <td>
+                                <input type="text" class="form-control" id="actionItemyNotes">
+                            </td>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Update">Insert</button>
+                            </td>
+                    </tr>
+                </form>
+                
+            </tbody>
+        </table>
+        <br><br><h4>Update KMS Action Item</h4>
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th>Action Item Description</th>
+                    <th>Actvity Owner</th>
+                    <th>Activity Start Date</th>
+                    <th>Target Completion Date</th>
+                    <th>Actual Completion Date</th>
+                    <th>Action Item Notes</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each results2}}
+                <form method="post">
+                    <tr>
+                        <input type="hidden" class="form-control" id="kmsActionItemID" name="kmsActionItemID" value="{{kmsActionItemID}}">
+                        <input type="hidden" class="form-control" id="projectID" name="projectID" value="{{projectID}}">
+                            <td>
+                                <input type="text" class="form-control" id="actionItemDescription" name="actionItemDescription" value="{{actionItemDescription}}"> 
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="activityOwner" name="activityOwner" value="{{activityOwner}}"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="activityStartDate" name="activityStartDate" value="{{#if activityStartDate}}{{formatTime activityStartDate "YYYY-MM-DD"}}{{/if}}"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="targetCompletionDate" name="targetCompletionDate" value="{{#if targetCompletionDate}}{{formatTime targetCompletionDate "YYYY-MM-DD"}}{{/if}}"> </td>
+                            <td>
+                                <input type="date" class="form-control" id="actualCompletionDate" name="actualCompletionDate" value="{{#if actualCompletionDate}}{{formatTime actualCompletionDate "YYYY-MM-DD"}}{{/if}}"> </td>
+                            
+                            <td>
+                                <input type="text" class="form-control" id="actionItemNotes" name="actionItemNotes"  value="{{actionItemNotes}}"> 
+                            </td>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updateActionItem">Update</button>
+                            </td>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Delete" formAction="/projects/deleteActionItem">Delete</button>
+                            </td>
+                    </tr>
+                </form>
+                {{/each}}
+            </tbody>
+        </table>
+        </div>
+    </div>
+                
 
             </div>
-            <div id="menu4" class="tab-pane fade">
+            {{#ifEquals updateType 'updateExternalActionItem'}}
+            <div id="menu4" class="tab-pane fade in active">
+            {{else}}
+            <div id="menu4" class="tab-pane fade in">
+            {{/ifEquals}}
                 <br>
                 <h3>External Action Items</h3>
-                <table class="table table-striped ">
+
+                <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#read2" role="tab">Read</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#update2" role="tab">Update</a>
+            </li>
+        </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+    <div class="tab-pane active" id="read2" role="tabpanel">
+      <table class="table table-striped ">
                     <thead>
                         <tr>
                             <th>Action Item Description</th>
@@ -222,20 +403,132 @@
                         <tr>
                             <td>{{actionItemDescription}}</td>
                             <td>{{activityOwner}}</td>
-                            <td>{{formatDate activityStartDate}}</td>
-                            <td>{{formatDate targetCompletionDate}}</td>
-                            <td>{{formatDate actualCompletionDate}}</td>
+                            <td>{{#if activityStartDate}}{{formatDate activityStartDate}}{{/if}}</td>
+                            <td>{{#if targetCompletionDate}}{{formatDate targetCompletionDate}}{{/if}}</td>
+                            <td>{{#if actualCompletionDate}}{{formatDate actualCompletionDate}}{{/if}}</td>
                             <td>{{actionItemNotes}}</td>
                         </tr>
                         {{/each}}
                     </tbody>
                 </table>
-            </div>
+    </div>
+    <div class="tab-pane" id="update2" role="tabpanel">
+        <br><br><h4>Add new External Action Item</h4>
 
-            <div id="menu5" class="tab-pane fade">
+        
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th>Action Item Description</th>
+                    <th>Actvity Owner</th>
+                    <th>Activity Start Date</th>
+                    <th>Target Completion Date</th>
+                    <th>Actual Completion Date</th>
+                    <th>Action Item Notes</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <form action="/projects/newActionItem" method="post">
+                    <tr>
+                        
+                        <input type="hidden" class="form-control" id="projectID" name="projectID" value={{#each results}}"{{projectID}}"{{/each}}>
+                            <td>
+                                <input type="text" class="form-control" id="actionItemDescription" name="actionItemDescription"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="activityOwner" name="activityOwner">
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="activityStartDate" name="actualStartDate"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="targetCompletionDate" name="targetCompletionDate"> </td>
+                            <td>
+                                <input type="date" class="form-control" id="actualCompletionDate" name="actualCompletionDate"> </td>
+                            <td>
+                                <input type="text" class="form-control" id="actionItemyNotes">
+                            </td>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Update">Insert</button>
+                            </td>
+                    </tr>
+                </form>
+                
+            </tbody>
+        </table>
+        <br><br><h4>Update External Action Item</h4>
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th>Action Item Description</th>
+                    <th>Actvity Owner</th>
+                    <th>Activity Start Date</th>
+                    <th>Target Completion Date</th>
+                    <th>Actual Completion Date</th>
+                    <th>Action Item Notes</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each results3}}
+                <form method="post">
+                    <tr>
+                        <input type="hidden" class="form-control" id="externalActionItem" name="externalActionItemID" value="{{externalActionItemID}}">
+                        <input type="hidden" class="form-control" id="projectID" name="projectID" value="{{projectID}}">
+                            <td>
+                                <input type="text" class="form-control" id="actionItemDescription" name="actionItemDescription" value="{{actionItemDescription}}"> 
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="activityOwner" name="activityOwner" value="{{activityOwner}}"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="activityStartDate" name="activityStartDate" value="{{#if activityStartDate}}{{formatTime activityStartDate "YYYY-MM-DD"}}{{/if}}"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="targetCompletionDate" name="targetCompletionDate" value="{{#if targetCompletionDate}}{{formatTime targetCompletionDate "YYYY-MM-DD"}}{{/if}}"> </td>
+                            <td>
+                                <input type="date" class="form-control" id="actualCompletionDate" name="actualCompletionDate" value="{{#if actualCompletionDate}}{{formatTime actualCompletionDate "YYYY-MM-DD"}}{{/if}}"> </td>
+                            
+                            <td>
+                                <input type="text" class="form-control" id="actionItemNotes" name="actionItemNotes"  value="{{actionItemNotes}}"> 
+                            </td>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updateExternalActionItem">Update</button>
+                            </td>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Delete" formAction="/projects/deleteExternalActionItem">Delete</button>
+                            </td>
+                    </tr>
+                </form>
+                {{/each}}
+            </tbody>
+        </table>
+        </div>
+    </div>
+    </div>
+    {{#ifEquals updateType 'updateCostSummary'}}
+            <div id="menu5" class="tab-pane fade in active">
+            {{else}}
+            <div id="menu5" class="tab-pane fade in">
+            {{/ifEquals}}
                 <br>
                 <h3>Cost Summary</h3>
-                <table class="table table-striped ">
+
+                <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#read3" role="tab">Read</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#update3" role="tab">Update</a>
+            </li>
+        </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+    <div class="tab-pane active" id="read3" role="tabpanel">
+      <table class="table table-striped ">
                     <thead>
                         <tr>
                             <th>Division Category</th>
@@ -267,12 +560,125 @@
                         {{/each}}
                     </tbody>
                 </table>
-            </div>
+    </div>
+    <div class="tab-pane" id="update3" role="tabpanel">
+        <br><br><h4>Add new Cost Sumary Line Item</h4>
 
-            <div id="menu6" class="tab-pane fade">
+        
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th>Activity Description</th>
+                    <th>Target Start Date</th>
+                    <th>Actual Start Date</th>
+                    <th>Target Completion Date</th>
+                    <th>Actual Completion Date</th>
+                    <th>Progress</th>
+                    <th>Activity Notes</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <form action="/projects/newProjectActivity" method="post">
+                    <tr>
+                        
+                        <input type="hidden" class="form-control" id="projectID" name="projectID" value={{#each results}}"{{projectID}}"{{/each}}>
+                            <td>
+                                <input type="text" class="form-control" id="activityDescription" name="activityDescription"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="targetStartDate" name="targetStartDate">
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="actualStartDate" name="actualStartDate"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="targetCompletionDate" name="targetCompletionDate"> </td>
+                            <td>
+                                <input type="date" class="form-control" id="actualCompletionDate" name="actualCompletionDate"> </td>
+                            <td>
+                                <input type="text" class="form-control" id="progress" name="progress">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="activityNotes">
+                            </td>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Update">Insert</button>
+                            </td>
+                    </tr>
+                </form>
+                
+            </tbody>
+        </table>
+        <br><br><h4>update Cost Sumary Line Item</h4>
+        <table class="table table-striped ">
+            <thead>
+                        <tr>
+                            <th>Division Category</th>
+                            <th>Line Item</th>
+                            <th>Line Item Totals</th>
+                            <th>Budget</th>
+                            <th>Committed</th>
+                            <th>Change Orders</th>
+                            <th>Anticipated Cost</th>
+                            <th>Variance</th>
+                            <th>Actual Cost To Date</th>
+                            <th>Dollars Remaining</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                {{#each results4}}
+                <form method="post">
+                    <tr>
+                        
+                        <input type="hidden" class="form-control" id="projectID" name="projectID" value="{{projectID}}">
+                            <td>
+                                <input type="text" class="form-control" id="pcoNumber" name="pcoNumber" value="{{pcoNumber}}" readonly>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="pcoDescription" name="pcoDescription" value="{{pcoDescription}}"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="toKMSDate" name="toKMSDate" value="{{#if toKMSDate}}{{formatTime toKMSDate "YYYY-MM-DD"}}{{/if}}"> 
+                            </td>
+                            
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updateCostSummary">Update</button>
+                            </td>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Delete" formAction="/projects/deleteCostSummary">Delete</button>
+                            </td>
+                    </tr>
+                </form>
+                {{/each}}
+            </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+    
+            {{#ifEquals updateType 'updatepco'}}
+            <div id="menu6" class="tab-pane fade in active">
+            {{else}}
+            <div id="menu6" class="tab-pane fade in">
+            {{/ifEquals}}
                 <br>
                 <h3>PCO Log</h3>
-                <table class="table table-striped ">
+
+                <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#read4" role="tab">Read</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#update4" role="tab">Update</a>
+            </li>
+        </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+    <div class="tab-pane active" id="read4" role="tabpanel">
+      <table class="table table-striped ">
                     <thead>
                         <tr>
                             <th>PCO Number</th>
@@ -295,11 +701,12 @@
                         <tr>
                             <td>{{pcoNumber}}</td>
                             <td>{{pcoDescription}}</td>
-                            <td>{{formatDate toKMSDate}}</td>
-                            <td>{{formatDate kmsReviewDate}}</td>
+                            <td>{{#if toKMSDate}}{{formatDate toKMSDate}}{{/if}}</td>
+                            <td>{{#if kmsReviewDate}}{{formatDate kmsReviewDate}}{{/if}}</td>
+                            <td>{{#if clientApprovedDate}}{{formatDate clientApprovedDate}}{{/if}}</td>
                             <td>${{pcoValue}}</td>
-                            <td>${{contingencyAmount}}</td>
-                            <td>${{costSavingsAmount}}</td>
+                            <td>${{formatNumber contingencyAmount}}</td>
+                            <td>${{formatNumber costSavingsAmount}}</td>
                             <td>{{changeOrders}}</td>
                             <td>{{status}}</td>
                             <td>{{comments}}</td>
@@ -307,7 +714,130 @@
                         {{/each}}
                     </tbody>
                 </table>
-            </div>
+    </div>
+    <div class="tab-pane" id="update4" role="tabpanel">
+        <br><br><h4>Add new PCO</h4>
+
+        
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th>Activity Description</th>
+                    <th>Target Start Date</th>
+                    <th>Actual Start Date</th>
+                    <th>Target Completion Date</th>
+                    <th>Actual Completion Date</th>
+                    <th>Progress</th>
+                    <th>Activity Notes</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <form action="/projects/newProjectActivity" method="post">
+                    <tr>
+                        
+                        <input type="hidden" class="form-control" id="projectID" name="projectID" value={{#each results}}"{{projectID}}"{{/each}}>
+                            <td>
+                                <input type="text" class="form-control" id="activityDescription" name="activityDescription"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="targetStartDate" name="targetStartDate">
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="actualStartDate" name="actualStartDate"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="targetCompletionDate" name="targetCompletionDate"> </td>
+                            <td>
+                                <input type="date" class="form-control" id="actualCompletionDate" name="actualCompletionDate"> </td>
+                            <td>
+                                <input type="text" class="form-control" id="progress" name="progress">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="activityNotes">
+                            </td>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Update">Insert</button>
+                            </td>
+                    </tr>
+                </form>
+                
+            </tbody>
+        </table>
+        <br><br><h4>Update PCO</h4>
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th>PCO Number</th>
+                            <th>PCO Description</th>
+                            <th>Due Date</th>
+                            <th>To KMS Date</th>
+                            <th>KMS Reviewed Date</th>
+                            <th>Client Approved Date</th>
+                            <th>PCO Value</th>
+                            <th>Contingency Amount</th>
+                            <th>Cost Savings Amount</th>
+                            <th>Change Orders</th>
+                            <th>Status</th>
+                            <th>Comments</th>
+                            <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each results5}}
+                <form method="post">
+                    <tr>
+                        
+                        <input type="hidden" class="form-control" id="projectID" name="projectID" value="{{projectID}}">
+                            <td>
+                                <input type="text" class="form-control" id="pcoNumber" name="pcoNumber" value="{{pcoNumber}}" readonly>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="pcoDescription" name="pcoDescription" value="{{pcoDescription}}"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="toKMSDate" name="toKMSDate" value="{{#if toKMSDate}}{{formatTime toKMSDate "YYYY-MM-DD"}}{{/if}}"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="kmsReviewedDate" name="kmsReviewedDate" value="{{#if kmsReviewedDate}}{{formatTime kmsReviewedDate "YYYY-MM-DD"}}{{/if}}"> </td>
+                            <td>
+                                <input type="date" class="form-control" id="clientApprovedDate" name="clientApprovedDate" value="{{#if clientApprovedDate}}{{formatTime clientApprovedDate "YYYY-MM-DD"}}{{/if}}"> </td>
+                            
+                            <td>
+                                <input type="text" class="form-control" id="pcoValue" name="pcoValue" value="{{pcoValue}}"> 
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="contingencyAmount" name="contingencyAmount" value="{{contingencyAmount}}"> 
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="costSavingsAmount" name="costSavingsAmount" value="{{costSavingsAmount}}"> 
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="changeOrders" name="changeOrders" value="{{changeOrders}}"> 
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="status" name="status" value="{{status}}"> 
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="comments" name="comments" value="{{comments}}"> 
+                            </td>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updateExternalActionItem">Update</button>
+                            </td>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Delete" formAction="/projects/deleteExternalActionItem">Delete</button>
+                            </td>
+                    </tr>
+                </form>
+                {{/each}}
+            </tbody>
+        </table>
+        </div>
+    </div>
+    </div>
+
+            
 
             <div id="menu7" class="tab-pane fade">
 
@@ -315,5 +845,5 @@
         </div>
     </div>
 </div>
-    <script src="handlebars/dist/handlebars.min.js"></script>
-    <script src="handlebars-intl/dist/handlebars-intl.min.js"></script>
+<script src="handlebars/dist/handlebars.min.js"></script>
+<script src="handlebars-intl/dist/handlebars-intl.min.js"></script>
