@@ -1,16 +1,19 @@
 <br>
+
 <h2 class="page-header">Account Login</h2>
 
 <div class="col-6 col-sm-3 placeholder">
   
-  {{#if errors}}
+</script>
+
+<form method="post" action="/users/login">
+
+  <div class="form-group">
+    {{#if errors}}
       {{#each errors}}
         <div class="alert alert-danger">{{msg}}</div>
       {{/each}}
 {{/if}}
-
-<form method="post" action="/users/login">
-  <div class="form-group">
     <label>Enter email:</label>
     <input type="text" class="form-control" name="email" placeholder="Email">
   </div>

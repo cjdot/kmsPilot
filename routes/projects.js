@@ -39,7 +39,7 @@ router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 	var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
 	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
 	var qry5 = 'SELECT * FROM lineitemsummary WHERE projectID = ?'
-	var qry6 = 'SELECT * FROM pcolog WHERE projectID = ?'
+	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
 	var updateType = 'updateProjectActivity'
 	
 	console.log('This is happening :' + req.body.actualCompletionDate);
@@ -91,7 +91,7 @@ router.post('/updateProjectActivity', ensureAuthenticated, function (req, res) {
 	var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
 	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
 	var qry5 = 'SELECT * FROM lineitemsummary WHERE projectID = ?'
-	var qry6 = 'SELECT * FROM pcolog WHERE projectID = ?'
+	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
 	var updateType = 'updateProjectActivity'
 	console.log('This is happening :' + req.body.actualCompletionDate);
 	//if (req.body.actualCompletionDate = '');
@@ -141,7 +141,7 @@ router.post('/deleteProjectActivity', ensureAuthenticated, function (req, res) {
 	var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
 	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
 	var qry5 = 'SELECT * FROM lineitem WHERE projectID = ?'
-	var qry6 = 'SELECT * FROM pcolog WHERE projectID = ?'
+	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
 	var updateType = 'updateProjectActivity'
 	console.log('This is happening :' + req.body.actualCompletionDate);
 	//if (req.body.actualCompletionDate = '');
@@ -185,13 +185,13 @@ router.post('/newActionItem', ensureAuthenticated, function (req, res) {
 	console.log(req.body.projectActivityID)
 	console.log(qry);
 	
-	var qry1 = 'UPDATE kmsactionitem SET actionItemDescription = ?, activityOwner = ?, activityStartDate = ?, targetCompletionDate = ?, actualCompletionDate = ?, actionItemNotes = ?, projectID = ?'
+	var qry1 = 'INSERT INTO kmsactionitem SET actionItemDescription = ?, activityOwner = ?, activityStartDate = ?, targetCompletionDate = ?, actualCompletionDate = ?, actionItemNotes = ?, projectID = ?'
 	var qry = 'SELECT * FROM project WHERE projectID = ?'
 	var qry2 = 'SELECT * FROM projectactivity WHERE projectID = ?'
 	var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
 	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
 	var qry5 = 'SELECT * FROM lineitemsummary WHERE projectID = ?'
-	var qry6 = 'SELECT * FROM pcolog WHERE projectID = ?'
+	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
 	var updateType = 'updateProjectActivity'
 	
 	console.log('This is happening :' + req.body.actualCompletionDate);
@@ -242,7 +242,7 @@ router.post('/updateActionItem', ensureAuthenticated, function (req, res) {
 	var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
 	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
 	var qry5 = 'SELECT * FROM lineitem WHERE projectID = ?'
-	var qry6 = 'SELECT * FROM pcolog WHERE projectID = ?'
+	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
 	var updateType = 'updateActionItem'
 	console.log('This is happening :' + req.body.actualCompletionDate);
 	//if (req.body.actualCompletionDate = '');
@@ -292,7 +292,7 @@ router.post('/deleteActionItem', ensureAuthenticated, function (req, res) {
 	var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
 	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
 	var qry5 = 'SELECT * FROM lineitem WHERE projectID = ?'
-	var qry6 = 'SELECT * FROM pcolog WHERE projectID = ?'
+	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
 	var updateType = 'updateActionItem'
 	console.log('This is happening :' + req.body.actualCompletionDate);
 	//if (req.body.actualCompletionDate = '');
@@ -342,7 +342,7 @@ router.post('/newExternalActionItem', ensureAuthenticated, function (req, res) {
 	var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
 	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
 	var qry5 = 'SELECT * FROM lineitem WHERE projectID = ?'
-	var qry6 = 'SELECT * FROM pcolog WHERE projectID = ?'
+	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
 	var updateType = 'updateExternalActionItem'
 	console.log('This is happening :' + req.body.actualCompletionDate);
 	//if (req.body.actualCompletionDate = '');
@@ -392,7 +392,7 @@ router.post('/updateExternalActionItem', ensureAuthenticated, function (req, res
 	var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
 	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
 	var qry5 = 'SELECT * FROM lineitem WHERE projectID = ?'
-	var qry6 = 'SELECT * FROM pcolog WHERE projectID = ?'
+	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
 	var updateType = 'updateExternalActionItem'
 	console.log('This is happening :' + req.body.actualCompletionDate);
 	//if (req.body.actualCompletionDate = '');
@@ -442,13 +442,312 @@ router.post('/deleteExternalActionItem', ensureAuthenticated, function (req, res
 	var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
 	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
 	var qry5 = 'SELECT * FROM lineitem WHERE projectID = ?'
-	var qry6 = 'SELECT * FROM pcolog WHERE projectID = ?'
+	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
 	var updateType = 'updateExternalActionItem'
 	console.log('This is happening :' + req.body.actualCompletionDate);
 	//if (req.body.actualCompletionDate = '');
 
 	console.log(qry);
 	conn.query(qry1, req.body.externalActionItemID, function (err, results0, fields) {
+		conn.query(qry, req.body.projectID, function (err, results, fields) {
+			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
+				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
+					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
+						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
+							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
+								
+								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+							});
+						});
+					});
+				});
+			});
+		});
+
+	});
+
+});
+
+router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
+	
+	const conn = new mysql.createConnection(config);
+	conn.connect(
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!! Error:");
+				throw err;
+			}
+			else {
+				console.log("Connection established.");
+			}
+		}
+
+	)
+	console.log(req.body.projectActivityID)
+	var qry1 = 'INSERT INTO lineitem SET costSummaryCategoryID = ?, lineItemBreakdown = ?, lineItemTotals = ?, budget = ?, committed = ?, changeOrders = ?, anticipatedCost = ?, actualCostToDate = ?, dollarsRemaining = ?, projectID = ?'
+
+	var qry = 'SELECT * FROM project WHERE projectID = ?'
+	console.log(qry);
+	var qry2 = 'SELECT * FROM projectactivity WHERE projectID = ?'
+	var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
+	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
+	var qry5 = 'SELECT * FROM lineitem WHERE projectID = ?'
+	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
+	var updateType = 'updateCostSummary'
+	console.log('This is happening :' + req.body.actualCompletionDate);
+	//if (req.body.actualCompletionDate = '');
+
+	console.log(qry);
+	conn.query(qry1, [req.body.costSummaryCategoryID, req.body.lineItemBreakdown, req.body.lineItemTotals, req.body.budget, req.body.committed, req.body.changeOrders, req.body.anticipatedCost, req.body.actualCostToDate, req.body.dollarsRemaining, req.body.projectID], function (err, results0, fields) {
+		conn.query(qry, req.body.projectID, function (err, results, fields) {
+			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
+				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
+					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
+						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
+							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
+								
+								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+							});
+						});
+					});
+				});
+			});
+		});
+
+	});
+
+});
+
+router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
+	
+	const conn = new mysql.createConnection(config);
+	conn.connect(
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!! Error:");
+				throw err;
+			}
+			else {
+				console.log("Connection established.");
+			}
+		}
+
+	)
+	console.log(req.body.projectActivityID)
+	var qry1 = 'UPDATE lineitem SET costSummaryCategoryID = ?, lineItemBreakdown = ?, lineItemTotals = ?, budget = ?, committed = ?, changeOrders = ?, anticipatedCost = ?, actualCostToDate = ?, dollarsRemaining = ? WHERE lineItemID = ?'
+
+	var qry = 'SELECT * FROM project WHERE projectID = ?'
+	console.log(qry);
+	var qry2 = 'SELECT * FROM projectactivity WHERE projectID = ?'
+	var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
+	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
+	var qry5 = 'SELECT * FROM lineitem WHERE projectID = ?'
+	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
+	var updateType = 'updateCostSummary'
+	console.log('This is happening :' + req.body.actualCompletionDate);
+	//if (req.body.actualCompletionDate = '');
+
+	console.log(qry);
+	conn.query(qry1, [req.body.costSummaryCategoryID, req.body.lineItemBreakdown, req.body.lineItemTotals, req.body.budget, req.body.committed, req.body.changeOrders, req.body.anticipatedCost, req.body.actualCostToDate, req.body.dollarsRemaining, req.body.lineItemID], function (err, results0, fields) {
+		conn.query(qry, req.body.projectID, function (err, results, fields) {
+			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
+				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
+					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
+						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
+							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
+								
+								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+							});
+						});
+					});
+				});
+			});
+		});
+
+	});
+
+});
+
+router.post('/deleteCostSummary', ensureAuthenticated, function (req, res) {
+	
+	const conn = new mysql.createConnection(config);
+	conn.connect(
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!! Error:");
+				throw err;
+			}
+			else {
+				console.log("Connection established.");
+			}
+		}
+
+	)
+	console.log(req.body.projectActivityID)
+	var qry1 = 'DELETE FROM lineitem WHERE lineItemID = ?'
+
+	var qry = 'SELECT * FROM project WHERE projectID = ?'
+	console.log(qry);
+	var qry2 = 'SELECT * FROM projectactivity WHERE projectID = ?'
+	var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
+	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
+	var qry5 = 'SELECT * FROM lineitem WHERE projectID = ?'
+	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
+	var updateType = 'updateCostSummary'
+	//if (req.body.actualCompletionDate = '');
+
+	console.log(req.body.lineItemID);
+	conn.query(qry1, req.body.lineItemID, function (err, results0, fields) {
+		conn.query(qry, req.body.projectID, function (err, results, fields) {
+			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
+				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
+					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
+						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
+							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
+								
+								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+							});
+						});
+					});
+				});
+			});
+		});
+
+	});
+
+});
+
+router.post('/newPCO', ensureAuthenticated, function (req, res) {
+	
+	const conn = new mysql.createConnection(config);
+	conn.connect(
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!! Error:");
+				throw err;
+			}
+			else {
+				console.log("Connection established.");
+			}
+		}
+
+	)
+	console.log(req.body.projectActivityID)
+	var qry1 = 'INSERT INTO pco SET pcoNumber = ?, pcoDescription = ?, dueDate = ?, toKMSDate = ?, kmsReviewedDate = ?, clientApprovedDate = ?, pcoValue = ?, contingencyAmount = ?, costSavingsAmount = ?, changeOrders = ?, pcoStatus = ?, comments = ?, projectID = ?'
+
+	var qry = 'SELECT * FROM project WHERE projectID = ?'
+	console.log(qry);
+	var qry2 = 'SELECT * FROM projectactivity WHERE projectID = ?'
+	var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
+	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
+	var qry5 = 'SELECT * FROM lineitem WHERE projectID = ?'
+	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
+	var updateType = 'updatePCO'
+	console.log('This is happening :' + req.body.actualCompletionDate);
+	//if (req.body.actualCompletionDate = '');
+
+	console.log(qry);
+	conn.query(qry1, [req.body.pcoNumber, req.body.pcoDescription, req.body.dueDate, req.body.toKMSDate, req.body.kmsReviewedDate, req.body.clientApprovedDate, req.body.pcoValue, req.body.contingencyAmount, req.body.costSavingsAmount, req.body.changeOrders, req.body.pcoStatus, req.body.comments, req.body.projectID], function (err, results0, fields) {
+		conn.query(qry, req.body.projectID, function (err, results, fields) {
+			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
+				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
+					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
+						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
+							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
+								
+								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+							});
+						});
+					});
+				});
+			});
+		});
+
+	});
+
+});
+
+router.post('/updatePCO', ensureAuthenticated, function (req, res) {
+	
+	const conn = new mysql.createConnection(config);
+	conn.connect(
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!! Error:");
+				throw err;
+			}
+			else {
+				console.log("Connection established.");
+			}
+		}
+
+	)
+	console.log(req.body.projectActivityID)
+	var qry1 = 'UPDATE pco SET pcoNumber = ?, pcoDescription = ?, dueDate = ?, toKMSDate = ?, kmsReviewedDate = ?, clientApprovedDate = ?, pcoValue = ?, contingencyAmount = ?, costSavingsAmount = ?, changeOrders = ?, pcoStatus = ?, comments = ? WHERE pcoID = ?'
+
+	var qry = 'SELECT * FROM project WHERE projectID = ?'
+	console.log(qry);
+	var qry2 = 'SELECT * FROM projectactivity WHERE projectID = ?'
+	var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
+	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
+	var qry5 = 'SELECT * FROM lineitem WHERE projectID = ?'
+	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
+	var updateType = 'updatePCO'
+	console.log('This is happening :' + req.body.actualCompletionDate);
+	//if (req.body.actualCompletionDate = '');
+
+	console.log(qry);
+	conn.query(qry1, [req.body.pcoNumber, req.body.pcoDescription, req.body.dueDate, req.body.toKMSDate, req.body.kmsReviewedDate, req.body.clientApprovedDate, req.body.pcoValue, req.body.contingencyAmount, req.body.costSavingsAmount, req.body.changeOrders, req.body.pcoStatus, req.body.comments, req.body.pcoID], function (err, results0, fields) {
+		conn.query(qry, req.body.projectID, function (err, results, fields) {
+			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
+				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
+					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
+						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
+							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
+								
+								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+							});
+						});
+					});
+				});
+			});
+		});
+
+	});
+
+});
+
+router.post('/deletePCO', ensureAuthenticated, function (req, res) {
+	
+	const conn = new mysql.createConnection(config);
+	conn.connect(
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!! Error:");
+				throw err;
+			}
+			else {
+				console.log("Connection established.");
+			}
+		}
+
+	)
+	console.log(req.body.projectActivityID)
+	var qry1 = 'DELETE FROM pco WHERE pcoID = ?'
+
+	var qry = 'SELECT * FROM project WHERE projectID = ?'
+	console.log(qry);
+	var qry2 = 'SELECT * FROM projectactivity WHERE projectID = ?'
+	var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
+	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
+	var qry5 = 'SELECT * FROM lineitem WHERE projectID = ?'
+	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
+	var updateType = 'updatePCO'
+	console.log('This is happening :' + req.body.actualCompletionDate);
+	//if (req.body.actualCompletionDate = '');
+
+	console.log(qry);
+	conn.query(qry1, req.body.pcoID, function (err, results0, fields) {
 		conn.query(qry, req.body.projectID, function (err, results, fields) {
 			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
 				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
@@ -521,7 +820,7 @@ router.post('/project_details', ensureAuthenticated, function (req, res) {
 	var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
 	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
 	var qry5 = 'SELECT * FROM lineitem WHERE projectID = ?'
-	var qry6 = 'SELECT * FROM pcolog WHERE projectID = ?'
+	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
 
 	console.log(qry);
 
