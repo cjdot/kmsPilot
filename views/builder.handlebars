@@ -16,7 +16,7 @@
 							
 							<div class="col-sm-6">
 								<label for="flyer-frequency" class="control-label">Frequency</label><br>
-								<input id="flyer-frequency" type="radio" name="freq" value="Weekly"> Weekly
+								<input id="flyer-frequency" type="radio" name="freq" value="Weekly" checked tabindex="2"> Weekly
   								<input id="flyer-frequency" type="radio" name="freq" value="Bi-Weekly"> Bi-Weekly
 								<input id="flyer-frequency" type="radio" name="freq" value="Monthly"> Monthly
 								<input id="flyer-frequency" type="radio" name="freq" value="Yearly"> Yearly
@@ -24,43 +24,20 @@
 						</div>
 
 						<br>
-
+{{!--
 						<div class="row">
-								<div class="col-sm-6">
-										<div class="form-group">
-												<label for="flyer-title" class="control-label">Title</label>
-												<input required class="form-control" id="flyer-title" placeholder="Main title" value="" maxlength="255" type="text" tabindex="2">
-										</div>
-								</div>
-
-								<div class="col-sm-3">
-										<div class="form-group">
-												<label for="flyer-title-size" class="control-label">Size (pt)</label>
-												<input required class="form-control" id="flyer-title-size" value="20" min="1" step="1" type="number" tabindex="3" title="Title size: tune it to fit the available space">
-										</div>
-								</div>
-
 								<div class="col-sm-3">
 										<label class="control-label" for="flyer-projectid">Project ID</label>
 										<input required class="form-control" id="flyer-projectid" placeholder="№" maxlength="5" type="text">
 								</div>
-
 						</div>
-
+--}}
 						<div class="form-group">
 								<label class="control-label" for="flyer-description">Executive Summary</label>
-								<textarea class="form-control" id="flyer-description" rows="3" placeholder="Insert executive summary here."></textarea>
+								<textarea class="form-control" id="flyer-description" rows="3" placeholder="Insert executive summary here." maxlength="1300" tabindex="3"></textarea>
 						</div>
-
-						<div class="row">
 {{!--
-								<div class="col-sm-4">
-										<div class="form-group">
-												<label for="flyer-price" class="control-label">Price</label>
-												<input required class="form-control" id="flyer-price" placeholder="Enter price (w/o decimals)" value="100" type="number" tabindex="5" step="any" min="0">
-										</div>
-								</div>
-
+						<div class="row">
 								<div class="col-sm-3">
 										<div class="form-group">
 												<label for="flyer-price-currency" class="control-label">Currency</label>
@@ -69,7 +46,7 @@
 												</select>
 										</div>
 								</div>
---}}
+
 								<div class="col-sm-2">
 										<div class="form-group">
 												<label for="flyer-price-color" class="control-label">Color</label>
@@ -77,21 +54,21 @@
 										</div>
 								</div>
 						</div>
-
+--}}
 						<div class="form-group">
 								<label class="control-label" for="flyer-quality">Quality Summary</label>
-								<textarea class="form-control" id="flyer-quality" rows="3" placeholder="Insert quality summary here."></textarea>
+								<textarea class="form-control" id="flyer-quality" rows="3" placeholder="Insert quality summary here." maxlength="1300" tabindex="4"></textarea>
 						</div>
 
 						<div class="row">
 							<div class="col-sm-6">
 									<label for="flyer-quality1" class="control-label">Quality Image 1</label>
-									<input id="flyer-quality1" type="file">
+									<input id="flyer-quality1" type="file" tabindex="5">
 							</div>
 
 							<div class="col-sm-6">
 									<label for="flyer-quality2" class="control-label">Quality Image 2</label>
-									<input id="flyer-quality2" type="file">
+									<input id="flyer-quality2" type="file" tabindex="6">
 							</div>
 						</div>
 
@@ -99,7 +76,7 @@
 						<div class="row">
 								<div class="col-sm-6">
 										<div class="form-group">
-												<button id="flyer_preview_btn" type="button" class="btn btn-primary btn-block" tabindex="9">Update preview</button>
+												<button id="flyer_preview_btn" type="button" class="btn btn-primary btn-block" tabindex="9">Update Preview</button>
 										</div>
 								</div>
 								<div class="col-sm-6">
@@ -370,14 +347,13 @@
 			_y = page_margin; // vertical starting point
 
 			// form data
-				//Forked variables
-			var flyer_title             = $('#flyer-title').val(),
-				flyer_title_size        = $('#flyer-title-size').val(),
+			var flyer_title             = 'Client Report',
+				flyer_title_size        = 20,
 				flyer_description       = $('#flyer-description').val(),
-				flyer_price_color       = $('#flyer-price-color').val(),
+				flyer_price_color       = '#8fe9ea',
 
 				//Our variables
-				flyer_projectid			=$('#flyer-projectid').val(),
+				//flyer_projectid			=$('#flyer-projectid').val(),
 				flyer_quality			=$('#flyer-quality').val(),
 				flyer_quality1			=$('#flyer-quality1').val(),
 				flyer_quality2			=$('#flyer-quality2').val()
@@ -392,6 +368,25 @@
 				black      = 0,
 				white 	   = 255
 			;
+
+			function makeHeader(text) {
+				_y = 0;
+				pdf.setTextColor(black);
+				pdf.setFontSize(flyer_title_size);
+				pdf.setFontType("bold");
+
+				lineHeight = px2mm(pdf.getLineHeight(flyer_title));
+				_y += (vspace + lineHeight);
+
+				pdf.textAlign(text, {align: "center"}, 0, _y);
+			};
+
+			function makeFooter() {
+				pdf.setFontSize(9);
+				pdf.setFontType("normal");
+				pdf.setTextColor(black);
+				pdf.textAlign(footer, {align: "center"}, 0, 287);
+			};
 
 			// Optional - set properties of the document
 			pdf.setProperties({
@@ -443,12 +438,6 @@
 			pdf.textAlign(frequency + ' Project Summary Report', {align: "center"}, 0, _y += 5);
 			pdf.textAlign(gen_date, {align: "center"}, 0, _y += 5);
 
-			// !Title
-			pdf.setFontSize(flyer_title_size);
-			lineHeight = px2mm(pdf.getLineHeight(flyer_title));
-			_y = 45;
-			pdf.textAlign(flyer_title, {align: "center"}, 0, _y);
-
 			// !Execuve Summary Header
 			pdf.setTextColor(black);
 			pdf.setFontSize(flyer_title_size);
@@ -456,29 +445,9 @@
 			pdf.setFontType("bold");
 
 			lineHeight = px2mm(pdf.getLineHeight(flyer_title));
-			_y += (vspace + lineHeight/2);
+			_y = 45;
 
 			pdf.textAlign('Executive Summary', {align: "center"}, 0, _y);
-
-			// !price
-			var circle_radius = 30;
-			color_array = hex2rgb(flyer_price_color);
-			pdf.setFillColor(color_array.red, color_array.green, color_array.blue);
-
-			// _x and _y refer to center of the circle
-			_x = content_width - circle_radius;      // circle ends at `page_margin` millimeters from the image right side
-			pdf.circle( _x, _y, circle_radius, 'F'); // circle overlaps image for 1/2 of its height
-			_string = 'Test';
-			pdf.setFontSize(60);
-			pdf.setFont("helvetica");
-			pdf.setFontType("bold");
-
-			lineHeight = px2mm(pdf.getLineHeight(_string));
-			y_correction = lineHeight/3;
-
-			pdf.setTextColor(white);
-			pdf.textAlign(_string, {align: "centerAtX"}, _x, _y + y_correction );
-
 
 			// !description / executive summary
 			if(flyer_description) {
@@ -487,12 +456,12 @@
 				pdf.setFontType("normal");
 				pdf.setTextColor(black);
 
-				var lineWidth = content_width - (page_margin);
+				var lineWidth = 190;
 				_y += page_margin;
 
 				var line_height = 7; // mm
 
-				var description_lines = pdf.splitTextToSize(flyer_description, lineWidth);
+				var description_lines = pdf.splitTextToSize('     ' + flyer_description, lineWidth);
 
 				for (var i = 0 ; i < description_lines.length ; i++ ) {
 					pdf.text(page_margin, _y, description_lines[i]);
@@ -501,6 +470,7 @@
 			}
 
 			// !Schedule Recap Header
+			_y = _y - line_height;
 			pdf.setFontSize(flyer_title_size);
 			pdf.setFontType("bold");
 
@@ -509,37 +479,22 @@
 
 			pdf.textAlign('Schedule Recap', {align: "center"}, 0, _y);
 
-			// !Page 1 footer
-			_y = 287;
-			pdf.setFontSize(9);
-			pdf.setFontType("normal");
-			pdf.setTextColor(black);
-			pdf.textAlign(footer, {align: "center"}, 0, _y)
-
+			makeFooter();
 			pdf.addPage(); //Page 2
 
-			// !Quality Header
-			_y = 0;
-			pdf.setTextColor(black);
-			pdf.setFontSize(flyer_title_size);
-			pdf.setFontType("bold");
+			// !Quality
+			makeHeader('Quality');
 
-			lineHeight = px2mm(pdf.getLineHeight(flyer_title));
-			_y += (vspace + lineHeight);
-
-			pdf.textAlign('Quality', {align: "center"}, 0, _y);
-
-			// !Quality Summary
 			if (flyer_quality) {
 				pdf.setFontSize(12);
 				pdf.setFont("helvetica");
 				pdf.setFontType("normal");
 				pdf.setTextColor(black);
 
-				lineWidth = content_width - (page_margin);
+				lineWidth = 190;
 				_y += page_margin;
 				line_height = 7; // mm
-				var quality_lines = pdf.splitTextToSize(flyer_quality, lineWidth);
+				var quality_lines = pdf.splitTextToSize('     ' + flyer_quality, lineWidth);
 
 				for (var i = 0 ; i < quality_lines.length ; i++ ) {
 					pdf.text(page_margin, _y, quality_lines[i]);
@@ -573,38 +528,31 @@
 				pdf.addImage(q2_data.src, q2_data.type, 200 - content_img_w, _y, content_img_w, content_img_h);
 			}
 
-			// !Page 2 footer
-			_y = 287;
-			pdf.setFontSize(9);
-			pdf.setFontType("normal");
-			pdf.setTextColor(black);
-			pdf.textAlign(footer, {align: "center"}, 0, _y)
-
+			makeFooter();
 			pdf.addPage(); //Page 3
 
-			// !Field Report Tracking Log Header
-			_y = 0;
-			pdf.setFontSize(flyer_title_size);
-			pdf.setFontType("bold");
+			// !Field Report Tracking Log
+			makeHeader('Field Report Tracking Log');
 
-			lineHeight = px2mm(pdf.getLineHeight(flyer_title));
-			_y += (vspace + lineHeight);
+			//Table here
 
-			pdf.textAlign('Field Report Tracking Log', {align: "center"}, 0, _y);
+			makeFooter();
+			pdf.addPage(); //Page 4
 
-			// !Page 3 footer
-			_y = 287;
-			pdf.setFontSize(9);
-			pdf.setFontType("normal");
-			pdf.setTextColor(black);
-			pdf.textAlign(footer, {align: "center"}, 0, _y);
+			// !Payment Summary
+			makeHeader('Payment Summary');
+
+			//Table here
+
+			makeFooter();
+			pdf.addPage(); //Page 5
 
 			// ****************************
 			// output
 			if(update_preview) {
 				preview_container.attr('src', pdf.output('datauristring') );
 			} else {
-				pdf.save('flyer ' + flyer_title + '.pdf');
+				pdf.save(frequency + ' ' + flyer_title + '.pdf');
 			}
 
 		}; // end createPDF
