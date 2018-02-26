@@ -30,8 +30,16 @@ router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 		}
 
 	)
-	console.log(req.body.projectActivityID)
-	console.log(qry);
+	
+	var targetStartDate = req.body.targetStartDate
+	var actualStartDate = req.body.actualStartDate
+	var targetCompletionDate = req.body.targetCompletionDate
+	var actualCompletionDate = req.body.actualCompletionDate
+
+	if (req.body.targetStartDate == ""){targetStartDate = null};
+	if (req.body.actualStartDate == ""){actualStartDate = null};
+	if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
+	if (req.body.actualCompletionDate == ""){actualCompletionDate = null};
 	
 	var qry1 = 'INSERT INTO projectactivity SET activityDescription = ?, targetStartDate = ?, actualStartDate = ?, targetCompletionDate = ?, actualCompletionDate = ?, progress = ?, projectID = ?'	
 	var qry = 'SELECT * FROM project WHERE projectID = ?'
@@ -42,12 +50,13 @@ router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
 	var updateType = 'updateProjectActivity'
 	
+	
 	console.log('This is happening :' + req.body.actualCompletionDate);
 	//if (req.body.actualCompletionDate = '');
 
 	console.log(qry);
 
-	conn.query(qry1, [req.body.activityDescription, req.body.targetStartDate, req.body.actualStartDate, req.body.targetCompletionDate, req.body.actualCompletionDate, req.body.progress, req.body.projectID] , function (err, results0, fields) {
+	conn.query(qry1, [req.body.activityDescription, targetStartDate, actualStartDate, targetCompletionDate, actualCompletionDate, req.body.progress, req.body.projectID] , function (err, results0, fields) {
 		conn.query(qry, req.body.projectID, function (err, results, fields) {
 			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
 				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
@@ -82,7 +91,18 @@ router.post('/updateProjectActivity', ensureAuthenticated, function (req, res) {
 		}
 
 	)
-	console.log(req.body.projectActivityID)
+
+	
+	var targetStartDate = req.body.targetStartDate
+	var actualStartDate = req.body.actualStartDate
+	var targetCompletionDate = req.body.targetCompletionDate
+	var actualCompletionDate = req.body.actualCompletionDate
+
+	if (req.body.targetStartDate == ""){targetStartDate = null};
+	if (req.body.actualStartDate == ""){actualStartDate = null};
+	if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
+	if (req.body.actualCompletionDate == ""){actualCompletionDate = null};
+	
 	var qry1 = 'UPDATE projectactivity SET activityDescription = ?, targetStartDate = ?, actualStartDate = ?, targetCompletionDate = ?, actualCompletionDate = ?, progress = ? WHERE projectActivityID = ?'
 
 	var qry = 'SELECT * FROM project WHERE projectID = ?'
@@ -97,7 +117,7 @@ router.post('/updateProjectActivity', ensureAuthenticated, function (req, res) {
 	//if (req.body.actualCompletionDate = '');
 
 	console.log(qry);
-	conn.query(qry1, [req.body.activityDescription, req.body.targetStartDate, req.body.actualStartDate, req.body.targetCompletionDate, req.body.actualCompletionDate, req.body.progress, req.body.projectActivityID], function (err, results0, fields) {
+	conn.query(qry1, [req.body.activityDescription, targetStartDate, actualStartDate, targetCompletionDate, actualCompletionDate, req.body.progress, req.body.projectActivityID], function (err, results0, fields) {
 		conn.query(qry, req.body.projectID, function (err, results, fields) {
 			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
 				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
@@ -182,8 +202,14 @@ router.post('/newActionItem', ensureAuthenticated, function (req, res) {
 		}
 
 	)
-	console.log(req.body.projectActivityID)
-	console.log(qry);
+	
+	var activityStartDate = req.body.targetStartDate
+	var targetCompletionDate = req.body.targetCompletionDate
+	var actualCompletionDate = req.body.actualCompletionDate
+
+	if (req.body.activityStartDate == ""){activityStartDate = null};
+	if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
+	if (req.body.actualCompletionDate == ""){actualCompletionDate = null};
 	
 	var qry1 = 'INSERT INTO kmsactionitem SET actionItemDescription = ?, activityOwner = ?, activityStartDate = ?, targetCompletionDate = ?, actualCompletionDate = ?, actionItemNotes = ?, projectID = ?'
 	var qry = 'SELECT * FROM project WHERE projectID = ?'
@@ -198,7 +224,7 @@ router.post('/newActionItem', ensureAuthenticated, function (req, res) {
 	//if (req.body.actualCompletionDate = '');
 
 	console.log(qry);
-	conn.query(qry1, [req.body.actionItemDescription, req.body.activityOwner, req.body.activityStartDate, req.body.targetCompletionDate, req.body.actualCompletionDate, req.body.actionItemNotes, req.body.projectID], function (err, results0, fields) {
+	conn.query(qry1, [req.body.actionItemDescription, req.body.activityOwner, activityStartDate, targetCompletionDate, actualCompletionDate, req.body.actionItemNotes, req.body.projectID], function (err, results0, fields) {
 		conn.query(qry, req.body.projectID, function (err, results, fields) {
 			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
 				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
@@ -233,7 +259,15 @@ router.post('/updateActionItem', ensureAuthenticated, function (req, res) {
 		}
 
 	)
-	console.log(req.body.projectActivityID)
+	
+	var activityStartDate = req.body.targetStartDate
+	var targetCompletionDate = req.body.targetCompletionDate
+	var actualCompletionDate = req.body.actualCompletionDate
+
+	if (req.body.activityStartDate == ""){activityStartDate = null};
+	if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
+	if (req.body.actualCompletionDate == ""){actualCompletionDate = null};
+
 	var qry1 = 'UPDATE kmsactionitem SET actionItemDescription = ?, activityOwner = ?, activityStartDate = ?, targetCompletionDate = ?, actualCompletionDate = ?, actionItemNotes = ? WHERE kmsActionItemID = ?'
 
 	var qry = 'SELECT * FROM project WHERE projectID = ?'
@@ -244,11 +278,11 @@ router.post('/updateActionItem', ensureAuthenticated, function (req, res) {
 	var qry5 = 'SELECT * FROM lineitem WHERE projectID = ?'
 	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
 	var updateType = 'updateActionItem'
-	console.log('This is happening :' + req.body.actualCompletionDate);
+
 	//if (req.body.actualCompletionDate = '');
 
 	console.log(qry);
-	conn.query(qry1, [req.body.actionItemDescription, req.body.activityOwner, req.body.activityStartDate, req.body.targetCompletionDate, req.body.actualCompletionDate, req.body.actionItemNotes, req.body.kmsActionItemID], function (err, results0, fields) {
+	conn.query(qry1, [req.body.actionItemDescription, req.body.activityOwner, activityStartDate, targetCompletionDate, actualCompletionDate, req.body.actionItemNotes, req.body.kmsActionItemID], function (err, results0, fields) {
 		conn.query(qry, req.body.projectID, function (err, results, fields) {
 			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
 				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
@@ -333,7 +367,15 @@ router.post('/newExternalActionItem', ensureAuthenticated, function (req, res) {
 		}
 
 	)
-	console.log(req.body.projectActivityID)
+	
+	var activityStartDate = req.body.targetStartDate
+	var targetCompletionDate = req.body.targetCompletionDate
+	var actualCompletionDate = req.body.actualCompletionDate
+
+	if (req.body.activityStartDate == ""){activityStartDate = null};
+	if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
+	if (req.body.actualCompletionDate == ""){actualCompletionDate = null};
+
 	var qry1 = 'INSERT INTO externalactionitem SET actionItemDescription = ?, activityOwner = ?, activityStartDate = ?, targetCompletionDate = ?, actualCompletionDate = ?, actionItemNotes = ?, projectID = ?'
 
 	var qry = 'SELECT * FROM project WHERE projectID = ?'
@@ -348,7 +390,7 @@ router.post('/newExternalActionItem', ensureAuthenticated, function (req, res) {
 	//if (req.body.actualCompletionDate = '');
 
 	console.log(qry);
-	conn.query(qry1, [req.body.actionItemDescription, req.body.activityOwner, req.body.activityStartDate, req.body.targetCompletionDate, req.body.actualCompletionDate, req.body.actionItemNotes, req.body.projectID], function (err, results0, fields) {
+	conn.query(qry1, [req.body.actionItemDescription, req.body.activityOwner, activityStartDate, targetCompletionDate, actualCompletionDate, req.body.actionItemNotes, req.body.projectID], function (err, results0, fields) {
 		conn.query(qry, req.body.projectID, function (err, results, fields) {
 			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
 				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
@@ -383,7 +425,15 @@ router.post('/updateExternalActionItem', ensureAuthenticated, function (req, res
 		}
 
 	)
-	console.log(req.body.projectActivityID)
+
+	var activityStartDate = req.body.targetStartDate
+	var targetCompletionDate = req.body.targetCompletionDate
+	var actualCompletionDate = req.body.actualCompletionDate
+
+	if (req.body.activityStartDate == ""){activityStartDate = null};
+	if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
+	if (req.body.actualCompletionDate == ""){actualCompletionDate = null};
+
 	var qry1 = 'UPDATE externalactionitem SET actionItemDescription = ?, activityOwner = ?, activityStartDate = ?, targetCompletionDate = ?, actualCompletionDate = ?, actionItemNotes = ? WHERE externalActionItemID = ?'
 
 	var qry = 'SELECT * FROM project WHERE projectID = ?'
@@ -398,7 +448,7 @@ router.post('/updateExternalActionItem', ensureAuthenticated, function (req, res
 	//if (req.body.actualCompletionDate = '');
 
 	console.log(qry);
-	conn.query(qry1, [req.body.actionItemDescription, req.body.activityOwner, req.body.activityStartDate, req.body.targetCompletionDate, req.body.actualCompletionDate, req.body.actionItemNotes, req.body.externalActionItemID], function (err, results0, fields) {
+	conn.query(qry1, [req.body.actionItemDescription, req.body.activityOwner, activityStartDate, targetCompletionDate, actualCompletionDate, req.body.actionItemNotes, req.body.externalActionItemID], function (err, results0, fields) {
 		conn.query(qry, req.body.projectID, function (err, results, fields) {
 			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
 				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
@@ -483,6 +533,8 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
 		}
 
 	)
+
+	
 	console.log(req.body.projectActivityID)
 	var qry1 = 'INSERT INTO lineitem SET costSummaryCategoryID = ?, lineItemBreakdown = ?, lineItemTotals = ?, budget = ?, committed = ?, changeOrders = ?, anticipatedCost = ?, actualCostToDate = ?, dollarsRemaining = ?, projectID = ?'
 
@@ -632,7 +684,17 @@ router.post('/newPCO', ensureAuthenticated, function (req, res) {
 		}
 
 	)
-	console.log(req.body.projectActivityID)
+	
+	var dueDate = req.body.dueDate
+	var toKMSDate = req.body.toKMSDate
+	var kmsReviewedDate = req.body.kmsReviewedDate
+	var clientApprovedDate = req.body.clientApprovedDate
+
+	if (req.body.dueDate == ""){activityStartDate = null};
+	if (req.body.toKMSDate == ""){targetCompletionDate = null};
+	if (req.body.kmsReviewedDate == ""){actualCompletionDate = null};
+	if (req.body.clientApprovedDate == ""){clientApprovedDate = null};
+
 	var qry1 = 'INSERT INTO pco SET pcoNumber = ?, pcoDescription = ?, dueDate = ?, toKMSDate = ?, kmsReviewedDate = ?, clientApprovedDate = ?, pcoValue = ?, contingencyAmount = ?, costSavingsAmount = ?, changeOrders = ?, pcoStatus = ?, comments = ?, projectID = ?'
 
 	var qry = 'SELECT * FROM project WHERE projectID = ?'
@@ -647,7 +709,7 @@ router.post('/newPCO', ensureAuthenticated, function (req, res) {
 	//if (req.body.actualCompletionDate = '');
 
 	console.log(qry);
-	conn.query(qry1, [req.body.pcoNumber, req.body.pcoDescription, req.body.dueDate, req.body.toKMSDate, req.body.kmsReviewedDate, req.body.clientApprovedDate, req.body.pcoValue, req.body.contingencyAmount, req.body.costSavingsAmount, req.body.changeOrders, req.body.pcoStatus, req.body.comments, req.body.projectID], function (err, results0, fields) {
+	conn.query(qry1, [req.body.pcoNumber, req.body.pcoDescription, dueDate, toKMSDate, kmsReviewedDate, clientApprovedDate, req.body.pcoValue, req.body.contingencyAmount, req.body.costSavingsAmount, req.body.changeOrders, req.body.pcoStatus, req.body.comments, req.body.projectID], function (err, results0, fields) {
 		conn.query(qry, req.body.projectID, function (err, results, fields) {
 			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
 				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
@@ -682,7 +744,17 @@ router.post('/updatePCO', ensureAuthenticated, function (req, res) {
 		}
 
 	)
-	console.log(req.body.projectActivityID)
+	
+	var dueDate = req.body.dueDate
+	var toKMSDate = req.body.toKMSDate
+	var kmsReviewedDate = req.body.kmsReviewedDate
+	var clientApprovedDate = req.body.clientApprovedDate
+
+	if (req.body.dueDate == ""){activityStartDate = null};
+	if (req.body.toKMSDate == ""){targetCompletionDate = null};
+	if (req.body.kmsReviewedDate == ""){actualCompletionDate = null};
+	if (req.body.clientApprovedDate == ""){clientApprovedDate = null};
+
 	var qry1 = 'UPDATE pco SET pcoNumber = ?, pcoDescription = ?, dueDate = ?, toKMSDate = ?, kmsReviewedDate = ?, clientApprovedDate = ?, pcoValue = ?, contingencyAmount = ?, costSavingsAmount = ?, changeOrders = ?, pcoStatus = ?, comments = ? WHERE pcoID = ?'
 
 	var qry = 'SELECT * FROM project WHERE projectID = ?'
@@ -697,7 +769,7 @@ router.post('/updatePCO', ensureAuthenticated, function (req, res) {
 	//if (req.body.actualCompletionDate = '');
 
 	console.log(qry);
-	conn.query(qry1, [req.body.pcoNumber, req.body.pcoDescription, req.body.dueDate, req.body.toKMSDate, req.body.kmsReviewedDate, req.body.clientApprovedDate, req.body.pcoValue, req.body.contingencyAmount, req.body.costSavingsAmount, req.body.changeOrders, req.body.pcoStatus, req.body.comments, req.body.pcoID], function (err, results0, fields) {
+	conn.query(qry1, [req.body.pcoNumber, req.body.pcoDescription, dueDate, toKMSDate, kmsReviewedDate, clientApprovedDate, req.body.pcoValue, req.body.contingencyAmount, req.body.costSavingsAmount, req.body.changeOrders, req.body.pcoStatus, req.body.comments, req.body.pcoID], function (err, results0, fields) {
 		conn.query(qry, req.body.projectID, function (err, results, fields) {
 			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
 				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
@@ -869,7 +941,35 @@ router.get('/myProjects', ensureAuthenticated, function (req, res) {
 });
 
 
+router.post('/searchProject', ensureAuthenticated, function (req, res) {
 
+
+	const conn = new mysql.createConnection(config);
+	conn.connect(
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!! Error:");
+				throw err;
+			}
+			else {
+				console.log("Connection established.");
+			}
+		}
+
+	)
+	var search = '%' + req.body.searchForm + '%'
+	var qry = 'SELECT * FROM project WHERE projectName LIKE ?'
+	var qry2 = 'SELECT * FROM project WHERE projectName LIKE ?'
+	console.log(qry);
+
+	conn.query(qry, search, function (err, results, fields) {
+		//var userss = res.json(results);
+		//console.log(results);
+		conn.query(qry2, search, function (err, results1, fields) {
+			res.render('project', { results: results, results1: results1 });
+		});
+	});
+});
 
 router.get('/userss', ensureAuthenticated, function (req, res) {
 
