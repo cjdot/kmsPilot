@@ -1,0 +1,290 @@
+<ul class="nav nav-tabs">
+    <li>
+        <a data-toggle="tab" href="#home">Users</a>
+    </li>
+    <li>
+        <a data-toggle="tab" href="#menu2">Projects</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+        <br>
+        <h3>Users</h3>
+        <br>
+        <ul class="nav nav-tabs">
+            <li>
+                <a data-toggle="tab" href="#register">Register User</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#editUser">Edit Users</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+
+            <div id="register" class="tab-pane active">
+                <div class="col-6 col-sm-3 placeholder">
+            <br>
+            <h2 class="page-header">Register</h2>
+
+
+
+
+            {{#if errors}} {{#each errors}}
+            <div class="alert alert-danger">{{msg}}</div>
+            {{/each}} {{/if}}
+            <form method="post" action="/users/register">
+
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" placeholder="First Name" name="firstName">
+                </div>
+
+                <div class="form-group">
+                    <label>Last Name </label>
+                    <input type="text" class="form-control" placeholder="Last Name" name="lastName">
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" placeholder="Email" name="email">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" class="form-control" placeholder="(123)-456-7890" name="phoneNumber">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" placeholder="Password" name="password">
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" class="form-control" placeholder="Password" name="password2">
+                </div>
+
+                <div class="form-group">
+                    <label>Permission Level</label>
+                    <select class="form-control" name="permission">
+                        <option value="read">Read</option>
+                        <option value="write">Write</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+
+            </form>
+
+        </div>
+            </div>
+
+            <div id="editUser" class="tab-pane fade in">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Permission Level</th>
+                            <th colspan="2">Action</th>
+                        </tr>
+                    </thead>
+                    
+                    
+                       <tbody>
+                {{#each results0}}
+                <form method="post">
+                    <tr>
+                        
+                        <input type="hidden" class="form-control" id="userID" name="userID" value="{{userID}}">
+                            <td>
+                                <input type="text" class="form-control" id="firstName" name="firstName" value="{{firstName}}"> 
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="lastName" name="lastName" value="{{lastName}}">
+                            </td>
+                            <td>
+                                <input type="email" class="form-control" id="email" name="email" value="{{email}}"> 
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="cellNumber" name="cellNumber" value="{{cellNumber}}">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="permissionLevel" name="permissionLevel" value="{{permissionLevel}}">
+                            </td>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Update" formAction="/admin/updateUser">Update</button>
+                            </td>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Delete" formAction="/admin/deleteUser">Delete</button>
+                            </td>
+                    </tr>
+                </form>
+                {{/each}}
+            </tbody>
+                    
+                    
+                </table>
+            </div>
+
+        </div>
+        
+    </div>
+    <div id="menu2" class="tab-pane fade in">
+        <br>
+        <h3>Projects</h3>
+        <br>
+        <ul class="nav nav-tabs">
+            <li>
+                <a data-toggle="tab" href="#registerProject">Register Project</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#editProject">Edit Projects</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+
+            <div id="registerProject" class="tab-pane active">
+                 <div class="col-6 col-sm-3 placeholder">
+            
+            <br>
+            <h2 class="page-header">Register</h2>
+
+
+
+
+            {{#if errors}} {{#each errors}}
+            <div class="alert alert-danger">{{msg}}</div>
+            {{/each}} {{/if}}
+            <form method="post" action="/admin/registerProject">
+
+                <div class="form-group">
+                    <label>Client Name</label>
+                    <input type="text" class="form-control" placeholder="Client Name" name="clientName">
+                </div>
+
+                <div class="form-group">
+                    <label>Project Name </label>
+                    <input type="text" class="form-control" placeholder="Project Name" name="projectName">
+                </div>
+
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" class="form-control" placeholder="Location" name="location">
+                </div>
+
+                <div class="form-group">
+                    <label>Target Start Date</label>
+                    <input type="date" class="form-control" name="targetStateDate">
+                </div>
+
+                <div class="form-group">
+                    <label>Target Completion Date</label>
+                    <input type="date" class="form-control" name="targetCompletionDate">
+                </div>
+
+                <div class="form-group">
+                    <label>Projected Budget</label>
+                    <input type="text" class="form-control" placeholder="500,000" name="projectedBudget">
+                </div>
+
+                <div class="form-group">
+                    <label>Contract Amount</label>
+                    <input type="text" class="form-control" placeholder="500,000" name="contractAmount">
+                </div>
+                <div class="form-group">
+                    <label>Change Order Sum</label>
+                    <input type="text" class="form-control" placeholder="500,000" name="changeOrderSum">
+                </div>
+
+                <div class="form-group">
+                    <label>Add Employee to Project</label>
+                    <select class="form-control" name="employee">
+                        {{#each results0}}<option value = "{{email}}">{{email}}</option>{{/each}}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+
+            </form>
+
+        
+        </div>
+        </div>
+
+            <div id="editProject" class="tab-pane">
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Client Name</th>
+                            <th>Project Name</th>
+                            <th>Location</th>
+                            <th>Service Type</th>
+                            <th>Target Start Date</th>
+                            <th>Target Completion Date</th>
+                            <th>Projected Budget</th>
+                            <th>Contract Amount</th>
+                            <th>Change Order Sum</th>
+                            <th colspan="2">Action</th>
+                        </tr>
+                    </thead>
+                    
+                    
+                       <tbody>
+                {{#each results}}
+                <form method="post">
+                    <tr>
+                        
+                        <input type="hidden" class="form-control" id="userID" name="projectID" value="{{projectID}}">
+                            <td>
+                                <input type="text" class="form-control" id="clientName" name="clientName" value="{{clientName}}"> 
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="projectName" name="projectName" value="{{projectName}}">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="location" name="location" value="{{location}}"> 
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="serviceType" name="serviceType" value="{{serviceType}}">
+                            </td>
+                            
+                            <td>
+                                <input type="date" class="form-control" id="targetStartDate" name="targetStartDate" value="{{#if targetStartDate}}{{formatTime targetStartDate "YYYY-MM-DD"}}{{/if}}">
+                            </td>
+                            
+                            <td>
+                                <input type="date" class="form-control" id="targetStartDate" name="targetCompletionDate" value="{{#if targetCompletionDate}}{{formatTime targetCompletionDate "YYYY-MM-DD"}}{{/if}}">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="projectedBudget" name="projectedBudget" value="{{projectedBudget}}">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="contractAmount" name="contractAmount" value="{{contractAmount}}">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="changeOrderSum" name="changeOrderSum" value="{{changeOrderSum}}">
+                            </td>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Update" formAction="/admin/updateProject">Update</button>
+                            </td>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Delete" formAction="/admin/deleteProject">Delete</button>
+                            </td>
+                    </tr>
+                </form>
+                {{/each}}
+            </tbody>
+                    
+                    
+                </table>
+            </div>
+        </div>
+       
+    </div>
+</div>

@@ -16,6 +16,7 @@ var moment = require('moment');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var projects = require('./routes/projects');
+var admin = require('./routes/admin');
 
 // Init App
 var app = express();
@@ -108,6 +109,7 @@ app.use(function (req, res, next) {
 app.use('/', routes);
 app.use('/users', users);
 app.use('/projects', projects);
+app.use('/admin', admin);
 
 app.use(express.static('public/css'));
 

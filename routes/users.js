@@ -61,7 +61,7 @@ router.post('/register', function(req, res){
 	var errors = req.validationErrors();
 
 	if(errors){
-		res.render('register',{
+		res.render('admin',{
 			errors:errors
 		});
 	} else {
@@ -79,8 +79,8 @@ router.post('/register', function(req, res){
 		if(err) throw err;
 		console.log(user);
 		});
-		req.flash('success_msg', 'You are registered and can now login');
-		res.redirect('/users/login');
+		req.flash('success_msg', 'New User has been registered');
+		res.redirect('/admin');
 	}
 });
 

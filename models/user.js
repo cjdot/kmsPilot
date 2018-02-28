@@ -15,6 +15,16 @@ module.exports.createUser = function(newUser, callback){
 	queryDatabase(newUser.firstName, newUser.lastName, newUser.email, hash, newUser.phoneNumber, newUser.permission)
 }
 
+module.exports.updateUser = function(newUser, callback){
+	
+	var firstName = newUser.firstName;
+	var lastName = newUser.lastName;
+	var email = newUser.email;
+
+
+	//This executes the insert statement			
+	queryUpdateDatabase(newUser.firstName, newUser.lastName, newUser.email, newUser.phoneNumber, newUser.permission, newUser.userID)
+}
 
 var loginEmail;
 var loginPass;
@@ -44,16 +54,17 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
 
 function queryDatabase(firstName, lastName, email, password, phoneNumber, permission){
 	var qry = 'INSERT INTO user (firstName, lastName, email, password, cellNumber, permissionLevel) VALUES(\'' + firstName + '\', \'' + lastName + '\', \'' + email + '\', \'' + password + '\', \'' + phoneNumber + '\', \'' + permission + '\')'
-	var qry2= 'INSERT INTO user (firstName, lastName, email, password, cellNumber, permissionLevel) VALUES( ? ? ? ? ? ?)'
+	var qry2= 'INSERT INTO user (firstName, lastName, email, password, cellNumber, permissionLevel) VALUES( ?, ?, ?, ?, ?, ?)'
 	
 	//USE qry2 in production to prevent SQL injection
 	console.log(qry);
-	conn.query( qry, function(err, results, fields){
+	conn.query( qry2, [firstName, lastName, email, password, phoneNumber, permission], function(err, results, fields){
 		if (err) throw err;
 		console.log('Query Executed', results);
 	})
 
 }
+
 
 var config = {
 

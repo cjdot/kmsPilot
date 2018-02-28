@@ -17,7 +17,9 @@
           <h4>Client: {{clientName}}</h4>
           <div class="text-muted" name="{{projectID}}" value="{{projectID}}">
               <strong>Project Name:</strong> {{projectName}} <br>
-              <strong>Budget:</strong> ${{formatNumber projectedBudget price="USD"}} <br>
+              <strong>Budget:</strong> ${{#if projectedBudget}}{{formatNumber projectedBudget price="USD"}}{{/if}} <br>
+              <strong>Contract Amount:</strong> ${{#if contractAmount}}{{formatNumber contractAmount price="USD"}}{{/if}} <br>            
+              <strong>Change Order Sum:</strong> ${{#if changeOrderSum}}{{formatNumber changeOrderSum price="USD"}}{{/if}} <br>
               <strong>Service Type:</strong> {{serviceType}} <br>
               <strong>Location:</strong> {{location}} <br>
               <br>
@@ -28,7 +30,7 @@
         </div>
 
   </div> 
-            
+      <br>     
 {{/each}}
 </section>
 
