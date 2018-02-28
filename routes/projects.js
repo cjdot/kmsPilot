@@ -536,7 +536,7 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
 
 	
 	console.log(req.body.projectActivityID)
-	var qry1 = 'INSERT INTO lineitem SET costSummaryCategoryID = ?, lineItemBreakdown = ?, lineItemTotals = ?, budget = ?, committed = ?, changeOrders = ?, anticipatedCost = ?, actualCostToDate = ?, dollarsRemaining = ?, projectID = ?'
+	var qry1 = 'INSERT INTO lineitem SET lineItemBreakdown = ?, budget = ?, changeOrders = ?, actualCostToDate = ?, projectID = ?'
 
 	var qry = 'SELECT * FROM project WHERE projectID = ?'
 	console.log(qry);
@@ -550,7 +550,7 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
 	//if (req.body.actualCompletionDate = '');
 
 	console.log(qry);
-	conn.query(qry1, [req.body.costSummaryCategoryID, req.body.lineItemBreakdown, req.body.lineItemTotals, req.body.budget, req.body.committed, req.body.changeOrders, req.body.anticipatedCost, req.body.actualCostToDate, req.body.dollarsRemaining, req.body.projectID], function (err, results0, fields) {
+	conn.query(qry1, [req.body.lineItemBreakdown, req.body.budget, req.body.changeOrders, req.body.actualCostToDate, req.body.projectID], function (err, results0, fields) {
 		conn.query(qry, req.body.projectID, function (err, results, fields) {
 			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
 				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
@@ -586,7 +586,7 @@ router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
 
 	)
 	console.log(req.body.projectActivityID)
-	var qry1 = 'UPDATE lineitem SET costSummaryCategoryID = ?, lineItemBreakdown = ?, lineItemTotals = ?, budget = ?, committed = ?, changeOrders = ?, anticipatedCost = ?, actualCostToDate = ?, dollarsRemaining = ? WHERE lineItemID = ?'
+	var qry1 = 'UPDATE lineitem SET lineItemBreakdown = ?, budget = ?, committed = ?, changeOrders = ?, actualCostToDate = ? WHERE lineItemID = ?'
 
 	var qry = 'SELECT * FROM project WHERE projectID = ?'
 	console.log(qry);
@@ -600,7 +600,7 @@ router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
 	//if (req.body.actualCompletionDate = '');
 
 	console.log(qry);
-	conn.query(qry1, [req.body.costSummaryCategoryID, req.body.lineItemBreakdown, req.body.lineItemTotals, req.body.budget, req.body.committed, req.body.changeOrders, req.body.anticipatedCost, req.body.actualCostToDate, req.body.dollarsRemaining, req.body.lineItemID], function (err, results0, fields) {
+	conn.query(qry1, [req.body.lineItemBreakdown, req.body.budget, req.body.committed, req.body.changeOrders, req.body.actualCostToDate, req.body.lineItemID], function (err, results0, fields) {
 		conn.query(qry, req.body.projectID, function (err, results, fields) {
 			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
 				conn.query(qry3, req.body.projectID, function (err, results2, fields) {

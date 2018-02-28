@@ -137,14 +137,21 @@ router.post('/registerProject', ensureAuthenticated, function(req, res){
 	if (req.body.targetStartDate == ""){targetStartDate = null};
     if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
 
-    var qry = 'INSERT INTO PROJECT (clientName, projectName, location, serviceType, targetStartDate, targetCompletionDate, projectedBudget, contractAmount) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
-    var qry1 = 'SELECT * FROM user'
+	var insertQuery= 'INSERT INTO kmsActionItem (actionItemDescription, projectID) VALUES(\'Project Management Plan\', LAST_INSERT_ID()); '
+	var insertQuery2= 'INSERT INTO kmsActionItem (actionItemDescription, projectID) VALUES(\'Construction Plan\', LAST_INSERT_ID()); '
+    var qry = 'INSERT INTO PROJECT (clientName, projectName, location, serviceType, targetStartDate, targetCompletionDate, projectedBudget, contractAmount) VALUES (?, ?, ?, ?, ?, ?, ?, ?);';
+	var qry1 = 'SELECT * FROM user'
     var qry2 = 'SELECT * FROM project'
 
     conn.query(qry, [req.body.clientName, req.body.projectName, req.body.location, req.body.serviceType, targetStartDate, targetCompletionDate, req.body.projectedBudget, req.body.contractAmount], function (err, results, fields) { 
-        conn.query(qry1, function (err, results0, fields) {
-            conn.query(qry2, function (err, results, fields) {
-                res.render('admin', {results0: results0, results: results});
+		conn.query(insertQuery, function (err, results00, fields) {
+            conn.query(insertQuery2, function (err, results000, fields) {
+				conn.query(qry1, function(err, results0, fields) {
+					conn.query(qry2, function(err, results, fields) {						
+						res.render('admin', {results0: results0, results: results});
+					})
+				});
+                
             });
         });
         
