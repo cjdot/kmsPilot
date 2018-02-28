@@ -157,7 +157,7 @@
                             <td>
                                 <input type="date" class="form-control" id="actualCompletionDate" name="actualCompletionDate"> </td>
                             <td>
-                                <input type="text" class="form-control" id="progress" name="progress">
+                                <input type="number" class="form-control" id="progress" name="progress">
                             </td>
                             <td>
                                 <input type="text" class="form-control" id="activityNotes">
@@ -204,7 +204,7 @@
                             <td>
                                 <input type="date" class="form-control" id="actualCompletionDate" name="actualCompletionDate" value="{{#if actualCompletionDate}}{{formatTime actualCompletionDate "YYYY-MM-DD"}}{{/if}}"> </td>
                             <td>
-                                <input type="text" class="form-control" id="progress" name="progress" placeholder="{{#if progress}}{{progress}}{{else}}0%{{/if}}"
+                                <input type="number" class="form-control" id="progress" name="progress" placeholder="{{#if progress}}{{progress}}{{else}}0%{{/if}}"
                                         value="{{#if progress}}{{progress}}{{else}}0%{{/if}}">
                             </td>
                             <td>
@@ -538,33 +538,30 @@
     <div class="tab-pane active" id="read3" role="tabpanel">
       <table class="table table-striped ">
                     <thead>
-                        <tr>
-                            <th>Division Category</th>
+                        <tr>                           
                             <th>Line Item</th>
-                            <th>Line Item Totals</th>
                             <th>Budget</th>
-                            <th>Committed</th>
+                            <th>Original Contract Value</th>
                             <th>Change Orders</th>
-                            <th>Anticipated Cost</th>
+                            <th>Revised Contract Value</th>
                             <th>Variance</th>
                             <th>Actual Cost To Date</th>
-                            <th>Dollars Remaining</th>
+                            <th>Remaining Contract Value</th>
+                            <th>Subheader</th>
                         </tr>
                     </thead>
                     <tbody>
 
                         {{#each results4}}
                         <tr>
-                            <td>{{costSummaryCategoryID}}</td>
                             <td>{{lineItemBreakdown}}</td>
-                            <td>${{lineItemTotals}}</td>
                             <td>${{budget}}</td>
-                            <td>${{committed}}</td>
+                            <td>${{originalContractValue}}</td>
                             <td>${{changeOrders}}</td>
-                            <td>${{anticipatedCost}}</td>
+                            <td>${{revisedContractValue}}</td>
                             <td>${{variance}}</td>
                             <td>${{actualCostToDate}}</td>
-                            <td>${{dollarsRemaining}}</td>
+                            <td>${{remainingContractValue}}</td>
                         </tr>
                         {{/each}}
                     </tbody>
@@ -577,15 +574,12 @@
         <table class="table table-striped ">
             <thead>
                 <tr>
-                    <th>Division Category</th>
-                    <th>Line Item Breakdown</th>
-                    <th>Line Item Totals</th>
+                    <th>Line Item</th>
                     <th>Budget</th>
-                    <th>Committed</th>
+                    <th>Original Contract Value</th>
                     <th>Change Orders</th>
-                    <th>Anticipated Cost</th>
                     <th>Actual Cost To Date</th>
-                    <th>Dollars Remaining</th>
+                    <th>Subheader</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -594,31 +588,22 @@
                 <form action="/projects/newCostSummary" method="post">
                     <tr>
                         
-                        <input type="hidden" class="form-control" id="projectID" name="projectID" value={{#each results}}"{{projectID}}"{{/each}}>
-                            <td>
-                                <input type="text" class="form-control" id="costSummaryCategoryID" name="costSummaryCategoryID"> 
-                            </td>
+                        <input type="hidden" class="form-control" id="projectID" name="projectID" value={{#each results}}"{{projectID}}"{{/each}}>                          
                             <td>
                                 <input type="text" class="form-control" id="lineItemBreakdown" name="lineItemBreakdown">
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="lineItemTotals" name="lineItemTotals"> 
+                                <input type="number" class="form-control" id="budget" name="budget"> </td>
+                            <td>
+                                <input type="number" class="form-control" id="originalContractValue" name="originalContractValue"> </td>
+                            <td>
+                                <input type="number" class="form-control" id="changeOrders" name="changeOrders">
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="budget" name="budget"> </td>
-                            <td>
-                                <input type="text" class="form-control" id="committed" name="committed"> </td>
-                            <td>
-                                <input type="text" class="form-control" id="changeOrders" name="changeOrders">
+                                <input type="number" class="form-control" id="actualCostToDate" name="actualCostToDate">
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="anticipatedCost" name="anticipatedCost">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" id="actualCostToDate" name="actualCostToDate">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" id="dollarsRemaining" name="dollarsRemaining">
+                                <input type="text" class="form-control" id="subHeaderID" name="subHeaderID">
                             </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update">Insert</button>
@@ -630,17 +615,14 @@
         </table>
         <br><br><h4>Update Cost Sumary Line Item</h4>
         <table class="table table-striped ">
-            <thead>
+                    <thead>
                         <tr>
-                            <th>Division Category</th>
                             <th>Line Item</th>
-                            <th>Line Item Totals</th>
                             <th>Budget</th>
-                            <th>Committed</th>
+                            <th>Original Contract Value</th>
                             <th>Change Orders</th>
-                            <th>Anticipated Cost</th>
                             <th>Actual Cost To Date</th>
-                            <th>Dollars Remaining</th>
+                            <th>Subheader</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -652,31 +634,22 @@
                         <input type="hidden" class="form-control" id="projectID" name="projectID" value="{{projectID}}">
                         <input type="hidden" class="form-control" id="lineItemID" name="lineItemID" value={{lineItemID}}>
                             <td>
-                                <input type="text" class="form-control" id="costSummaryCategoryID" name="costSummaryCategoryID" value="{{costSummaryCategoryID}}"> 
-                            </td>
-                            <td>
                                 <input type="text" class="form-control" id="lineItemBreakdown" name="lineItemBreakdown" value="{{lineItemBreakdown}}">
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="lineItemTotals" name="lineItemTotals" value="{{lineItemTotals}}"> 
+                                <input type="number" class="form-control" id="budget" name="budget" value="{{budget}}"> 
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="budget" name="budget" value="{{budget}}"> 
+                                <input type="number" class="form-control" id="originalContractValue" name="originalContractValue" value="{{originalContractValue}}"> 
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="committed" name="committed" value="{{committed}}"> 
+                                <input type="number" class="form-control" id="changeOrders" name="changeOrders" value="{{changeOrders}}">
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="changeOrders" name="changeOrders" value="{{changeOrders}}">
+                                <input type="number" class="form-control" id="actualCostToDate" name="actualCostToDate" value="{{actualCostToDate}}">
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="anticipatedCost" name="anticipatedCost" value="{{anticipatedCost}}">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" id="actualCostToDate" name="actualCostToDate" value="{{actualCostToDate}}">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" id="dollarsRemaining" name="dollarsRemaining" value="{{dollarsRemaining}}">
+                                <input type="text" class="form-control" id="subheaderID" name="subheaderID" value="{{subheaderID}}">
                             </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updateCostSummary">Update</button>
@@ -796,16 +769,16 @@
                             <td>
                                 <input type="date" id="clientApprovedDate" name="clientApprovedDate"> </td>
                             <td>
-                                <input type="text" class="form-control" id="pcoValue" name="pcoValue">
+                                <input type="number" class="form-control" id="pcoValue" name="pcoValue">
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="contingencyAmount" name="contingencyAmount">
+                                <input type="number" class="form-control" id="contingencyAmount" name="contingencyAmount">
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="costSavingsAmount" name="costSavingsAmount">
+                                <input type="number" class="form-control" id="costSavingsAmount" name="costSavingsAmount">
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="changeOrders" name="changeOrders">
+                                <input type="number" class="form-control" id="changeOrders" name="changeOrders">
                             </td>
                             <td>
                                 <input type="text" class="form-control" id="pcoStatus" name="pcoStatus">
@@ -867,16 +840,16 @@
                                 <input type="date" class="form-control" id="clientApprovedDate" name="clientApprovedDate" value="{{#if clientApprovedDate}}{{formatTime clientApprovedDate "YYYY-MM-DD"}}{{/if}}"> </td>
                             
                             <td>
-                                <input type="text" class="form-control" id="pcoValue" name="pcoValue" value="{{pcoValue}}"> 
+                                <input type="number" class="form-control" id="pcoValue" name="pcoValue" value="{{pcoValue}}"> 
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="contingencyAmount" name="contingencyAmount" value="{{contingencyAmount}}"> 
+                                <input type="number" class="form-control" id="contingencyAmount" name="contingencyAmount" value="{{contingencyAmount}}"> 
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="costSavingsAmount" name="costSavingsAmount" value="{{costSavingsAmount}}"> 
+                                <input type="number" class="form-control" id="costSavingsAmount" name="costSavingsAmount" value="{{costSavingsAmount}}"> 
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="changeOrders" name="changeOrders" value="{{changeOrders}}"> 
+                                <input type="number" class="form-control" id="changeOrders" name="changeOrders" value="{{changeOrders}}"> 
                             </td>
                             <td>
                                 <input type="text" class="form-control" id="pcoStatus" name="pcoStatus" value="{{pcoStatus}}"> 
