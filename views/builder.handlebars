@@ -73,6 +73,35 @@
 						</div>
 
 						<hr>
+
+						<div id="table">
+						<table class="table table-striped">
+                   			<thead>
+                        	<tr>
+                            	<th>First Name</th>
+                            	<th>Last Name</th>
+                            	<th>Email</th>
+                 	            <th>Phone Number</th>
+                 	            <th>Permission Level</th>
+                        	</tr>
+                    		</thead>    
+            				
+							<tbody>
+                			{{#each results0}}
+                			<form method="post">
+                    			<tr>
+                        			<td>{{firstName}}</td>
+                        			<td>{{lastName}}</td>
+                        			<td>{{email}}</td>
+                        			<td>{{cellNumber}}</td>
+                        			<td>{{permissionLevel}}</td>
+                    			</tr>
+                			</form>
+                			{{/each}}
+            				</tbody>
+        					</table>
+						</div>
+
 						<div class="row">
 								<div class="col-sm-6">
 										<div class="form-group">
@@ -95,10 +124,9 @@
 		</div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script> {{!-- jsPDF base --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script> {{!-- jsPDF AutoTable plugin --}}
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.12.0/jquery.qrcode.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.0.0.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-3.0.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js" integrity="sha384-CchuzHs077vGtfhGYl9Qtc7Vx64rXBXdIAZIPbItbNyWIRTdG0oYAqki3Ry13Yzu" crossorigin="anonymous"></script> {{!-- jsPDF base --}}
 <script type="text/javascript">
 /* jshint undef:false, newcap: false, unused:false */
 
@@ -356,7 +384,8 @@
 				//flyer_projectid			=$('#flyer-projectid').val(),
 				flyer_quality			=$('#flyer-quality').val(),
 				flyer_quality1			=$('#flyer-quality1').val(),
-				flyer_quality2			=$('#flyer-quality2').val()
+				flyer_quality2			=$('#flyer-quality2').val(),
+				test_table				=$("#table")[0]
 			;
 
 			var pdf = new jsPDF('p', 'mm', page_size),
@@ -531,10 +560,15 @@
 			makeFooter();
 			pdf.addPage(); //Page 3
 
-			// !Field Report Tracking Log
-			makeHeader('Field Report Tracking Log');
+			// !Test Area
+			makeHeader('Test Table');
 
-			//Table here
+			var table_margins = {top: 10, bottom: 10, left: 10, width: 550};
+
+			pdf.fromHTML(
+				test_table, table_margins.left, table_margins.top, {
+					'width' : table_margins.width
+				}, table_margins);
 
 			makeFooter();
 			pdf.addPage(); //Page 4
@@ -543,9 +577,8 @@
 			makeHeader('Payment Summary');
 
 			//Table here
-
+			
 			makeFooter();
-			pdf.addPage(); //Page 5
 
 			// ****************************
 			// output
