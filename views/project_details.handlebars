@@ -160,7 +160,7 @@
                                 <input type="number" class="form-control" id="progress" name="progress">
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="activityNotes">
+                                <input type="text" class="form-control" id="activityNotes" name="activityNotes">
                             </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update">Insert</button>
@@ -208,7 +208,7 @@
                                         value="{{#if progress}}{{progress}}{{else}}0%{{/if}}">
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="activityNotes" placeholder="{{activityNotes}}"
+                                <input type="text" class="form-control" id="activityNotes" name="activityNotes" placeholder="{{activityNotes}}"
                                         value="{{activityNotes}}"> </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updateProjectActivity">Update</button>
@@ -224,21 +224,15 @@
         </div>
     </div>      
     </div>
-
-                
-                
-            
-
-            
-            {{#ifEquals updateType 'updateActionItem'}}
-            <div id="menu3" class="tab-pane fade in active">
-            {{else}}
-            <div id="menu3" class="tab-pane fade in">
-            {{/ifEquals}}
-                <br>
-                <h3>KMS Action Items</h3>
-
-                <ul class="nav nav-tabs" role="tablist">
+           
+    {{#ifEquals updateType 'updateActionItem'}}
+    <div id="menu3" class="tab-pane fade in active">
+    {{else}}
+    <div id="menu3" class="tab-pane fade in">
+    {{/ifEquals}}
+        <br>
+        <h3>KMS Action Items</h3>
+        <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#read1" role="tab">Read</a>
             </li>
@@ -248,9 +242,9 @@
         </ul>
 
     <!-- Tab panes -->
-    <div class="tab-content">
-    <div class="tab-pane active" id="read1" role="tabpanel">
-      <table class="table table-striped ">
+        <div class="tab-content">
+            <div class="tab-pane active" id="read1" role="tabpanel">
+                <table class="table table-striped ">
                     <thead>
                         <tr>
                             <th>Action Item Description</th>
@@ -275,27 +269,27 @@
                         {{/each}}
                     </tbody>
                 </table>
-    </div>
-    <div class="tab-pane" id="update1" role="tabpanel">
-        <br><br><h4>Add new KMS Action Item</h4>
+            </div>
+        <div class="tab-pane" id="update1" role="tabpanel">
 
-        
-        <table class="table table-striped ">
-            <thead>
-                <tr>
-                    <th>Action Item Description</th>
-                    <th>Actvity Owner</th>
-                    <th>Activity Start Date</th>
-                    <th>Target Completion Date</th>
-                    <th>Actual Completion Date</th>
-                    <th>Action Item Notes</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <form action="/projects/newActionItem" method="post">
+            <br><br><h4>Add new KMS Action Item</h4>
+
+            <table class="table table-striped ">    
+                <thead>
                     <tr>
+                        <th>Action Item Description</th>
+                        <th>Actvity Owner</th>
+                        <th>Activity Start Date</th>
+                        <th>Target Completion Date</th>
+                        <th>Actual Completion Date</th>
+                        <th>Action Item Notes</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <form action="/projects/newActionItem" method="post">
+                        <tr>
                         
                         <input type="hidden" class="form-control" id="projectID" name="projectID" value={{#each results}}"{{projectID}}"{{/each}}>
                             <td>
