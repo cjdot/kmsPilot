@@ -536,7 +536,7 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
 
 	
 	console.log(req.body.projectActivityID)
-	var qry1 = 'INSERT INTO lineitem SET lineItemBreakdown = ?, budget = ?, changeOrders = ?, actualCostToDate = ?, projectID = ?'
+	var qry1 = 'INSERT INTO lineitem SET lineItemBreakdown = ?, originalContractValue = ?, budget = ?, changeOrders = ?, actualCostToDate = ?, projectID = ?'
 
 	var qry = 'SELECT * FROM project WHERE projectID = ?'
 	console.log(qry);
@@ -550,7 +550,7 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
 	//if (req.body.actualCompletionDate = '');
 
 	console.log(qry);
-	conn.query(qry1, [req.body.lineItemBreakdown, req.body.budget, req.body.changeOrders, req.body.actualCostToDate, req.body.projectID], function (err, results0, fields) {
+	conn.query(qry1, [req.body.lineItemBreakdown, req.body.originalContractValue, req.body.budget, req.body.changeOrders, req.body.actualCostToDate, req.body.projectID], function (err, results0, fields) {
 		conn.query(qry, req.body.projectID, function (err, results, fields) {
 			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
 				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
@@ -586,7 +586,7 @@ router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
 
 	)
 	console.log(req.body.projectActivityID)
-	var qry1 = 'UPDATE lineitem SET lineItemBreakdown = ?, budget = ?, committed = ?, changeOrders = ?, actualCostToDate = ? WHERE lineItemID = ?'
+	var qry1 = 'UPDATE lineitem SET lineItemBreakdown = ?, originalContractValue = ?, budget = ?, committed = ?, changeOrders = ?, actualCostToDate = ? WHERE lineItemID = ?'
 
 	var qry = 'SELECT * FROM project WHERE projectID = ?'
 	console.log(qry);
@@ -595,20 +595,22 @@ router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
 	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
 	var qry5 = 'SELECT * FROM lineitem WHERE projectID = ?'
 	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
+	var qry7 = 'SELECT COUNT(lineItemID), divisionCategory FROM lineitem WHERE projectID = ? AND divisionCategory IS NOT NULL GROUP BY divisionCategory'
 	var updateType = 'updateCostSummary'
 	console.log('This is happening :' + req.body.actualCompletionDate);
 	//if (req.body.actualCompletionDate = '');
 
 	console.log(qry);
-	conn.query(qry1, [req.body.lineItemBreakdown, req.body.budget, req.body.committed, req.body.changeOrders, req.body.actualCostToDate, req.body.lineItemID], function (err, results0, fields) {
+	conn.query(qry1, [req.body.lineItemBreakdown, req.body.originalContractValue, req.body.budget, req.body.committed, req.body.changeOrders, req.body.actualCostToDate, req.body.lineItemID], function (err, results0, fields) {
 		conn.query(qry, req.body.projectID, function (err, results, fields) {
 			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
 				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
 					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
 						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
-								
-								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
+								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6:results6 });
+								});
 							});
 						});
 					});
@@ -893,6 +895,7 @@ router.post('/project_details', ensureAuthenticated, function (req, res) {
 	var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
 	var qry5 = 'SELECT * FROM lineitem WHERE projectID = ?'
 	var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
+	var qry7 = 'SELECT COUNT(lineItemID), divisionCategory FROM lineitem WHERE projectID = ? AND divisionCategory IS NOT NULL GROUP BY divisionCategory'
 
 	console.log(qry);
 
@@ -902,7 +905,9 @@ router.post('/project_details', ensureAuthenticated, function (req, res) {
 				conn.query(qry4, req.body.projectID, function (err, results3, fields) {
 					conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 						conn.query(qry6, req.body.projectID, function (err, results5, fields) {
-							res.render('project_details', { results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+							conn.query(qry7, req.body.projectID, function (err, results6, fields) {
+								res.render('project_details', { results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6:results6 });
+							});
 						});
 					});
 				});
