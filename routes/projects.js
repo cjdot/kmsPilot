@@ -23,10 +23,10 @@ var qry = 'SELECT * FROM project WHERE projectID = ?'
 var qry2 = 'SELECT * FROM projectactivity WHERE projectID = ?'
 var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
 var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
-var qry5 = 'SELECT * FROM lineitem WHERE projectID = ?'
+var qry5 = 'SELECT * FROM lineitem INNER JOIN costsummarysubheader ON lineitem.subheaderID = costsummarysubheader.subheaderID WHERE lineitem.projectID = ?'
 var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
 var qry7 = 'SELECT COUNT(lineItemID), divisionCategory FROM lineitem WHERE projectID = ? AND divisionCategory IS NOT NULL GROUP BY divisionCategory'
-
+var qry8 = 'SELECT * FROM costsummarysubheader WHERE projectID = ?'
 
 router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 	
@@ -63,8 +63,10 @@ router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
-								
-									res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
+										
+										res.render('project_details', { results7: results7, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+									});
 								});
 							});
 						});
@@ -110,8 +112,10 @@ router.post('/updateProjectActivity', ensureAuthenticated, function (req, res) {
 						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
-							
-									res.render('project_details', { results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });	
+									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
+									
+										res.render('project_details', { results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });	
+									});
 								});
 							});
 						});
@@ -147,8 +151,10 @@ router.post('/deleteProjectActivity', ensureAuthenticated, function (req, res) {
 						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
-									
-									res.render('project_details', { results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
+																		
+										res.render('project_details', { results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+									});
 								});
 							});
 						});
@@ -191,8 +197,12 @@ router.post('/newActionItem', ensureAuthenticated, function (req, res) {
 					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
 						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
-								
-								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
+									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
+										
+										res.render('project_details', { results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+									});
+								});
 							});
 						});
 					});
@@ -234,8 +244,12 @@ router.post('/updateActionItem', ensureAuthenticated, function (req, res) {
 					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
 						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
-								
-								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
+									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
+									
+										res.render('project_details', { results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+									});
+								});
 							});
 						});
 					});
@@ -269,8 +283,12 @@ router.post('/deleteActionItem', ensureAuthenticated, function (req, res) {
 					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
 						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
-								
-								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
+									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
+
+										res.render('project_details', { results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+									});
+								});
 							});
 						});
 					});
@@ -312,8 +330,12 @@ router.post('/newExternalActionItem', ensureAuthenticated, function (req, res) {
 					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
 						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
-								
-								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
+									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
+										
+										res.render('project_details', { results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+									});
+								});
 							});
 						});
 					});
@@ -355,8 +377,12 @@ router.post('/updateExternalActionItem', ensureAuthenticated, function (req, res
 					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
 						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
-								
-								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
+									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
+										
+										res.render('project_details', { results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+									});
+								});
 							});
 						});
 					});
@@ -392,8 +418,12 @@ router.post('/deleteExternalActionItem', ensureAuthenticated, function (req, res
 					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
 						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
-								
-								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
+									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
+
+										res.render('project_details', { results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+									});
+								});
 							});
 						});
 					});
@@ -417,18 +447,22 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
 			}
 		});
 	
-	var qry1 = 'INSERT INTO lineitem SET lineItemBreakdown = ?, originalContractValue = ?, budget = ?, changeOrders = ?, actualCostToDate = ?, projectID = ?'
+	var qry1 = 'INSERT INTO lineitem SET divisionCategory = ?, lineItemBreakdown = ?, originalContractValue = ?, budget = ?, changeOrders = ?, actualCostToDate = ?, subheaderID = ?, projectID = ?'
 	var updateType = 'updateCostSummary'
 	
-	conn.query(qry1, [req.body.lineItemBreakdown, req.body.originalContractValue, req.body.budget, req.body.changeOrders, req.body.actualCostToDate, req.body.projectID], function (err, results0, fields) {
+	conn.query(qry1, [req.body.divisionCategory, req.body.lineItemBreakdown, req.body.originalContractValue, req.body.budget, req.body.changeOrders, req.body.actualCostToDate, req.body.subheaderID, req.body.projectID], function (err, results0, fields) {
 		conn.query(qry, req.body.projectID, function (err, results, fields) {
 			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
 				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
 					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
 						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
-								
-								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
+									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
+
+									res.render('project_details', { results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+									});
+								});
 							});
 						});
 					});
@@ -452,10 +486,10 @@ router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
 			}
 		});
 	
-	var qry1 = 'UPDATE lineitem SET lineItemBreakdown = ?, originalContractValue = ?, budget = ?, committed = ?, changeOrders = ?, actualCostToDate = ? WHERE lineItemID = ?'
+	var qry1 = 'UPDATE lineitem SET divisionCategory = ?, lineItemBreakdown = ?, originalContractValue = ?, budget = ?, changeOrders = ?, actualCostToDate = ?, subheaderID = ? WHERE lineItemID = ?'
 	var updateType = 'updateCostSummary'
-	
-	conn.query(qry1, [req.body.lineItemBreakdown, req.body.originalContractValue, req.body.budget, req.body.committed, req.body.changeOrders, req.body.actualCostToDate, req.body.lineItemID], function (err, results0, fields) {
+	console.log(req.body.divisionCategory)
+	conn.query(qry1, [req.body.divisionCategory, req.body.lineItemBreakdown, req.body.originalContractValue, req.body.budget, req.body.changeOrders, req.body.actualCostToDate, req.body.subheaderID, req.body.lineItemID], function (err, results0, fields) {
 		conn.query(qry, req.body.projectID, function (err, results, fields) {
 			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
 				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
@@ -463,7 +497,10 @@ router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
 						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
-								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6:results6 });
+									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
+
+										res.render('project_details', { results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6:results6 });
+									});
 								});
 							});
 						});
@@ -498,8 +535,12 @@ router.post('/deleteCostSummary', ensureAuthenticated, function (req, res) {
 					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
 						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
-								
-								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
+									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
+
+										res.render('project_details', { results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+									});
+								});
 							});
 						});
 					});
@@ -543,8 +584,12 @@ router.post('/newPCO', ensureAuthenticated, function (req, res) {
 					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
 						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
-								
-								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
+									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
+
+										res.render('project_details', { results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+									});
+								});
 							});
 						});
 					});
@@ -588,8 +633,12 @@ router.post('/updatePCO', ensureAuthenticated, function (req, res) {
 					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
 						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
-								
-								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
+									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
+
+										res.render('project_details', { results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+									});
+								});
 							});
 						});
 					});
@@ -624,8 +673,12 @@ router.post('/deletePCO', ensureAuthenticated, function (req, res) {
 					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
 						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
-								
-								res.render('project_details', { updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
+									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
+
+										res.render('project_details', { results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+									});
+								});
 							});
 						});
 					});
@@ -635,6 +688,44 @@ router.post('/deletePCO', ensureAuthenticated, function (req, res) {
 	});
 });
 
+router.post('/newSubheader', ensureAuthenticated, function (req, res) {
+	
+	const conn = new mysql.createConnection(config);
+	conn.connect(
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!! Error:");
+				throw err;
+			}
+			else {
+				console.log("Connection established.");
+			}
+		});
+
+	var qry1 = 'INSERT INTO costsummarysubheader SET subheaderName = ?, divisionCategory = ?, projectID = ?'
+	var updateType = 'updateCostSummary'
+	
+	conn.query(qry1, [req.body.subheaderName,  req.body.divisionCategory, req.body.projectID], function (err, results0, fields) {
+		conn.query(qry, req.body.projectID, function (err, results, fields) {
+			conn.query(qry2, req.body.projectID, function (err, results1, fields) {
+				conn.query(qry3, req.body.projectID, function (err, results2, fields) {
+					conn.query(qry4, req.body.projectID, function (err, results3, fields) {
+						conn.query(qry5, req.body.projectID, function (err, results4, fields) {
+							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
+								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
+									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
+
+										res.render('project_details', { results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+									});
+								});
+							});
+						});
+					});
+				});
+			});
+		});
+	});
+});
 
 router.get('/project', ensureAuthenticated, function (req, res) {
 
@@ -681,7 +772,10 @@ router.post('/project_details', ensureAuthenticated, function (req, res) {
 					conn.query(qry5, req.body.projectID, function (err, results4, fields) {
 						conn.query(qry6, req.body.projectID, function (err, results5, fields) {
 							conn.query(qry7, req.body.projectID, function (err, results6, fields) {
-								res.render('project_details', { results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6:results6 });
+								conn.query(qry8, req.body.projectID, function (err, results7, fields) {
+									console.log(results4);
+									res.render('project_details', { results7: results7, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6:results6 });
+								});
 							});
 						});
 					});

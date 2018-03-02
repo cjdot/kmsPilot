@@ -524,6 +524,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#update3" role="tab">Update</a>
+            </li>           
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#updateSubheader" role="tab">Subheader Options</a>
             </li>
         </ul>
 
@@ -561,7 +564,8 @@
             <td>${{revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 0 - General Conditions and Soft Cost'}}
             <td>${{variance}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 0 - General Conditions and Soft Cost'}}
             <td>${{actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 0 - General Conditions and Soft Cost'}}
-            <td>${{remainingContractValue}}</td>{{/ifEquals}}
+            <td>${{remainingContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 0 - General Conditions and Soft Cost'}}
+            <td>{{subheaderName}}</td> {{/ifEquals}}
         </tr>
         {{/each}}
     </tbody>
@@ -597,7 +601,8 @@
             <td>${{revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}
             <td>${{variance}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}
             <td>${{actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}
-            <td>${{remainingContractValue}}</td>{{/ifEquals}}
+            <td>${{remainingContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}
+            <td>{{subheaderName}}</td> {{/ifEquals}}
         </tr>
         {{/each}}
     </tbody>
@@ -633,7 +638,8 @@
             <td>${{revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 3 - Concrete'}}
             <td>${{variance}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 3 - Concrete'}}
             <td>${{actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 3 - Concrete'}}
-            <td>${{remainingContractValue}}</td>{{/ifEquals}}
+            <td>${{remainingContractValue}}</td>{{/ifEquals}}{{#ifEquals divisionCategory 'Division 3 - Concrete'}}
+            <td>{{subheaderName}}</td> {{/ifEquals}}
         </tr>
         {{/each}}
     </tbody>
@@ -669,7 +675,8 @@
             <td>${{revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 4 - Masonry'}}
             <td>${{variance}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 4 - Masonry'}}
             <td>${{actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 4 - Masonry'}}
-            <td>${{remainingContractValue}}</td>{{/ifEquals}}
+            <td>${{remainingContractValue}}</td>{{/ifEquals}}{{#ifEquals divisionCategory 'Division 4 - Masonry'}}
+            <td>{{subheaderName}}</td> {{/ifEquals}}
         </tr>
         {{/each}}
     </tbody>
@@ -705,7 +712,8 @@
             <td>${{revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 5 - Metals'}}
             <td>${{variance}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 5 - Metals'}}
             <td>${{actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 5 - Metals'}}
-            <td>${{remainingContractValue}}</td>{{/ifEquals}}
+            <td>${{remainingContractValue}}</td>{{/ifEquals}}{{#ifEquals divisionCategory 'Division 5 - Metals'}}
+            <td>{{subheaderName}}</td> {{/ifEquals}}
         </tr>
         {{/each}}
     </tbody>
@@ -741,7 +749,8 @@
             <td>${{revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}
             <td>${{variance}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}
             <td>${{actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}
-            <td>${{remainingContractValue}}</td>{{/ifEquals}}
+            <td>${{remainingContractValue}}</td>{{/ifEquals}}{{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}
+            <td>{{subheaderName}}</td> {{/ifEquals}}
         </tr>
         {{/each}}
     </tbody>
@@ -777,7 +786,8 @@
             <td>${{revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}
             <td>${{variance}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}
             <td>${{actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}
-            <td>${{remainingContractValue}}</td>{{/ifEquals}}
+            <td>${{remainingContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}
+            <td>{{subheaderName}}</td> {{/ifEquals}}
         </tr>
         {{/each}}
     </tbody>
@@ -813,7 +823,8 @@
             <td>${{revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}
             <td>${{variance}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}
             <td>${{actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}
-            <td>${{remainingContractValue}}</td>{{/ifEquals}}
+            <td>${{remainingContractValue}}</td>{{/ifEquals}}{{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}
+            <td>{{subheaderName}}</td> {{/ifEquals}}
         </tr>
         {{/each}}
     </tbody>
@@ -849,7 +860,8 @@
             <td>${{revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 9 - Finishes'}}
             <td>${{variance}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 9 - Finishes'}}
             <td>${{actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 9 - Finishes'}}
-            <td>${{remainingContractValue}}</td>{{/ifEquals}}
+            <td>${{remainingContractValue}}</td>{{/ifEquals}}{{#ifEquals divisionCategory 'Division 9 - Finishes'}}
+            <td>{{subheaderName}}</td> {{/ifEquals}}
         </tr>
         {{/each}}
     </tbody>
@@ -885,7 +897,8 @@
             <td>${{revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 10 - Specialties'}}
             <td>${{variance}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 10 - Specialties'}}
             <td>${{actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 10 - Specialties'}}
-            <td>${{remainingContractValue}}</td>{{/ifEquals}}
+            <td>${{remainingContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 10 - Specialties'}}
+            <td>{{subheaderName}}</td> {{/ifEquals}}
         </tr>
         {{/each}}
     </tbody>
@@ -921,7 +934,8 @@
             <td>${{revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 11 - Equipment'}}
             <td>${{variance}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 11 - Equipment'}}
             <td>${{actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 11 - Equipment'}}
-            <td>${{remainingContractValue}}</td>{{/ifEquals}}
+            <td>${{remainingContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 11 - Equipment'}}
+            <td>{{subheaderName}}</td> {{/ifEquals}}
         </tr>
         {{/each}}
     </tbody>
@@ -957,7 +971,8 @@
             <td>${{revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}
             <td>${{variance}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}
             <td>${{actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}
-            <td>${{remainingContractValue}}</td>{{/ifEquals}}
+            <td>${{remainingContractValue}}</td>{{/ifEquals}}{{#ifEquals divisionCategory 'Division 12 - Furnishings'}}
+            <td>{{subheaderName}}</td> {{/ifEquals}}
         </tr>
         {{/each}}
     </tbody>
@@ -993,7 +1008,8 @@
             <td>${{revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}
             <td>${{variance}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}
             <td>${{actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}
-            <td>${{remainingContractValue}}</td>{{/ifEquals}}
+            <td>${{remainingContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}
+            <td>{{subheaderName}}</td> {{/ifEquals}}
         </tr>
         {{/each}}
     </tbody>
@@ -1029,7 +1045,8 @@
             <td>${{revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}
             <td>${{variance}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}
             <td>${{actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}
-            <td>${{remainingContractValue}}</td>{{/ifEquals}}
+            <td>${{remainingContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}
+            <td>{{subheaderName}}</td> {{/ifEquals}}
         </tr>
         {{/each}}
     </tbody>
@@ -1065,7 +1082,8 @@
             <td>${{revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}
             <td>${{variance}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}
             <td>${{actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}
-            <td>${{remainingContractValue}}</td>{{/ifEquals}}
+            <td>${{remainingContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}
+            <td>{{subheaderName}}</td> {{/ifEquals}}
         </tr>
         {{/each}}
     </tbody>
@@ -1101,7 +1119,8 @@
             <td>${{revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 16 - Electrical'}}
             <td>${{variance}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 16 - Electrical'}}
             <td>${{actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals divisionCategory 'Division 16 - Electrical'}}
-            <td>${{remainingContractValue}}</td>{{/ifEquals}}
+            <td>${{remainingContractValue}}</td>{{/ifEquals}}{{#ifEquals divisionCategory 'Division 16 - Electrical'}}
+            <td>{{subheaderName}}</td> {{/ifEquals}}
         </tr>
         {{/each}}
     </tbody>
@@ -1117,6 +1136,7 @@
         <table class="table table-striped ">
             <thead>
                 <tr>
+                    <th>Division Category</th>
                     <th>Line Item</th>
                     <th>Budget</th>
                     <th>Original Contract Value</th>
@@ -1133,23 +1153,49 @@
                         
                         <input type="hidden" class="form-control" id="projectID" name="projectID" value={{#each results}}"{{projectID}}"{{/each}}>                          
                             <td>
-                                <input type="text" class="form-control" id="lineItemBreakdown" name="lineItemBreakdown">
+                                <select class="form-control" name="divisionCategory" id="divisionCategory">
+                                    <option value="Division 0 - General Conditions and Soft Cost">Division 0 - General Conditions and Soft Cost</option>
+                                    <option value="Division 2 - Site Construction">Division 2 - Site Construction</option>
+                                    <option value="Division 3 - Concrete">Division 3 - Concrete</option>
+                                    <option value="Division 4 - Masonry">Division 4 - Masonry</option>
+                                    <option value="Division 5 - Metals">Division 5 - Metals</option>
+                                    <option value="Division 6 - Carpentry and Millwork">Division 6 - Carpentry and Millwork</option>
+                                    <option value="Division 7 - Thermal and Moisture Protection">Division 7 - Thermal and Moisture Protection</option>
+                                    <option value="Division 8 - Doors and Windows">Division 8 - Doors and Windows</option>
+                                    <option value="Division 9 - Finishes">Division 9 - Finishes</option>
+                                    <option value="Division 10 - Specialties">Division 10 - Specialties</option>
+                                    <option value="Division 11 - Equipment">Division 11 - Equipment</option>
+                                    <option value="Division 12 - Furnishings">Division 12 - Furnishings</option>
+                                    <option value="Division 13 - Special Construction">Division 13 - Special Construction</option>
+                                    <option value="Division 14 - Conveying Systems">Division 14 - Conveying Systems</option>
+                                    <option value="Division 15 - Mechanical, Plumbing, HVAC, and Fire">Division 15 - Mechanical, Plumbing, HVAC, and Fire</option>
+                                    <option value="Division 16 - Electrical">Division 16 - Electrical</option>
+                                </select>
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="budget" name="budget"> </td>
-                            <td>
-                                <input type="number" class="form-control" id="originalContractValue" name="originalContractValue"> </td>
-                            <td>
-                                <input type="number" class="form-control" id="changeOrders" name="changeOrders">
+                                <input type="text" class="form-control" id="lineItemBreakdown" name="lineItemBreakdown" value="{{lineItemBreakdown}}">
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="actualCostToDate" name="actualCostToDate">
+                                <input type="number" class="form-control" id="budget" name="budget" value="{{budget}}"> 
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="subHeaderID" name="subHeaderID">
+                                <input type="number" class="form-control" id="originalContractValue" name="originalContractValue" value="{{originalContractValue}}"> 
                             </td>
                             <td>
-                                <button type="submit" name="actionType" class="form-control" value="Update">Insert</button>
+                                <input type="number" class="form-control" id="changeOrders" name="changeOrders" value="{{changeOrders}}">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="actualCostToDate" name="actualCostToDate" value="{{actualCostToDate}}">
+                            </td>
+                            <td>
+                                <select class="form-control" name="subheaderID" id="subheaderID">
+                                {{#each results7}}
+                                    <option value="{{subheaderID}}">{{subheaderName}}</option>
+                                {{/each}}
+                                </select>
+                            </td>
+                            <td>
+                                <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/newCostSummary">Insert</button>
                             </td>
                     </tr>
                 </form>
@@ -1160,6 +1206,7 @@
         <table class="table table-striped ">
                     <thead>
                         <tr>
+                            <th>Division Category</th>
                             <th>Line Item</th>
                             <th>Budget</th>
                             <th>Original Contract Value</th>
@@ -1177,6 +1224,26 @@
                         <input type="hidden" class="form-control" id="projectID" name="projectID" value="{{projectID}}">
                         <input type="hidden" class="form-control" id="lineItemID" name="lineItemID" value={{lineItemID}}>
                             <td>
+                                <select class="form-control" name="divisionCategory" id="divisionCategory">
+                                    <option value="Division 0 - General Conditions and Soft Cost" {{#ifEquals divisionCategory 'Division 0 - General Conditions and Soft Cost'}} selected {{/ifEquals}}>Division 0 - General Conditions and Soft Cost</option>
+                                    <option value="Division 2 - Site Construction" {{#ifEquals divisionCategory 'Division 2 - Site Construction'}} selected {{/ifEquals}}>Division 2 - Site Construction</option>
+                                    <option value="Division 3 - Concrete" {{#ifEquals divisionCategory 'Division 3 - Concrete'}} selected {{/ifEquals}}>Division 3 - Concrete</option>
+                                    <option value="Division 4 - Masonry" {{#ifEquals divisionCategory 'Division 4 - Masonry'}} selected {{/ifEquals}}>Division 4 - Masonry</option>
+                                    <option value="Division 5 - Metals" {{#ifEquals divisionCategory 'Division 5 - Metals'}} selected {{/ifEquals}}>Division 5 - Metals</option>
+                                    <option value="Division 6 - Carpentry and Millwork" {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}} selected {{/ifEquals}}>Division 6 - Carpentry and Millwork</option>
+                                    <option value="Division 7 - Thermal and Moisture Protection" {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}} selected {{/ifEquals}}>Division 7 - Thermal and Moisture Protection</option>
+                                    <option value="Division 8 - Doors and Windows" {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}} selected {{/ifEquals}}>Division 8 - Doors and Windows</option>
+                                    <option value="Division 9 - Finishes" {{#ifEquals divisionCategory 'Division 9 - Finishes'}} selected {{/ifEquals}}>Division 9 - Finishes</option>
+                                    <option value="Division 10 - Specialties" {{#ifEquals divisionCategory 'Division 10 - Specialties'}} selected {{/ifEquals}}>Division 10 - Specialties</option>
+                                    <option value="Division 11 - Equipment" {{#ifEquals divisionCategory 'Division 11 - Equipment'}} selected {{/ifEquals}}>Division 11 - Equipment</option>
+                                    <option value="Division 12 - Furnishings" {{#ifEquals divisionCategory 'Division 12 - Furnishings'}} selected {{/ifEquals}}>Division 12 - Furnishings</option>
+                                    <option value="Division 13 - Special Construction" {{#ifEquals divisionCategory 'Division 13 - Special Construction'}} selected {{/ifEquals}}>Division 13 - Special Construction</option>
+                                    <option value="Division 14 - Conveying Systems" {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}} selected {{/ifEquals}}>Division 14 - Conveying Systems</option>
+                                    <option value="Division 15 - Mechanical, Plumbing, HVAC, and Fire" {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}} selected {{/ifEquals}}>Division 15 - Mechanical, Plumbing, HVAC, and Fire</option>
+                                    <option value="Division 16 - Electrical" {{#ifEquals divisionCategory 'Division 16 - Electrical'}} selected {{/ifEquals}}>Division 16 - Electrical</option>
+                                </select>
+                            </td>
+                            <td>
                                 <input type="text" class="form-control" id="lineItemBreakdown" name="lineItemBreakdown" value="{{lineItemBreakdown}}">
                             </td>
                             <td>
@@ -1192,7 +1259,11 @@
                                 <input type="number" class="form-control" id="actualCostToDate" name="actualCostToDate" value="{{actualCostToDate}}">
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="subheaderID" name="subheaderID" value="{{subheaderID}}">
+                                <select class="form-control" name="subheaderID" id="subheaderID">
+                                {{#each ../results7}}
+                                    <option value="{{subheaderID}}" {{#ifEquals subheaderID ../subheaderID}} selected {{/ifEquals}}>{{subheaderName}}</option>
+                                {{/each}}
+                                </select>
                             </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updateCostSummary">Update</button>
@@ -1204,6 +1275,45 @@
                 </form>
                 {{/each}}
             </tbody>
+            </table>
+        </div>
+
+        <div class="tab-pane" id="updateSubheader" role="tabpanel">
+            <br><br><h4>New subheader option</h4>
+            <table class="table table-striped ">
+                <thead>
+                    <th>Division Category</th>
+                    <th>Subheader Description</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    <form action="/projects/newSubheader" method="POST">
+                    
+                    <input type="hidden" id="projectID" name="projectID" value={{#each results}}"{{projectID}}"{{/each}}>
+                    <td>
+                        <select class="form-control" name="divisionCategory" id="divisionCategory">
+                            <option value="Division 0 - General Conditions and Soft Cost">Division 0 - General Conditions and Soft Cost</option>
+                            <option value="Division 2 - Site Construction">Division 2 - Site Construction</option>
+                            <option value="Division 3 - Concrete">Division 3 - Concrete</option>
+                            <option value="Division 4 - Masonry">Division 4 - Masonry</option>
+                            <option value="Division 5 - Metals">Division 5 - Metals</option>
+                            <option value="Division 6 - Carpentry and Millwork">Division 6 - Carpentry and Millwork</option>
+                            <option value="Division 7 - Thermal and Moisture Protection">Division 7 - Thermal and Moisture Protection</option>
+                            <option value="Division 8 - Doors and Windows">Division 8 - Doors and Windows</option>
+                            <option value="Division 9 - Finishes">Division 9 - Finishes</option>
+                            <option value="Division 10 - Specialties">Division 10 - Specialties</option>
+                            <option value="Division 11 - Equipment">Division 11 - Equipment</option>
+                            <option value="Division 12 - Furnishings">Division 12 - Furnishings</option>
+                            <option value="Division 13 - Special Construction">Division 13 - Special Construction</option>
+                            <option value="Division 14 - Conveying Systems">Division 14 - Conveying Systems</option>
+                            <option value="Division 15 - Mechanical, Plumbing, HVAC, and Fire">Division 15 - Mechanical, Plumbing, HVAC, and Fire</option>
+                            <option value="Division 16 - Electrical">Division 16 - Electrical</option>
+                        </select>
+                    </td>
+                    <td><input class="form-control" type="text" name="subheaderName" id="subheaderName"> </td>
+                    <td> <button type="submit" class="form-control">Insert</button></td>
+                    </form>
+                </tbody>
             </table>
         </div>
     </div>
