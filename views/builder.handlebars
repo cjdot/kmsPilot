@@ -3,7 +3,7 @@
 {{!-- PDF Generator, forked from https://codepen.io/massimo-cassandro/pen/qOrJNx --}}
 
 <div class="container-fluid flyer-builder">
-    <p>Development Note: the current format is very much a work in progress</p>
+    <p>Development Note: this part of the website is not complete</p>
 
 		<div class="row">
 				<div class="col-sm-6 loc_form">
@@ -54,15 +54,62 @@
 						</div>
 
 						<div class="row">
-							<div class="col-sm-6">
+							<div class="col-sm-3">
 									<label for="flyer-quality1" class="control-label">Quality Image 1</label>
-									<input id="flyer-quality1" type="file" tabindex="5">
+									<input id="flyer-quality1" type="file" tabindex="5" multiple>
+									<input type="text" id="Q1_c" placeholder="Caption" maxlength="230">
 							</div>
 
-							<div class="col-sm-6">
+							<div class="col-sm-3">
 									<label for="flyer-quality2" class="control-label">Quality Image 2</label>
 									<input id="flyer-quality2" type="file" tabindex="6">
+									<input type="text" id="Q2_c" placeholder="Caption" maxlength="230">
 							</div>
+
+							<div class="col-sm-3">
+									<label for="flyer-quality3" class="control-label">Quality Image 3</label>
+									<input id="flyer-quality3" type="file" tabindex="5">
+									<input type="text" id="Q3_c" placeholder="Caption" maxlength="230">
+							</div>
+
+							<div class="col-sm-3">
+									<label for="flyer-quality4" class="control-label">Quality Image 4</label>
+									<input id="flyer-quality4" type="file" tabindex="5">
+									<input type="text" id="Q4_c" placeholder="Caption" maxlength="230">
+							</div>
+						</div>
+
+						<div class="row" id="QIMG_extra" style="display:none">
+							<div class="col-sm-3">
+									<label for="flyer-quality5" class="control-label">Quality Image 5</label>
+									<input id="flyer-quality5" type="file" tabindex="5">
+									<input type="text" id="Q5_c" placeholder="Caption" maxlength="230">
+							</div>
+
+							<div class="col-sm-3">
+									<label for="flyer-quality6" class="control-label">Quality Image 6</label>
+									<input id="flyer-quality6" type="file" tabindex="6">
+									<input type="text" id="Q6_c" placeholder="Caption" maxlength="230">
+							</div>
+
+							<div class="col-sm-3">
+									<label for="flyer-quality7" class="control-label">Quality Image 7</label>
+									<input id="flyer-quality7" type="file" tabindex="6">
+									<input type="text" id="Q7_c" placeholder="Caption" maxlength="230">
+							</div>
+
+							<div class="col-sm-3">
+									<label for="flyer-quality8" class="control-label">Quality Image 8</label>
+									<input id="flyer-quality8" type="file" tabindex="6">
+									<input type="text" id="Q8_c" placeholder="Caption" maxlength="230">
+							</div>
+						</div>
+
+						<br>
+
+						<div class="form-group">
+								<label class="control-label" for="flyer-quality-notes">Quality Image Notes</label>
+								<textarea class="form-control" id="flyer-quality-notes" rows="3" placeholder="Insert notes on quality images here." tabindex="6"></textarea>
 						</div>
 
 						<hr>
@@ -90,14 +137,27 @@
 						</div>
 
 						<div class="row">
-								<div class="col-sm-6">
+								<div class="col-sm-3">
+										<div class="form-group">
+												<button id="flyer_quality_btn" type="button" class="btn btn-info btn-block" tabindex="8">More Quality Images</button>
+										</div>
+								</div>
+
+								<div class="col-sm-3">
+										<div class="form-group">
+												<button id="flyer_progress_btn" type="button" class="btn btn-info btn-block" tabindex="8">More Progress Images</button>
+										</div>
+								</div>
+
+								<div class="col-sm-3">
 										<div class="form-group">
 												<button id="flyer_preview_btn" type="button" class="btn btn-primary btn-block" tabindex="9">Update Preview</button>
 										</div>
 								</div>
-								<div class="col-sm-6">
+
+								<div class="col-sm-3">
 										<div class="form-group text-right">
-												<button id="flyer_download_btn" type="button" class="btn btn-default btn-xs btn-block" tabindex="10">Download</button>
+												<button id="flyer_download_btn" type="button" class="btn btn-success btn-xs btn-block" tabindex="10">Download</button>
 										</div>
 								</div>
 						</div>
@@ -307,16 +367,7 @@
 
             var q1_reader = new FileReader();
             q1_reader.onload = function(event){
-                q1_data.src = event.target.result;
-
-                // we need this to get img dimensions
-                var q1_userimg = new Image();
-                q1_userimg.onload = function () {
-                    q1_data.w = q1_userimg.width;
-                    q1_data.h = q1_userimg.height;
-
-                };
-                q1_userimg.src = q1_data.src;
+            q1_data.src = event.target.result;
             };
 
             //when the file is read it triggers the onload event above.
@@ -338,21 +389,145 @@
 
             var q2_reader = new FileReader();
             q2_reader.onload = function(event){
-                q2_data.src = event.target.result;
-
-                // we need this to get img dimensions
-                var q2_userimg = new Image();
-                q2_userimg.onload = function () {
-                    q2_data.w = q2_userimg.width;
-                    q2_data.h = q2_userimg.height;
-
-                };
-                q2_userimg.src = q2_data.src;
+            q2_data.src = event.target.result;
             };
 
             //when the file is read it triggers the onload event above.
             q2_reader.readAsDataURL(q2_file);
         });
+
+		//Quality Image 3 Check
+        var q3_img = $('#flyer-quality3'),
+            q3_data = null
+        ;
+
+        $('#flyer-quality3').change(function () {
+
+            var q3_file = q3_img[0].files[0];
+
+            q3_data = {
+                type: q3_file.type === 'image/jpeg' ? 'JPEG' : 'PNG'
+            };
+
+            var q3_reader = new FileReader();
+            q3_reader.onload = function(event){
+            q3_data.src = event.target.result;
+            };
+
+            //when the file is read it triggers the onload event above.
+            q3_reader.readAsDataURL(q3_file);
+        });
+
+		//Quality Image 4 Check
+        var q4_img = $('#flyer-quality4'),
+            q4_data = null
+        ;
+
+        $('#flyer-quality4').change(function () {
+
+            var q4_file = q4_img[0].files[0];
+
+            q4_data = {
+                type: q4_file.type === 'image/jpeg' ? 'JPEG' : 'PNG'
+            };
+
+            var q4_reader = new FileReader();
+            q4_reader.onload = function(event){
+            q4_data.src = event.target.result;
+            };
+
+            //when the file is read it triggers the onload event above.
+            q4_reader.readAsDataURL(q4_file);
+        });
+
+		//Quality Image 5 Check
+        var q5_img = $('#flyer-quality5'),
+            q5_data = null
+        ;
+
+        $('#flyer-quality5').change(function () {
+
+            var q5_file = q5_img[0].files[0];
+
+            q5_data = {
+                type: q5_file.type === 'image/jpeg' ? 'JPEG' : 'PNG'
+            };
+
+            var q5_reader = new FileReader();
+            q5_reader.onload = function(event){
+            q5_data.src = event.target.result;
+            };
+
+            //when the file is read it triggers the onload event above.
+            q5_reader.readAsDataURL(q5_file);
+        });
+
+        //Quality Image 6 Check
+        var q6_img = $('#flyer-quality6'),
+            q6_data = null
+        ;
+
+        $('#flyer-quality6').change(function () {
+
+            var q6_file = q6_img[0].files[0];
+
+            q6_data = {
+                type: q6_file.type === 'image/jpeg' ? 'JPEG' : 'PNG'
+            };
+
+            var q6_reader = new FileReader();
+            q6_reader.onload = function(event){
+            q6_data.src = event.target.result;
+            };
+
+            //when the file is read it triggers the onload event above.
+            q6_reader.readAsDataURL(q6_file);
+        });
+
+        //Quality Image 7 Check
+        var q7_img = $('#flyer-quality7'),
+            q7_data = null
+        ;
+
+        $('#flyer-quality7').change(function () {
+
+            var q7_file = q7_img[0].files[0];
+
+            q7_data = {
+                type: q7_file.type === 'image/jpeg' ? 'JPEG' : 'PNG'
+            };
+
+            var q7_reader = new FileReader();
+            q7_reader.onload = function(event){
+            q7_data.src = event.target.result;
+            };
+
+            //when the file is read it triggers the onload event above.
+            q7_reader.readAsDataURL(q7_file);
+        });
+
+        //Quality Image 8 Check
+        var q8_img = $('#flyer-quality8'),
+            q8_data = null
+        ;
+
+        $('#flyer-quality8').change(function () {
+
+            var q8_file = q8_img[0].files[0];
+
+            q8_data = {
+                type: q8_file.type === 'image/jpeg' ? 'JPEG' : 'PNG'
+            };
+
+            var q8_reader = new FileReader();
+            q8_reader.onload = function(event){
+            q8_data.src = event.target.result;
+            };
+
+            //when the file is read it triggers the onload event above.
+            q8_reader.readAsDataURL(q8_file);
+        });
+
 
 		//!pdf builder
 		var createPDF = function (update_preview) {
@@ -370,6 +545,22 @@
 				flyer_quality			=$('#flyer-quality').val(),
 				flyer_quality1			=$('#flyer-quality1').val(),
 				flyer_quality2			=$('#flyer-quality2').val(),
+				flyer_quality3			=$('#flyer-quality3').val(),
+				flyer_quality4			=$('#flyer-quality4').val(),
+				flyer_quality5			=$('#flyer-quality5').val(),
+				flyer_quality6			=$('#flyer-quality6').val(),
+				flyer_quality7			=$('#flyer-quality7').val(),
+				flyer_quality8			=$('#flyer-quality8').val(),
+
+				q1_caption				=$('#Q1_c').val(),
+				q2_caption				=$('#Q2_c').val(),
+				q3_caption				=$('#Q3_c').val(),
+				q4_caption				=$('#Q4_c').val(),
+				q5_caption				=$('#Q5_c').val(),
+				q6_caption				=$('#Q6_c').val(),
+				q7_caption				=$('#Q7_c').val(),
+				q8_caption				=$('#Q8_c').val(),
+
 				test_table				=$("#table")[0],
 				logo_data 				= {w : 15, h : 25, x : 185, y : 10};
 			;
@@ -402,6 +593,26 @@
 				pdf.setFontType("normal");
 				pdf.setTextColor(black);
 				pdf.textAlign(footer, {align: "center"}, 0, 287);
+			};
+
+			function makeCaption(text, xpos, ypos) {
+				pdf.setFontSize(10);
+				pdf.setFont("helvetica");
+				pdf.setFontType("normal");
+				pdf.setTextColor(black);
+
+				var lineWidth = 95;
+
+				var line_height = 3; // mm
+
+				var caption_lines = pdf.splitTextToSize(text, lineWidth);
+
+				for (var i = 0 ; i < caption_lines.length ; i++ ) {
+					pdf.text(xpos, ypos, caption_lines[i]);
+					ypos += line_height;
+				}
+
+				pdf.setFontSize(12);
 			};
 
 			// Optional - set properties of the document
@@ -532,15 +743,65 @@
 				y += page_margin;
 			}
 
+			pdf.setFontSize(10);
+
 			// !Quality Images
 			if(q1_data) {
-				var img_sizes = imgSizes (q1_data.w, q1_data.h, content_width);
 				pdf.addImage(q1_data.src, q1_data.type, 10, _y, content_img_w, content_img_h);
+				makeCaption(q1_caption, 10, _y + content_img_h + 3);
 			}
 
 			if(q2_data) {
-				var img_sizes = imgSizes (q2_data.w, q2_data.h, content_width);
 				pdf.addImage(q2_data.src, q2_data.type, 200 - content_img_w, _y, content_img_w, content_img_h);
+				makeCaption(q2_caption, 200 - content_img_w, _y + content_img_h + 3);
+			}
+
+			if(flyer_quality.length > 970) {
+				makeFooter();
+				pdf.addPage();
+				makeHeader('Quality Continued');
+				_y += 10;
+			}
+
+			if(q3_data) {
+                pdf.addImage(q3_data.src, q3_data.type, 10, _y + content_img_h + 20, content_img_w, content_img_h);
+				makeCaption(q3_caption, 10, _y + (content_img_h * 2) + 23);
+            }
+
+			if(q4_data) {
+                pdf.addImage(q4_data.src, q4_data.type, 200 - content_img_w, _y + content_img_h + 20, content_img_w, content_img_h);
+				makeCaption(q4_caption, 200 - content_img_w, _y + (content_img_h * 2) + 23);
+            }
+
+			if(q5_data) {
+
+				if(flyer_quality.length <= 970)
+				{
+					makeFooter();
+					pdf.addPage();
+					makeHeader('Quality Continued');
+					_y += 10;
+				}
+
+				if(q5_data) {
+                	pdf.addImage(q5_data.src, q5_data.type, 10, _y, content_img_w, content_img_h);
+					makeCaption(q5_caption, 10, _y + content_img_h + 3);
+            	}
+
+				if(q6_data) {
+                	pdf.addImage(q6_data.src, q6_data.type, 200 - content_img_w, _y, content_img_w, content_img_h);
+					makeCaption(q6_caption, 200 - content_img_w, _y + content_img_h + 3);
+            	}
+
+				if(q7_data) {
+                	pdf.addImage(q7_data.src, q7_data.type, 10, _y + content_img_h + 20, content_img_w, content_img_h);
+					makeCaption(q7_caption, 10, _y + (content_img_h * 2) + 23);
+            	}
+
+         		if(q8_data) {
+                	pdf.addImage(q8_data.src, q8_data.type, 200 - content_img_w, _y + content_img_h + 20, content_img_w, content_img_h);
+					makeCaption(q8_caption, 200 - content_img_w, _y + (content_img_h * 2) + 23);
+            	}
 			}
 
 			makeFooter();
@@ -566,6 +827,8 @@
 			// output
 			if(update_preview) {
 				preview_container.attr('src', pdf.output('datauristring') );
+				var new_row = document.getElementById('QIMG_extra').style;
+				new_row.display = 'inherit';
 			} else {
 				pdf.save(frequency + ' ' + flyer_title + '.pdf');
 			}
@@ -573,6 +836,18 @@
 		}; // end createPDF
 
 		// !buttons
+		$('#flyer_quality_btn').click(function () {
+			var new_row = document.getElementById('QIMG_extra').style;
+			new_row.display = 'inherit';
+			document.getElementById("flyer_quality_btn").disabled = true;
+		});
+
+		$('#flyer_progress_btn').click(function () {
+			//var new_row = document.getElementById('QIMG_extra').style;
+			//new_row.display = 'inherit';
+			document.getElementById("flyer_progress_btn").disabled = true;
+		});
+
 		update_preview_button.click(function () {
 			createPDF(true);
 		});
