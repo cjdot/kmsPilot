@@ -23,9 +23,10 @@ var qry = 'SELECT * FROM project WHERE projectID = ?'
 var qry2 = 'SELECT * FROM projectactivity WHERE projectID = ?'
 var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = ?'
 var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
-var qry5 = 'SELECT * FROM lineitem INNER JOIN costsummarysubheader ON lineitem.subheaderID = costsummarysubheader.subheaderID WHERE lineitem.projectID = ?'
+var preqry5 = 'SELECT * FROM lineitem LEFT JOIN costsummarysubheader ON lineitem.subheaderID = costsummarysubheader.subheaderID WHERE lineitem.projectID = ?'
+var qry5 = {sql: preqry5, nestTables: '_'};
 var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
-var qry7 = 'SELECT COUNT(lineItemID), divisionCategory FROM lineitem WHERE projectID = ? AND divisionCategory IS NOT NULL GROUP BY divisionCategory'
+var qry7 = 'SELECT COUNT(lineItemID), divisionCategory, CAST(RIGHT(LEFT(lineitem.divisionCategory, 11), 2) AS SIGNED) AS orderSet FROM lineitem WHERE projectID = ? AND divisionCategory IS NOT NULL GROUP BY divisionCategory ORDER BY CAST(RIGHT(LEFT(lineitem.divisionCategory, 11), 2) AS SIGNED)'
 var qry8 = 'SELECT * FROM costsummarysubheader WHERE projectID = ?'
 
 router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
@@ -459,7 +460,7 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
 							conn.query(qry6, req.body.projectID, function (err, results5, fields) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
 									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
-
+									
 									res.render('project_details', { results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
 									});
 								});
@@ -765,6 +766,9 @@ router.post('/project_details', ensureAuthenticated, function (req, res) {
 			}
 		});
 
+		
+	
+	
 	conn.query(qry, req.body.projectID, function (err, results, fields) {
 		conn.query(qry2, req.body.projectID, function (err, results1, fields) {
 			conn.query(qry3, req.body.projectID, function (err, results2, fields) {
