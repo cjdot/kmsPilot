@@ -551,7 +551,6 @@
 				flyer_quality6			=$('#flyer-quality6').val(),
 				flyer_quality7			=$('#flyer-quality7').val(),
 				flyer_quality8			=$('#flyer-quality8').val(),
-
 				q1_caption				=$('#Q1_c').val(),
 				q2_caption				=$('#Q2_c').val(),
 				q3_caption				=$('#Q3_c').val(),
@@ -560,6 +559,7 @@
 				q6_caption				=$('#Q6_c').val(),
 				q7_caption				=$('#Q7_c').val(),
 				q8_caption				=$('#Q8_c').val(),
+				flyer_quality_notes		=$('#flyer-quality-notes').val(),
 
 				test_table				=$("#table")[0],
 				logo_data 				= {w : 15, h : 25, x : 185, y : 10};
@@ -613,6 +613,24 @@
 				}
 
 				pdf.setFontSize(12);
+			};
+
+			function makeQualityNotes(ypos) {
+				pdf.setFontSize(12);
+				pdf.setFont("helvetica");
+				pdf.setFontType("normal");
+				pdf.setTextColor(black);
+
+				var lineWidth = 190;
+
+				var line_height = 7; // mm
+
+				var qnote_lines = pdf.splitTextToSize('     ' + flyer_quality_notes, lineWidth);
+
+				for (var i = 0 ; i < qnote_lines.length ; i++ ) {
+					pdf.text(page_margin, ypos, qnote_lines[i]);
+					ypos += line_height;
+				}
 			};
 
 			// Optional - set properties of the document
@@ -763,6 +781,10 @@
 				_y += 10;
 			}
 
+			if(q3_data == null) {
+				makeQualityNotes(_y + content_img_h + 23);
+			}
+
 			if(q3_data) {
                 pdf.addImage(q3_data.src, q3_data.type, 10, _y + content_img_h + 20, content_img_w, content_img_h);
 				makeCaption(q3_caption, 10, _y + (content_img_h * 2) + 23);
@@ -772,6 +794,19 @@
                 pdf.addImage(q4_data.src, q4_data.type, 200 - content_img_w, _y + content_img_h + 20, content_img_w, content_img_h);
 				makeCaption(q4_caption, 200 - content_img_w, _y + (content_img_h * 2) + 23);
             }
+
+			if((q3_data) && (q5_data == null) && (flyer_quality.length <= 970)) {
+				makeFooter();
+				pdf.addPage();
+				makeHeader('Quality Continued');
+				_y += 10;
+
+				makeQualityNotes(_y);
+			}
+
+			if((q3_data) && (q5_data == null) && (flyer_quality.length > 970)) {
+				makeQualityNotes(_y + (content_img_h * 2) + 43);
+			}
 
 			if(q5_data) {
 
@@ -802,6 +837,19 @@
                 	pdf.addImage(q8_data.src, q8_data.type, 200 - content_img_w, _y + content_img_h + 20, content_img_w, content_img_h);
 					makeCaption(q8_caption, 200 - content_img_w, _y + (content_img_h * 2) + 23);
             	}
+
+				if((q5_data) && (q7_data == null))
+				{
+					_y = _y + content_img_h + 23;
+				}
+
+				if(q7_data) {
+					_y = _y + (content_img_h * 2) + 43;
+				}
+
+				if(flyer_quality_notes) {
+					makeQualityNotes(_y)
+				}
 			}
 
 			makeFooter();
@@ -827,8 +875,6 @@
 			// output
 			if(update_preview) {
 				preview_container.attr('src', pdf.output('datauristring') );
-				var new_row = document.getElementById('QIMG_extra').style;
-				new_row.display = 'inherit';
 			} else {
 				pdf.save(frequency + ' ' + flyer_title + '.pdf');
 			}
