@@ -34,50 +34,53 @@
             {{#if errors}} {{#each errors}}
             <div class="alert alert-danger">{{msg}}</div>
             {{/each}} {{/if}}
-            <form method="post" action="/users/register">
+            <form method="post" class="form-inline" action="/users/register">
 
-                <div class="form-group">
-                    <label>First Name</label>
-                    <input type="text" class="form-control" placeholder="First Name" name="firstName">
+                <div class="form-group mb-2">
+                    <label for="firstName">First Name:  &nbsp  &nbsp</label>
+                    <input type="text" class="form-control" placeholder="First Name" name="firstName" />
+                    <br> <br>
                 </div>
-
-                <div class="form-group">
-                    <label>Last Name </label>
+                
+                <div class="form-group mb-2">
+                    <label>Last Name:  &nbsp  &nbsp</label>
                     <input type="text" class="form-control" placeholder="Last Name" name="lastName">
                 </div>
 
-                <div class="form-group">
-                    <label>Email</label>
+                <div class="form-group mb-2">
+                    <label>Email:  &nbsp  &nbsp</label>
                     <input type="email" class="form-control" placeholder="Email" name="email">
                 </div>
 
-                <div class="form-group">
-                    <label>Phone Number</label>
+                <div class="form-group mb-2">
+                    <label>Phone Number:  &nbsp  &nbsp</label>
                     <input type="tel" class="form-control" placeholder="(123)-456-7890" name="phoneNumber">
                 </div>
 
-                <div class="form-group">
-                    <label>Password</label>
+                <div class="form-group mb-2">
+                    <label>Password:  &nbsp  &nbsp</label>
                     <input type="password" class="form-control" placeholder="Password" name="password">
                 </div>
 
-                <div class="form-group">
-                    <label>Confirm Password</label>
+                <div class="form-group mb-2">
+                    <label>Confirm Password:  &nbsp  &nbsp </label>
                     <input type="password" class="form-control" placeholder="Password" name="password2">
                 </div>
 
                 <div class="form-group">
-                    <label>Permission Level</label>
+                    <label>Permission Level:  &nbsp  &nbsp </label>
                     <select class="form-control" name="permission">
-                        <option value="read">Read</option>
-                        <option value="write">Write</option>
-                        <option value="admin">Admin</option>
+                        <option value="read"> Read </option>
+                        <option value="write"> Write </option>
+                        <option value="admin"> Admin </option>
                     </select>
+                    
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
 
+                
+                <button type="submit" class="btn btn-outline-info my-2 my-sm-0">Submit</button>
+                
             </form>
-
         </div>
             </div>
 
@@ -165,54 +168,55 @@
             {{#if errors}} {{#each errors}}
             <div class="alert alert-danger">{{msg}}</div>
             {{/each}} {{/if}}
-            <form method="post" action="/admin/registerProject">
+            <form method="post" class="form-inline" action="/admin/registerProject">
 
                 <div class="form-group">
-                    <label>Client Name</label>
-                    <input type="text" class="form-control" placeholder="Client Name" name="clientName">
+                    <label>Client Name: &nbsp  &nbsp</label>
+                    <input type="text" class="form-control mb-2" placeholder="Client Name" name="clientName">
                 </div>
 
                 <div class="form-group">
-                    <label>Project Name </label>
-                    <input type="text" class="form-control" placeholder="Project Name" name="projectName">
+                    <label>Project Name: &nbsp  &nbsp</label>
+                    <input type="text" class="form-control mb-2" placeholder="Project Name" name="projectName">
                 </div>
 
                 <div class="form-group">
-                    <label>Location</label>
-                    <input type="text" class="form-control" placeholder="Location" name="location">
+                    <label>Location: &nbsp  &nbsp</label>
+                    <input type="text" class="form-control mb-2" placeholder="Location" name="location">
                 </div>
 
                 <div class="form-group">
-                    <label>Target Start Date</label>
-                    <input type="date" class="form-control" name="targetStateDate">
+                    <label>Target Start Date: &nbsp  &nbsp</label>
+                    <input type="date" class="form-control mb-2" name="targetStateDate">
                 </div>
 
                 <div class="form-group">
-                    <label>Target Completion Date</label>
-                    <input type="date" class="form-control" name="targetCompletionDate">
+                    <label>Target Completion Date: &nbsp  &nbsp</label>
+                    <input type="date" class="form-control mb-2" name="targetCompletionDate">
                 </div>
 
                 <div class="form-group">
-                    <label>Projected Budget</label>
-                    <input type="number" class="form-control" placeholder="500,000" name="projectedBudget">
+                    <label>Projected Budget: &nbsp  &nbsp</label>
+                    <input type="number" class="form-control mb-2" placeholder="500,000" name="projectedBudget">
                 </div>
 
                 <div class="form-group">
-                    <label>Contract Amount</label>
-                    <input type="number" class="form-control" placeholder="500,000" name="contractAmount">
+                    <label>Contract Amount: &nbsp  &nbsp</label>
+                    <input type="number" class="form-control mb-2" placeholder="500,000" name="contractAmount">
                 </div>
                 <div class="form-group">
-                    <label>Change Order Sum</label>
-                    <input type="number" class="form-control" placeholder="500,000" name="changeOrderSum">
+                    <label>Change Order Sum: &nbsp  &nbsp</label>
+                    <input type="number" class="form-control mb-2" placeholder="500,000" name="changeOrderSum">
                 </div>
 
                 <div class="form-group">
-                    <label>Add Employee to Project</label>
+                    <label>Add Employee to Project: &nbsp  &nbsp</label>
                     <select class="form-control" name="employee">
                         {{#each results0}}<option value = "{{email}}">{{email}}</option>{{/each}}
                     </select>
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <br>
+                <button type="submit" class="btn btn-outline-info my-2 my-sm-0">Submit</button>
 
             </form>
 

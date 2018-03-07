@@ -14,23 +14,22 @@
 
 <div class="col-6 col-sm-3 placeholder">
    
-          <h4>Client: {{clientName}}</h4>
+          <h4>Project Name: {{projectName}}</h4>
           <div class="text-muted" name="{{projectID}}" value="{{projectID}}">
-              <strong>Project Name:</strong> {{projectName}} <br>
-              <strong>Budget:</strong> ${{#if projectedBudget}}{{formatNumber projectedBudget price="USD"}}{{/if}} <br>
-              <strong>Contract Amount:</strong> ${{#if contractAmount}}{{formatNumber contractAmount price="USD"}}{{/if}} <br>            
-              <strong>Change Order Sum:</strong> ${{#if changeOrderSum}}{{formatNumber changeOrderSum price="USD"}}{{/if}} <br>
-              <strong>Service Type:</strong> {{serviceType}} <br>
+              <strong>Client Name:</strong> {{clientName}} <br>
               <strong>Location:</strong> {{location}} <br>
+              <strong>Service Type:</strong> {{serviceType}} <br>
+              <strong>Budget:</strong> ${{#if projectedBudget}}{{formatNumber projectedBudget price="USD"}}{{/if}} <br>
+              <strong>Contract Amount:</strong> ${{#if contractAmount}}{{formatNumber contractAmount price="USD"}}{{/if}} <br>
               <br>
             <form action= "/projects/project_details" method="POST">
                   <input type= "hidden" name="projectID", id="projectID" value="{{projectID}}">
                   <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Select Project</button>
             </form>
         </div>
-
+      <br>
   </div> 
-      <br>     
+           
 {{/each}}
 </section>
 

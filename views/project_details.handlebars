@@ -45,29 +45,28 @@
     <br>
         <div class="col-6 col-sm-3 placeholder">
             {{#each results}}
-            <h4>Client Name: </h4>
-            <p>{{clientName}}</p>
-            <h4>Project Name: </h4>
-            <p>{{projectName}}</p>
-            <h4>Location: </h4>
-            <p>{{location}}</p>
+            <h4 style="display: inline-block;">Client Name: </h4> &nbsp {{clientName}}
+            <br> <br>
+            <h4 style="display: inline-block;">Project Name: </h4> &nbsp {{projectName}}
+            <br> <br>
+            <h4 style="display: inline-block;">Location: </h4> &nbsp {{location}}
         </div>
         <div class="col-6 col-sm-3 placeholder">
             
-            <h4>Service Type: </h4>
-            <p>{{serviceType}}</p>
-            <h4>Target Start Date: </h4>
-            <p>{{formatDate targetStartDate}}</p>
-            <h4>Target Completion Date: </h4>
-            <p>{{formatDate targetCompletionDate}}</p>
+            <h4 style="display: inline-block;">Service Type: </h4> &nbsp {{serviceType}}
+            <br> <br>
+            <h4 style="display: inline-block;">Target Start Date: </h4> &nbsp {{#if targetStartDate}}{{formatDate targetStartDate}}{{/if}}
+            <br> <br>
+            <h4 style="display: inline-block;">Target Completion Date: </h4> &nbsp {{#if targetCompletionDate}}{{formatDate targetCompletionDate}}{{/if}}
         </div>
         <div class="col-6 col-sm-3 placeholder">
-            <h4>Projected Budget: </h4>
-            <p>${{#if projectedBudget}}{{formatNumber projectedBudget}}{{/if}}</p>
-            <h4>Contract Amount: </h4>
-            <p>${{#if contractAmount}}{{formatNumber contractAmount}}{{/if}}</p>
-            <h4>Change Order Sum: </h4>
-            <p>${{#if changeOrderSum}}{{formatNumber changeOrderSum}}{{/if}}</p>
+            <h4 style="display: inline-block;">Projected Budget: </h4> &nbsp ${{#if projectedBudget}}{{formatNumber projectedBudget}}{{/if}}
+            <br> <br>
+            {{#each ../results9}}
+            <h4 style="display: inline-block;">Original Contract Value: </h4> &nbsp ${{#if originalContractValue}}{{formatNumber originalContractValue}}{{/if}}
+            <br> <br>
+            <h4 style="display: inline-block;">Current Contract Value: </h4> &nbsp${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{/if}}
+            {{/each}}
             {{/each}}
         </div>
     </div>
