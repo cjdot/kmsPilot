@@ -28,6 +28,7 @@ var qry5 = {sql: preqry5, nestTables: '_'};
 var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
 var qry7 = 'SELECT COUNT(lineItemID), divisionCategory, CAST(RIGHT(LEFT(lineitem.divisionCategory, 11), 2) AS SIGNED) AS orderSet FROM lineitem WHERE projectID = ? AND divisionCategory IS NOT NULL GROUP BY divisionCategory ORDER BY CAST(RIGHT(LEFT(lineitem.divisionCategory, 11), 2) AS SIGNED)'
 var qry8 = 'SELECT * FROM costsummarysubheader WHERE projectID = ?'
+var qry9 = 'SELECT divisionCategory, SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE projectID = ? GROUP BY divisionCategory'
 
 router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 	
@@ -777,8 +778,10 @@ router.post('/project_details', ensureAuthenticated, function (req, res) {
 						conn.query(qry6, req.body.projectID, function (err, results5, fields) {
 							conn.query(qry7, req.body.projectID, function (err, results6, fields) {
 								conn.query(qry8, req.body.projectID, function (err, results7, fields) {
-									console.log(results4);
-									res.render('project_details', { results7: results7, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6:results6 });
+									conn.query(qry9, req.body.projectID, function (err, results8, fields) {
+										console.log(results8);
+										res.render('project_details', { results8: results8, results7: results7, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6:results6 });
+									});
 								});
 							});
 						});
