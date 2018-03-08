@@ -19,6 +19,9 @@
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#editUser">Edit Users</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#readUser">User list</a>
+            </li>
         </ul>
 
         <div class="tab-content">
@@ -35,6 +38,7 @@
             <div class="alert alert-danger">{{msg}}</div>
             {{/each}} {{/if}}
             <table>
+            <tbody>
             <form method="post" class="form-inline" action="/users/register">
                 <tr>
                 <div class="form-group mb-2">
@@ -45,37 +49,37 @@
                 </tr>
                 <tr>
                 <div class="form-group mb-2">
-                    <td><label>Last Name:  &nbsp  &nbsp</label></td>
+                    <td><label>Last Name:</label></td>
                     <td><input type="text" class="form-control" placeholder="Last Name" name="lastName"></td>
                 </div>
                 </tr>
                 <tr>
                 <div class="form-group mb-2">
-                    <td><label>Email:  &nbsp  &nbsp</label></td>
+                    <td><label>Email:</label></td>
                     <td><input type="email" class="form-control" placeholder="Email" name="email"></td>
                 </div>
                 </tr>
                 <tr>
                 <div class="form-group mb-2">
-                    <td><label>Phone Number:  &nbsp  &nbsp</label></td>
+                    <td><label>Phone Number:</label></td>
                     <td><input type="tel" class="form-control" placeholder="(123)-456-7890" name="phoneNumber"></td>
                 </div>
                 </tr>
                 <tr>
                 <div class="form-group mb-2">
-                    <td><label>Password:  &nbsp  &nbsp</label></td>
+                    <td><label>Password:</label></td>
                     <td><input type="password" class="form-control" placeholder="Password" name="password"></td>
                 </div>
                 </tr>
                 <tr>
                 <div class="form-group mb-2">
-                    <td><label>Confirm Password:  &nbsp  &nbsp </label></td>
+                    <td><label>Confirm Password:</label></td>
                     <td><input type="password" class="form-control" placeholder="Password" name="password2"></td>
                 </div>
                 </tr>
                 <tr>
                 <div class="form-group mb-2">
-                    <td><label>Permission Level:  &nbsp  &nbsp </label></td>
+                    <td><label>Permission Level:</label></td>
                     <td><select class="form-control" name="permission">
                         <option value="read"> Read </option>
                         <option value="write"> Write </option>
@@ -87,6 +91,7 @@
                 <button type="submit" class="btn btn-outline-info my-2 my-sm-0">Submit</button>
                 </td></tr>
             </form>
+            </tbody>
             </table>
         </div>
             </div>
@@ -145,7 +150,30 @@
                     
                 </table>
             </div>
-
+            <div id="readUser" class="tab-pane">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Permission Level</th>
+                        </tr>
+                    </thead>                    
+                    <tbody>
+                        {{#each results0}}
+                        <tr>                        
+                            <td>{{firstName}}</td>
+                            <td>{{lastName}}</td>
+                            <td>{{email}}</td>
+                            <td>{{cellNumber}}</td>
+                            <td>{{permissionLevel}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>     
+                </table>
+            </div>
         </div>
         
     </div>
@@ -159,6 +187,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#editProject">Edit Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#readProject">Project List</a>
             </li>
         </ul>
 
@@ -176,54 +207,76 @@
             {{#if errors}} {{#each errors}}
             <div class="alert alert-danger">{{msg}}</div>
             {{/each}} {{/if}}
+            <table>
+            <tbody>
             <form method="post" class="form-inline" action="/admin/registerProject">
-
+                <tr>
                 <div class="form-group">
-                    <label>Client Name: &nbsp  &nbsp</label>
-                    <input type="text" class="form-control mb-2" placeholder="Client Name" name="clientName">
+                    <td><label>Client Name:</label></td>
+                    <td><input type="text" class="form-control mb-2" placeholder="Client Name" name="clientName"></td>
                 </div>
-
+                </tr>
+                <tr>
                 <div class="form-group">
-                    <label>Project Name: &nbsp  &nbsp</label>
-                    <input type="text" class="form-control mb-2" placeholder="Project Name" name="projectName">
+                    <td><label>Project Name:</label></td>
+                    <td><input type="text" class="form-control mb-2" placeholder="Project Name" name="projectName"></td>
                 </div>
-
+                </tr>
+                <tr>
                 <div class="form-group">
-                    <label>Location: &nbsp  &nbsp</label>
-                    <input type="text" class="form-control mb-2" placeholder="Location" name="location">
+                    <td><label>Location:</label></td>
+                    <td><input type="text" class="form-control mb-2" placeholder="Location" name="location"></td>
                 </div>
-
+                </tr>
+                <tr>
                 <div class="form-group">
-                    <label>Target Start Date: &nbsp  &nbsp</label>
-                    <input type="date" class="form-control mb-2" name="targetStateDate">
+                    <td><label>Target Start Date:</label></td>
+                    <td><input type="date" class="form-control mb-2" name="targetStateDate"></td>
                 </div>
-
+                </tr>
+                <tr>
                 <div class="form-group">
-                    <label>Target Completion Date: &nbsp  &nbsp</label>
-                    <input type="date" class="form-control mb-2" name="targetCompletionDate">
+                    <td><label>Target Completion Date:</label></td>
+                    <td><input type="date" class="form-control mb-2" name="targetCompletionDate"></td>
                 </div>
-
+                </tr>
+                <tr>
                 <div class="form-group">
-                    <label>Projected Budget: &nbsp  &nbsp</label>
-                    <input type="number" class="form-control mb-2" placeholder="500,000" name="projectedBudget">
+                    <td><label>Projected Budget:</label></td>
+                    <td><input type="number" class="form-control mb-2" placeholder="500,000" name="projectedBudget"></td>
                 </div>
-
+                </tr>
+                <tr>
                 <div class="form-group">
-                    <label>Contract Amount: &nbsp  &nbsp</label>
-                    <input type="number" class="form-control mb-2" placeholder="500,000" name="contractAmount">
+                    <td><label>Contract Amount:</label></td>
+                    <td><input type="number" class="form-control mb-2" placeholder="500,000" name="contractAmount"></td>
                 </div>
-
+                </tr>
+                <tr>
                 <div class="form-group">
-                    <label>Add Employee to Project: &nbsp  &nbsp</label>
-                    <select class="form-control" name="employee">
+                    <td><label>Service Type: </label></td>
+                    <td><select class="form-control" name="serviceType">
+                        <option value = "Consulting">Consulting</option>
+                        <option value = "Project Management">Project Management</option>
+                        <option value = "Construction Management">Construction Management</option>
+                    </select> </td>
+                </div>
+                </tr>
+                <tr>
+                <div class="form-group">
+                    <td><label>Add Employee to Project:</label></td>
+                    <td><select class="form-control" name="employee">
                         {{#each results0}}<option value = "{{email}}">{{email}}</option>{{/each}}
-                    </select>
+                    </select></td>
                 </div>
-                <br>
+                </tr>
+                <tr><td>
                 <button type="submit" class="btn btn-outline-info my-2 my-sm-0">Submit</button>
-
+                </td>
+                </tr>
             </form>
-
+            </tbody>
+            </table>
         
         </div>
         </div>
@@ -288,15 +341,43 @@
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Delete" formAction="/admin/deleteProject">Delete</button>
                             </td>
-                    </tr>
-                </form>
-                {{/each}}
-            </tbody>
-                    
-                    
+                        </tr>
+                        </form>
+                    {{/each}}
+                    </tbody>   
                 </table>
             </div>
-        </div>
-       
+
+            <div id="readProject" class="tab-pane">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Client Name</th>
+                            <th>Project Name</th>
+                            <th>Location</th>
+                            <th>Service Type</th>
+                            <th>Target Start Date</th>
+                            <th>Target Completion Date</th>
+                            <th>Projected Budget</th>
+                            <th>Contract Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {{#each results}}                  
+                        <tr>
+                            <td>{{clientName}}</td>
+                            <td>{{projectName}}</td>
+                            <td>{{location}}</td>
+                            <td>{{serviceType}}</td>                           
+                            <td>{{#if targetStartDate}}{{formatDate targetStartDate}}{{/if}}</td>                           
+                            <td>{{#if targetCompletionDate}}{{formatDate targetCompletionDate}}{{/if}}</td>
+                            <td>{{#if projectedBudget}}${{formatNumber projectedBudget}}{{/if}}</td>
+                            <td>{{#if contractAmount}}${{formatNumber contractAmount}}{{/if}}</td>
+                        </tr>                       
+                    {{/each}}
+                    </tbody>   
+                </table>
+            </div>
+        </div>       
     </div>
 </div>

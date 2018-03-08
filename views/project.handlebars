@@ -12,8 +12,16 @@
 <section class="row text-left">
 {{#each results}}
 
-<div class="col-6 col-sm-3 placeholder">
-   
+<div class="col-6 col-sm-3 placeholder" style="border-style: double; margin: 10px;">
+          <br>
+
+          <form action= "/projects/project_details" method="POST">
+                  <input type= "hidden" name="projectID", id="projectID" value="{{projectID}}">
+                  <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Select Project</button>
+          </form>
+
+          <br>
+
           <h4>Project Name: {{projectName}}</h4>
           <div class="text-muted" name="{{projectID}}" value="{{projectID}}">
               <strong>Client Name:</strong> {{clientName}} <br>
@@ -21,14 +29,10 @@
               <strong>Service Type:</strong> {{serviceType}} <br>
               <strong>Budget:</strong> ${{#if projectedBudget}}{{formatNumber projectedBudget price="USD"}}{{/if}} <br>
               <strong>Contract Amount:</strong> ${{#if contractAmount}}{{formatNumber contractAmount price="USD"}}{{/if}} <br>
-              <br>
-            <form action= "/projects/project_details" method="POST">
-                  <input type= "hidden" name="projectID", id="projectID" value="{{projectID}}">
-                  <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Select Project</button>
-            </form>
+              <br>           
         </div>
       <br>
-  </div> 
+  </div>
            
 {{/each}}
 </section>
