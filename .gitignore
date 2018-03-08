@@ -3815,3 +3815,9 @@ node_modules/moment/src/locale/x-pseudo.js
 node_modules/moment/src/locale/zh-cn.js
 node_modules/moment/src/locale/zh-hk.js
 node_modules/moment/src/locale/zh-tw.js
+node_modules/moment/locale/ug-cn.js
+node_modules/moment/locale/en-il.js
+node_modules/moment/locale/tg.js
+node_modules/moment/src/locale/en-il.js
+node_modules/moment/src/locale/tg.js
+node_modules/moment/src/locale/ug-cn.js
