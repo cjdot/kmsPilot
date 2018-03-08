@@ -201,28 +201,35 @@ router.post('/deleteProject', ensureAuthenticated, function(req, res){
 			else {
 				console.log("Connection established.");
 			}
-		}
+		});
+	
+	var delqry1 = 'DELETE FROM projectactivity WHERE projectID = ?'
+	var delqry2 = 'DELETE FROM kmsActionItem WHERE projectID = ?'
+	var delqry3 = 'DELETE FROM externalactionitem WHERE projectID = ?'
+	var delqry4 = 'DELETE FROM costsummary WHERE projectID = ?'
+	var delqry5 = 'DELETE FROM pcolog WHERE projectID = ?'
+	var delqry = 'DELETE FROM PROJECT WHERE projectID = ?'
 
-    )
-
-    
-	var targetCompletionDate = req.body.targetCompletionDate
-	var targetStartDate = req.body.targetStartDate
-
-	if (req.body.targetStartDate == ""){targetStartDate = null};
-    if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
-
-    var qry = 'DELETE FROM PROJECT WHERE projectID = ?'
     var qry1 = 'SELECT * FROM user'
     var qry2 = 'SELECT * FROM project'
 
-    conn.query(qry, req.body.projectID, function (err, results, fields) { 
-        conn.query(qry1, function (err, results0, fields) {
-            conn.query(qry2, function (err, results, fields) {
-                res.render('admin', {results0: results0, results: results});
+    conn.query(delqry1, req.body.projectID, function (err, results000, fields) { 
+		conn.query(delqry2, req.body.projectID, function (err, results0000, fields) { 
+			conn.query(delqry3, req.body.projectID, function (err, results00000, fields) { 
+				conn.query(delqry4, req.body.projectID, function (err, results000000, fields) { 
+					conn.query(delqry5, req.body.projectID, function (err, results0000000, fields) { 
+						conn.query(delqry, req.body.projectID, function (err, results0000000, fields) { 
+        					conn.query(qry1, function (err, results0, fields) {
+            					conn.query(qry2, function (err, results, fields) {
+			   
+									res.render('admin', {results0: results0, results: results});
+								});
+							});
+						});
+					});
+				});
             });
         });
-        
     }); 
 });
 

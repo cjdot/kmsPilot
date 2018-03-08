@@ -114,14 +114,15 @@
                                 <input type="email" class="form-control" id="email" name="email" value="{{email}}"> 
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="cellNumber" name="cellNumber" value="{{cellNumber}}">
+                                <input type="tel" class="form-control" id="cellNumber" name="cellNumber" value="{{cellNumber}}">
                             </td>
                             <td>
                                 <select class="form-control" name="permissionLevel" id="permissionLevel">
-                                    <option value = "Consulting" {{#ifEquals permissionLevel 'Read'}}selected="selected"{{/ifEquals}}>Read</option>
-                                    <option value = "Project Management" {{#ifEquals permissionLevel 'Write'}}selected="selected"{{/ifEquals}}>Write</option>
-                                    <option value = "Construction Management" {{#ifEquals permissionLevel 'Admin'}}selected="selected"{{/ifEquals}}>Admin</option>
+                                    <option value = "read" {{#ifEquals permissionLevel 'read'}} selected {{/ifEquals}}>Read</option>
+                                    <option value = "write" {{#ifEquals permissionLevel 'write'}} selected {{/ifEquals}}>Write</option>
+                                    <option value = "admin" {{#ifEquals permissionLevel 'admin'}} selected {{/ifEquals}}>Admin</option>
                                 </select>
+                                
                             </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/admin/updateUser">Update</button>
@@ -204,10 +205,6 @@
                     <label>Contract Amount: &nbsp  &nbsp</label>
                     <input type="number" class="form-control mb-2" placeholder="500,000" name="contractAmount">
                 </div>
-                <div class="form-group">
-                    <label>Change Order Sum: &nbsp  &nbsp</label>
-                    <input type="number" class="form-control mb-2" placeholder="500,000" name="changeOrderSum">
-                </div>
 
                 <div class="form-group">
                     <label>Add Employee to Project: &nbsp  &nbsp</label>
@@ -237,7 +234,6 @@
                             <th>Target Completion Date</th>
                             <th>Projected Budget</th>
                             <th>Contract Amount</th>
-                            <th>Change Order Sum</th>
                             <th colspan="2">Action</th>
                         </tr>
                     </thead>
@@ -278,9 +274,6 @@
                             </td>
                             <td>
                                 <input type="text" class="form-control" id="contractAmount" name="contractAmount" value="{{contractAmount}}">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" id="changeOrderSum" name="changeOrderSum" value="{{changeOrderSum}}">
                             </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/admin/updateProject">Update</button>
