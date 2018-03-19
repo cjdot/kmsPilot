@@ -68,8 +68,8 @@ function queryDatabase(firstName, lastName, email, password, phoneNumber, permis
 
 var config = {
 
-	host: 'kmspilot.mysql.database.azure.com',
-	user: 'kmsadmin@kmspilot',
+	host: 'kmspilot2.mysql.database.azure.com',
+	user: 'kmsadmin@kmspilot2',
 	password: 'KMSproject1',
 	database: 'kmspilot',
 	port: 3306,

@@ -8,8 +8,8 @@ var mysql = require('mysql2');
 //These are the configuration settings to make the database connection to eventually query and return results to appropriate handlebars file
 var config = {
 
-	host: 'kmspilot.mysql.database.azure.com',
-	user: 'kmsadmin@kmspilot',
+	host: 'kmspilot2.mysql.database.azure.com',
+	user: 'kmsadmin@kmspilot2',
 	password: 'KMSproject1',
 	database: 'kmspilot',
 	port: 3306,
