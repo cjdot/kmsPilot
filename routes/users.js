@@ -17,8 +17,8 @@ router.get('/register', function(req, res){
 //PDF Builder
 var config = {
 
-	host: 'kmspilot.mysql.database.azure.com',
-	user: 'kmsadmin@kmspilot',
+	host: 'kmspilot2.mysql.database.azure.com',
+	user: 'kmsadmin@kmspilot2',
 	password: 'KMSproject1',
 	database: 'kmspilot',
 	port: 3306,
@@ -101,21 +101,35 @@ router.post('/register', function(req, res){
 		});
 	} else {
         
-        var newUser = {
-					firstName: firstName,
-					lastName: lastName,
-					email: email,
-					password: password,
-					phoneNumber: phoneNumber,
-					permission: permission
-				}
+        
 
-		User.createUser(newUser, function(err, user){
-		if(err) throw err;
-		console.log(user);
+		//This code below hashes the password to store in database
+		let hash = bcrypt.hashSync(password, 10);
+
+		//This executes the insert statement			
+		//queryDatabase(newUser.firstName, newUser.lastName, newUser.email, hash, newUser.phoneNumber, newUser.permission)
+
+		const conn = new mysql.createConnection(config);
+		conn.connect(
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!! Error:");
+				throw err;
+			}
+			else {
+				console.log("Connection established.");
+			}
 		});
-		req.flash('success_msg', 'New User has been registered');
-		res.redirect('/admin');
+
+		var qry2= 'INSERT INTO user (firstName, lastName, email, password, cellNumber, permissionLevel) VALUES( ?, ?, ?, ?, ?, ?)'
+		console.log(firstName + ' ' + lastName + ' ' + email + ' ' + hash + ' ' + phoneNumber + ' ' + permission)
+		conn.query( qry2, [firstName, lastName, email, hash, phoneNumber, permission], function(err, results, fields){
+			if (err) throw err;
+			console.log(results)
+			req.flash('success_msg', 'New User has been registered');
+			res.redirect('/admin');			
+		});
+		
 	}
 });
 
@@ -243,14 +257,5 @@ passport.deserializeUser(function(email, done) {
     done(null, email);
 });
 
-var config = {
 
-	host: 'kmspilot.mysql.database.azure.com',
-	user: 'kmsadmin@kmspilot',
-	password: 'KMSproject1',
-	database: 'kmspilot',
-	port: 3306,
-	ssl: true
-
-};
 
