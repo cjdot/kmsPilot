@@ -142,12 +142,7 @@ router.post('/login', function(req, res) {
 	req.checkBody('email', 'Email is required').notEmpty();
 	req.checkBody('password', 'Password is required').notEmpty();
 
-
-	
-	
 	var errors = req.validationErrors();
-
-	
 
 	if(errors){
 		res.render('login',{
@@ -155,16 +150,7 @@ router.post('/login', function(req, res) {
 		});
 	} else {
 
-        var config = {
 
-			host: 'kmspilot.mysql.database.azure.com',
-			user: 'kmsadmin@kmspilot',
-			password: 'KMSproject1',
-			database: 'kmspilot',
-			port: 3306,
-			ssl: true
-		
-		};
 
 		const conn = new mysql.createConnection(config);
         conn.connect(
@@ -187,18 +173,17 @@ router.post('/login', function(req, res) {
 			if (err) throw err;
 			if (results.length > 0){
 				
+			console.log(req.body.password + ' ' + results[0].password)
+
 			if (bcrypt.compareSync(req.body.password, results[0].password)){
 				
-				req.login(results[0].email, results[0].password, function(err) {
-				
+				req.login(results[0].email, results[0].password, function(err) {				
 					res.redirect('/');
 				})
 
 			} else {
 				req.flash('error_msg', 'Incorrect Username or Password');
-				res.redirect('/users/login')
-				
-				
+				res.redirect('/users/login')				
 			} 
 		} else {
 			
