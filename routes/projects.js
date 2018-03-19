@@ -188,7 +188,7 @@ router.post('/newActionItem', ensureAuthenticated, function (req, res) {
 			}
 		});
 	
-	var activityStartDate = req.body.targetStartDate
+	var activityStartDate = req.body.activityStartDate
 	var targetCompletionDate = req.body.targetCompletionDate
 	var actualCompletionDate = req.body.actualCompletionDate
 
@@ -237,7 +237,7 @@ router.post('/updateActionItem', ensureAuthenticated, function (req, res) {
 			}
 	});
 	
-	var activityStartDate = req.body.targetStartDate
+	var activityStartDate = req.body.activityStartDate
 	var targetCompletionDate = req.body.targetCompletionDate
 	var actualCompletionDate = req.body.actualCompletionDate
 
