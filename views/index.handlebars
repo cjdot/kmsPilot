@@ -1,4 +1,60 @@
 
- <h2 class="page-header">Dashboard</h2>
+<h2 class="page-header">Dashboard</h2>
 <p>Welcome to your dashboard</p>  
+
+
+<section class="row text-left">
+
+    <div class="col-sm-5 placeholder" style="border-style: double; margin: 10px;">
+        <br>
+        <h4>KMS Action Items</h4>
+        <br>
+        <table class="table table-sm">
+        <thead>
+            <th>Project Name</th>
+            <th>Action Item</th>
+            <th>Target Completion</th>
+        </thead>
+        <tbody>
+        {{#each results0}}
+        <form>
+        <tr>
+            <td><input class="btn btn-outline-info my-2 my-sm-0" type="submit" value="{{projectName}}" /></td> 
+            <td>{{actionItemDescription}}</td> 
+            <td>{{formatDate targetCompletionDate}}</td>
+        </tr>
+        </form>
+        {{/each}}
+        </tbody>
+        </table>
+        
+        <br>
+    </div>
+
+
+
+    <div class="col-sm-5 placeholder" style="border-style: double; margin: 10px;">
+        <br>
+        <h4>External Action Items</h4>
+        <table class="table table-sm">
+        <thead>
+            <th>Project Name</th>
+            <th>Action Item</th>
+            <th>Target Completion</th>
+        </thead>
+        {{#each results}}
+        <form>
+        <tr>
+            <td><input class="btn btn-outline-info my-2 my-sm-0" type="submit" value="{{projectName}}" /></td> 
+            <td>{{actionItemDescription}}</td> 
+            <td>{{formatDate targetCompletionDate}}</td>
+        </tr>
+        </form>
+        {{/each}}
+        </table>
+        <br>
+    </div>
+</section>
+
+
 
