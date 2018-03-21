@@ -19,7 +19,8 @@ var config = {
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res){
     console.log(req.user);
-    
+	
+	//Establishing connection to the database
     const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -50,6 +51,7 @@ router.get('/', ensureAuthenticated, function(req, res){
 
 router.post('/updateUser', function(req, res){
 		
+	//Establishing connection to the database
     const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -64,6 +66,7 @@ router.post('/updateUser', function(req, res){
 
     )
 
+	//Updates data in the user table within the database
 	var qry= 'UPDATE user SET firstName= ?, lastName = ?, email = ?, cellNumber = ?, permissionLevel = ? WHERE userID = ?'
 	
     var qry1 = 'SELECT * FROM user'
@@ -80,6 +83,8 @@ router.post('/updateUser', function(req, res){
 });
 
 router.post('/deleteUser', ensureAuthenticated, function(req, res){
+
+	//Establishing connection to the database
     const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -116,6 +121,8 @@ router.post('/deleteUser', ensureAuthenticated, function(req, res){
 });
 
 router.post('/registerProject', ensureAuthenticated, function(req, res){
+
+	//Establishing connection to the database
     const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -155,6 +162,8 @@ router.post('/registerProject', ensureAuthenticated, function(req, res){
 });
 
 router.post('/updateProject', ensureAuthenticated, function(req, res){
+
+	//Establishing connection to the database
     const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -191,6 +200,8 @@ router.post('/updateProject', ensureAuthenticated, function(req, res){
 });
 
 router.post('/deleteProject', ensureAuthenticated, function(req, res){
+
+	//Establishing connection to the database
     const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
