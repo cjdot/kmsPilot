@@ -333,10 +333,10 @@
                                 <input type="date" class="form-control" id="targetStartDate" name="targetCompletionDate" value="{{#if targetCompletionDate}}{{formatTime targetCompletionDate "YYYY-MM-DD"}}{{/if}}">
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="projectedBudget" name="projectedBudget" value="{{projectedBudget}}">
+                                <input type="number" class="form-control" id="projectedBudget" name="projectedBudget" value="{{projectedBudget}}">
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="contractAmount" name="contractAmount" value="{{contractAmount}}">
+                                <input type="number" class="form-control" id="contractAmount" name="contractAmount" value="{{contractAmount}}">
                             </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/admin/updateProject">Update</button>

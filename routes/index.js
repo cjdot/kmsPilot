@@ -30,7 +30,7 @@ router.get('/', ensureAuthenticated, function(req, res){
 	
 	var qry1 = 'SELECT kmsactionitem.projectID, project.projectName, kmsactionitem.actionItemDescription, kmsactionitem.targetCompletionDate FROM kmsactionitem INNER JOIN project ON kmsactionitem.projectID = project.projectID WHERE kmsactionitem.targetCompletionDate IS NOT NULL ORDER BY kmsactionitem.targetCompletionDate DESC LIMIT 10';
 	var qry2 = 'SELECT externalactionitem.projectID, project.projectName, externalactionitem.actionItemDescription, externalactionitem.targetCompletionDate FROM externalactionitem INNER JOIN project ON externalactionitem.projectID = project.projectID WHERE externalactionitem.targetCompletionDate IS NOT NULL ORDER BY externalactionitem.targetCompletionDate DESC LIMIT 10';
-	var qry3 = 'SELECT COUNT(targetCompletionDate) AS totalTarget, COUNT(actualCompletionDate) AS totalActual FROM kmsactionitem'
+	var qry3 = 'SELECT COUNT(actionItemDescription) AS totalTarget, COUNT(actualCompletionDate) AS totalActual FROM kmsactionitem'
 	conn.query(qry1, function (err, results0, fields) { 
 		conn.query(qry2, function (err, results, fields){
 			conn.query(qry3, function (err, results1, fields){
