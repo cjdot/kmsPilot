@@ -9,7 +9,7 @@
         <br>
         <h4>KMS Action Items</h4>
         <br>
-        <table class="table table-sm">
+        <table style="table-layout:fixed; width:100%" class="table table-sm">
         <thead>
             <th>Project Name</th>
             <th>Action Item</th>
@@ -17,9 +17,10 @@
         </thead>
         <tbody>
         {{#each results0}}
-        <form>
+        <form action= "/projects/project_details" method="POST">
         <tr>
-            <td><input class="btn btn-outline-info my-2 my-sm-0" type="submit" value="{{projectName}}" /></td> 
+            <input type= "hidden" name="projectID", id="projectID" value="{{projectID}}">
+            <td><input style="width:100%" class="btn btn-info my-2 my-sm-0" type="submit" value="{{projectName}}" /></td> 
             <td>{{actionItemDescription}}</td> 
             <td>{{formatDate targetCompletionDate}}</td>
         </tr>
@@ -36,16 +37,17 @@
     <div class="col-sm-5 placeholder" style="border-style: double; margin: 10px;">
         <br>
         <h4>External Action Items</h4>
-        <table class="table table-sm">
+        <table style="table-layout:fixed; width:100%" class="table table-sm">
         <thead>
             <th>Project Name</th>
             <th>Action Item</th>
             <th>Target Completion</th>
         </thead>
         {{#each results}}
-        <form>
+        <form action= "/projects/project_details" method="POST">
         <tr>
-            <td><input class="btn btn-outline-info my-2 my-sm-0" type="submit" value="{{projectName}}" /></td> 
+            <input type= "hidden" name="projectID", id="projectID" value="{{projectID}}">
+            <td><input style="width:100%" class="btn btn-primary my-2 my-sm-0" type="submit" value="{{projectName}}" /></td> 
             <td>{{actionItemDescription}}</td> 
             <td>{{formatDate targetCompletionDate}}</td>
         </tr>

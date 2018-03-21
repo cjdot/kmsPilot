@@ -28,8 +28,8 @@ router.get('/', ensureAuthenticated, function(req, res){
 			}
 		});
 	
-	var qry1 = 'SELECT project.projectName, kmsactionitem.actionItemDescription, kmsactionitem.targetCompletionDate FROM kmsactionitem INNER JOIN project ON kmsactionitem.projectID = project.projectID ORDER BY kmsactionitem.targetCompletionDate DESC LIMIT 10';
-	var qry2 = 'SELECT project.projectName, externalactionitem.actionItemDescription, externalactionitem.targetCompletionDate FROM externalactionitem INNER JOIN project ON externalactionitem.projectID = project.projectID ORDER BY externalactionitem.targetCompletionDate DESC LIMIT 10';
+	var qry1 = 'SELECT kmsactionitem.projectID, project.projectName, kmsactionitem.actionItemDescription, kmsactionitem.targetCompletionDate FROM kmsactionitem INNER JOIN project ON kmsactionitem.projectID = project.projectID ORDER BY kmsactionitem.targetCompletionDate DESC LIMIT 10';
+	var qry2 = 'SELECT externalactionitem.projectID, project.projectName, externalactionitem.actionItemDescription, externalactionitem.targetCompletionDate FROM externalactionitem INNER JOIN project ON externalactionitem.projectID = project.projectID ORDER BY externalactionitem.targetCompletionDate DESC LIMIT 10';
 
 	conn.query(qry1, function (err, results0, fields) { 
 		conn.query(qry2, function (err, results, fields){
