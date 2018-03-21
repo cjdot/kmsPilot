@@ -6,6 +6,41 @@
     <input type= "hidden" name="totalActual", id="totalActual" value="{{totalActual}}">
 {{/each}}
 
+<script type="text/javascript">
+window.onload = function() {
+CanvasJS.addColorSet("kmsTone",
+    [
+    "#AAC998",
+    "#0698D5"
+    ]);
+
+var inProgress_AI = $('#totalTarget').val();
+var completed_AI = $('#totalActual').val();
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+    colorSet: "kmsTone",
+	title: {
+		text: "Status of Action Items in Open Projects"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 240,
+		indexLabel: "{label} {y}",
+		dataPoints: [
+			{y: inProgress_AI, label: "In Progress"},
+			{y: completed_AI, label: "Completed"}
+		]
+	}]
+});
+chart.render();
+
+}
+</script>
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
 <section class="row text-left">
 
     <div class="col-sm-5 placeholder" style="border-style: double; margin: 10px;">
@@ -39,7 +74,7 @@
 
     <div class="col-sm-5 placeholder" style="border-style: double; margin: 10px;">
         <br>
-        <h4>External Action Items</h4>
+        <h4>External Action Items</h4><br>
         <table style="table-layout:fixed; width:100%" class="table table-sm">
         <thead>
             <th>Project Name</th>
