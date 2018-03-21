@@ -1871,6 +1871,14 @@
 
 						<hr>
 
+                        <div style="display:none">
+                            {{#each results}}
+                            <form method="post">
+                            <textarea class="form-control" id="client_name">{{clientName}}</textarea>
+                            </form>
+                            {{/each}}
+                        </div>
+
 						<div id="table" style="visibility:collapse">
 						<table class="table table-striped">
                    			<thead>
@@ -2356,7 +2364,7 @@ function sortTable(n, tableUsed) {
 			_y = page_margin; // vertical starting point
 
 			// form data
-			var flyer_title             = 'Client Report',
+			var flyer_title             = $('#client_name').val(),
 				flyer_title_size        = 20,
 				flyer_description       = $('#flyer-description').val(),
 				flyer_price_color       = '#8fe9ea',
@@ -2424,7 +2432,7 @@ function sortTable(n, tableUsed) {
 
 				var lineWidth = 95;
 
-				var line_height = 3; // mm
+				var line_height = 5; // mm
 
 				var caption_lines = pdf.splitTextToSize(text, lineWidth);
 
@@ -2499,7 +2507,7 @@ function sortTable(n, tableUsed) {
 			// !Header
 			pdf.setTextColor(black);
 			pdf.setFontSize(15);
-			pdf.textAlign('Client Company', {align: "center"}, 0, _y += 5);
+			pdf.textAlign(flyer_title, {align: "center"}, 0, _y += 5);
 			pdf.textAlign(frequency + ' Project Summary Report', {align: "center"}, 0, _y += 5);
 			pdf.textAlign(gen_date, {align: "center"}, 0, _y += 5);
 
@@ -2568,7 +2576,7 @@ function sortTable(n, tableUsed) {
 			}
 
 			// !Universal content image sizes
-			var content_img_w = 95;
+			var content_img_w = 94;
 			var content_img_h = 65;
 
 			if(_y > 287 - content_img_h) {
@@ -2587,12 +2595,12 @@ function sortTable(n, tableUsed) {
 			// !Quality Images
 			if(q1_data) {
 				pdf.addImage(q1_data.src, q1_data.type, 10, _y, content_img_w, content_img_h);
-				makeCaption(q1_caption, 10, _y + content_img_h + 3);
+				makeCaption(q1_caption, 10, _y + content_img_h + 5);
 			}
 
 			if(q2_data) {
 				pdf.addImage(q2_data.src, q2_data.type, 200 - content_img_w, _y, content_img_w, content_img_h);
-				makeCaption(q2_caption, 200 - content_img_w, _y + content_img_h + 3);
+				makeCaption(q2_caption, 200 - content_img_w, _y + content_img_h + 5);
 			}
 
 			if(flyer_quality.length > 970) {
@@ -2603,17 +2611,17 @@ function sortTable(n, tableUsed) {
 			}
 
 			if(q3_data == null) {
-				makeQualityNotes(_y + content_img_h + 23);
+				makeQualityNotes(_y + content_img_h + 25);
 			}
 
 			if(q3_data) {
                 pdf.addImage(q3_data.src, q3_data.type, 10, _y + content_img_h + 20, content_img_w, content_img_h);
-				makeCaption(q3_caption, 10, _y + (content_img_h * 2) + 23);
+				makeCaption(q3_caption, 10, _y + (content_img_h * 2) + 25);
             }
 
 			if(q4_data) {
                 pdf.addImage(q4_data.src, q4_data.type, 200 - content_img_w, _y + content_img_h + 20, content_img_w, content_img_h);
-				makeCaption(q4_caption, 200 - content_img_w, _y + (content_img_h * 2) + 23);
+				makeCaption(q4_caption, 200 - content_img_w, _y + (content_img_h * 2) + 25);
             }
 
 			if((q3_data) && (q5_data == null) && (flyer_quality.length <= 970)) {
@@ -2626,7 +2634,7 @@ function sortTable(n, tableUsed) {
 			}
 
 			if((q3_data) && (q5_data == null) && (flyer_quality.length > 970)) {
-				makeQualityNotes(_y + (content_img_h * 2) + 43);
+				makeQualityNotes(_y + (content_img_h * 2) + 45);
 			}
 
 			if(q5_data) {
@@ -2641,31 +2649,31 @@ function sortTable(n, tableUsed) {
 
 				if(q5_data) {
                 	pdf.addImage(q5_data.src, q5_data.type, 10, _y, content_img_w, content_img_h);
-					makeCaption(q5_caption, 10, _y + content_img_h + 3);
+					makeCaption(q5_caption, 10, _y + content_img_h + 5);
             	}
 
 				if(q6_data) {
                 	pdf.addImage(q6_data.src, q6_data.type, 200 - content_img_w, _y, content_img_w, content_img_h);
-					makeCaption(q6_caption, 200 - content_img_w, _y + content_img_h + 3);
+					makeCaption(q6_caption, 200 - content_img_w, _y + content_img_h + 5);
             	}
 
 				if(q7_data) {
                 	pdf.addImage(q7_data.src, q7_data.type, 10, _y + content_img_h + 20, content_img_w, content_img_h);
-					makeCaption(q7_caption, 10, _y + (content_img_h * 2) + 23);
+					makeCaption(q7_caption, 10, _y + (content_img_h * 2) + 25);
             	}
 
          		if(q8_data) {
                 	pdf.addImage(q8_data.src, q8_data.type, 200 - content_img_w, _y + content_img_h + 20, content_img_w, content_img_h);
-					makeCaption(q8_caption, 200 - content_img_w, _y + (content_img_h * 2) + 23);
+					makeCaption(q8_caption, 200 - content_img_w, _y + (content_img_h * 2) + 25);
             	}
 
 				if((q5_data) && (q7_data == null))
 				{
-					_y = _y + content_img_h + 23;
+					_y = _y + content_img_h + 25;
 				}
 
 				if(q7_data) {
-					_y = _y + (content_img_h * 2) + 43;
+					_y = _y + (content_img_h * 2) + 45;
 				}
 
 				if(flyer_quality_notes) {

@@ -10,8 +10,8 @@
 window.onload = function() {
 CanvasJS.addColorSet("kmsTone",
     [
-    "#AAC998",
-    "#0698D5"
+    "#0698D5",
+    "#AAC998"
     ]);
 
 var inProgress_AI = $('#totalTarget').val();
@@ -25,7 +25,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	},
 	data: [{
 		type: "pie",
-		startAngle: 240,
+		startAngle: 270,
 		indexLabel: "{label} {y}",
 		dataPoints: [
 			{y: inProgress_AI, label: "In Progress"},
@@ -43,7 +43,7 @@ chart.render();
 
 <section class="row text-left">
 
-    <div class="col-sm-5 placeholder" style="border-style: double; margin: 10px; overflow: scroll; height: 400px;">
+    <div class="col-sm-5 placeholder" style="border-radius: 15px; border: 2px solid #BFBFBF; padding: 10px;  margin: 10px; overflow: scroll; height: 400px;">
         <br>
         <h4>KMS Action Items</h4>
         <br>
@@ -71,8 +71,8 @@ chart.render();
     </div>
 
 
-    
-    <div class="col-sm-5 placeholder" style="border-style: double; margin: 10px; overflow: scroll;">
+
+    <div class="col-sm-5 placeholder" style="border-radius: 15px; border: 2px solid #BFBFBF; padding: 10px;  margin: 10px; overflow: scroll; height: 400px;">
         <br>
         <h4>External Action Items</h4><br>
         <table style="table-layout:fixed; width:100%" class="table table-sm">
@@ -96,6 +96,3 @@ chart.render();
     
     </div>
 </section>
-
-
-
