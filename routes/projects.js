@@ -51,7 +51,7 @@ router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 	var targetCompletionDate = req.body.targetCompletionDate
 	var actualCompletionDate = req.body.actualCompletionDate
 
-	//Places a null value in each of these fields if there is not a value entered
+	//Places a null value in each of the fields if there is not a value entered
 	if (req.body.targetStartDate == ""){targetStartDate = null};
 	if (req.body.actualStartDate == ""){actualStartDate = null};
 	if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
@@ -105,11 +105,13 @@ router.post('/updateProjectActivity', ensureAuthenticated, function (req, res) {
 	var targetCompletionDate = req.body.targetCompletionDate
 	var actualCompletionDate = req.body.actualCompletionDate
 
+	//Places a null value in each of the fields if there is not a value entered
 	if (req.body.targetStartDate == ""){targetStartDate = null};
 	if (req.body.actualStartDate == ""){actualStartDate = null};
 	if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
 	if (req.body.actualCompletionDate == ""){actualCompletionDate = null};
 	
+	//Updates data in the projectactivity table within the database
 	var qry1 = 'UPDATE projectactivity SET activityDescription = ?, targetStartDate = ?, actualStartDate = ?, targetCompletionDate = ?, actualCompletionDate = ?, progress = ?, activityNotes = ? WHERE projectActivityID = ?'
 	var updateType = 'updateProjectActivity'
 
@@ -139,6 +141,7 @@ router.post('/updateProjectActivity', ensureAuthenticated, function (req, res) {
 
 router.post('/deleteProjectActivity', ensureAuthenticated, function (req, res) {
 	
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -151,6 +154,7 @@ router.post('/deleteProjectActivity', ensureAuthenticated, function (req, res) {
 			}
 	});
 	
+	//Deletes data from the projectactivity table within the database
 	var qry1 = 'DELETE FROM projectactivity WHERE projectActivityID = ?'
 	var updateType = 'updateProjectActivity'
 
@@ -180,6 +184,7 @@ router.post('/deleteProjectActivity', ensureAuthenticated, function (req, res) {
 
 router.post('/newActionItem', ensureAuthenticated, function (req, res) {
 	
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -196,10 +201,12 @@ router.post('/newActionItem', ensureAuthenticated, function (req, res) {
 	var targetCompletionDate = req.body.targetCompletionDate
 	var actualCompletionDate = req.body.actualCompletionDate
 
+	//Places a null value in each of the fields if there is not a value entered
 	if (req.body.activityStartDate == ""){activityStartDate = null};
 	if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
 	if (req.body.actualCompletionDate == ""){actualCompletionDate = null};
 	
+	//Inserts data into the kmsactionitem table within the database
 	var qry1 = 'INSERT INTO kmsactionitem SET actionItemDescription = ?, activityOwner = ?, activityStartDate = ?, targetCompletionDate = ?, actualCompletionDate = ?, actionItemNotes = ?, projectID = ?'
 	var updateType = 'updateActionItem'
 
@@ -229,6 +236,7 @@ router.post('/newActionItem', ensureAuthenticated, function (req, res) {
 
 router.post('/updateActionItem', ensureAuthenticated, function (req, res) {
 	
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -245,10 +253,12 @@ router.post('/updateActionItem', ensureAuthenticated, function (req, res) {
 	var targetCompletionDate = req.body.targetCompletionDate
 	var actualCompletionDate = req.body.actualCompletionDate
 
+	//Places a null value in each of the fields if there is not a value entered
 	if (req.body.activityStartDate == ""){activityStartDate = null};
 	if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
 	if (req.body.actualCompletionDate == ""){actualCompletionDate = null};
 
+	//Updates data in the kmsactionitem table within the database
 	var qry1 = 'UPDATE kmsactionitem SET actionItemDescription = ?, activityOwner = ?, activityStartDate = ?, targetCompletionDate = ?, actualCompletionDate = ?, actionItemNotes = ? WHERE kmsActionItemID = ?'
 	var updateType = 'updateActionItem'
 
@@ -278,6 +288,7 @@ router.post('/updateActionItem', ensureAuthenticated, function (req, res) {
 
 router.post('/deleteActionItem', ensureAuthenticated, function (req, res) {
 	
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -289,7 +300,7 @@ router.post('/deleteActionItem', ensureAuthenticated, function (req, res) {
 				console.log("Connection established.");
 			}
 	});
-	
+	//Deletes data from the kmsactionitem table within the database
 	var qry1 = 'DELETE FROM kmsactionitem WHERE kmsActionItemID = ?'
 	var updateType = 'updateActionItem'
 
@@ -319,6 +330,7 @@ router.post('/deleteActionItem', ensureAuthenticated, function (req, res) {
 
 router.post('/newExternalActionItem', ensureAuthenticated, function (req, res) {
 	
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -335,10 +347,12 @@ router.post('/newExternalActionItem', ensureAuthenticated, function (req, res) {
 	var targetCompletionDate = req.body.targetCompletionDate
 	var actualCompletionDate = req.body.actualCompletionDate
 
+	//Places a null value in each of the fields if there is not a value entered
 	if (req.body.activityStartDate == ""){activityStartDate = null};
 	if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
 	if (req.body.actualCompletionDate == ""){actualCompletionDate = null};
 
+	//Inserts data into the externalactionitem table within the database
 	var qry1 = 'INSERT INTO externalactionitem SET actionItemDescription = ?, activityOwner = ?, activityStartDate = ?, targetCompletionDate = ?, actualCompletionDate = ?, actionItemNotes = ?, projectID = ?'
 	var updateType = 'updateExternalActionItem'
 
@@ -368,6 +382,7 @@ router.post('/newExternalActionItem', ensureAuthenticated, function (req, res) {
 
 router.post('/updateExternalActionItem', ensureAuthenticated, function (req, res) {
 	
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -384,10 +399,12 @@ router.post('/updateExternalActionItem', ensureAuthenticated, function (req, res
 	var targetCompletionDate = req.body.targetCompletionDate
 	var actualCompletionDate = req.body.actualCompletionDate
 
+	//Places a null value in each of the fields if there is not a value entered
 	if (req.body.activityStartDate == ""){activityStartDate = null};
 	if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
 	if (req.body.actualCompletionDate == ""){actualCompletionDate = null};
 
+	//Updates data in the externalactionitem table within the database
 	var qry1 = 'UPDATE externalactionitem SET actionItemDescription = ?, activityOwner = ?, activityStartDate = ?, targetCompletionDate = ?, actualCompletionDate = ?, actionItemNotes = ? WHERE externalActionItemID = ?'
 	var updateType = 'updateExternalActionItem'
 
@@ -419,6 +436,7 @@ router.post('/updateExternalActionItem', ensureAuthenticated, function (req, res
 
 router.post('/deleteExternalActionItem', ensureAuthenticated, function (req, res) {
 	
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -431,6 +449,7 @@ router.post('/deleteExternalActionItem', ensureAuthenticated, function (req, res
 			}
 		});
 
+		//Deletes data from the externalactionitem table within the database
 	var qry1 = 'DELETE FROM externalactionitem WHERE externalActionItemID = ?'
 	var updateType = 'updateExternalActionItem'
 
@@ -460,6 +479,7 @@ router.post('/deleteExternalActionItem', ensureAuthenticated, function (req, res
 
 router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
 	
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -472,6 +492,7 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
 			}
 		});
 	
+		//Inserts data into the lineitem table within the database
 	var qry1 = 'INSERT INTO lineitem SET divisionCategory = ?, lineItemBreakdown = ?, originalContractValue = ?, budget = ?, changeOrders = ?, actualCostToDate = ?, subheaderID = ?, projectID = ?'
 	var updateType = 'updateCostSummary'
 	
@@ -501,6 +522,7 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
 
 router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
 	
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -513,6 +535,7 @@ router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
 			}
 		});
 	
+		//Updates data in the lineitem table within the database
 	var qry1 = 'UPDATE lineitem SET divisionCategory = ?, lineItemBreakdown = ?, originalContractValue = ?, budget = ?, changeOrders = ?, actualCostToDate = ?, subheaderID = ? WHERE lineItemID = ?'
 	var updateType = 'updateCostSummary'
 	console.log(req.body.divisionCategory)
@@ -542,6 +565,7 @@ router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
 
 router.post('/deleteCostSummary', ensureAuthenticated, function (req, res) {
 	
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -554,6 +578,7 @@ router.post('/deleteCostSummary', ensureAuthenticated, function (req, res) {
 			}
 		});
 	
+		//Delete data in the lineitem table within the database
 	var qry1 = 'DELETE FROM lineitem WHERE lineItemID = ?'
 	var updateType = 'updateCostSummary'
 
@@ -583,6 +608,7 @@ router.post('/deleteCostSummary', ensureAuthenticated, function (req, res) {
 
 router.post('/newPCO', ensureAuthenticated, function (req, res) {
 	
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -605,6 +631,7 @@ router.post('/newPCO', ensureAuthenticated, function (req, res) {
 	if (req.body.kmsReviewedDate == ""){actualCompletionDate = null};
 	if (req.body.clientApprovedDate == ""){clientApprovedDate = null};
 
+	//Inserts data into the pco table within the database
 	var qry1 = 'INSERT INTO pco SET pcoNumber = ?, pcoDescription = ?, dueDate = ?, toKMSDate = ?, kmsReviewedDate = ?, clientApprovedDate = ?, pcoValue = ?, contingencyAmount = ?, costSavingsAmount = ?, changeOrders = ?, pcoStatus = ?, comments = ?, projectID = ?'
 	var updateType = 'updatePCO'
 	
@@ -634,6 +661,7 @@ router.post('/newPCO', ensureAuthenticated, function (req, res) {
 
 router.post('/updatePCO', ensureAuthenticated, function (req, res) {
 	
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -656,6 +684,7 @@ router.post('/updatePCO', ensureAuthenticated, function (req, res) {
 	if (req.body.kmsReviewedDate == ""){actualCompletionDate = null};
 	if (req.body.clientApprovedDate == ""){clientApprovedDate = null};
 
+	//Update data in the pco table within the database
 	var qry1 = 'UPDATE pco SET pcoNumber = ?, pcoDescription = ?, dueDate = ?, toKMSDate = ?, kmsReviewedDate = ?, clientApprovedDate = ?, pcoValue = ?, contingencyAmount = ?, costSavingsAmount = ?, changeOrders = ?, pcoStatus = ?, comments = ? WHERE pcoID = ?'
 	var updateType = 'updatePCO'
 
@@ -686,6 +715,7 @@ router.post('/updatePCO', ensureAuthenticated, function (req, res) {
 
 router.post('/deletePCO', ensureAuthenticated, function (req, res) {
 	
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -698,6 +728,7 @@ router.post('/deletePCO', ensureAuthenticated, function (req, res) {
 			}
 		});
 	
+		//Delete data in the pco table within the database
 	var qry1 = 'DELETE FROM pco WHERE pcoID = ?'
 	var updateType = 'updatePCO'
 	
@@ -727,6 +758,7 @@ router.post('/deletePCO', ensureAuthenticated, function (req, res) {
 
 router.post('/newSubheader', ensureAuthenticated, function (req, res) {
 	
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -739,6 +771,7 @@ router.post('/newSubheader', ensureAuthenticated, function (req, res) {
 			}
 		});
 
+		//Inserts data into the costsummarysubheader table within the database
 	var qry1 = 'INSERT INTO costsummarysubheader SET subheaderName = ?, divisionCategory = ?, projectID = ?'
 	var updateType = 'updateCostSummary'
 	
@@ -768,6 +801,7 @@ router.post('/newSubheader', ensureAuthenticated, function (req, res) {
 
 router.get('/project', ensureAuthenticated, function (req, res) {
 
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -792,6 +826,7 @@ router.get('/project', ensureAuthenticated, function (req, res) {
 
 router.post('/project_details', ensureAuthenticated, function (req, res) {
 
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -834,6 +869,7 @@ router.post('/project_details', ensureAuthenticated, function (req, res) {
 
 router.get('/myProjects', ensureAuthenticated, function (req, res) {
 
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
