@@ -33,6 +33,7 @@ var qry10 = 'SELECT SUM(originalContractValue) AS originalContractValue, SUM(rev
 
 router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 	
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
@@ -50,11 +51,13 @@ router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 	var targetCompletionDate = req.body.targetCompletionDate
 	var actualCompletionDate = req.body.actualCompletionDate
 
+	//Places a null value in each of these fields if there is not a value entered
 	if (req.body.targetStartDate == ""){targetStartDate = null};
 	if (req.body.actualStartDate == ""){actualStartDate = null};
 	if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
 	if (req.body.actualCompletionDate == ""){actualCompletionDate = null};
 	
+	//Inserts data into the projectactivity table within the database
 	var qry1 = 'INSERT INTO projectactivity SET activityDescription = ?, targetStartDate = ?, actualStartDate = ?, targetCompletionDate = ?, actualCompletionDate = ?, progress = ?, activityNotes = ?, projectID = ?'	
 	var updateType = 'updateProjectActivity'
 
@@ -84,6 +87,7 @@ router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 
 router.post('/updateProjectActivity', ensureAuthenticated, function (req, res) {
 	
+	//Establishing connection to the database
 	const conn = new mysql.createConnection(config);
 	conn.connect(
 		function (err) {
