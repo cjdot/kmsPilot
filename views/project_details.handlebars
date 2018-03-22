@@ -526,9 +526,6 @@
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#update3" role="tab">Update</a>
             </li>           
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#updateSubheader" role="tab">Subheader Options</a>
-            </li>
         </ul>
 
     <!-- Tab panes -->
@@ -551,7 +548,6 @@
                     <th>Variance</th>
                     <th>Actual Cost To Date</th>
                     <th>Remaining Contract Value</th>
-                    <th>Subheader</th>
                 </tr>
             </thead>
             
@@ -567,7 +563,6 @@
                 {{#ifEquals lineitem_divisionCategory 'Allowances'}}<td>${{lineitem_variance}}</td>{{/ifEquals}} 
                 {{#ifEquals lineitem_divisionCategory 'Allowances'}}<td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} 
                 {{#ifEquals lineitem_divisionCategory 'Allowances'}}<td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} 
-                {{#if costsummarysubheader_subheaderName}}{{#ifEquals lineitem_divisionCategory 'Allowances'}}<td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}{{/if}}
             </tr>
             {{/each}}
 
@@ -603,7 +598,6 @@
                     <th>Variance</th>
                     <th>Actual Cost To Date</th>
                     <th>Remaining Contract Value</th>
-                    <th>Subheader</th>
                 </tr>
             </thead>
             
@@ -619,7 +613,6 @@
                 {{#ifEquals lineitem_divisionCategory 'FF&E'}}<td>${{lineitem_variance}}</td>{{/ifEquals}} 
                 {{#ifEquals lineitem_divisionCategory 'FF&E'}}<td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} 
                 {{#ifEquals lineitem_divisionCategory 'FF&E'}}<td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} 
-                {{#if costsummarysubheader_subheaderName}}{{#ifEquals lineitem_divisionCategory 'FF&E'}}<td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}{{/if}}
             </tr>
             {{/each}}
 
@@ -655,7 +648,6 @@
                     <th>Variance</th>
                     <th>Actual Cost To Date</th>
                     <th>Remaining Contract Value</th>
-                    <th>Subheader</th>
                 </tr>
             </thead>
             
@@ -671,7 +663,6 @@
                 {{#ifEquals lineitem_divisionCategory 'IT'}}<td>${{lineitem_variance}}</td>{{/ifEquals}} 
                 {{#ifEquals lineitem_divisionCategory 'IT'}}<td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} 
                 {{#ifEquals lineitem_divisionCategory 'IT'}}<td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} 
-                {{#if costsummarysubheader_subheaderName}}{{#ifEquals lineitem_divisionCategory 'IT'}}<td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}{{/if}}
             </tr>
             {{/each}}
 
@@ -707,7 +698,6 @@
                     <th>Variance</th>
                     <th>Actual Cost To Date</th>
                     <th>Remaining Contract Value</th>
-                    <th>Subheader</th>
                 </tr>
             </thead>
             
@@ -723,7 +713,6 @@
                 {{#ifEquals lineitem_divisionCategory 'Security'}}<td>${{lineitem_variance}}</td>{{/ifEquals}} 
                 {{#ifEquals lineitem_divisionCategory 'Security'}}<td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} 
                 {{#ifEquals lineitem_divisionCategory 'Security'}}<td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} 
-                {{#if costsummarysubheader_subheaderName}}{{#ifEquals lineitem_divisionCategory 'Security'}}<td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}{{/if}}
             </tr>
             {{/each}}
 
@@ -759,7 +748,6 @@
                     <th>Variance</th>
                     <th>Actual Cost To Date</th>
                     <th>Remaining Contract Value</th>
-                    <th>Subheader</th>
                 </tr>
             </thead>
             
@@ -775,8 +763,6 @@
                 {{#ifEquals lineitem_divisionCategory 'Consultants'}}<td>${{lineitem_variance}}</td>{{/ifEquals}} 
                 {{#ifEquals lineitem_divisionCategory 'Consultants'}}<td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} 
                 {{#ifEquals lineitem_divisionCategory 'Consultants'}}<td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} 
-                {{#if costsummarysubheader_subheaderName}}{{#ifEquals lineitem_divisionCategory 'Consultants'}}<td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}{{/if}}
-            </tr>
             {{/each}}
 
             <tr  class="table-info">
@@ -811,7 +797,6 @@
                     <th>Variance</th>
                     <th>Actual Cost To Date</th>
                     <th>Remaining Contract Value</th>
-                    <th>Subheader</th>
                 </tr>
             </thead>
             
@@ -827,7 +812,6 @@
                 {{#ifEquals lineitem_divisionCategory 'Contingency'}}<td>${{lineitem_variance}}</td>{{/ifEquals}} 
                 {{#ifEquals lineitem_divisionCategory 'Contingency'}}<td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} 
                 {{#ifEquals lineitem_divisionCategory 'Contingency'}}<td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} 
-                {{#if costsummarysubheader_subheaderName}}{{#ifEquals lineitem_divisionCategory 'Contingency'}}<td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}{{/if}}
             </tr>
             {{/each}}
 
@@ -863,7 +847,6 @@
                     <th>Variance</th>
                     <th>Actual Cost To Date</th>
                     <th>Remaining Contract Value</th>
-                    <th>Subheader</th>
                 </tr>
             </thead>
             
@@ -879,7 +862,6 @@
                 {{#ifEquals lineitem_divisionCategory 'Owner Supplied Equipment'}}<td>${{lineitem_variance}}</td>{{/ifEquals}} 
                 {{#ifEquals lineitem_divisionCategory 'Owner Supplied Equipment'}}<td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} 
                 {{#ifEquals lineitem_divisionCategory 'Owner Supplied Equipment'}}<td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} 
-                {{#if costsummarysubheader_subheaderName}}{{#ifEquals lineitem_divisionCategory 'Owner Supplied Equipment'}}<td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}{{/if}}
             </tr>
             {{/each}}
 
@@ -915,7 +897,6 @@
                     <th>Variance</th>
                     <th>Actual Cost To Date</th>
                     <th>Remaining Contract Value</th>
-                    <th>Subheader</th>
                 </tr>
             </thead>
             
@@ -931,7 +912,6 @@
                 {{#ifEquals lineitem_divisionCategory 'Division 1 - General Conditions and Insurance'}}<td>${{lineitem_variance}}</td>{{/ifEquals}} 
                 {{#ifEquals lineitem_divisionCategory 'Division 1 - General Conditions and Insurance'}}<td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} 
                 {{#ifEquals lineitem_divisionCategory 'Division 1 - General Conditions and Insurance'}}<td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} 
-                {{#if costsummarysubheader_subheaderName}}{{#ifEquals lineitem_divisionCategory 'Division 1 - General Conditions and Insurance'}}<td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}{{/if}}
             </tr>
             {{/each}}
 
@@ -968,7 +948,6 @@
                     <th>Variance</th>
                     <th>Actual Cost To Date</th>
                     <th>Remaining Contract Value</th>
-                    <th>Subheader</th>
                 </tr>
             </thead>
             <tbody>
@@ -982,7 +961,6 @@
                     {{#ifEquals lineitem_divisionCategory 'Division 2 - Site Construction'}}<td>${{lineitem_variance}}</td>{{/ifEquals}} 
                     {{#ifEquals lineitem_divisionCategory 'Division 2 - Site Construction'}}<td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} 
                     {{#ifEquals lineitem_divisionCategory 'Division 2 - Site Construction'}}<td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} 
-                    {{#ifEquals lineitem_divisionCategory 'Division 2 - Site Construction'}}<td>{{costsummarysubheader_subheaderName}}</td>{{/ifEquals}}
                 </tr>
             {{/each}}
 
@@ -1018,7 +996,6 @@
             <th>Variance</th>
             <th>Actual Cost To Date</th>
             <th>Remaining Contract Value</th>
-            <th>Subheader</th>
         </tr>
     </thead>
     <tbody>
@@ -1033,7 +1010,6 @@
             {{#ifEquals lineitem_divisionCategory 'Division 3 - Concrete'}}<td>${{lineitem_variance}}</td>{{/ifEquals}} 
             {{#ifEquals lineitem_divisionCategory 'Division 3 - Concrete'}}<td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} 
             {{#ifEquals lineitem_divisionCategory 'Division 3 - Concrete'}}<td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}}
-            {{#ifEquals lineitem_divisionCategory 'Division 3 - Concrete'}}<td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}
         </tr>
         {{/each}}
 
@@ -1068,7 +1044,6 @@
             <th>Variance</th>
             <th>Actual Cost To Date</th>
             <th>Remaining Contract Value</th>
-            <th>Subheader</th>
         </tr>
     </thead>
     <tbody>
@@ -1083,8 +1058,7 @@
             <td>${{lineitem_revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 4 - Masonry'}}
             <td>${{lineitem_variance}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 4 - Masonry'}}
             <td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 4 - Masonry'}}
-            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}}{{#ifEquals lineitem_divisionCategory 'Division 4 - Masonry'}}
-            <td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}
+            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}}
         </tr>
         {{/each}}
 
@@ -1120,7 +1094,6 @@
             <th>Variance</th>
             <th>Actual Cost To Date</th>
             <th>Remaining Contract Value</th>
-            <th>Subheader</th>
         </tr>
     </thead>
     <tbody>
@@ -1135,8 +1108,7 @@
             <td>${{lineitem_revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 5 - Metals'}}
             <td>${{lineitem_variance}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 5 - Metals'}}
             <td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 5 - Metals'}}
-            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}}{{#ifEquals lineitem_divisionCategory 'Division 5 - Metals'}}
-            <td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}
+            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}}
         </tr>
         {{/each}}
 
@@ -1171,7 +1143,6 @@
             <th>Variance</th>
             <th>Actual Cost To Date</th>
             <th>Remaining Contract Value</th>
-            <th>Subheader</th>
         </tr>
     </thead>
     <tbody>
@@ -1186,8 +1157,7 @@
             <td>${{lineitem_revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 6 - Carpentry and Millwork'}}
             <td>${{lineitem_variance}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 6 - Carpentry and Millwork'}}
             <td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 6 - Carpentry and Millwork'}}
-            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}}{{#ifEquals lineitem_divisionCategory 'Division 6 - Carpentry and Millwork'}}
-            <td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}
+            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}}
         </tr>
         {{/each}}
 
@@ -1223,7 +1193,6 @@
             <th>Variance</th>
             <th>Actual Cost To Date</th>
             <th>Remaining Contract Value</th>
-            <th>Subheader</th>
         </tr>
     </thead>
     <tbody>
@@ -1238,8 +1207,7 @@
             <td>${{lineitem_revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 7 - Thermal and Moisture Protection'}}
             <td>${{lineitem_variance}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 7 - Thermal and Moisture Protection'}}
             <td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 7 - Thermal and Moisture Protection'}}
-            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 7 - Thermal and Moisture Protection'}}
-            <td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}
+            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} 
         </tr>
         {{/each}}
 
@@ -1275,7 +1243,6 @@
             <th>Variance</th>
             <th>Actual Cost To Date</th>
             <th>Remaining Contract Value</th>
-            <th>Subheader</th>
         </tr>
     </thead>
     <tbody>
@@ -1290,8 +1257,7 @@
             <td>${{lineitem_revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 8 - Doors and Windows'}}
             <td>${{lineitem_variance}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 8 - Doors and Windows'}}
             <td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 8 - Doors and Windows'}}
-            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}}{{#ifEquals lineitem_divisionCategory 'Division 8 - Doors and Windows'}}
-            <td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}
+            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}}
         </tr>
         {{/each}}
 
@@ -1327,7 +1293,6 @@
             <th>Variance</th>
             <th>Actual Cost To Date</th>
             <th>Remaining Contract Value</th>
-            <th>Subheader</th>
         </tr>
     </thead>
     <tbody>
@@ -1342,8 +1307,7 @@
             <td>${{lineitem_revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 9 - Finishes'}}
             <td>${{lineitem_variance}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 9 - Finishes'}}
             <td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 9 - Finishes'}}
-            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}}{{#ifEquals lineitem_divisionCategory 'Division 9 - Finishes'}}
-            <td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}
+            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}}
         </tr>
         {{/each}}
 
@@ -1379,7 +1343,6 @@
             <th>Variance</th>
             <th>Actual Cost To Date</th>
             <th>Remaining Contract Value</th>
-            <th>Subheader</th>
         </tr>
     </thead>
     <tbody>
@@ -1394,8 +1357,7 @@
             <td>${{lineitem_revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 10 - Specialties'}}
             <td>${{lineitem_variance}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 10 - Specialties'}}
             <td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 10 - Specialties'}}
-            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 10 - Specialties'}}
-            <td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}
+            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} 
         </tr>
         {{/each}}
 
@@ -1431,7 +1393,6 @@
             <th>Variance</th>
             <th>Actual Cost To Date</th>
             <th>Remaining Contract Value</th>
-            <th>Subheader</th>
         </tr>
     </thead>
     <tbody>
@@ -1446,8 +1407,7 @@
             <td>${{lineitem_revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 11 - Equipment'}}
             <td>${{lineitem_variance}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 11 - Equipment'}}
             <td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 11 - Equipment'}}
-            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 11 - Equipment'}}
-            <td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}
+            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} 
         </tr>
         {{/each}}
 
@@ -1483,7 +1443,6 @@
             <th>Variance</th>
             <th>Actual Cost To Date</th>
             <th>Remaining Contract Value</th>
-            <th>Subheader</th>
         </tr>
     </thead>
     <tbody>
@@ -1498,8 +1457,7 @@
             <td>${{lineitem_revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 12 - Furnishings'}}
             <td>${{lineitem_variance}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 12 - Furnishings'}}
             <td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 12 - Furnishings'}}
-            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}}{{#ifEquals lineitem_divisionCategory 'Division 12 - Furnishings'}}
-            <td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}
+            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}}
         </tr>
         {{/each}}
 
@@ -1535,7 +1493,6 @@
             <th>Variance</th>
             <th>Actual Cost To Date</th>
             <th>Remaining Contract Value</th>
-            <th>Subheader</th>
         </tr>
     </thead>
     <tbody>
@@ -1550,8 +1507,7 @@
             <td>${{lineitem_revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 13 - Special Construction'}}
             <td>${{lineitem_variance}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 13 - Special Construction'}}
             <td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 13 - Special Construction'}}
-            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 13 - Special Construction'}}
-            <td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}
+            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} 
         </tr>
         {{/each}}
 
@@ -1587,7 +1543,6 @@
             <th>Variance</th>
             <th>Actual Cost To Date</th>
             <th>Remaining Contract Value</th>
-            <th>Subheader</th>
         </tr>
     </thead>
     <tbody>
@@ -1602,8 +1557,7 @@
             <td>${{lineitem_revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 14 - Conveying Systems'}}
             <td>${{lineitem_variance}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 14 - Conveying Systems'}}
             <td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 14 - Conveying Systems'}}
-            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 14 - Conveying Systems'}}
-            <td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}
+            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} 
         </tr>
         {{/each}}
 
@@ -1638,7 +1592,6 @@
             <th>Variance</th>
             <th>Actual Cost To Date</th>
             <th>Remaining Contract Value</th>
-            <th>Subheader</th>
         </tr>
     </thead>
     <tbody>
@@ -1653,8 +1606,7 @@
             <td>${{lineitem_revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}
             <td>${{lineitem_variance}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}
             <td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}
-            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}
-            <td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}
+            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}} 
         </tr>
         {{/each}}
 
@@ -1689,23 +1641,20 @@
             <th>Variance</th>
             <th>Actual Cost To Date</th>
             <th>Remaining Contract Value</th>
-            <th>Subheader</th>
         </tr>
     </thead>
     <tbody>
 
         {{#each ../results4}}
         <tr>
-            {{#ifEquals lineitem_divisionCategory 'Division 16 - Electrical'}}
-            <td>{{lineitem_lineItemBreakdown}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 16 - Electrical'}}
-            <td>${{lineitem_budget}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 16 - Electrical'}}
-            <td>${{lineitem_originalContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 16 - Electrical'}}
-            <td>${{lineitem_changeOrders}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 16 - Electrical'}}
-            <td>${{lineitem_revisedContractValue}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 16 - Electrical'}}
-            <td>${{lineitem_variance}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 16 - Electrical'}}
-            <td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} {{#ifEquals lineitem_divisionCategory 'Division 16 - Electrical'}}
-            <td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}}{{#ifEquals lineitem_divisionCategory 'Division 16 - Electrical'}}
-            <td>{{costsummarysubheader_subheaderName}}</td> {{/ifEquals}}
+            {{#ifEquals lineitem_divisionCategory 'Division 16 - Electrical'}}<td>{{lineitem_lineItemBreakdown}}</td>{{/ifEquals}} 
+            {{#ifEquals lineitem_divisionCategory 'Division 16 - Electrical'}}<td>${{lineitem_budget}}</td>{{/ifEquals}} 
+            {{#ifEquals lineitem_divisionCategory 'Division 16 - Electrical'}}<td>${{lineitem_originalContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals lineitem_divisionCategory 'Division 16 - Electrical'}}<td>${{lineitem_changeOrders}}</td>{{/ifEquals}} 
+            {{#ifEquals lineitem_divisionCategory 'Division 16 - Electrical'}}<td>${{lineitem_revisedContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals lineitem_divisionCategory 'Division 16 - Electrical'}}<td>${{lineitem_variance}}</td>{{/ifEquals}} 
+            {{#ifEquals lineitem_divisionCategory 'Division 16 - Electrical'}}<td>${{lineitem_actualCostToDate}}</td>{{/ifEquals}} 
+            {{#ifEquals lineitem_divisionCategory 'Division 16 - Electrical'}}<td>${{lineitem_remainingContractValue}}</td>{{/ifEquals}}
         </tr>
         {{/each}}
 
@@ -1741,7 +1690,6 @@
                     <th>Original Contract Value</th>
                     <th>Change Orders</th>
                     <th>Actual Cost To Date</th>
-                    <th>Subheader</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -1794,13 +1742,6 @@
                                 <input type="number" class="form-control" id="actualCostToDate" name="actualCostToDate" value="{{actualCostToDate}}">
                             </td>
                             <td>
-                                <select class="form-control" name="subheaderID" id="subheaderID">
-                                {{#each results7}}
-                                    <option value="{{subheaderID}}">{{subheaderName}}</option>
-                                {{/each}}
-                                </select>
-                            </td>
-                            <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update">Insert</button>
                             </td>
                     </tr>
@@ -1818,7 +1759,6 @@
                             <th>Original Contract Value</th>
                             <th>Change Orders</th>
                             <th>Actual Cost To Date</th>
-                            <th>Subheader</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -1835,7 +1775,7 @@
                                     <option value="FF&E" {{#ifEquals lineitem_divisionCategory 'FF&E'}} selected {{/ifEquals}}>FF&E</option>
                                     <option value="IT" {{#ifEquals lineitem_divisionCategory 'IT'}} selected {{/ifEquals}}>IT</option>
                                     <option value="Security" {{#ifEquals lineitem_divisionCategory 'Security'}} selected {{/ifEquals}}>Security</option>
-                                    <option value="Consultants" {{#ifEquals lineitem_divisionCategory 'Consultants'}} selected {{/ifEquals}}Consultants></option>
+                                    <option value="Consultants" {{#ifEquals lineitem_divisionCategory 'Consultants'}} selected {{/ifEquals}}>Consultants</option>
                                     <option value="Contingency" {{#ifEquals lineitem_divisionCategory 'Contingency'}} selected {{/ifEquals}}>Contingency</option>
                                     <option value="Owner Supplied Equipment" {{#ifEquals lineitem_divisionCategory 'Owner Supplied Equipment'}} selected {{/ifEquals}}>Owner Supplied Equipment</option>
                                     <option value="Division 1 - General Conditions and Insurance" {{#ifEquals lineitem_divisionCategory 'Division 1 - General Conditions and Insurance'}} selected {{/ifEquals}}>Division 1 - General Conditions and Insurance</option>
@@ -1872,13 +1812,6 @@
                                 <input type="number" class="form-control" id="actualCostToDate" name="actualCostToDate" value="{{lineitem_actualCostToDate}}">
                             </td>
                             <td>
-                                <select class="form-control" name="subheaderID" id="subheaderID">
-                                {{#each ../results7}}
-                                    <option value="{{subheaderID}}" {{#ifEquals subheaderID ../lineitem_subheaderID}} selected {{/ifEquals}}>{{subheaderName}}</option>
-                                {{/each}}
-                                </select>
-                            </td>
-                            <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updateCostSummary">Update</button>
                             </td>
                             <td>
@@ -1890,54 +1823,6 @@
             </tbody>
             </table>
         </div>
-
-        <div class="tab-pane" id="updateSubheader" role="tabpanel">
-            <br><br><h4>New subheader option</h4>
-            <table class="table table-striped ">
-                <thead>
-                    <th>Division Category</th>
-                    <th>Subheader Description</th>
-                    <th>Action</th>
-                </thead>
-                <tbody>
-                    <form action="/projects/newSubheader" method="POST">
-                    
-                    <input type="hidden" id="projectID" name="projectID" value={{#each results}}"{{projectID}}"{{/each}}>
-                    <td>
-                        <select class="form-control" name="divisionCategory" id="divisionCategory">
-                            <option value="Allowances">Allowances</option>
-                            <option value="FF&E">FF&E</option>
-                            <option value="IT">IT</option>
-                            <option value="Security">Security</option>
-                            <option value="Consultants">Consultants</option>
-                            <option value="Contingency">Contingency</option>
-                            <option value="Owner Supplied Equipment">Owner Supplied Equipment</option>
-                            <option value="Division 1 - General Conditions and Insurance">Division 1 - General Conditions and Insurance</option>
-                            <option value="Division 2 - Site Construction">Division 2 - Site Construction</option>
-                            <option value="Division 3 - Concrete">Division 3 - Concrete</option>
-                            <option value="Division 4 - Masonry">Division 4 - Masonry</option>
-                            <option value="Division 5 - Metals">Division 5 - Metals</option>
-                            <option value="Division 6 - Carpentry and Millwork">Division 6 - Carpentry and Millwork</option>
-                            <option value="Division 7 - Thermal and Moisture Protection">Division 7 - Thermal and Moisture Protection</option>
-                            <option value="Division 8 - Doors and Windows">Division 8 - Doors and Windows</option>
-                            <option value="Division 9 - Finishes">Division 9 - Finishes</option>
-                            <option value="Division 10 - Specialties">Division 10 - Specialties</option>
-                            <option value="Division 11 - Equipment">Division 11 - Equipment</option>
-                            <option value="Division 12 - Furnishings">Division 12 - Furnishings</option>
-                            <option value="Division 13 - Special Construction">Division 13 - Special Construction</option>
-                            <option value="Division 14 - Conveying Systems">Division 14 - Conveying Systems</option>
-                            <option value="Division 15 - Mechanical, Plumbing, HVAC, and Fire">Division 15 - Mechanical, Plumbing, HVAC, and Fire</option>
-                            <option value="Division 16 - Electrical">Division 16 - Electrical</option>
-                        </select>
-                    </td>
-                    <td><input class="form-control" type="text" name="subheaderName" id="subheaderName"> </td>
-                    <td> <button type="submit" class="form-control">Insert</button></td>
-                    </form>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    </div>
     
             {{#ifEquals updateType 'updatePCO'}}
             <div id="menu6" class="tab-pane fade in active show">
