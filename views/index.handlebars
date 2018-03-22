@@ -6,6 +6,40 @@
     <input type= "hidden" name="totalActual", id="totalActual" value="{{totalActual}}">
 {{/each}}
 
+
+<script type="text/javascript">
+window.onload = function() {
+CanvasJS.addColorSet("kmsTone",
+    [
+    "#0698D5",
+    "#AAC998"
+    ]);
+
+var inProgress_AI = $('#totalTarget').val();
+var completed_AI = $('#totalActual').val();
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+    colorSet: "kmsTone",
+	title: {
+		text: "Status of Action Items in Open Projects"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 270,
+		indexLabel: "{label} {y}",
+		dataPoints: [
+			{y: inProgress_AI, label: "In Progress"},
+			{y: completed_AI, label: "Completed"}
+		]
+	}]
+});
+chart.render();
+
+}
+</script>
+
+
 <script type="text/javascript">
 window.onload = function() {
 CanvasJS.addColorSet("kmsTone",
@@ -43,7 +77,7 @@ chart.render();
 
 <section class="row text-left">
 
-    <div class="col-sm-5 placeholder" style="border-radius: 15px; border: 2px solid #BFBFBF; padding: 10px;  margin: 10px; overflow: scroll; height: 400px;">
+    <div class="col-sm-5 placeholder" style="border-radius: 15px; border: 2px solid #BFBFBF; padding: 10px;  margin: 10px; overflow: scroll; height: 500px;">
         <br>
         <h4>KMS Action Items</h4>
         <br>
@@ -72,7 +106,7 @@ chart.render();
 
 
 
-    <div class="col-sm-5 placeholder" style="border-radius: 15px; border: 2px solid #BFBFBF; padding: 10px;  margin: 10px; overflow: scroll; height: 400px;">
+    <div class="col-sm-5 placeholder" style="border-radius: 15px; border: 2px solid #BFBFBF; padding: 10px;  margin: 10px; overflow: scroll; height: 500px;">
         <br>
         <h4>External Action Items</h4><br>
         <table style="table-layout:fixed; width:100%" class="table table-sm">

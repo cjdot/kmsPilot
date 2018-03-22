@@ -26,7 +26,7 @@ var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = ?'
 var preqry5 = 'SELECT * FROM lineitem LEFT JOIN costsummarysubheader ON lineitem.subheaderID = costsummarysubheader.subheaderID WHERE lineitem.projectID = ?'
 var qry5 = {sql: preqry5, nestTables: '_'};
 var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
-var qry7 = 'SELECT COUNT(lineItemID), divisionCategory, CAST(RIGHT(LEFT(lineitem.divisionCategory, 11), 2) AS SIGNED) AS orderSet FROM lineitem WHERE projectID = ? AND divisionCategory IS NOT NULL GROUP BY divisionCategory ORDER BY CAST(RIGHT(LEFT(lineitem.divisionCategory, 11), 2) AS SIGNED)'
+var qry7 = 'SELECT * FROM orderset WHERE projectID = ? ORDER BY orderSet'
 var qry8 = 'SELECT * FROM costsummarysubheader WHERE projectID = ?'
 var qry9 = 'SELECT divisionCategory, SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE projectID = ? GROUP BY divisionCategory'
 var qry10 = 'SELECT SUM(originalContractValue) AS originalContractValue, SUM(revisedContractValue) AS revisedContractValue FROM lineitem WHERE projectID = ?'
