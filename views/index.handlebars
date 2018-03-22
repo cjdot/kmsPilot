@@ -6,38 +6,10 @@
     <input type= "hidden" name="totalActual", id="totalActual" value="{{totalActual}}">
 {{/each}}
 
-
-<script type="text/javascript">
-window.onload = function() {
-CanvasJS.addColorSet("kmsTone",
-    [
-    "#0698D5",
-    "#AAC998"
-    ]);
-
-var inProgress_AI = $('#totalTarget').val();
-var completed_AI = $('#totalActual').val();
-
-var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-    colorSet: "kmsTone",
-	title: {
-		text: "Status of Action Items in Open Projects"
-	},
-	data: [{
-		type: "pie",
-		startAngle: 270,
-		indexLabel: "{label} {y}",
-		dataPoints: [
-			{y: inProgress_AI, label: "In Progress"},
-			{y: completed_AI, label: "Completed"}
-		]
-	}]
-});
-chart.render();
-
-}
-</script>
+{{#each results2}}
+    <input type= "hidden" name="totalTarget2", id="totalTarget2" value="{{totalTarget2}}">
+    <input type= "hidden" name="totalActual2", id="totalActual2" value="{{totalActual2}}">
+{{/each}}
 
 
 <script type="text/javascript">
@@ -51,11 +23,17 @@ CanvasJS.addColorSet("kmsTone",
 var inProgress_AI = $('#totalTarget').val();
 var completed_AI = $('#totalActual').val();
 
-var chart = new CanvasJS.Chart("chartContainer", {
+var inProgress_AI2 = $('#totalTarget2').val();
+var completed_AI2 = $('#totalActual2').val();
+
+
+
+
+var chart = new CanvasJS.Chart("chartContainer1", {
 	animationEnabled: true,
     colorSet: "kmsTone",
 	title: {
-		text: "Status of Action Items in Open Projects"
+		text: "Status of KMS Action Items in Open Projects"
 	},
 	data: [{
 		type: "pie",
@@ -69,10 +47,35 @@ var chart = new CanvasJS.Chart("chartContainer", {
 });
 chart.render();
 
+var chart = new CanvasJS.Chart("chartContainer2", {
+	animationEnabled: true,
+    colorSet: "kmsTone",
+	title: {
+		text: "Status of External Action Items in Open Projects"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 270,
+		indexLabel: "{label} {y}",
+		dataPoints: [
+			{y: inProgress_AI2, label: "In Progress"},
+			{y: completed_AI2, label: "Completed"}
+		]
+	}]
+});
+
+chart.render();
+
+
 }
 </script>
 
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<div class="row" style="margin-right: 200px;">
+<div id="chartContainer1" style="width: 50%; height: 400px;float:left;"></div> 
+<div id="chartContainer2" style="width: 50%; height: 400px;"></div> </br>
+</div>
+
+
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <section class="row text-left">
@@ -81,6 +84,16 @@ chart.render();
         <br>
         <h4>KMS Action Items</h4>
         <br>
+
+        <form action="myservlet.do" method="POST">
+            <select name="myselect" id="myselect" onchange="this.form.submit()">
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+            <option value="4">Four</option>
+            </select>
+        </form>
+        
         <table style="table-layout:fixed; width:100%" class="table table-sm">
         <thead>
             <th>Project Name</th>
