@@ -33,6 +33,7 @@ var chart = new CanvasJS.Chart("chartContainer1", {
 	animationEnabled: true,
     colorSet: "kmsTone",
 	title: {
+        fontFamily: "tahoma",
 		text: "Status of KMS Action Items in Open Projects"
 	},
 	data: [{
@@ -51,6 +52,7 @@ var chart = new CanvasJS.Chart("chartContainer2", {
 	animationEnabled: true,
     colorSet: "kmsTone",
 	title: {
+        fontFamily: "tahoma",
 		text: "Status of External Action Items in Open Projects"
 	},
 	data: [{
@@ -85,15 +87,15 @@ chart.render();
         <h4>KMS Action Items</h4>
         <br>
 
-        <form action="myservlet.do" method="POST">
-            <select name="myselect" id="myselect" onchange="this.form.submit()">
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-            <option value="4">Four</option>
+        <form action="/" method="GET">
+            <select class="form-control" name="myselect" id="myselect" onchange="this.form.submit()">
+            <option value="1">Due This Week</option>
+            <option value="2">Due This 2 Weeks</option>
+            <option value="3">Due This Month</option>
+            <option value="4">Past Due</option>
             </select>
         </form>
-        
+        <br>
         <table style="table-layout:fixed; width:100%" class="table table-sm">
         <thead>
             <th>Project Name</th>
@@ -121,7 +123,18 @@ chart.render();
 
     <div class="col-sm-5 placeholder" style="border-radius: 15px; border: 2px solid #BFBFBF; padding: 10px;  margin: 10px; overflow: scroll; height: 500px;">
         <br>
-        <h4>External Action Items</h4><br>
+        <h4>External Action Items</h4>
+        <br>
+
+        <form action="/" method="GET">
+            <select class="form-control" name="myselect" id="myselect" onchange="this.form.submit()">
+            <option value="1">Due This Week</option>
+            <option value="2">Due This 2 Weeks</option>
+            <option value="3">Due This Month</option>
+            <option value="4">Past Due</option>
+            </select>
+        </form>
+        <br>
         <table style="table-layout:fixed; width:100%" class="table table-sm">
         <thead>
             <th>Project Name</th>
