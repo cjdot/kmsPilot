@@ -3821,3 +3821,12 @@ node_modules/moment/locale/tg.js
 node_modules/moment/src/locale/en-il.js
 node_modules/moment/src/locale/tg.js
 node_modules/moment/src/locale/ug-cn.js
+node_modules/mysql2/node_modules/sqlstring/LICENSE
+node_modules/mysql2/node_modules/process-nextick-args/license.md
+node_modules/mysql2/node_modules/process-nextick-args/package.json
+node_modules/mysql2/node_modules/process-nextick-args/readme.md
+node_modules/mysql2/node_modules/sqlstring/HISTORY.md
+node_modules/mysql2/node_modules/sqlstring/index.js
+node_modules/mysql2/node_modules/sqlstring/package.json
+node_modules/mysql2/node_modules/sqlstring/README.md
+node_modules/mysql2/node_modules/sqlstring/lib/SqlString.js
