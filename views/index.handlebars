@@ -87,12 +87,12 @@ chart.render();
         <h4>KMS Action Items</h4>
         <br>
 
-        <form action="/" method="GET">
-            <select class="form-control" name="myselect" id="myselect" onchange="this.form.submit()">
-            <option value="1">Due This Week</option>
-            <option value="2">Due This 2 Weeks</option>
-            <option value="3">Due This Month</option>
-            <option value="4">Past Due</option>
+        <form action="/" method="POST">
+            <select class="form-control" name="dateRange" id="dateRange" onchange="this.form.submit()">
+            <option value="thisWeek" {{#ifEquals updateType 'thisWeek'}}selected {{/ifEquals}}>Due This Week </option>
+            <option value="thisWeek2" {{#ifEquals updateType 'thisWeek2'}}selected {{/ifEquals}}>Due This 2 Weeks</option>
+            <option value="thisMonth" {{#ifEquals updateType 'thisMonth'}}selected {{/ifEquals}}>Due This Month</option>
+            <option value="pastDue" {{#ifEquals updateType 'pastDue'}}selected {{/ifEquals}}>Past Due</option>
             </select>
         </form>
         <br>
@@ -126,12 +126,12 @@ chart.render();
         <h4>External Action Items</h4>
         <br>
 
-        <form action="/" method="GET">
+        <form action="/" method="POST">
             <select class="form-control" name="myselect" id="myselect" onchange="this.form.submit()">
-            <option value="1">Due This Week</option>
-            <option value="2">Due This 2 Weeks</option>
-            <option value="3">Due This Month</option>
-            <option value="4">Past Due</option>
+            <option value="thisWeek" {{#ifEquals updateType 'thisWeek'}}selected {{/ifEquals}}>Due This Week</option>
+            <option value="thisWeek2" {{#ifEquals updateType 'thisWeek2'}}selected {{/ifEquals}}>Due This 2 Weeks</option>
+            <option value="thisMonth" {{#ifEquals updateType 'thisMonth'}}selected {{/ifEquals}}>Due This Month</option>
+            <option value="pastDue" {{#ifEquals updateType 'pastDue'}}selected {{/ifEquals}}>Past Due</option>
             </select>
         </form>
         <br>
