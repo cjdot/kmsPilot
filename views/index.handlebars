@@ -125,9 +125,8 @@ chart.render();
         <br>
         <h4>External Action Items</h4>
         <br>
-
-        <form action="/" method="POST">
-            <select class="form-control" name="myselect" id="myselect" onchange="this.form.submit()">
+        <form action="/" method="POST">        
+            <select class="form-control" name="dateRange" id="dateRange" onchange="this.form.submit()">
             <option value="thisWeek" {{#ifEquals updateType 'thisWeek'}}selected {{/ifEquals}}>Due This Week</option>
             <option value="thisWeek2" {{#ifEquals updateType 'thisWeek2'}}selected {{/ifEquals}}>Due This 2 Weeks</option>
             <option value="thisMonth" {{#ifEquals updateType 'thisMonth'}}selected {{/ifEquals}}>Due This Month</option>
