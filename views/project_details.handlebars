@@ -532,34 +532,59 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane active" id="read3" role="tabpanel">
+        
+        <br>
+        <table class="table table-bordered table-sm" style="width: 30%"  >   
+
+            <tbody>
+             {{#each results}}
+            {{#each ../results9}}
+            <tr>
+                <td style="border-color: black">Project #:</td>
+                <td bgcolor="#d9d9d9" style="border-color: black">hello </td>
+            </tr>
+            <tr>  
+                <td style="border-color: black"><strong>PROJECT BUDGET:</strong></td>
+                <td style="border-color: black"><strong>${{#if budget}}{{formatNumber budget}}{{/if}}</strong></td>
+            </tr>
+            <tr>
+                <td style="border-color: black"><strong>REVISED CONTRACT VALUE:</strong></td>
+                <td style="border-color: black"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{/if}}</strong></td>
+            </tr>
+            <tr>
+                <td style="border-color: black">Budget Variance <sub>(Anticipated Cost - Budget)</sub>:</td>
+                <td style="border-color: black">${{#if variance}}{{formatNumber variance}}{{/if}}</td>
+            </tr>
+            <tr>
+                <td style="border-color: black"><strong>ACTUAL COST TO DATE:</strong></td>
+                <td style="border-color: black">${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{/if}}</td>
+            </tr>
+            <tr>
+                <td style="border-color: black"><strong>REMAINING CONTRACT VALUE:</strong></td>
+                <td style="border-color: black">${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{/if}}</td>
+            </tr>
+             {{/each}}
+             {{/each}}
+            </tbody>
+        </table>
+        
         {{#each results6}} 
 
         {{#ifEquals orderSet 0}}
         <br>
         <strong>{{divisionCategory}}</strong>
         <br>
-        <table class="table table-striped">
-
-            <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+        <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Line Item</th>
-                    <th>Budget</th>
-                    <th>Original Contract Value</th>
-                    <th>Change Orders</th>
-                    <th>Revised Contract Value</th>
-                    <th>Variance</th>
-                    <th>Actual Cost To Date</th>
-                    <th>Remaining Contract Value</th>
+                    <th style="border-color: black">Line Item</th>
+                    <th style="border-color: black">Budget</th>
+                    <th style="border-color: black">Original Contract Value</th>
+                    <th style="border-color: black">Change Orders</th>
+                    <th style="border-color: black">Revised Contract Value</th>
+                    <th style="border-color: black">Variance</th>
+                    <th bgcolor="#adebad" style="border-color: black">Actual Cost To Date</th>
+                    <th bgcolor="#adebad" style="border-color: black">Remaining Contract Value</th>
                 </tr>
             </thead>
             
@@ -567,27 +592,27 @@
             
             {{#each ../results4}}
             <tr>
-                {{#ifEquals divisionCategory 'Allowances'}}<td>{{lineItemBreakdown}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td>${{budget}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td>${{originalContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td>${{changeOrders}}</td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Allowances'}}<td>${{revisedContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td>${{variance}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td>${{actualCostToDate}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td>${{remainingContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td style="border-color: black">{{lineItemBreakdown}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td style="border-color: black">${{budget}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td style="border-color: black">${{originalContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td style="border-color: black">${{changeOrders}}</td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Allowances'}}<td style="border-color: black">${{revisedContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td style="border-color: black">${{variance}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td style="border-color: black">${{actualCostToDate}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td style="border-color: black">${{remainingContractValue}}</td>{{/ifEquals}} 
             </tr>
             {{/each}}
 
             <tr  class="table-info">
                 {{#each ../results8}}
-                {{#ifEquals divisionCategory 'Allowances'}}<td><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td><strong>${{#if budget}}{{formatNumber budget}}{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Allowances'}}<td><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td><strong>${{#if variance}}{{formatNumber variance}}{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Allowances'}}<td style="border-color: black"><strong>Subtotal:</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td style="border-color: black"><strong>${{#if budget}}{{formatNumber budget}}{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td style="border-color: black"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td style="border-color: black"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Allowances'}}<td style="border-color: black"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td style="border-color: black"><strong>${{#if variance}}{{formatNumber variance}}{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td style="border-color: black"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td style="border-color: black"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{/if}}</strong></td>{{/ifEquals}}
                 {{/each}}
             </tr>
 
@@ -599,27 +624,17 @@
         <br>
         <strong>{{divisionCategory}}</strong>
         <br>
-        <table class="table table-striped">
-            <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+        <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Line Item</th>
-                    <th>Budget</th>
-                    <th>Original Contract Value</th>
-                    <th>Change Orders</th>
-                    <th>Revised Contract Value</th>
-                    <th>Variance</th>
-                    <th>Actual Cost To Date</th>
-                    <th>Remaining Contract Value</th>
+                    <th class="costsummarystyle">Line Item</th>
+                    <th class="costsummarystyle">Budget</th>
+                    <th class="costsummarystyle">Original Contract Value</th>
+                    <th class="costsummarystyle">Change Orders</th>
+                    <th class="costsummarystyle">Revised Contract Value</th>
+                    <th class="costsummarystyle">Variance</th>
+                    <th bgcolor="#adebad" class="costsummarystyle">Actual Cost To Date</th>
+                    <th bgcolor="#adebad" class="costsummarystyle">Remaining Contract Value</th>
                 </tr>
             </thead>
             
@@ -627,27 +642,27 @@
             
             {{#each ../results4}}
             <tr>
-                {{#ifEquals divisionCategory 'FF&E'}}<td>{{lineItemBreakdown}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td>${{budget}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td>${{originalContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td>${{changeOrders}}</td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'FF&E'}}<td>${{revisedContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td>${{variance}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td>${{actualCostToDate}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td>${{remainingContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'FF&E'}}<td class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}} 
             </tr>
             {{/each}}
 
             <tr  class="table-info">
                 {{#each ../results8}}
-                {{#ifEquals divisionCategory 'FF&E'}}<td><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td><strong>${{#if budget}}{{formatNumber budget}}{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'FF&E'}}<td><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td><strong>${{#if variance}}{{formatNumber variance}}{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'FF&E'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'FF&E'}}<td class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{/if}}</strong></td>{{/ifEquals}}
                 {{/each}}
             </tr>
 
@@ -659,17 +674,8 @@
         <br>
         <strong>{{divisionCategory}}</strong>
         <br>
-        <table class="table table-striped">
-            <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+        <table class="table">
+           
             <thead>
                 <tr>
                     <th>Line Item</th>
@@ -678,8 +684,8 @@
                     <th>Change Orders</th>
                     <th>Revised Contract Value</th>
                     <th>Variance</th>
-                    <th>Actual Cost To Date</th>
-                    <th>Remaining Contract Value</th>
+                    <th bgcolor="#adebad">Actual Cost To Date</th>
+                    <th bgcolor="#adebad">Remaining Contract Value</th>
                 </tr>
             </thead>
             
@@ -719,17 +725,8 @@
         <br>
         <strong>{{divisionCategory}}</strong>
         <br>
-        <table class="table table-striped">
-            <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+        <table class="table">
+           
             <thead>
                 <tr>
                     <th>Line Item</th>
@@ -738,8 +735,8 @@
                     <th>Change Orders</th>
                     <th>Revised Contract Value</th>
                     <th>Variance</th>
-                    <th>Actual Cost To Date</th>
-                    <th>Remaining Contract Value</th>
+                    <th bgcolor="#adebad">Actual Cost To Date</th>
+                    <th bgcolor="#adebad">Remaining Contract Value</th>
                 </tr>
             </thead>
             
@@ -779,17 +776,8 @@
         <br>
         <strong>{{divisionCategory}}</strong>
         <br>
-        <table class="table table-striped">
-            <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+        <table class="table">
+          
             <thead>
                 <tr>
                     <th>Line Item</th>
@@ -798,8 +786,8 @@
                     <th>Change Orders</th>
                     <th>Revised Contract Value</th>
                     <th>Variance</th>
-                    <th>Actual Cost To Date</th>
-                    <th>Remaining Contract Value</th>
+                    <th bgcolor="#adebad">Actual Cost To Date</th>
+                    <th bgcolor="#adebad">Remaining Contract Value</th>
                 </tr>
             </thead>
             
@@ -839,17 +827,8 @@
         <br>
         <strong>{{divisionCategory}}</strong>
         <br>
-        <table class="table table-striped">
-            <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+        <table class="table">
+       
             <thead>
                 <tr>
                     <th>Line Item</th>
@@ -858,8 +837,8 @@
                     <th>Change Orders</th>
                     <th>Revised Contract Value</th>
                     <th>Variance</th>
-                    <th>Actual Cost To Date</th>
-                    <th>Remaining Contract Value</th>
+                    <th bgcolor="#adebad">Actual Cost To Date</th>
+                    <th bgcolor="#adebad">Remaining Contract Value</th>
                 </tr>
             </thead>
             
@@ -899,17 +878,8 @@
         <br>
         <strong>{{divisionCategory}}</strong>
         <br>
-        <table class="table table-striped">
-            <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+        <table class="table">
+          
             <thead>
                 <tr>
                     <th>Line Item</th>
@@ -918,8 +888,8 @@
                     <th>Change Orders</th>
                     <th>Revised Contract Value</th>
                     <th>Variance</th>
-                    <th>Actual Cost To Date</th>
-                    <th>Remaining Contract Value</th>
+                    <th bgcolor="#adebad">Actual Cost To Date</th>
+                    <th bgcolor="#adebad">Remaining Contract Value</th>
                 </tr>
             </thead>
             
@@ -959,17 +929,8 @@
         <br>
         <strong>{{divisionCategory}}</strong>
         <br>
-        <table class="table table-striped">
-            <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+        <table class="table">
+           
             <thead>
                 <tr>
                     <th>Line Item</th>
@@ -978,8 +939,8 @@
                     <th>Change Orders</th>
                     <th>Revised Contract Value</th>
                     <th>Variance</th>
-                    <th>Actual Cost To Date</th>
-                    <th>Remaining Contract Value</th>
+                    <th bgcolor="#adebad">Actual Cost To Date</th>
+                    <th bgcolor="#adebad">Remaining Contract Value</th>
                 </tr>
             </thead>
             
@@ -1020,17 +981,8 @@
         <br>
         <strong>{{divisionCategory}}</strong>
         <br>
-        <table class="table table-striped ">
-            <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+        <table class="table">
+           
             <thead>
                 <tr>
                     <th>Line Item</th>
@@ -1039,8 +991,8 @@
                     <th>Change Orders</th>
                     <th>Revised Contract Value</th>
                     <th>Variance</th>
-                    <th>Actual Cost To Date</th>
-                    <th>Remaining Contract Value</th>
+                    <th bgcolor="#adebad">Actual Cost To Date</th>
+                    <th bgcolor="#adebad">Remaining Contract Value</th>
                 </tr>
             </thead>
             <tbody>
@@ -1078,17 +1030,8 @@
 <br>
 <strong>{{divisionCategory}}</strong>
 <br>
-<table class="table table-striped ">
-        <colgroup>
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col style="background-color: #18ad9c"/>
-            <col style="background-color: #18ad9c"/>
-        </colgroup>
+<table class="table">
+       
     <thead>
         <tr>
             <th>Line Item</th>
@@ -1097,8 +1040,8 @@
             <th>Change Orders</th>
             <th>Revised Contract Value</th>
             <th>Variance</th>
-            <th>Actual Cost To Date</th>
-            <th>Remaining Contract Value</th>
+            <th bgcolor="#adebad">Actual Cost To Date</th>
+            <th bgcolor="#adebad">Remaining Contract Value</th>
         </tr>
     </thead>
     <tbody>
@@ -1136,17 +1079,8 @@
 <br>
 <strong>{{divisionCategory}}</strong>
 <br>
-<table class="table table-striped ">
-            <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+<table class="table">
+           
     <thead>
         <tr>
             <th>Line Item</th>
@@ -1155,8 +1089,8 @@
             <th>Change Orders</th>
             <th>Revised Contract Value</th>
             <th>Variance</th>
-            <th>Actual Cost To Date</th>
-            <th>Remaining Contract Value</th>
+            <th bgcolor="#adebad">Actual Cost To Date</th>
+            <th bgcolor="#adebad">Remaining Contract Value</th>
         </tr>
     </thead>
     <tbody>
@@ -1196,17 +1130,8 @@
 <br>
 <strong>{{divisionCategory}}</strong>
 <br>
-<table class="table table-striped ">
-    <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+<table class="table">
+    
     <thead>
         <tr>
             <th>Line Item</th>
@@ -1215,8 +1140,8 @@
             <th>Change Orders</th>
             <th>Revised Contract Value</th>
             <th>Variance</th>
-            <th>Actual Cost To Date</th>
-            <th>Remaining Contract Value</th>
+            <th bgcolor="#adebad">Actual Cost To Date</th>
+            <th bgcolor="#adebad">Remaining Contract Value</th>
         </tr>
     </thead>
     <tbody>
@@ -1255,17 +1180,8 @@
 <br>
 <strong>{{divisionCategory}}</strong>
 <br>
-<table class="table table-striped ">
-    <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+<table class="table">
+   
     <thead>
         <tr>
             <th>Line Item</th>
@@ -1274,8 +1190,8 @@
             <th>Change Orders</th>
             <th>Revised Contract Value</th>
             <th>Variance</th>
-            <th>Actual Cost To Date</th>
-            <th>Remaining Contract Value</th>
+            <th bgcolor="#adebad">Actual Cost To Date</th>
+            <th bgcolor="#adebad">Remaining Contract Value</th>
         </tr>
     </thead>
     <tbody>
@@ -1315,17 +1231,8 @@
 <br>
 <strong>{{divisionCategory}}</strong>
 <br>
-<table class="table table-striped ">
-    <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+<table class="table">
+   
     <thead>
         <tr>
             <th>Line Item</th>
@@ -1334,8 +1241,8 @@
             <th>Change Orders</th>
             <th>Revised Contract Value</th>
             <th>Variance</th>
-            <th>Actual Cost To Date</th>
-            <th>Remaining Contract Value</th>
+            <th bgcolor="#adebad">Actual Cost To Date</th>
+            <th bgcolor="#adebad">Remaining Contract Value</th>
         </tr>
     </thead>
     <tbody>
@@ -1376,17 +1283,8 @@
 <br>
 <strong>{{divisionCategory}}</strong>
 <br>
-<table class="table table-striped ">
-    <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+<table class="table">
+   
     <thead>
         <tr>
             <th>Line Item</th>
@@ -1395,8 +1293,8 @@
             <th>Change Orders</th>
             <th>Revised Contract Value</th>
             <th>Variance</th>
-            <th>Actual Cost To Date</th>
-            <th>Remaining Contract Value</th>
+            <th bgcolor="#adebad">Actual Cost To Date</th>
+            <th bgcolor="#adebad">Remaining Contract Value</th>
         </tr>
     </thead>
     <tbody>
@@ -1437,17 +1335,8 @@
 <br>
 <strong>{{divisionCategory}}</strong>
 <br>
-<table class="table table-striped ">
-    <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+<table class="table">
+   
     <thead>
         <tr>
             <th>Line Item</th>
@@ -1456,8 +1345,8 @@
             <th>Change Orders</th>
             <th>Revised Contract Value</th>
             <th>Variance</th>
-            <th>Actual Cost To Date</th>
-            <th>Remaining Contract Value</th>
+            <th bgcolor="#adebad">Actual Cost To Date</th>
+            <th bgcolor="#adebad">Remaining Contract Value</th>
         </tr>
     </thead>
     <tbody>
@@ -1498,17 +1387,8 @@
 <br>
 <strong>{{divisionCategory}}</strong>
 <br>
-<table class="table table-striped ">
-    <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+<table class="table">
+   
     <thead>
         <tr>
             <th>Line Item</th>
@@ -1517,8 +1397,8 @@
             <th>Change Orders</th>
             <th>Revised Contract Value</th>
             <th>Variance</th>
-            <th>Actual Cost To Date</th>
-            <th>Remaining Contract Value</th>
+            <th bgcolor="#adebad">Actual Cost To Date</th>
+            <th bgcolor="#adebad">Remaining Contract Value</th>
         </tr>
     </thead>
     <tbody>
@@ -1558,17 +1438,8 @@
 <br>
 <strong>{{divisionCategory}}</strong>
 <br>
-<table class="table table-striped ">
-    <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+<table class="table">
+    
     <thead>
         <tr>
             <th>Line Item</th>
@@ -1577,8 +1448,8 @@
             <th>Change Orders</th>
             <th>Revised Contract Value</th>
             <th>Variance</th>
-            <th>Actual Cost To Date</th>
-            <th>Remaining Contract Value</th>
+            <th bgcolor="#adebad">Actual Cost To Date</th>
+            <th bgcolor="#adebad">Remaining Contract Value</th>
         </tr>
     </thead>
     <tbody>
@@ -1618,17 +1489,8 @@
 <br>
 <strong>{{divisionCategory}}</strong>
 <br>
-<table class="table table-striped ">
-    <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+<table class="table">
+   
     <thead>
         <tr>
             <th>Line Item</th>
@@ -1637,8 +1499,8 @@
             <th>Change Orders</th>
             <th>Revised Contract Value</th>
             <th>Variance</th>
-            <th>Actual Cost To Date</th>
-            <th>Remaining Contract Value</th>
+            <th bgcolor="#adebad">Actual Cost To Date</th>
+            <th bgcolor="#adebad">Remaining Contract Value</th>
         </tr>
     </thead>
     <tbody>
@@ -1678,17 +1540,8 @@
 <br>
 <strong>{{divisionCategory}}</strong>
 <br>
-<table class="table table-striped ">
-    <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+<table class="table">
+   
     <thead>
         <tr>
             <th>Line Item</th>
@@ -1697,8 +1550,8 @@
             <th>Change Orders</th>
             <th>Revised Contract Value</th>
             <th>Variance</th>
-            <th>Actual Cost To Date</th>
-            <th>Remaining Contract Value</th>
+            <th bgcolor="#adebad">Actual Cost To Date</th>
+            <th bgcolor="#adebad">Remaining Contract Value</th>
         </tr>
     </thead>
     <tbody>
@@ -1738,17 +1591,8 @@
 <br>
 <strong>{{divisionCategory}}</strong>
 <br>
-<table class="table table-striped ">
-    <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+<table class="table">
+   
     <thead>
         <tr>
             <th>Line Item</th>
@@ -1757,8 +1601,8 @@
             <th>Change Orders</th>
             <th>Revised Contract Value</th>
             <th>Variance</th>
-            <th>Actual Cost To Date</th>
-            <th>Remaining Contract Value</th>
+            <th bgcolor="#adebad">Actual Cost To Date</th>
+            <th bgcolor="#adebad">Remaining Contract Value</th>
         </tr>
     </thead>
     <tbody>
@@ -1797,17 +1641,8 @@
 <br>
 <strong>{{divisionCategory}}</strong>
 <br>
-<table class="table table-striped ">
-    <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+<table class="table">
+    
     <thead>
         <tr>
             <th>Line Item</th>
@@ -1816,8 +1651,8 @@
             <th>Change Orders</th>
             <th>Revised Contract Value</th>
             <th>Variance</th>
-            <th>Actual Cost To Date</th>
-            <th>Remaining Contract Value</th>
+            <th bgcolor="#adebad">Actual Cost To Date</th>
+            <th bgcolor="#adebad">Remaining Contract Value</th>
         </tr>
     </thead>
     <tbody>
@@ -1856,17 +1691,8 @@
 <br>
 <strong>{{divisionCategory}}</strong>
 <br>
-<table class="table table-striped ">
-    <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col style="background-color: #18ad9c"/>
-                <col style="background-color: #18ad9c"/>
-            </colgroup>
+<table class="table">
+  
     <thead>
         <tr>
             <th>Line Item</th>
@@ -1875,8 +1701,8 @@
             <th>Change Orders</th>
             <th>Revised Contract Value</th>
             <th>Variance</th>
-            <th>Actual Cost To Date</th>
-            <th>Remaining Contract Value</th>
+            <th bgcolor="#adebad">Actual Cost To Date</th>
+            <th bgcolor="#adebad">Remaining Contract Value</th>
         </tr>
     </thead>
     <tbody>
@@ -1918,7 +1744,7 @@
         <br><br><h4>Add new Cost Sumary Line Item</h4>
 
         
-        <table class="table table-striped ">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Division Category</th>
