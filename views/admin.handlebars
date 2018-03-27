@@ -68,15 +68,16 @@
                 </div>
                 </tr>
                 <tr>
+                
                 <div class="form-group mb-2">
                     <td><label>Password:</label></td>
-                    <td><input type="password" class="form-control" placeholder="Password" name="password"></td>
+                    <td><input title="Password must contain at least 7 characters, include both upper and lowercase letters, and numbers. Special characters are allowed, but not required." type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,25}" class="form-control" placeholder="Password" name="password" onchange="form.password2.pattern = RegExp.escape(this.value);"></td>
                 </div>
                 </tr>
                 <tr>
                 <div class="form-group mb-2">
                     <td><label>Confirm Password:</label></td>
-                    <td><input type="password" class="form-control" placeholder="Password" name="password2"></td>
+                    <td><input title="Please enter the same password as above." type="password" class="form-control" placeholder="Password" name="password2"></td>
                 </div>
                 </tr>
                 <tr>
@@ -384,3 +385,11 @@
         </div>       
     </div>
 </div>
+
+<script type="text/javascript">
+    if(!RegExp.escape) {
+        RegExp.escape = function(s) {
+            return String(s).replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
+        };
+    }
+</script>

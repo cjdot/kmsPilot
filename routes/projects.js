@@ -28,7 +28,7 @@ var qry6 = 'SELECT * FROM pco WHERE projectID = ?'
 var qry7 = 'SELECT * FROM orderset WHERE projectID = ? ORDER BY orderSet'
 var qry8 = 'SELECT * FROM costsummarysubheader WHERE projectID = ?'
 var qry9 = 'SELECT divisionCategory, SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE projectID = ? GROUP BY divisionCategory'
-var qry10 = 'SELECT SUM(originalContractValue) AS originalContractValue, SUM(revisedContractValue) AS revisedContractValue FROM lineitem WHERE projectID = ?'
+var qry10 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, SUM(remainingContractValue) AS remainingContractValue FROM lineitem WHERE projectID = ?'
 
 router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 	
