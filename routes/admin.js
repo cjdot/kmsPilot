@@ -3,6 +3,17 @@ var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mysql = require('mysql2');
+var sql = require('mssql');
+
+var sqlconfig = {
+	user: 'kmsadmin',
+    password: 'KMSproject1',
+    server: 'kempmspilot.database.windows.net', 
+    database: 'kmspilot',
+	options: {
+		encrypt: true
+	}
+}
 
 var config = {
 
@@ -122,21 +133,10 @@ router.post('/deleteUser', ensureAuthenticated, function(req, res){
 
 router.post('/registerProject', ensureAuthenticated, function(req, res){
 
-	//Establishing connection to the database
-    const conn = new mysql.createConnection(config);
-	conn.connect(
-		function (err) {
-			if (err) {
-				console.log("!!!! Cannot Connect !!! Error:");
-				throw err;
-			}
-			else {
-				console.log("Connection established.");
-			}
-		}
-
-    )
-
+    var insertQuery= 'INSERT INTO kmsActionItem (actionItemDescription, projectID) VALUES(\'Contract Signed\', LAST_INSERT_ID()), (\'Business Plan Complete\', LAST_INSERT_ID() ), (\'Project Management Plan Complete\', LAST_INSERT_ID() ); '
+    var qry = 'INSERT INTO PROJECT (clientName, projectName, location, serviceType, targetStartDate, targetCompletionDate, projectedBudget, contractAmount) VALUES (@clientName, @projectName, @location, @serviceType, @targetStartDate, @targetCompletionDate, @projectedBudget, @contractAmount);';
+	var qry1 = 'SELECT * FROM users'
+    var qry2 = 'SELECT * FROM project'
     
 	var targetCompletionDate = req.body.targetCompletionDate
 	var targetStartDate = req.body.targetStartDate
@@ -144,21 +144,42 @@ router.post('/registerProject', ensureAuthenticated, function(req, res){
 	if (req.body.targetStartDate == ""){targetStartDate = null};
     if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
 
-	var insertQuery= 'INSERT INTO kmsActionItem (actionItemDescription, projectID) VALUES(\'Contract Signed\', LAST_INSERT_ID()), (\'Business Plan Complete\', LAST_INSERT_ID() ), (\'Project Management Plan Complete\', LAST_INSERT_ID() ); '
-    var qry = 'INSERT INTO PROJECT (clientName, projectName, location, serviceType, targetStartDate, targetCompletionDate, projectedBudget, contractAmount) VALUES (?, ?, ?, ?, ?, ?, ?, ?);';
-	var qry1 = 'SELECT * FROM user'
-    var qry2 = 'SELECT * FROM project'
-
-    conn.query(qry, [req.body.clientName, req.body.projectName, req.body.location, req.body.serviceType, targetStartDate, targetCompletionDate, req.body.projectedBudget, req.body.contractAmount], function (err, results, fields) { 
-		conn.query(insertQuery, function (err, results00, fields) {
-			conn.query(qry1, function(err, results0, fields) {
-				conn.query(qry2, function(err, results, fields) {	
-
-					res.render('admin', {results0: results0, results: results});
-				});				              
-            });
-        });       
-    }); 
+	//Establishing connection to the database
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
+	
+	conn.connect(
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!!! Error")
+				throw err;
+			}
+			else {
+                console.log("Connection established.");
+                
+				request.input("clientName", sql.VarChar, req.body.clientName);
+                request.input("projectName", sql.VarChar, req.body.projectName);
+            	request.input("location", sql.VarChar, req.body.location);
+                request.input("serviceType", sql.VarChar, req.body.serviceType);
+            	request.input("targetStartDate", sql.Date, targetStartDate);
+                request.input("targetCompletionDate", sql.Date, targetCompletionDate);
+                request.input("projectedBudget", sql.Decimal, req.body.projectedBudget);
+				request.input("contractAmount", sql.Decimal, req.body.contractAmount);
+				
+				request.query(qry, function (err, resultss, fields) { 
+                    request.query(qry1, function(err, preresults0, fields) {
+                        request.query(qry2, function(err, preresults, fields) {	
+							
+							var results = preresults.recordset;
+							var results0 = preresults0.recordset;
+							
+							res.render('admin', {results: results, results0: results0});	
+							conn.close();				
+                        });				              
+                    });
+                }); 				
+			}
+		});
 });
 
 router.post('/updateProject', ensureAuthenticated, function(req, res){

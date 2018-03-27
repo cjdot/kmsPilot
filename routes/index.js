@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql2');
+var sql = require('mssql');
 
 var config = {
 
@@ -13,8 +14,49 @@ var config = {
 
 };
 
+
+var sqlconfig = {
+	user: 'kmsadmin',
+    password: 'KMSproject1',
+    server: 'kempmspilot.database.windows.net', 
+    database: 'kmspilot',
+	options: {
+		encrypt: true
+	}
+}
+
+
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res){
+	
+	var qry1 = 'SELECT TOP 10 kmsactionitem.projectID, project.projectName, kmsactionitem.actionItemDescription, kmsactionitem.targetCompletionDate FROM kmsactionitem INNER JOIN project ON kmsactionitem.projectID = project.projectID WHERE kmsactionitem.targetCompletionDate IS NOT NULL AND kmsactionitem.targetCompletionDate >= GETDATE() AND kmsactionitem.targetCompletionDate <= DATEADD(day, 7, GETDATE())  ORDER BY kmsactionitem.targetCompletionDate DESC';
+	var qry2 = 'SELECT TOP 10 externalactionitem.projectID, project.projectName, externalactionitem.actionItemDescription, externalactionitem.targetCompletionDate FROM externalactionitem INNER JOIN project ON externalactionitem.projectID = project.projectID WHERE externalactionitem.targetCompletionDate IS NOT NULL AND externalactionitem.targetCompletionDate >= GETDATE() AND externalactionitem.targetCompletionDate <= DATEADD(day, 7, GETDATE())  ORDER BY externalactionitem.targetCompletionDate DESC';
+	var simple = 'SELECT * FROM kmsactionitem'
+	var myqry1 = 'SELECT kmsactionitem.projectID, project.projectName, kmsactionitem.actionItemDescription, kmsactionitem.targetCompletionDate FROM kmsactionitem INNER JOIN project ON kmsactionitem.projectID = project.projectID WHERE kmsactionitem.targetCompletionDate IS NOT NULL AND kmsactionitem.targetCompletionDate >= CURDATE() AND kmsactionitem.targetCompletionDate <= DATE_ADD(CURDATE(), INTERVAL 7 DAY)  ORDER BY kmsactionitem.targetCompletionDate DESC LIMIT 10';
+	var myqry2 = 'SELECT externalactionitem.projectID, project.projectName, externalactionitem.actionItemDescription, externalactionitem.targetCompletionDate FROM externalactionitem INNER JOIN project ON externalactionitem.projectID = project.projectID WHERE externalactionitem.targetCompletionDate IS NOT NULL AND externalactionitem.targetCompletionDate >= CURDATE() AND externalactionitem.targetCompletionDate <= DATE_ADD(CURDATE(), INTERVAL 7 DAY) ORDER BY externalactionitem.targetCompletionDate DESC LIMIT 10';
+	var qry3 = 'SELECT (COUNT(targetCompletionDate) - COUNT(actualCompletionDate)) AS totalTarget, COUNT(actualCompletionDate) AS totalActual FROM kmsactionitem'
+	var qry4 = 'SELECT (COUNT(targetCompletionDate) - COUNT(actualCompletionDate)) AS totalTarget2, COUNT(actualCompletionDate) AS totalActual2 FROM externalactionitem'
+
+	
+	const conn2 = new sql.ConnectionPool(sqlconfig);
+	var req = new sql.Request(conn2);
+	
+	conn2.connect(
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!!! Error")
+				throw err;
+			}
+			else {
+				console.log("Connection established.");
+				req.query(simple, function (err, result) {
+					if(err) {console.log(err)};
+					console.log(result.recordset);
+					conn2.close();
+				});	
+			
+			}
+		});
 	
 	const conn = new mysql.createConnection(config);
 	conn.connect(
@@ -28,13 +70,9 @@ router.get('/', ensureAuthenticated, function(req, res){
 			}
 		});
 	
-		
-	var qry1 = 'SELECT kmsactionitem.projectID, project.projectName, kmsactionitem.actionItemDescription, kmsactionitem.targetCompletionDate FROM kmsactionitem INNER JOIN project ON kmsactionitem.projectID = project.projectID WHERE kmsactionitem.targetCompletionDate IS NOT NULL AND kmsactionitem.targetCompletionDate >= CURDATE() AND kmsactionitem.targetCompletionDate <= DATE_ADD(CURDATE(), INTERVAL 7 DAY)  ORDER BY kmsactionitem.targetCompletionDate DESC LIMIT 10';
-	var qry2 = 'SELECT externalactionitem.projectID, project.projectName, externalactionitem.actionItemDescription, externalactionitem.targetCompletionDate FROM externalactionitem INNER JOIN project ON externalactionitem.projectID = project.projectID WHERE externalactionitem.targetCompletionDate IS NOT NULL AND externalactionitem.targetCompletionDate >= CURDATE() AND externalactionitem.targetCompletionDate <= DATE_ADD(CURDATE(), INTERVAL 7 DAY) ORDER BY externalactionitem.targetCompletionDate DESC LIMIT 10';
-	var qry3 = 'SELECT (COUNT(targetCompletionDate) - COUNT(actualCompletionDate)) AS totalTarget, COUNT(actualCompletionDate) AS totalActual FROM kmsactionitem'
-	var qry4 = 'SELECT (COUNT(targetCompletionDate) - COUNT(actualCompletionDate)) AS totalTarget2, COUNT(actualCompletionDate) AS totalActual2 FROM externalactionitem'
-	conn.query(qry1, function (err, results0, fields) { 
-		conn.query(qry2, function (err, results, fields){
+	
+	conn.query(myqry1, function (err, results0, fields) { 
+		conn.query(myqry2, function (err, results, fields){
 			conn.query(qry3, function (err, results1, fields){
 				conn.query(qry4, function (err, results2, fields){
 
