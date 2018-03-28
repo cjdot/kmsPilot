@@ -29,6 +29,7 @@ var qry7 = 'SELECT * FROM orderset WHERE projectID = ? ORDER BY orderSet'
 var qry8 = 'SELECT * FROM costsummarysubheader WHERE projectID = ?'
 var qry9 = 'SELECT divisionCategory, SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE projectID = ? GROUP BY divisionCategory'
 var qry10 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, SUM(remainingContractValue) AS remainingContractValue FROM lineitem WHERE projectID = ?'
+var qry11 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE (divisionCategory=\'Allowances\' OR divisionCategory=\'FF&E\' OR divisionCategory=\'IT\' OR divisionCategory=\'Security\' OR divisionCategory=\'Consultants\' OR divisionCategory=\'Contingency\' OR divisionCategory=\'Owner Supplied Equipment\') AND projectID = ?;'
 
 router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 	
@@ -70,8 +71,9 @@ router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
 									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
 										conn.query(qry9, req.body.projectID, function (err, results8, fields) {
+											conn.query(qry10, req.body.projectID, function (err, results9, fields) {
 
-											res.render('project_details', { results8: results8, results7: results7, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+											res.render('project_details', {results9: results9, results8: results8, results7: results7, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
 										});
 									});
 								});
@@ -82,6 +84,7 @@ router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 			});
 		});
 	});
+});
 });
 
 router.post('/updateProjectActivity', ensureAuthenticated, function (req, res) {
@@ -124,8 +127,9 @@ router.post('/updateProjectActivity', ensureAuthenticated, function (req, res) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
 									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
 										conn.query(qry9, req.body.projectID, function (err, results8, fields) {
+											conn.query(qry10, req.body.projectID, function (err, results9, fields) {
 
-											res.render('project_details', { results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });	
+											res.render('project_details', {results9: results9, results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });	
 										});
 									});
 								});
@@ -136,6 +140,7 @@ router.post('/updateProjectActivity', ensureAuthenticated, function (req, res) {
 			});
 		});
 	});
+});
 });
 
 router.post('/deleteProjectActivity', ensureAuthenticated, function (req, res) {
@@ -167,8 +172,9 @@ router.post('/deleteProjectActivity', ensureAuthenticated, function (req, res) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
 									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
 										conn.query(qry9, req.body.projectID, function (err, results8, fields) {
+											conn.query(qry10, req.body.projectID, function (err, results9, fields) {
 						
-											res.render('project_details', { results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+											res.render('project_details', {results9: results9, results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
 										});
 									});
 								});
@@ -179,6 +185,7 @@ router.post('/deleteProjectActivity', ensureAuthenticated, function (req, res) {
 			});
 		});
 	});
+});
 });
 
 router.post('/newActionItem', ensureAuthenticated, function (req, res) {
@@ -219,8 +226,9 @@ router.post('/newActionItem', ensureAuthenticated, function (req, res) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
 									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
 										conn.query(qry9, req.body.projectID, function (err, results8, fields) {
+											conn.query(qry10, req.body.projectID, function (err, results9, fields) {
 
-											res.render('project_details', { results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+											res.render('project_details', {results9: results9, results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
 										});
 									});
 								});
@@ -231,6 +239,7 @@ router.post('/newActionItem', ensureAuthenticated, function (req, res) {
 			});
 		});
 	});
+});
 });
 
 router.post('/updateActionItem', ensureAuthenticated, function (req, res) {
@@ -271,8 +280,9 @@ router.post('/updateActionItem', ensureAuthenticated, function (req, res) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
 									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
 										conn.query(qry9, req.body.projectID, function (err, results8, fields) {
+											conn.query(qry10, req.body.projectID, function (err, results9, fields) {
 
-											res.render('project_details', { results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+											res.render('project_details', {results9: results9, results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
 										});
 									});
 								});
@@ -283,6 +293,7 @@ router.post('/updateActionItem', ensureAuthenticated, function (req, res) {
 			});
 		});
 	});
+});
 });
 
 router.post('/deleteActionItem', ensureAuthenticated, function (req, res) {
@@ -313,8 +324,9 @@ router.post('/deleteActionItem', ensureAuthenticated, function (req, res) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
 									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
 										conn.query(qry9, req.body.projectID, function (err, results8, fields) {
+											conn.query(qry10, req.body.projectID, function (err, results9, fields) {
 
-											res.render('project_details', { results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+											res.render('project_details', {results9: results9, results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
 										});
 									});
 								});
@@ -325,6 +337,7 @@ router.post('/deleteActionItem', ensureAuthenticated, function (req, res) {
 			});
 		});
 	});
+});
 });
 
 router.post('/newExternalActionItem', ensureAuthenticated, function (req, res) {
@@ -342,7 +355,7 @@ router.post('/newExternalActionItem', ensureAuthenticated, function (req, res) {
 			}
 		});
 	
-	var activityStartDate = req.body.targetStartDate
+	var activityStartDate = req.body.activityStartDate
 	var targetCompletionDate = req.body.targetCompletionDate
 	var actualCompletionDate = req.body.actualCompletionDate
 
@@ -365,8 +378,9 @@ router.post('/newExternalActionItem', ensureAuthenticated, function (req, res) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
 									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
 										conn.query(qry9, req.body.projectID, function (err, results8, fields) {
+											conn.query(qry10, req.body.projectID, function (err, results9, fields) {
 
-											res.render('project_details', { results9: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+											res.render('project_details', {results9: results9, results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
 										});
 									});
 								});
@@ -377,6 +391,7 @@ router.post('/newExternalActionItem', ensureAuthenticated, function (req, res) {
 			});
 		});
 	});
+});
 });
 
 router.post('/updateExternalActionItem', ensureAuthenticated, function (req, res) {
@@ -394,7 +409,7 @@ router.post('/updateExternalActionItem', ensureAuthenticated, function (req, res
 			}
 		});
 
-	var activityStartDate = req.body.targetStartDate
+	var activityStartDate = req.body.activityStartDate
 	var targetCompletionDate = req.body.targetCompletionDate
 	var actualCompletionDate = req.body.actualCompletionDate
 
@@ -417,8 +432,9 @@ router.post('/updateExternalActionItem', ensureAuthenticated, function (req, res
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
 									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
 										conn.query(qry9, req.body.projectID, function (err, results8, fields) {
+											conn.query(qry10, req.body.projectID, function (err, results9, fields) {
 
-											res.render('project_details', { results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+											res.render('project_details', {results9: results9, results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
 										});
 									});
 								});
@@ -430,7 +446,7 @@ router.post('/updateExternalActionItem', ensureAuthenticated, function (req, res
 		});
 	});
 });
-
+});
 
 
 router.post('/deleteExternalActionItem', ensureAuthenticated, function (req, res) {
@@ -462,8 +478,9 @@ router.post('/deleteExternalActionItem', ensureAuthenticated, function (req, res
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
 									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
 										conn.query(qry9, req.body.projectID, function (err, results8, fields) {
+											conn.query(qry10, req.body.projectID, function (err, results9, fields) {
 
-											res.render('project_details', { results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+											res.render('project_details', {results9: results9, results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
 										});
 									});
 								});
@@ -474,6 +491,7 @@ router.post('/deleteExternalActionItem', ensureAuthenticated, function (req, res
 			});
 		});
 	});
+});
 });
 
 router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
@@ -505,8 +523,9 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
 									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
 										conn.query(qry9, req.body.projectID, function (err, results8, fields) {
+											conn.query(qry10, req.body.projectID, function (err, results9, fields) {
 
-											res.render('project_details', {results8: results8,  results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+											res.render('project_details', {results9: results9, results8: results8,  results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
 										});
 									});
 								});
@@ -517,6 +536,7 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
 			});
 		});
 	});
+});
 });
 
 router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
@@ -548,8 +568,9 @@ router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
 									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
 										conn.query(qry9, req.body.projectID, function (err, results8, fields) {
+											conn.query(qry10, req.body.projectID, function (err, results9, fields) {
 
-											res.render('project_details', { results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6:results6 });
+											res.render('project_details', {results9: results9, results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6:results6 });
 										});
 									});
 								});
@@ -560,6 +581,7 @@ router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
 			});
 		});
 	});
+});
 });
 
 router.post('/deleteCostSummary', ensureAuthenticated, function (req, res) {
@@ -591,8 +613,9 @@ router.post('/deleteCostSummary', ensureAuthenticated, function (req, res) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
 									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
 										conn.query(qry9, req.body.projectID, function (err, results8, fields) {
+											conn.query(qry10, req.body.projectID, function (err, results9, fields) {
 
-											res.render('project_details', { results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+											res.render('project_details', {results9: results9, results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
 										});
 									});
 								});
@@ -603,6 +626,7 @@ router.post('/deleteCostSummary', ensureAuthenticated, function (req, res) {
 			});
 		});
 	});
+});
 });
 
 router.post('/newPCO', ensureAuthenticated, function (req, res) {
@@ -644,8 +668,9 @@ router.post('/newPCO', ensureAuthenticated, function (req, res) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
 									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
 										conn.query(qry9, req.body.projectID, function (err, results8, fields) {
+											conn.query(qry10, req.body.projectID, function (err, results9, fields) {
 
-											res.render('project_details', { results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+											res.render('project_details', {results9: results9, results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
 										});
 									});
 								});
@@ -656,6 +681,7 @@ router.post('/newPCO', ensureAuthenticated, function (req, res) {
 			});
 		});
 	});
+});
 });
 
 router.post('/updatePCO', ensureAuthenticated, function (req, res) {
@@ -697,8 +723,9 @@ router.post('/updatePCO', ensureAuthenticated, function (req, res) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
 									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
 										conn.query(qry9, req.body.projectID, function (err, results8, fields) {
+											conn.query(qry10, req.body.projectID, function (err, results9, fields) {
 
-											res.render('project_details', { results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+											res.render('project_details', {results9: results9, results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
 										});
 									});
 								});
@@ -709,6 +736,7 @@ router.post('/updatePCO', ensureAuthenticated, function (req, res) {
 			});
 		});
 	});
+});
 });
 
 
@@ -741,8 +769,9 @@ router.post('/deletePCO', ensureAuthenticated, function (req, res) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
 									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
 										conn.query(qry9, req.body.projectID, function (err, results8, fields) {
+											conn.query(qry10, req.body.projectID, function (err, results9, fields) {
 
-											res.render('project_details', { results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+											res.render('project_details', {results9: results9, results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
 										});
 									});
 								});
@@ -753,6 +782,7 @@ router.post('/deletePCO', ensureAuthenticated, function (req, res) {
 			});
 		});
 	});
+});
 });
 
 router.post('/newSubheader', ensureAuthenticated, function (req, res) {
@@ -784,8 +814,9 @@ router.post('/newSubheader', ensureAuthenticated, function (req, res) {
 								conn.query(qry7, req.body.projectID, function (err, results6, fields) {
 									conn.query(qry8, req.body.projectID, function (err, results7, fields) {
 										conn.query(qry9, req.body.projectID, function (err, results8, fields) {
+											conn.query(qry10, req.body.projectID, function (err, results9, fields) {
 
-											res.render('project_details', { results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
+											res.render('project_details', {results9: results9, results8: results8, results7: results7, results6: results6, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5 });
 										});
 									});
 								});
@@ -796,6 +827,7 @@ router.post('/newSubheader', ensureAuthenticated, function (req, res) {
 			});
 		});
 	});
+});
 });
 
 router.get('/project', ensureAuthenticated, function (req, res) {
@@ -851,8 +883,9 @@ router.post('/project_details', ensureAuthenticated, function (req, res) {
 								conn.query(qry8, req.body.projectID, function (err, results7, fields) {
 									conn.query(qry9, req.body.projectID, function (err, results8, fields) {
 										conn.query(qry10, req.body.projectID, function (err, results9, fields) {
+											conn.query(qry11, req.body.projectID, function (err, results10, fields) {
 
-											res.render('project_details', { results9: results9, results8: results8, results7: results7, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6:results6 });
+											res.render('project_details', {results10: results10, results9: results9, results8: results8, results7: results7, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6:results6 });
 										});
 									});
 								});
@@ -863,6 +896,7 @@ router.post('/project_details', ensureAuthenticated, function (req, res) {
 			});
 		});
 	});
+});
 });
 
 
