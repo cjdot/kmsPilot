@@ -30,6 +30,7 @@ var qry8 = 'SELECT * FROM costsummarysubheader WHERE projectID = ?'
 var qry9 = 'SELECT divisionCategory, SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE projectID = ? GROUP BY divisionCategory'
 var qry10 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, SUM(remainingContractValue) AS remainingContractValue FROM lineitem WHERE projectID = ?'
 var qry11 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE (divisionCategory=\'Allowances\' OR divisionCategory=\'FF&E\' OR divisionCategory=\'IT\' OR divisionCategory=\'Security\' OR divisionCategory=\'Consultants\' OR divisionCategory=\'Contingency\' OR divisionCategory=\'Owner Supplied Equipment\') AND projectID = ?;'
+var qry12 = 'select SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE (divisionCategory=\'Division 1 - General Conditions and Insurance\' OR divisionCategory=\'Division 2 - Site Construction\' OR divisionCategory=\'Division 3 - Concrete\' OR divisionCategory=\'Division 4 - Masonry\' OR divisionCategory=\'Division 5 - Metals\' OR divisionCategory=\'Division 6 - Carpentry and Millwork\' OR divisionCategory=\'Division 7 - Thermal and Moisture Protection\' OR divisionCategory=\'Division 8 - Doors and Windows\' OR divisionCategory=\'Division 9 - Finishes\' OR divisionCategory=\'Division 10 - Specialties\' OR divisionCategory=\'Division 11 - Equipment\' OR divisionCategory=\'Division 12 - Furnishings\' OR divisionCategory=\'Division 13 - Special Construction\' OR divisionCategory=\'Division 14 - Conveying Systems\' OR divisionCategory=\'Division 15 - Mechanical, Plumbing, HVAC, and Fire\' OR divisionCategory=\'Division 16 - Electrical\' ) AND projectID = 19;'
 
 router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 	
@@ -884,8 +885,9 @@ router.post('/project_details', ensureAuthenticated, function (req, res) {
 									conn.query(qry9, req.body.projectID, function (err, results8, fields) {
 										conn.query(qry10, req.body.projectID, function (err, results9, fields) {
 											conn.query(qry11, req.body.projectID, function (err, results10, fields) {
+												conn.query(qry12, req.body.projectID, function (err, results11, fields) {
 
-											res.render('project_details', {results10: results10, results9: results9, results8: results8, results7: results7, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6:results6 });
+											res.render('project_details', {results11: results11, results10: results10, results9: results9, results8: results8, results7: results7, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6:results6 });
 										});
 									});
 								});
@@ -896,6 +898,7 @@ router.post('/project_details', ensureAuthenticated, function (req, res) {
 			});
 		});
 	});
+});
 });
 });
 
