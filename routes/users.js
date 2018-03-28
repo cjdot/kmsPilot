@@ -4,6 +4,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mysql = require('mysql2');
 var bcrypt = require('bcryptjs');
+var sql = require('mssql');
 
 var User = require('../models/user');
 
@@ -13,6 +14,16 @@ var User = require('../models/user');
 router.get('/register', function(req, res){
 	res.render('register');
 });
+
+var sqlconfig = {
+	user: 'kmsadmin',
+    password: 'KMSproject1',
+    server: 'kempmspilot.database.windows.net', 
+    database: 'kmspilot',
+	options: {
+		encrypt: true
+	}
+}
 
 //PDF Builder
 var config = {
@@ -26,40 +37,11 @@ var config = {
 
 };
 
-router.get('/builder', ensureAuthenticated, function (req, res) {
-	
-	const conn = new mysql.createConnection(config);
-	conn.connect(
-		function (err) {
-			if (err) {
-				console.log("!!!! Cannot Connect !!! Error:");
-				throw err;
-			}
-			else {
-				console.log("Connection established.");
-			}
-		}
-
-	)
-
-	var qry1 = 'SELECT * FROM user'
-    var qry2 = 'SELECT * FROM project'
-    
-    conn.query(qry1, function (err, results0, fields) { 
-        conn.query(qry2, function (err, results, fields){
-
-            res.render('builder', {results0:results0, results:results});
-        });
-	});
-	
-});
 
 // Login
 router.get('/login', function(req, res){
 	res.render('login');
 });
-
-
 
 
 //This function ensures that every route is authenticated with a user
@@ -94,6 +76,16 @@ router.post('/register', function(req, res){
 	req.checkBody('permission', 'Permission Level is required').notEmpty();
 
 	var errors = req.validationErrors();
+	var qry= 'INSERT INTO users (firstName, lastName, email, password, cellNumber, permissionLevel) VALUES( @firstName, @lastName, @email, @password, @cellNumber, @permissionLevel )'
+	var qry1 = 'SELECT * FROM users'
+	var qry2 = 'SELECT * FROM project'
+	
+	//This code below hashes the password to store in database
+	let hash = bcrypt.hashSync(password, 10);
+
+	//Establishing connection to the database
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
 
 	if(errors){
 		res.render('admin',{
@@ -101,34 +93,39 @@ router.post('/register', function(req, res){
 		});
 	} else {
         
-        
+        conn.connect(
+			function (err) {
+				if (err) {
+					console.log("!!!! Cannot Connect !!!! Error")
+					throw err;
+				}
+				else {
+					console.log("Connection established.");
+					
 
-		//This code below hashes the password to store in database
-		let hash = bcrypt.hashSync(password, 10);
+					request.input("firstName", sql.VarChar, req.body.firstName);
+					request.input("lastName", sql.VarChar, req.body.lastName);
+					request.input("email", sql.VarChar, req.body.email);
+					request.input("password", sql.VarChar, hash);
+					request.input("cellNumber", sql.VarChar, req.body.phoneNumber);
+					request.input("permissionLevel", sql.VarChar, req.body.permission);
+					
+					request.query(qry, function (err, preresults0) {
+						request.query(qry1, function (err, preresults1) {
+							request.query(qry2, function (err, preresults2) {
+							
+								var results0 = preresults1.recordset;
+								var results = preresults2.recordset;
 
-		//This executes the insert statement			
-		//queryDatabase(newUser.firstName, newUser.lastName, newUser.email, hash, newUser.phoneNumber, newUser.permission)
+								req.flash('success_msg', 'New User has been registered');		
+								res.render('admin', {results0:results0, results:results});	
+								conn.close();	
 
-		const conn = new mysql.createConnection(config);
-		conn.connect(
-		function (err) {
-			if (err) {
-				console.log("!!!! Cannot Connect !!! Error:");
-				throw err;
-			}
-			else {
-				console.log("Connection established.");
-			}
-		});
-
-		var qry2= 'INSERT INTO user (firstName, lastName, email, password, cellNumber, permissionLevel) VALUES( ?, ?, ?, ?, ?, ?)'
-		console.log(firstName + ' ' + lastName + ' ' + email + ' ' + hash + ' ' + phoneNumber + ' ' + permission)
-		conn.query( qry2, [firstName, lastName, email, hash, phoneNumber, permission], function(err, results, fields){
-			if (err) throw err;
-			console.log(results)
-			req.flash('success_msg', 'New User has been registered');
-			res.redirect('/admin');			
-		});
+							});		
+						});
+					}); 				
+				}
+			});
 		
 	}
 });

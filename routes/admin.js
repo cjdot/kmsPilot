@@ -31,110 +31,120 @@ var config = {
 router.get('/', ensureAuthenticated, function(req, res){
     console.log(req.user);
 	
+	var qry1 = 'SELECT * FROM users'
+	var qry2 = 'SELECT * FROM project'
+	
 	//Establishing connection to the database
-    const conn = new mysql.createConnection(config);
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
+	
 	conn.connect(
 		function (err) {
 			if (err) {
-				console.log("!!!! Cannot Connect !!! Error:");
+				console.log("!!!! Cannot Connect !!!! Error")
 				throw err;
 			}
 			else {
-				console.log("Connection established.");
-			}
+                console.log("Connection established.");
+                				
+                request.query(qry1, function(err, preresults0, fields) {
+                    request.query(qry2, function(err, preresults, fields) {	
+						
+						var results = preresults.recordset;
+						var results0 = preresults0.recordset;
+							
+						res.render('admin', {results: results, results0: results0});	
+						conn.close();				
+                    });				              
+                });
+                 				
 		}
-
-    )
-
-    
-    var qry1 = 'SELECT * FROM user'
-    var qry2 = 'SELECT * FROM project'
-    
-    conn.query(qry1, function (err, results0, fields) { 
-        conn.query(qry2, function (err, results, fields){
-
-            res.render('admin', {results0:results0, results:results});
-        });
-    });
-
-	
+	});	
 });
 
 router.post('/updateUser', function(req, res){
-		
+	
+	var qry= 'UPDATE users SET firstName= @firstName, lastName = @lastname, email = @email, cellNumber = @cellNumber, permissionLevel = @permissionLevel WHERE userID = @userID'	
+    var qry1 = 'SELECT * FROM users'
+	var qry2 = 'SELECT * FROM project'
+	
 	//Establishing connection to the database
-    const conn = new mysql.createConnection(config);
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
+	
 	conn.connect(
 		function (err) {
 			if (err) {
-				console.log("!!!! Cannot Connect !!! Error:");
+				console.log("!!!! Cannot Connect !!!! Error")
 				throw err;
 			}
 			else {
-				console.log("Connection established.");
+                console.log("Connection established.");
+                
+				request.input("firstName", sql.VarChar, req.body.firstName);
+				request.input("lastName", sql.VarChar, req.body.lastName);
+				request.input("email", sql.VarChar, req.body.email);
+				request.input("cellNumber", sql.VarChar, req.body.cellNumber);
+				request.input("permissionLevel", sql.VarChar, req.body.permissionLevel);
+				request.input("userID", sql.Int, req.body.userID)
+
+				request.query(qry, function (err, resultss, fields) { 
+                    request.query(qry1, function(err, preresults0, fields) {
+                        request.query(qry2, function(err, preresults, fields) {	
+														
+							var results0 = preresults0.recordset;
+							var results = preresults.recordset;
+
+							res.render('admin', {results: results, results0: results0});	
+							conn.close();				
+                        });				              
+                    });
+                }); 				
 			}
-		}
-
-    )
-
-	//Updates data in the user table within the database
-	var qry= 'UPDATE user SET firstName= ?, lastName = ?, email = ?, cellNumber = ?, permissionLevel = ? WHERE userID = ?'
-	
-    var qry1 = 'SELECT * FROM user'
-    var qry2 = 'SELECT * FROM project'
-
-    conn.query(qry, [req.body.firstName, req.body.lastName, req.body.email, req.body.cellNumber, req.body.permissionLevel, req.body.userID], function (err, resultsNeutral, fields) { 
-        conn.query(qry1, function (err, results0, fields) {
-            conn.query(qry2, function (err, results, fields) {
-                res.render('admin', {results0: results0, results: results});
-            });
-        });
-        
-    }); 
+		});
 });
 
 router.post('/deleteUser', ensureAuthenticated, function(req, res){
 
+	
+    var qry = 'DELETE FROM USERS WHERE userID = @userID'
+    var qry1 = 'SELECT * FROM users'
+    var qry2 = 'SELECT * FROM project'
+
 	//Establishing connection to the database
-    const conn = new mysql.createConnection(config);
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
+	
 	conn.connect(
 		function (err) {
 			if (err) {
-				console.log("!!!! Cannot Connect !!! Error:");
+				console.log("!!!! Cannot Connect !!!! Error")
 				throw err;
 			}
 			else {
-				console.log("Connection established.");
+                console.log("Connection established.");
+
+				request.input("userID", sql.Int, req.body.userID)
+
+				request.query(qry, function (err, resultss, fields) { 
+                    request.query(qry1, function(err, preresults0, fields) {
+                        request.query(qry2, function(err, preresults, fields) {	
+														
+							var results0 = preresults0.recordset;
+							var results = preresults.recordset;
+
+							res.render('admin', {results: results, results0: results0});	
+							conn.close();				
+                        });				              
+                    });
+                }); 				
 			}
-		}
-
-    )
-
-    
-	var targetCompletionDate = req.body.targetCompletionDate
-	var targetStartDate = req.body.targetStartDate
-
-	if (req.body.targetStartDate == ""){targetStartDate = null};
-    if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
-
-    var qry = 'DELETE FROM USER WHERE userID = ?'
-    var qry1 = 'SELECT * FROM user'
-    var qry2 = 'SELECT * FROM project'
-
-    conn.query(qry, req.body.userID, function (err, results, fields) { 
-        conn.query(qry1, function (err, results0, fields) {
-            conn.query(qry2, function (err, results, fields) {
-                res.render('admin', {results0: results0, results: results});
-            });
-        });
-        
-    }); 
+		}); 
 });
 
 router.post('/registerProject', ensureAuthenticated, function(req, res){
 
-    var insertQuery= 'INSERT INTO kmsActionItem (actionItemDescription, projectID) VALUES(\'Contract Signed\', LAST_INSERT_ID()), (\'Business Plan Complete\', LAST_INSERT_ID() ), (\'Project Management Plan Complete\', LAST_INSERT_ID() ); '
-    var qry = 'INSERT INTO PROJECT (clientName, projectName, location, serviceType, targetStartDate, targetCompletionDate, projectedBudget, contractAmount) VALUES (@clientName, @projectName, @location, @serviceType, @targetStartDate, @targetCompletionDate, @projectedBudget, @contractAmount);';
+    var qry = 'INSERT INTO PROJECT (clientName, projectName, location, serviceType, targetStartDate, targetCompletionDate, projectedBudget, contractAmount) VALUES (@clientName, @projectName, @location, @serviceType, @targetStartDate, @targetCompletionDate, @projectedBudget, @contractAmount) DECLARE @ID int set @ID = SCOPE_IDENTITY() INSERT INTO kmsActionItem (actionItemDescription, projectID) VALUES(\'Contract Signed\', @ID), (\'Business Plan Complete\', @ID), (\'Project Management Plan Complete\', @ID)';
 	var qry1 = 'SELECT * FROM users'
     var qry2 = 'SELECT * FROM project'
     
@@ -184,85 +194,110 @@ router.post('/registerProject', ensureAuthenticated, function(req, res){
 
 router.post('/updateProject', ensureAuthenticated, function(req, res){
 
-	//Establishing connection to the database
-    const conn = new mysql.createConnection(config);
-	conn.connect(
-		function (err) {
-			if (err) {
-				console.log("!!!! Cannot Connect !!! Error:");
-				throw err;
-			}
-			else {
-				console.log("Connection established.");
-			}
-		}
-
-    )
-
-    
+  
 	var targetCompletionDate = req.body.targetCompletionDate
 	var targetStartDate = req.body.targetStartDate
 
 	if (req.body.targetStartDate == ""){targetStartDate = null};
     if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
 
-    var qry = 'UPDATE PROJECT SET clientName = ?, projectName = ?, location = ?, serviceType = ?, targetStartDate = ?, targetCompletionDate = ?, projectedBudget = ?, contractAmount = ? WHERE projectID = ?'
-    var qry1 = 'SELECT * FROM user'
-    var qry2 = 'SELECT * FROM project'
+    var qry = 'UPDATE PROJECT SET clientName = @clientName, projectName = @projectName, location = @location, serviceType = @serviceType, targetStartDate = @targetStartDate, targetCompletionDate = @targetCompletionDate, projectedBudget = @projectedBudget, contractAmount = @contractAmount WHERE projectID = @projectID'
+    var qry1 = 'SELECT * FROM users'
+	var qry2 = 'SELECT * FROM project'
+	
+	//Establishing connection to the database
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
+	
+	conn.connect(
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!!! Error")
+				throw err;
+			}
+			else {
+                console.log("Connection established.");
+                
+				request.input("clientName", sql.VarChar, req.body.clientName);
+                request.input("projectName", sql.VarChar, req.body.projectName);
+            	request.input("location", sql.VarChar, req.body.location);
+                request.input("serviceType", sql.VarChar, req.body.serviceType);
+            	request.input("targetStartDate", sql.Date, targetStartDate);
+                request.input("targetCompletionDate", sql.Date, targetCompletionDate);
+                request.input("projectedBudget", sql.Decimal, req.body.projectedBudget);
+				request.input("contractAmount", sql.Decimal, req.body.contractAmount);
+				request.input("projectID", sql.Int, req.body.projectID);
 
-    conn.query(qry, [req.body.clientName, req.body.projectName, req.body.location, req.body.serviceType, targetStartDate, targetCompletionDate, req.body.projectedBudget, req.body.contractAmount, req.body.projectID], function (err, results, fields) { 
-        conn.query(qry1, function (err, results0, fields) {
-            conn.query(qry2, function (err, results, fields) {
-                res.render('admin', {results0: results0, results: results});
-            });
-        });
-        
-    }); 
+				request.query(qry, function (err, resultss, fields) { 
+                    request.query(qry1, function(err, preresults0, fields) {
+                        request.query(qry2, function(err, preresults, fields) {	
+							
+							var results = preresults.recordset;
+							var results0 = preresults0.recordset;
+							
+							res.render('admin', {results: results, results0: results0});	
+							conn.close();				
+                        });				              
+                    });
+                }); 				
+			}
+		});
+
 });
 
 router.post('/deleteProject', ensureAuthenticated, function(req, res){
 
+	
+	var delqry1 = 'DELETE FROM projectactivity WHERE projectID = @projectID'
+	var delqry2 = 'DELETE FROM kmsActionItem WHERE projectID = @projectID'
+	var delqry3 = 'DELETE FROM externalactionitem WHERE projectID = @projectID'
+	var delqry4 = 'DELETE FROM costsummary WHERE projectID = @projectID'
+	var delqry5 = 'DELETE FROM pcolog WHERE projectID = @projectID'
+	var delqry = 'DELETE FROM PROJECT WHERE projectID = @projectID'
+
+    var qry1 = 'SELECT * FROM users'
+    var qry2 = 'SELECT * FROM project'
+
+
 	//Establishing connection to the database
-    const conn = new mysql.createConnection(config);
-	conn.connect(
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
+
+    conn.connect(
 		function (err) {
 			if (err) {
-				console.log("!!!! Cannot Connect !!! Error:");
+				console.log("!!!! Cannot Connect !!!! Error")
 				throw err;
 			}
 			else {
-				console.log("Connection established.");
+                console.log("Connection established.");
+
+				request.input("projectID", sql.Int, req.body.projectID);
+
+				request.query(delqry1, function (err, resultss, fields) { 
+					request.query(delqry2, function (err, resultss, fields) { 
+						request.query(delqry3, function (err, resultss, fields) {
+							request.query(delqry4, function (err, resultss, fields) {
+								request.query(delqry5, function (err, resultss, fields) {
+									request.query(delqry, function (err, resultss, fields) {										
+										request.query(qry1, function(err, preresults0, fields) {
+                        					request.query(qry2, function(err, preresults, fields) {	
+							
+												var results = preresults.recordset;
+												var results0 = preresults0.recordset;
+							
+												res.render('admin', {results: results, results0: results0});	
+												conn.close();
+											});
+										});
+									});	
+								});	
+							});		
+                        });				              
+                    });
+                }); 				
 			}
-		});
-	
-	var delqry1 = 'DELETE FROM projectactivity WHERE projectID = ?'
-	var delqry2 = 'DELETE FROM kmsActionItem WHERE projectID = ?'
-	var delqry3 = 'DELETE FROM externalactionitem WHERE projectID = ?'
-	var delqry4 = 'DELETE FROM costsummary WHERE projectID = ?'
-	var delqry5 = 'DELETE FROM pcolog WHERE projectID = ?'
-	var delqry = 'DELETE FROM PROJECT WHERE projectID = ?'
-
-    var qry1 = 'SELECT * FROM user'
-    var qry2 = 'SELECT * FROM project'
-
-    conn.query(delqry1, req.body.projectID, function (err, results000, fields) { 
-		conn.query(delqry2, req.body.projectID, function (err, results0000, fields) { 
-			conn.query(delqry3, req.body.projectID, function (err, results00000, fields) { 
-				conn.query(delqry4, req.body.projectID, function (err, results000000, fields) { 
-					conn.query(delqry5, req.body.projectID, function (err, results0000000, fields) { 
-						conn.query(delqry, req.body.projectID, function (err, results0000000, fields) { 
-        					conn.query(qry1, function (err, results0, fields) {
-            					conn.query(qry2, function (err, results, fields) {
-			   
-									res.render('admin', {results0: results0, results: results});
-								});
-							});
-						});
-					});
-				});
-            });
-        });
-    }); 
+		}); 
 });
 
 
