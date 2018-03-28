@@ -38,9 +38,9 @@
   <div class="form-group">
     <input id="spy" type="text" class="form-control" value="">
     <label>Enter email:</label>
-    <input type="text" class="form-control" name="email" placeholder="Email">
+    <input id="forgot_email" type="text" class="form-control" name="email" placeholder="Email">
   </div>
-  <button id="forgot_button" type="button" class="btn btn-default">Email</button>
+  <button id="forgot_button" type="button" class="btn btn-default" name="forgot_email">Email</button>
 </form>
 </div>
 
@@ -52,14 +52,16 @@
 <script type="text/javascript">
   $('#spy').hide();
 
-  var spy_token = $('#spy').val().length;
-
   $('#forgot_button').click(function () {
 
-    if(spy_token == 0) {
-	  Email.send("REDACTED");
+    if($('#spy').val().length == 0) {
+	    //Email.send("REDACTED");
+      alert("Email sent!");
+    }
+    else {
+      alert("Bot input detected!");
+    }
 
     document.getElementById("forgot_button").disabled = true;
-    }
   });
 </script>
