@@ -604,8 +604,8 @@
         <table class="table table-bordered table-sm" style="width: 30%"  >   
 
             <tbody>
-             {{#each results}}
-            {{#each ../results9}}
+             
+            {{#each results9}}
             <tr>
                 <td class="costsummarystyle">Project #:</td>
                 <td bgcolor="#d9d9d9" align="center" class="costsummarystyle">PA - 9</td>
@@ -631,38 +631,27 @@
                 <td align="center" class="costsummarystyle">${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{/if}}</td>
             </tr>
              {{/each}}
-             {{/each}}
+             
             </tbody>
         </table>
         <br>
-        <table class="table table-bordered">
-               <thead>
-                <tr>
-                    <th class="text-center" style="border-color: black">Line Item</th>
-                    <th class="text-center" style="border-color: black">Budget</th>
-                    <th class="text-center" style="border-color: black">Original Contract Value</th>
-                    <th class="text-center" style="border-color: black">Change Orders</th>
-                    <th class="text-center" style="border-color: black">Revised Contract Value</th>
-                    <th class="text-center" style="border-color: black">Variance</th>
-                    <th bgcolor="#adebad" class="text-center" style="border-color: black">Actual Cost To Date</th>
-                    <th bgcolor="#adebad" class="text-center" style="border-color: black">Remaining Contract Value</th>
-                </tr>
-            </thead>
+        <table class="table">
+              
             <tbody>
-            {{#each results}}
-            {{#each ../results10}}
+            
+            {{#each results10}}
             <tr style="background-color: #64c3e5">
                 <td align="center" style="border-color: black"><strong>SOFT COSTS</strong></td>
-                <td align="center" style="border-color: black"><strong>${{#if budget}}{{formatNumber budget}}{{/if}}</strong></td>
-                <td align="center" style="border-color: black"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{/if}}</strong></td>
-                <td align="center" style="border-color: black"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{/if}}</strong></td>
-                <td align="center" style="border-color: black"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{/if}}</strong></td>
-                <td align="center" style="border-color: black"><strong>${{#if variance}}{{formatNumber variance}}{{/if}}</strong></td> 
-                <td align="center" style="border-color: black"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{/if}}</strong></td>
-                <td align="center" style="border-color: black"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Budget: <strong>${{#if budget}}{{formatNumber budget}}{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Original Contract Values: <strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Change Orders:<strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Revised Contract Value: <strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Variance: <strong>${{#if variance}}{{formatNumber variance}}{{/if}}</strong></td> 
+                <td align="center" style="border-color: black">Actual Cost To Date: <strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Remaining Contract Value: <strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{/if}}</strong></td>
             </tr>
             {{/each}}
-            {{/each}}
+            
 
             </tbody>
         </table>
@@ -1024,34 +1013,23 @@
         {{/ifEquals}}
         {{/each}}
         <br> <br>
-       <table class="table table-bordered">
-               <thead>
-                <tr>
-                    <th class="text-center" style="border-color: black">Line Item</th>
-                    <th class="text-center" style="border-color: black">Budget</th>
-                    <th class="text-center" style="border-color: black">Original Contract Value</th>
-                    <th class="text-center" style="border-color: black">Change Orders</th>
-                    <th class="text-center" style="border-color: black">Revised Contract Value</th>
-                    <th class="text-center" style="border-color: black">Variance</th>
-                    <th bgcolor="#adebad" class="text-center" style="border-color: black">Actual Cost To Date</th>
-                    <th bgcolor="#adebad" class="text-center" style="border-color: black">Remaining Contract Value</th>
-                </tr>
-            </thead>
+       <table class="table">
+               
             <tbody>
-            {{#each results}}
-            {{#each ../results11}}
+            
+            {{#each results11}}
             <tr style="background-color: #64c3e5">
                 <td align="center" style="border-color: black"><strong>CONSTRUCTION</strong></td>
-                <td align="center" style="border-color: black"><strong>${{#if budget}}{{formatNumber budget}}{{/if}}</strong></td>
-                <td align="center" style="border-color: black"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{/if}}</strong></td>
-                <td align="center" style="border-color: black"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{/if}}</strong></td>
-                <td align="center" style="border-color: black"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{/if}}</strong></td>
-                <td align="center" style="border-color: black"><strong>${{#if variance}}{{formatNumber variance}}{{/if}}</strong></td> 
-                <td align="center" style="border-color: black"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{/if}}</strong></td>
-                <td align="center" style="border-color: black"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Budget: <strong>${{#if budget}}{{formatNumber budget}}{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Original Contract Value: <strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Change Orders: <strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Revised Contract Value: <strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Variance: <strong>${{#if variance}}{{formatNumber variance}}{{/if}}</strong></td> 
+                <td align="center" style="border-color: black">Actual Cost To Date: <strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Remaining Contract Value: <strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{/if}}</strong></td>
             </tr>
             {{/each}}
-            {{/each}}
+            
 
             </tbody>
         </table>
