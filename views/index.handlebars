@@ -109,7 +109,7 @@ chart.render();
             <input type= "hidden" name="projectID", id="projectID" value="{{projectID}}">
             <td><input style="width:100%" class="btn btn-info my-2 my-sm-0" type="submit" value="{{projectName}}" /></td> 
             <td>{{actionItemDescription}}</td> 
-            <td>{{#if targetCompletionDate}}{{formatDate targetCompletionDate}}{{/if}}</td>
+            <td>{{#if targetCompletionDate}}{{formatTime targetCompletionDate "MM/DD/YYYY"}}{{/if}}</td>
         </tr>
         </form>
         {{/each}}
@@ -146,7 +146,7 @@ chart.render();
             <input type= "hidden" name="projectID", id="projectID" value="{{projectID}}">
             <td><input style="width:100%" class="btn btn-primary my-2 my-sm-0" type="submit" value="{{projectName}}" /></td> 
             <td>{{actionItemDescription}}</td> 
-            <td>{{formatDate targetCompletionDate}}</td>
+            <td>{{formatTime targetCompletionDate "MM/DD/YYYY"}}</td>
         </tr>
         </form>
         {{/each}}

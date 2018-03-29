@@ -130,6 +130,8 @@ h1 {
   overflow-x: auto;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
   border-right: 1px solid #eee;
+  background-color: #333333;
+  
 }
 
 /* Sidebar navigation */
@@ -152,6 +154,7 @@ h1 {
 
 .sidebar .nav-link {
   border-radius: 0;
+  color:#47c9ff; 
 }
 
 .projectss {

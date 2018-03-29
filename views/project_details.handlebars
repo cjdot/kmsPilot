@@ -49,50 +49,50 @@
 
 
 
-<table class="table table-bordered "  >   
-
+<table class="table table-bordered " style="width: 600px" >   
+   
             <tbody>
              {{#each results}}
             
            <tr>
-                <td class="costsummarystyle" style="font-size: 25px;"><strong>Client Name:</strong></td>
-                <td align="center"  class="costsummarystyle">&nbsp {{clientName}}</td>
+                <td class="costsummarystyle" style="font-size: 20px;"><strong>Client Name:</strong></td>
+                <td  align="center" class="costsummarystyle">&nbsp {{clientName}}</td>
             </tr>
             <tr>  
-                <td class="costsummarystyle" style="font-size: 25px;"><strong>Project Name:</strong></td>
+                <td class="costsummarystyle" style="font-size: 20px;"><strong>Project Name:</strong></td>
                 <td align="center" class="costsummarystyle">&nbsp {{projectName}}</td>
             </tr>
             <tr>
-                <td class="costsummarystyle" style="font-size: 25px;"><strong>Location:</strong></td>
+                <td class="costsummarystyle" style="font-size: 20px;"><strong>Location:</strong></td>
                 <td align="center" class="costsummarystyle">&nbsp {{location}}</td>
             </tr>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3" >
             <tr>
-                <td class="costsummarystyle" style="font-size: 25px;"><strong>Service Type:</strong></td>
+                <td class="costsummarystyle" style="font-size: 20px;"><strong>Service Type:</strong></td>
                 <td align="center" class="costsummarystyle"> {{serviceType}}</td>
             </tr>
             <tr>
-                <td class="costsummarystyle" style="font-size: 25px;"><strong>Target Start Date:</strong></td>
-                <td align="center" class="costsummarystyle"> {{#if targetStartDate}}{{formatDate targetStartDate}}{{/if}}</td>
+                <td class="costsummarystyle" style="font-size: 20px;"><strong>Target Start Date:</strong></td>
+                <td align="center" class="costsummarystyle"> {{#if targetStartDate}}{{formatTime targetStartDate "MM/DD/YYYY"}}{{/if}}</td>
             </tr>
             <tr>
-                <td class="costsummarystyle" style="font-size: 25px;"><strong>Target Completion Date:</strong></td>
-                <td align="center" class="costsummarystyle">{{#if targetCompletionDate}}{{formatDate targetCompletionDate}}{{/if}}</td>
+                <td class="costsummarystyle" style="font-size: 20px;"><strong>Target Completion Date:</strong></td>
+                <td align="center" class="costsummarystyle">{{#if targetCompletionDate}}{{formatTime targetCompletionDate "MM/DD/YYYY"}}{{/if}}</td>
             </tr>
         </div>
         <div class="col-lg-3">
             <tr>
-                <td class="costsummarystyle" style="font-size: 25px;"><strong>Projected Budget:</strong></td>
+                <td class="costsummarystyle" style="font-size: 20px;"><strong>Projected Budget:</strong></td>
                 <td align="center" class="costsummarystyle">${{#if projectedBudget}}{{formatNumber projectedBudget}}{{/if}}</td>
             </tr>
             {{#each ../results9}}
             <tr>
-                <td class="costsummarystyle" style="font-size: 25px;"><strong>Original Contract Value:</strong></td>
+                <td class="costsummarystyle" style="font-size: 20px;"><strong>Original Contract Value:</strong></td>
                 <td align="center" class="costsummarystyle">${{#if originalContractValue}}{{formatNumber originalContractValue}}{{/if}}</td>
             </tr>
             <tr>
-                <td class="costsummarystyle" style="font-size: 25px;"><strong>Current Contract Value:</strong></td>
+                <td class="costsummarystyle" style="font-size: 20px;"><strong>Current Contract Value:</strong></td>
                 <td align="center" class="costsummarystyle">${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{/if}}</td>
             </tr>
              {{/each}}
@@ -118,9 +118,9 @@
             
             <h4 style="display: inline-block;">Service Type: </h4> &nbsp {{serviceType}}
             <br> <br>
-            <h4 style="display: inline-block;">Target Start Date: </h4> &nbsp {{#if targetStartDate}}{{formatDate targetStartDate}}{{/if}}
+            <h4 style="display: inline-block;">Target Start Date: </h4> &nbsp {{#if targetStartDate}}{{formatTime targetStartDate "MM/DD/YYYY"}}{{/if}}
             <br> <br>
-            <h4 style="display: inline-block;">Target Completion Date: </h4> &nbsp {{#if targetCompletionDate}}{{formatDate targetCompletionDate}}{{/if}}
+            <h4 style="display: inline-block;">Target Completion Date: </h4> &nbsp {{#if targetCompletionDate}}{{formatTime targetCompletionDate "MM/DD/YYYY"}}{{/if}}
         </div>
         <div class="col-lg-3">
             <h4 style="display: inline-block;">Projected Budget: </h4> &nbsp ${{#if projectedBudget}}{{formatNumber projectedBudget}}{{/if}}
@@ -179,10 +179,10 @@
                 {{#each results1}}
                 <tr>
                     <td>{{activityDescription}}</td>
-                    <td>{{#if targetStartDate}}{{formatDate targetStartDate}}{{/if}}</td>
-                    <td>{{#if actualStartDate}}{{formatDate actualStartDate}}{{/if}}</td>
-                    <td>{{#if targetCompletionDate}}{{formatDate targetCompletionDate}}{{/if}}</td>
-                    <td>{{#if actualCompletionDate}}{{formatDate actualCompletionDate}}{{/if}}</td>
+                    <td>{{#if targetStartDate}}{{formatTime targetStartDate "MM/DD/YYYY"}}{{/if}}</td>
+                    <td>{{#if actualStartDate}}{{formatTime actualStartDate "MM/DD/YYYY"}}{{/if}}</td>
+                    <td>{{#if targetCompletionDate}}{{formatTime targetCompletionDate "MM/DD/YYYY"}}{{/if}}</td>
+                    <td>{{#if actualCompletionDate}}{{formatTime actualCompletionDate "MM/DD/YYYY"}}{{/if}}</td>
                     <td>{{#if progress}}{{progress}}{{else}}0%{{/if}}</td>
                     <td>{{activityNotes}}</td>
                 </tr>
@@ -330,9 +330,9 @@
                         <tr>
                             <td>{{actionItemDescription}}</td>
                             <td>{{activityOwner}}</td>
-                            <td>{{#if activityStartDate}}{{formatDate activityStartDate}}{{/if}}</td>
-                            <td>{{#if targetCompletionDate}}{{formatDate targetCompletionDate}}{{/if}}</td>
-                            <td>{{#if actualCompletionDate}}{{formatDate actualCompletionDate}}{{/if}}</td>
+                            <td>{{#if activityStartDate}}{{formatTime activityStartDate "MM/DD/YYYY"}}{{/if}}</td>
+                            <td>{{#if targetCompletionDate}}{{formatTime targetCompletionDate "MM/DD/YYYY"}}{{/if}}</td>
+                            <td>{{#if actualCompletionDate}}{{formatTime actualCompletionDate "MM/DD/YYYY"}}{{/if}}</td>
                             <td>{{actionItemNotes}}</td>
                         </tr>
                         {{/each}}
@@ -474,9 +474,9 @@
                         <tr>
                             <td>{{actionItemDescription}}</td>
                             <td>{{activityOwner}}</td>
-                            <td>{{#if activityStartDate}}{{formatDate activityStartDate}}{{/if}}</td>
-                            <td>{{#if targetCompletionDate}}{{formatDate targetCompletionDate}}{{/if}}</td>
-                            <td>{{#if actualCompletionDate}}{{formatDate actualCompletionDate}}{{/if}}</td>
+                            <td>{{#if activityStartDate}}{{formatTime activityStartDate "MM/DD/YYYY"}}{{/if}}</td>
+                            <td>{{#if targetCompletionDate}}{{formatTime targetCompletionDate "MM/DD/YYYY"}}{{/if}}</td>
+                            <td>{{#if actualCompletionDate}}{{formatTime actualCompletionDate "MM/DD/YYYY"}}{{/if}}</td>
                             <td>{{actionItemNotes}}</td>
                         </tr>
                         {{/each}}
@@ -2052,10 +2052,10 @@
                         <tr>
                             <td>{{pcoNumber}}</td>
                             <td>{{pcoDescription}}</td>
-                            <td>{{#if dueDate}}{{formatDate dueDate}}{{/if}}</td>
-                            <td>{{#if toKMSDate}}{{formatDate toKMSDate}}{{/if}}</td>
-                            <td>{{#if kmsReviewedDate}}{{formatDate kmsReviewedDate}}{{/if}}</td>
-                            <td>{{#if clientApprovedDate}}{{formatDate clientApprovedDate}}{{/if}}</td>
+                            <td>{{#if dueDate}}{{formatTime dueDate "MM/DD/YYYY"}}{{/if}}</td>
+                            <td>{{#if toKMSDate}}{{formatTime toKMSDate "MM/DD/YYYY"}}{{/if}}</td>
+                            <td>{{#if kmsReviewedDate}}{{formatTime kmsReviewedDate "MM/DD/YYYY"}}{{/if}}</td>
+                            <td>{{#if clientApprovedDate}}{{formatTime clientApprovedDate "MM/DD/YYYY"}}{{/if}}</td>
                             <td>${{pcoValue}}</td>
                             <td>${{contingencyAmount}}</td>
                             <td>${{costSavingsAmount}}</td>

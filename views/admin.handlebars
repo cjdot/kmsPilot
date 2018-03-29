@@ -373,8 +373,8 @@
                             <td>{{projectName}}</td>
                             <td>{{location}}</td>
                             <td>{{serviceType}}</td>                           
-                            <td>{{#if targetStartDate}}{{formatDate targetStartDate}}{{/if}}</td>                           
-                            <td>{{#if targetCompletionDate}}{{formatDate targetCompletionDate}}{{/if}}</td>
+                            <td>{{#if targetStartDate}}{{formatTime targetStartDate "MM/DD/YYYY"}}{{/if}}</td>                           
+                            <td>{{#if targetCompletionDate}}{{formatTime targetCompletionDate "MM/DD/YYYY"}}{{/if}}</td>
                             <td>{{#if projectedBudget}}${{formatNumber projectedBudget}}{{/if}}</td>
                             <td>{{#if contractAmount}}${{formatNumber contractAmount}}{{/if}}</td>
                         </tr>                       
