@@ -40,7 +40,7 @@ var qry7 = 'SELECT * FROM orderset WHERE projectID = @projectID ORDER BY orderSe
 var qry9 = 'SELECT divisionCategory, SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE projectID = @projectID GROUP BY divisionCategory'
 var qry10 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, SUM(remainingContractValue) AS remainingContractValue FROM lineitem WHERE projectID = @projectID'
 var qry11 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE (divisionCategory=\'Allowances\' OR divisionCategory=\'FF&E\' OR divisionCategory=\'IT\' OR divisionCategory=\'Security\' OR divisionCategory=\'Consultants\' OR divisionCategory=\'Contingency\' OR divisionCategory=\'Owner Supplied Equipment\') AND projectID = @projectID;'
-var qry12 = 'select SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE (divisionCategory=\'Division 1 - General Conditions and Insurance\' OR divisionCategory=\'Division 2 - Site Construction\' OR divisionCategory=\'Division 3 - Concrete\' OR divisionCategory=\'Division 4 - Masonry\' OR divisionCategory=\'Division 5 - Metals\' OR divisionCategory=\'Division 6 - Carpentry and Millwork\' OR divisionCategory=\'Division 7 - Thermal and Moisture Protection\' OR divisionCategory=\'Division 8 - Doors and Windows\' OR divisionCategory=\'Division 9 - Finishes\' OR divisionCategory=\'Division 10 - Specialties\' OR divisionCategory=\'Division 11 - Equipment\' OR divisionCategory=\'Division 12 - Furnishings\' OR divisionCategory=\'Division 13 - Special Construction\' OR divisionCategory=\'Division 14 - Conveying Systems\' OR divisionCategory=\'Division 15 - Mechanical, Plumbing, HVAC, and Fire\' OR divisionCategory=\'Division 16 - Electrical\' ) AND projectID = @projectID;'
+var qry12 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE (divisionCategory=\'Division 1 - General Conditions and Insurance\' OR divisionCategory=\'Division 2 - Site Construction\' OR divisionCategory=\'Division 3 - Concrete\' OR divisionCategory=\'Division 4 - Masonry\' OR divisionCategory=\'Division 5 - Metals\' OR divisionCategory=\'Division 6 - Carpentry and Millwork\' OR divisionCategory=\'Division 7 - Thermal and Moisture Protection\' OR divisionCategory=\'Division 8 - Doors and Windows\' OR divisionCategory=\'Division 9 - Finishes\' OR divisionCategory=\'Division 10 - Specialties\' OR divisionCategory=\'Division 11 - Equipment\' OR divisionCategory=\'Division 12 - Furnishings\' OR divisionCategory=\'Division 13 - Special Construction\' OR divisionCategory=\'Division 14 - Conveying Systems\' OR divisionCategory=\'Division 15 - Mechanical, Plumbing, HVAC, and Fire\' OR divisionCategory=\'Division 16 - Electrical\' ) AND projectID = @projectID;'
 
 router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 		
@@ -92,6 +92,8 @@ router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 												
 													request.query(qry9, function (err, preresults8, fields) {
 														request.query(qry10, function (err, preresults9, fields) {
+															request.query(qry11, function (err, preresults10, fields) {
+																request.query(qry12, function (err, preresults11, fields) {
 															
 															
 
@@ -106,13 +108,16 @@ router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 															
 															var results8 = preresults8.recordset;
 															var results9 = preresults9.recordset;
+															var results10 = preresults10.recordset;
+															var results11 = preresults11.recordset;
 
-															res.render('project_details', {results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
 															conn.close();
 															
 													});
 												});
-											
+											});
+										});
 										});
 									});
 								});
@@ -178,6 +183,8 @@ router.post('/updateProjectActivity', ensureAuthenticated, function (req, res) {
 												
 													request.query(qry9, function (err, preresults8, fields) {
 														request.query(qry10, function (err, preresults9, fields) {
+															request.query(qry11, function (err, preresults10, fields) {
+																request.query(qry12, function (err, preresults11, fields) {
 															
 															var results0 = preresults0.recordset;
 															var results = preresults.recordset;
@@ -190,12 +197,15 @@ router.post('/updateProjectActivity', ensureAuthenticated, function (req, res) {
 															
 															var results8 = preresults8.recordset;
 															var results9 = preresults9.recordset;
+															var results10 = preresults10.recordset;
+															var results11 = preresults11.recordset;
 
-															res.render('project_details', {results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
 															conn.close();
 													});
 												});
-											
+											});
+										});
 										});
 									});
 								});
@@ -243,6 +253,8 @@ router.post('/deleteProjectActivity', ensureAuthenticated, function (req, res) {
 												
 													request.query(qry9, function (err, preresults8, fields) {
 														request.query(qry10, function (err, preresults9, fields) {
+															request.query(qry11, function (err, preresults10, fields) {
+																request.query(qry12, function (err, preresults11, fields) {
 															
 															var results0 = preresults0.recordset;
 															var results = preresults.recordset;
@@ -255,12 +267,15 @@ router.post('/deleteProjectActivity', ensureAuthenticated, function (req, res) {
 
 															var results8 = preresults8.recordset;
 															var results9 = preresults9.recordset;
+															var results10 = preresults10.recordset;
+															var results11 = preresults11.recordset;
 
-															res.render('project_details', {results9: results9, results8: results8,  updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8,  updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
 															conn.close();
 													});
 												});
-										
+											});
+										});
 										});
 									});
 								});
@@ -320,6 +335,8 @@ router.post('/newActionItem', ensureAuthenticated, function (req, res) {
 												
 													request.query(qry9, function (err, preresults8, fields) {
 														request.query(qry10, function (err, preresults9, fields) {
+															request.query(qry11, function (err, preresults10, fields) {
+																request.query(qry11, function (err, preresults11, fields) {
 															
 															
 															var results = preresults.recordset;
@@ -331,13 +348,16 @@ router.post('/newActionItem', ensureAuthenticated, function (req, res) {
 															var results6 = preresults6.recordset;
 															var results8 = preresults8.recordset;
 															var results9 = preresults9.recordset;
+															var results10 = preresults10.recordset;
+															var results11 = preresults11.recordset;
 
-															res.render('project_details', {results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
 															conn.close();
 
 													});
 												});
-											
+											});
+										});
 										});
 									});
 								});
@@ -398,6 +418,8 @@ router.post('/updateActionItem', ensureAuthenticated, function (req, res) {
 												
 													request.query(qry9, function (err, preresults8, fields) {
 														request.query(qry10, function (err, preresults9, fields) {
+															request.query(qry11, function (err, preresults10, fields) {
+																request.query(qry12, function (err, preresults11, fields) {
 															
 															var results0 = preresults0.recordset;
 															var results = preresults.recordset;
@@ -410,13 +432,16 @@ router.post('/updateActionItem', ensureAuthenticated, function (req, res) {
 															
 															var results8 = preresults8.recordset;
 															var results9 = preresults9.recordset;
+															var results10 = preresults10.recordset;
+															var results11 = preresults11.recordset;
 
-															res.render('project_details', {results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
 															conn.close();
 
 													});
 												});
-											
+											});
+										});
 										});
 									});
 								});
@@ -471,6 +496,8 @@ router.post('/deleteActionItem', ensureAuthenticated, function (req, res) {
 												
 													request.query(qry9, function (err, preresults8, fields) {
 														request.query(qry10, function (err, preresults9, fields) {
+															request.query(qry11, function (err, preresults10, fields) {
+																request.query(qry12, function (err, preresults11, fields) {
 															
 															var results0 = preresults0.recordset;
 															var results = preresults.recordset;
@@ -483,13 +510,16 @@ router.post('/deleteActionItem', ensureAuthenticated, function (req, res) {
 															
 															var results8 = preresults8.recordset;
 															var results9 = preresults9.recordset;
+															var results10 = preresults10.recordset;
+															var results11 = preresults11.recordset;
 
-															res.render('project_details', {results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
 															conn.close();
 
 													});
 												});
-											
+											});
+										});
 										});
 									});
 								});
@@ -549,6 +579,8 @@ router.post('/newExternalActionItem', ensureAuthenticated, function (req, res) {
 												
 													request.query(qry9, function (err, preresults8, fields) {
 														request.query(qry10, function (err, preresults9, fields) {
+															request.query(qry11, function (err, preresults10, fields) {
+																request.query(qry12, function (err, preresults11, fields) {
 															
 															var results0 = preresults0.recordset;
 															var results = preresults.recordset;
@@ -561,13 +593,16 @@ router.post('/newExternalActionItem', ensureAuthenticated, function (req, res) {
 
 															var results8 = preresults8.recordset;
 															var results9 = preresults9.recordset;
+															var results10 = preresults10.recordset;
+															var results11 = preresults11.recordset;
 
-															res.render('project_details', {results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
 															conn.close();
 
 													});
 												});
-											
+											});
+										});
 										});
 									});
 								});
@@ -628,6 +663,8 @@ router.post('/updateExternalActionItem', ensureAuthenticated, function (req, res
 												
 													request.query(qry9, function (err, preresults8, fields) {
 														request.query(qry10, function (err, preresults9, fields) {
+															request.query(qry11, function (err, preresults10, fields) {
+																request.query(qry12, function (err, preresults11, fields) {
 															
 															var results0 = preresults0.recordset;
 															var results = preresults.recordset;
@@ -640,13 +677,16 @@ router.post('/updateExternalActionItem', ensureAuthenticated, function (req, res
 															
 															var results8 = preresults8.recordset;
 															var results9 = preresults9.recordset;
+															var results10 = preresults10.recordset;
+															var results11 = preresults11.recordset;
 
-															res.render('project_details', {results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
 															conn.close();
 
 													});
 												});
-											
+											});
+										});
 										});
 									});
 								});
@@ -702,6 +742,8 @@ router.post('/deleteExternalActionItem', ensureAuthenticated, function (req, res
 												
 													request.query(qry9, function (err, preresults8, fields) {
 														request.query(qry10, function (err, preresults9, fields) {
+															request.query(qry11, function (err, preresults10, fields) {
+																request.query(qry12, function (err, preresults11, fields) {
 															
 															var results0 = preresults0.recordset;
 															var results = preresults.recordset;
@@ -714,13 +756,16 @@ router.post('/deleteExternalActionItem', ensureAuthenticated, function (req, res
 															
 															var results8 = preresults8.recordset;
 															var results9 = preresults9.recordset;
+															var results10 = preresults10.recordset;
+															var results11 = preresults11.recordset;
 
-															res.render('project_details', {results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
 															conn.close();
 
 													});
 												});
-											
+											});
+										});
 										});
 									});
 								});
@@ -761,7 +806,7 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
 				request.input("actualCostToDate", sql.Decimal, req.body.actualCostToDate);
 				request.input("projectID", sql.Int, req.body.projectID);
 
-				request.query(qry1,  function (err, preresults0, fields) {
+				request.query(qry1, function (err, preresults0, fields) {
 					request.query(qry, function (err, preresults, fields) {
 						request.query(qry2, function (err, preresults1, fields) {
 							request.query(qry3, function (err, preresults2, fields) {
@@ -772,6 +817,8 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
 												
 													request.query(qry9, function (err, preresults8, fields) {
 														request.query(qry10, function (err, preresults9, fields) {
+															request.query(qry11, function (err, preresults10, fields) {
+																request.query(qry12, function (err, preresults11, fields) {
 															
 															var results0 = preresults0.recordset;
 															var results = preresults.recordset;
@@ -784,13 +831,16 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
 															
 															var results8 = preresults8.recordset;
 															var results9 = preresults9.recordset;
+															var results10 = preresults10.recordset;
+															var results11 = preresults11.recordset;
 
-															res.render('project_details', {results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
 															conn.close();
 
 													});
 												});
-											
+											});
+										});
 										});
 									});
 								});
@@ -844,6 +894,8 @@ router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
 												
 													request.query(qry9, function (err, preresults8, fields) {
 														request.query(qry10, function (err, preresults9, fields) {
+															request.query(qry11, function (err, preresults10, fields) {
+																request.query(qry12, function (err, preresults11, fields) {
 															
 															var results0 = preresults0.recordset;
 															var results = preresults.recordset;
@@ -856,13 +908,16 @@ router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
 															
 															var results8 = preresults8.recordset;
 															var results9 = preresults9.recordset;
+															var results10 = preresults10.recordset;
+															var results11 = preresults11.recordset;
 
-															res.render('project_details', {results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
 															conn.close();
 
 													});
 												});
-											
+											});
+										});
 										});
 									});
 								});
@@ -909,6 +964,8 @@ router.post('/deleteCostSummary', ensureAuthenticated, function (req, res) {
 												
 													request.query(qry9, function (err, preresults8, fields) {
 														request.query(qry10, function (err, preresults9, fields) {
+															request.query(qry11, function (err, preresults10, fields) {
+																request.query(qry12, function (err, preresults11, fields) {
 															
 															var results0 = preresults0.recordset;
 															var results = preresults.recordset;
@@ -921,13 +978,16 @@ router.post('/deleteCostSummary', ensureAuthenticated, function (req, res) {
 															
 															var results8 = preresults8.recordset;
 															var results9 = preresults9.recordset;
+															var results10 = preresults10.recordset;
+															var results11 = preresults11.recordset;
 
-															res.render('project_details', {results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
 															conn.close();
 
 													});
 												});
-											
+											});
+										});
 										});
 									});
 								});
@@ -1014,7 +1074,6 @@ router.post('/newPCO', ensureAuthenticated, function (req, res) {
 
 													});
 												});
-											
 										});
 									});
 								});
