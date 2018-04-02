@@ -148,46 +148,46 @@ router.post('/login', function(req, res) {
 	} else {
 
 
-
-		const conn = new mysql.createConnection(config);
-        conn.connect(
+		var qry = 'SELECT email, password FROM users WHERE email = @email'
+		
+		//Establishing connection to the database
+		const conn = new sql.ConnectionPool(sqlconfig);
+		var request = new sql.Request(conn);
+		
+		conn.connect(
 			function (err) {
 				if (err) {
-					console.log("!!!! Cannot Connect !!! Error:");
+					console.log("!!!! Cannot Connect !!!! Error")
 					throw err;
 				}
 				else {
-					console.log("Connection established.");
+						console.log("Connection established.");
+						request.input("email", sql.VarChar, req.body.email);
+
+						request.query(qry, function(err, preresults, fields) {
+							if (err) throw err;
+
+							results = preresults.recordset;
+
+							if (results.length > 0){	
+								if (bcrypt.compareSync(req.body.password, results[0].password)){							
+									req.login(results[0].email, results[0].password, function(err) {				
+										res.redirect('/');
+								})			
+							} else {
+								req.flash('error_msg', 'Incorrect Username or Password');
+								res.redirect('/users/login')				
+							} 
+						} else {
+						
+							req.flash('error_msg', 'Incorrect Username or Password');
+							res.redirect('/users/login');
+						}	              
+					});             				
 				}
-			}
-		
-		)
-		
-		var qry = 'SELECT email, password FROM user WHERE email = ?'
-		console.log(qry);
-		conn.query( qry, req.body.email, function(err, results, fields){
-			
-			if (err) throw err;
-			if (results.length > 0){
-				
-			console.log(req.body.password + ' ' + results[0].password)
-
-			if (bcrypt.compareSync(req.body.password, results[0].password)){
-				
-				req.login(results[0].email, results[0].password, function(err) {				
-					res.redirect('/');
-				})
-
-			} else {
-				req.flash('error_msg', 'Incorrect Username or Password');
-				res.redirect('/users/login')				
-			} 
-		} else {
-			
-			req.flash('error_msg', 'Incorrect Username or Password');
-			res.redirect('/users/login');
-		}
 		});
+
+
 	
 	}
 
