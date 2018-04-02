@@ -34,17 +34,6 @@ app.use(cookieParser());
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-//Session options and setup for MYSQL store
-var options = {
-
-  host: 'kmspilot.mysql.database.azure.com',
-	user: 'kmsadmin@kmspilot',
-	password: 'KMSproject1',
-	database: 'kmspilot',
-	port: 3306,
-	ssl: true
-
-}
 
 HandlebarsIntl.registerWith(Handlebars);
 Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
@@ -56,7 +45,6 @@ Handlebars.registerHelper('formatTime', function (date, format) {
   return mmnt.format(format);
 });
 
-var sessionStore = new MySQLStore(options);
 
 // Express Session
 app.use(session({
@@ -64,7 +52,6 @@ app.use(session({
     //NEED TO CHANGE THE 'secret' VARIABLE AND STORE IN ENCRYPTED CONFIG FILE NOT IN THIS FILE HERE
     //NEEDS TO BE SOMETHING THAT NO ONE CAN GUESS 'asdlfkhj34087yfkjasf023rhb'
     secret: 'secret',
-    store: sessionStore,
     saveUninitialized: false,
     resave: false
 }));
