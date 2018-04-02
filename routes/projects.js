@@ -1037,7 +1037,7 @@ router.post('/newPCO', ensureAuthenticated, function (req, res) {
 				request.input("toKMSDate", sql.Date, toKMSDate);
 				request.input("kmsReviewedDate", sql.Date, kmsReviewedDate);
 				request.input("clientApprovedDate", sql.Date, clientApprovedDate);
-				request.input("pcoValue", sql.Decimal, pcoValue);
+				request.input("pcoValue", sql.Decimal, req.body.pcoValue);
 				request.input("contingencyAmount", sql.Decimal, req.body.contingencyAmount);
 				request.input("costSavingsAmount", sql.Decimal, req.body.costSavingsAmount);
 				request.input("changeOrders", sql.Decimal, req.body.changeOrders);
@@ -1177,7 +1177,7 @@ router.post('/updatePCO', ensureAuthenticated, function (req, res) {
 router.post('/deletePCO', ensureAuthenticated, function (req, res) {
 	
 
-	var qry1 = 'DELETE FROM pco WHERE pcoID = ?'
+	var qry1 = 'DELETE FROM pco WHERE pcoID = @pcoID'
 	var updateType = 'updatePCO'
 	
 	//Establishing connection to the database
@@ -1209,24 +1209,22 @@ router.post('/deletePCO', ensureAuthenticated, function (req, res) {
 													request.query(qry9, function (err, preresults8, fields) {
 														request.query(qry10, function (err, preresults9, fields) {
 															
-															var results0 = preresults0.recordset;
+															
 															var results = preresults.recordset;
 															var results1 = preresults1.recordset;
 															var results2 = preresults2.recordset;
 															var results3 = preresults3.recordset;
 															var results4 = preresults4.recordset;
 															var results5 = preresults5.recordset;
-															var results6 = preresults6.recordset;
-															
+															var results6 = preresults6.recordset;															
 															var results8 = preresults8.recordset;
 															var results9 = preresults9.recordset;
 
 															res.render('project_details', {results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
 															conn.close();
 
-													});
 												});
-											
+											});											
 										});
 									});
 								});
