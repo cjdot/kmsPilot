@@ -144,7 +144,7 @@ router.post('/deleteUser', ensureAuthenticated, function(req, res){
 
 router.post('/registerProject', ensureAuthenticated, function(req, res){
 
-    var qry = 'INSERT INTO PROJECT (clientName, projectName, location, serviceType, targetStartDate, targetCompletionDate, projectedBudget, contractAmount) VALUES (@clientName, @projectName, @location, @serviceType, @targetStartDate, @targetCompletionDate, @projectedBudget, @contractAmount) DECLARE @ID int set @ID = SCOPE_IDENTITY() INSERT INTO kmsActionItem (actionItemDescription, projectID) VALUES(\'Contract Signed\', @ID), (\'Business Plan Complete\', @ID), (\'Project Management Plan Complete\', @ID)';
+    var qry = 'INSERT INTO PROJECT (clientName, projectName, location, serviceType, targetStartDate, targetCompletionDate, projectedBudget, contractAmount, openProject) VALUES (@clientName, @projectName, @location, @serviceType, @targetStartDate, @targetCompletionDate, @projectedBudget, @contractAmount , 1) DECLARE @ID int set @ID = SCOPE_IDENTITY() INSERT INTO kmsActionItem (actionItemDescription, projectID) VALUES(\'Contract Signed\', @ID), (\'Business Plan Complete\', @ID), (\'Project Management Plan Complete\', @ID)';
 	var qry1 = 'SELECT * FROM users'
     var qry2 = 'SELECT * FROM project'
     
@@ -172,6 +172,7 @@ router.post('/registerProject', ensureAuthenticated, function(req, res){
                 console.log("Connection established.");
                 
 				request.input("clientName", sql.VarChar, req.body.clientName);
+				request.input("openProject", sql.VarChar, req.body.openProject);
                 request.input("projectName", sql.VarChar, req.body.projectName);
             	request.input("location", sql.VarChar, req.body.location);
                 request.input("serviceType", sql.VarChar, req.body.serviceType);
@@ -198,7 +199,8 @@ router.post('/registerProject', ensureAuthenticated, function(req, res){
 
 router.post('/updateProject', ensureAuthenticated, function(req, res){
 
-  
+	console.log(req.body.openProject)
+
 	var targetCompletionDate = req.body.targetCompletionDate
 	var targetStartDate = req.body.targetStartDate
 	var projectedBudget = req.body.projectedBudget
@@ -209,7 +211,7 @@ router.post('/updateProject', ensureAuthenticated, function(req, res){
 	if (req.body.projectedBudget == ""){projectedBudget = null};
 	if (req.body.contractAmount == ""){contractAmount = null};
 
-    var qry = 'UPDATE PROJECT SET clientName = @clientName, projectName = @projectName, location = @location, serviceType = @serviceType, targetStartDate = @targetStartDate, targetCompletionDate = @targetCompletionDate, projectedBudget = @projectedBudget, contractAmount = @contractAmount WHERE projectID = @projectID'
+    var qry = 'UPDATE PROJECT SET openProject = @openProject, clientName = @clientName, projectName = @projectName, location = @location, serviceType = @serviceType, targetStartDate = @targetStartDate, targetCompletionDate = @targetCompletionDate, projectedBudget = @projectedBudget, contractAmount = @contractAmount WHERE projectID = @projectID'
     var qry1 = 'SELECT * FROM users'
 	var qry2 = 'SELECT * FROM project'
 	
@@ -234,6 +236,7 @@ router.post('/updateProject', ensureAuthenticated, function(req, res){
                 request.input("targetCompletionDate", sql.Date, targetCompletionDate);
                 request.input("projectedBudget", sql.Decimal, projectedBudget);
 				request.input("contractAmount", sql.Decimal, contractAmount);
+				request.input("openProject", sql.Bit, req.body.openProject);
 				request.input("projectID", sql.Int, req.body.projectID);
 
 				request.query(qry, function (err, resultss, fields) { 

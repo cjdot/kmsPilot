@@ -290,6 +290,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
+                            <th>Open?</th>
                             <th>Client Name</th>
                             <th>Project Name</th>
                             <th>Location</th>
@@ -309,6 +310,9 @@
                     <tr>
                         
                         <input type="hidden" class="form-control" id="userID" name="projectID" value="{{projectID}}">
+                            <td>
+                                <input type="checkbox" class="form-control" id="open" name="open" {{#ifEquals openProject 1}}value=1 checked{{/ifEquals}}{{#ifEquals openProject 0}} value=0{{/ifEquals}}>
+                            </td>
                             <td>
                                 <input type="text" class="form-control" id="clientName" name="clientName" value="{{clientName}}"> 
                             </td>

@@ -915,10 +915,14 @@ router.post('/newPCO', ensureAuthenticated, function (req, res) {
 											request.query(qry7, function (err, results6, fields) {												
 												request.query(qry9, function (err, results8, fields) {
 													request.query(qry10, function (err, results9, fields) {
-
-													res.render('project_details', {results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
-													conn.close();
-
+														request.query(qry11, function (err, results10, fields) {
+															request.query(qry12, function (err, results11, fields) {
+													
+																res.render('project_details', { results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+																conn.close();
+															
+														});
+													});
 												});
 											});
 										});
@@ -998,10 +1002,14 @@ router.post('/updatePCO', ensureAuthenticated, function (req, res) {
 											request.query(qry7, function (err, results6, fields) {												
 												request.query(qry9, function (err, results8, fields) {
 													request.query(qry10, function (err, results9, fields) {
+														request.query(qry11, function (err, results10, fields) {
+															request.query(qry12, function (err, results11, fields){
 
-													res.render('project_details', {results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
-													conn.close();
-
+															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+															conn.close();
+			
+														});
+													});
 												});
 											});											
 										});
@@ -1050,10 +1058,14 @@ router.post('/deletePCO', ensureAuthenticated, function (req, res) {
 											request.query(qry7, function (err, results6, fields) {												
 												request.query(qry9, function (err, results8, fields) {
 													request.query(qry10, function (err, results9, fields) {															
+														request.query(qry11, function (err, results10, fields) {
+															request.query(qry12, function (err, results11, fields) {
+													
+															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+															conn.close();
 
-													res.render('project_details', {results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
-													conn.close();
-
+														});
+													});
 												});
 											});											
 										});
