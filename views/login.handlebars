@@ -34,13 +34,13 @@
 
 <div class="col-6 col-sm-5 placeholder">
 
-<form method="post" action="/users/login">
+<form method="post" action="/users/forgot">
   <div class="form-group">
     <input id="spy" type="text" class="form-control" value="">
     <label>Enter email:</label>
-    <input id="forgot_email" type="text" class="form-control" name="email" placeholder="Email">
+    <input id="forgot_email" type="text" class="form-control" name="forgot_email" placeholder="This doesn't work right now.">
   </div>
-  <button id="forgot_button" type="button" class="btn btn-default" name="forgot_email">Email</button>
+  <button id="forgot_button" type="submit" class="btn btn-default">Email</button>
 </form>
 </div>
 
@@ -53,10 +53,12 @@
   //Honeypot
   $('#spy').hide();
 
+  document.getElementById("forgot_button").disabled = true; //Delete after error is fixed
+/*
   $('#forgot_button').click(function () {
-
     if($('#spy').val().length == 0) {
-	    Email.send("Sender@email","Recipient@email","KMS Web App Forgot Password","Here is your password: ","smtp.elasticemail.com","elastic@username","elastic@password");
+      var recipient_email = $('#forgot_email').val();
+	    Email.send("Sender@email",recipient_email,"KMS Web App Forgot Password","Here is your password: ","smtp.elasticemail.com","elastic@username","elastic@password");
       alert("Email sent!");
     }
     else {
@@ -65,4 +67,5 @@
 
     document.getElementById("forgot_button").disabled = true;
   });
+*/
 </script>

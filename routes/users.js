@@ -186,13 +186,60 @@ router.post('/login', function(req, res) {
 					});             				
 				}
 		});
-
-
-	
 	}
+});
 
+router.post('/forgot', function(req, res){
 
-	
+	/*
+		I don't really know what I'm doing here, so feel free to rectify.
+		The goal is to:
+			- Compare forgot_email to the emails in the DB
+			- If there is a match, change the password to a random string
+			- Then execute the send function
+			- Notify the user of success or failure
+		Currently I am just trying to get it to give me something.
+	*/
+
+	//Email input present
+	req.checkBody('forgot_email', 'Email is required for password reset').notEmpty();
+
+	var errors = req.validationErrors();
+	var qry3 = 'SELECT email FROM users WHERE email = @forgot_email'
+
+	if(errors){
+		res.render('login',{
+			errors:errors
+		});
+	} else {
+		//Establishing connection to the database
+		const conn = new sql.ConnectionPool(sqlconfig);
+		var request = new sql.Request(conn);
+		/*
+		conn.connect(
+			function (err) {
+				if (err) {
+					console.log("Cannot initiate forgot password function.")
+					throw err;
+				}
+				else {
+					console.log("Forgot password function initiated...");
+					request.query(qry3, function(err, preresults3, fields) {
+
+						var results3 = preresults3.recordset; // !!! SOMETHING BREAKS HERE !!!
+
+						if (results3.length > 0) {
+							res.render('login', {results3: results3, results3: results3});	
+							conn.close();
+							console.log(forgot_email)	
+						} else {
+							console.log("No email match.")
+							conn.close();
+						}
+					});
+				}
+		}); */           				
+	}
 });
 
 
