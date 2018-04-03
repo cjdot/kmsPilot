@@ -30,17 +30,17 @@ var config = {
 
 //All of these query variables below are used to populate either the project details page or the project search page
 //Each of these query's are used in just about every function below
-var qry = 'SELECT * FROM project WHERE projectID = @projectID'
-var qry2 = 'SELECT * FROM projectactivity WHERE projectID = @projectID'
+var qry = 'SELECT * FROM project WHERE projectID = @projectID; '
+var qry2 = 'SELECT * FROM projectactivity WHERE projectID = @projectID; '
 var qry3 = 'SELECT * FROM kmsactionitem WHERE projectID = @projectID'
-var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = @projectID'
-var qry5 = 'SELECT * FROM lineitem WHERE projectID = @projectID'
-var qry6 = 'SELECT * FROM pco WHERE projectID = @projectID'
-var qry7 = 'SELECT * FROM orderset WHERE projectID = @projectID ORDER BY orderSet'
-var qry9 = 'SELECT divisionCategory, SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE projectID = @projectID GROUP BY divisionCategory'
-var qry10 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, SUM(remainingContractValue) AS remainingContractValue FROM lineitem WHERE projectID = @projectID'
-var qry11 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE (divisionCategory=\'Allowances\' OR divisionCategory=\'FF&E\' OR divisionCategory=\'IT\' OR divisionCategory=\'Security\' OR divisionCategory=\'Consultants\' OR divisionCategory=\'Contingency\' OR divisionCategory=\'Owner Supplied Equipment\') AND projectID = @projectID;'
-var qry12 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE (divisionCategory=\'Division 1 - General Conditions and Insurance\' OR divisionCategory=\'Division 2 - Site Construction\' OR divisionCategory=\'Division 3 - Concrete\' OR divisionCategory=\'Division 4 - Masonry\' OR divisionCategory=\'Division 5 - Metals\' OR divisionCategory=\'Division 6 - Carpentry and Millwork\' OR divisionCategory=\'Division 7 - Thermal and Moisture Protection\' OR divisionCategory=\'Division 8 - Doors and Windows\' OR divisionCategory=\'Division 9 - Finishes\' OR divisionCategory=\'Division 10 - Specialties\' OR divisionCategory=\'Division 11 - Equipment\' OR divisionCategory=\'Division 12 - Furnishings\' OR divisionCategory=\'Division 13 - Special Construction\' OR divisionCategory=\'Division 14 - Conveying Systems\' OR divisionCategory=\'Division 15 - Mechanical, Plumbing, HVAC, and Fire\' OR divisionCategory=\'Division 16 - Electrical\' ) AND projectID = @projectID;'
+var qry4 = 'SELECT * FROM externalactionitem WHERE projectID = @projectID; '
+var qry5 = 'SELECT * FROM lineitem WHERE projectID = @projectID; '
+var qry6 = 'SELECT * FROM pco WHERE projectID = @projectID; '
+var qry7 = 'SELECT * FROM orderset WHERE projectID = @projectID ORDER BY orderSet; '
+var qry9 = 'SELECT divisionCategory, SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE projectID = @projectID GROUP BY divisionCategory; '
+var qry10 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, SUM(remainingContractValue) AS remainingContractValue FROM lineitem WHERE projectID = @projectID; '
+var qry11 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE (divisionCategory=\'Allowances\' OR divisionCategory=\'FF&E\' OR divisionCategory=\'IT\' OR divisionCategory=\'Security\' OR divisionCategory=\'Consultants\' OR divisionCategory=\'Contingency\' OR divisionCategory=\'Owner Supplied Equipment\') AND projectID = @projectID; '
+var qry12 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE (divisionCategory=\'Division 1 - General Conditions and Insurance\' OR divisionCategory=\'Division 2 - Site Construction\' OR divisionCategory=\'Division 3 - Concrete\' OR divisionCategory=\'Division 4 - Masonry\' OR divisionCategory=\'Division 5 - Metals\' OR divisionCategory=\'Division 6 - Carpentry and Millwork\' OR divisionCategory=\'Division 7 - Thermal and Moisture Protection\' OR divisionCategory=\'Division 8 - Doors and Windows\' OR divisionCategory=\'Division 9 - Finishes\' OR divisionCategory=\'Division 10 - Specialties\' OR divisionCategory=\'Division 11 - Equipment\' OR divisionCategory=\'Division 12 - Furnishings\' OR divisionCategory=\'Division 13 - Special Construction\' OR divisionCategory=\'Division 14 - Conveying Systems\' OR divisionCategory=\'Division 15 - Mechanical, Plumbing, HVAC, and Fire\' OR divisionCategory=\'Division 16 - Electrical\' ) AND projectID = @projectID; '
 
 router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 		
@@ -48,21 +48,26 @@ router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 	var actualStartDate = req.body.actualStartDate
 	var targetCompletionDate = req.body.targetCompletionDate
 	var actualCompletionDate = req.body.actualCompletionDate
+	var progress = req.body.progress
 
 	//Places a null value in each of the fields if there is not a value entered
 	if (req.body.targetStartDate == ""){targetStartDate = null};
 	if (req.body.actualStartDate == ""){actualStartDate = null};
 	if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
 	if (req.body.actualCompletionDate == ""){actualCompletionDate = null};
-	
+	if (req.body.progress == ""){progress = null};
 	//Inserts data into the projectactivity table within the database
-	var qry1 = 'INSERT INTO projectactivity (activityDescription, targetStartDate, actualStartDate, targetCompletionDate, actualCompletionDate, progress, activityNotes, projectID) VALUES (@activityDescription, @targetStartDate, @actualStartDate, @targetCompletionDate, @actualCompletionDate, @progress, @activityNotes, @projectID)' 	
+	var qry1 = 'INSERT INTO projectactivity (activityDescription, targetStartDate, actualStartDate, targetCompletionDate, actualCompletionDate, progress, activityNotes, projectID) VALUES (@activityDescription, @targetStartDate, @actualStartDate, @targetCompletionDate, @actualCompletionDate, @progress, @activityNotes, @projectID); ' 	
 	var updateType = 'updateProjectActivity'
 
 	//Establishing connection to the database
     const conn = new sql.ConnectionPool(sqlconfig);
 	var request = new sql.Request(conn);
 	
+	console.log(null)
+	console.log(progress)
+	console.log(req.body.progress)
+
 	conn.connect(
 		function (err) {
 			if (err) {
@@ -77,47 +82,30 @@ router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 				request.input("actualStartDate", sql.Date,actualStartDate);
 				request.input("targetCompletionDate", sql.Date, targetCompletionDate);
 				request.input("actualCompletionDate", sql.Date, actualCompletionDate);
-				request.input("progress", sql.Int, req.body.progress)
+				request.input("progress", sql.Int, progress)
 				request.input("activityNotes", sql.VarChar, req.body.activityNotes)
 				request.input("projectID", sql.Int, req.body.projectID)
 
-				request.query(qry1, function (err, preresults0, fields) {
-					request.query(qry, function (err, preresults, fields) {
-						request.query(qry2, function (err, preresults1, fields) {
-							request.query(qry3, function (err, preresults2, fields) {
-								request.query(qry4, function (err, preresults3, fields) {
-									request.query(qry5, function (err, preresults4, fields) {
-										request.query(qry6, function (err, preresults5, fields) {
-											request.query(qry7, function (err, preresults6, fields) {
-												
-													request.query(qry9, function (err, preresults8, fields) {
-														request.query(qry10, function (err, preresults9, fields) {
-															request.query(qry11, function (err, preresults10, fields) {
-																request.query(qry12, function (err, preresults11, fields) {
-															
-															
-
-															var results0 = preresults0.recordset;
-															var results = preresults.recordset;
-															var results1 = preresults1.recordset;
-															var results2 = preresults2.recordset;
-															var results3 = preresults3.recordset;
-															var results4 = preresults4.recordset;
-															var results5 = preresults5.recordset;
-															var results6 = preresults6.recordset;
-															
-															var results8 = preresults8.recordset;
-															var results9 = preresults9.recordset;
-															var results10 = preresults10.recordset;
-															var results11 = preresults11.recordset;
-
-															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+				request.query(qry1, function (err, results0, fields) {
+					request.query(qry, function (err, results, fields) {
+						request.query(qry2, function (err, results1, fields) {
+							request.query(qry3, function (err, results2, fields) {
+								request.query(qry4, function (err, results3, fields) {
+									request.query(qry5, function (err, results4, fields) {
+										request.query(qry6, function (err, results5, fields) {
+											request.query(qry7, function (err, results6, fields) {												
+												request.query(qry9, function (err, results8, fields) {
+													request.query(qry10, function (err, results9, fields) {
+														request.query(qry11, function (err, results10, fields) {
+															request.query(qry12, function (err, results11, fields) {													
+																
+															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 															
+														});
 													});
 												});
 											});
-										});
 										});
 									});
 								});
@@ -125,7 +113,7 @@ router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 						});
 					});
 				});
-			});
+			}); 
 		}
 	});
 });
@@ -139,13 +127,15 @@ router.post('/updateProjectActivity', ensureAuthenticated, function (req, res) {
 	var actualStartDate = req.body.actualStartDate
 	var targetCompletionDate = req.body.targetCompletionDate
 	var actualCompletionDate = req.body.actualCompletionDate
+	var progress = req.body.progress
 
 	//Places a null value in each of the fields if there is not a value entered
 	if (req.body.targetStartDate == ""){targetStartDate = null};
 	if (req.body.actualStartDate == ""){actualStartDate = null};
 	if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
 	if (req.body.actualCompletionDate == ""){actualCompletionDate = null};
-	
+	if (req.body.progress == ""){progress = null};
+
 	//Updates data in the projectactivity table within the database
 	
 
@@ -167,45 +157,31 @@ router.post('/updateProjectActivity', ensureAuthenticated, function (req, res) {
 				request.input("actualStartDate", sql.Date, actualStartDate);
 				request.input("targetCompletionDate", sql.Date, targetCompletionDate);
 				request.input("actualCompletionDate", sql.Date, actualCompletionDate);
-				request.input("progress", sql.Int, req.body.progress)
+				request.input("progress", sql.Int, progress)
 				request.input("activityNotes", sql.VarChar, req.body.activityNotes)
 				request.input("projectActivityID", sql.Int, req.body.projectActivityID)
 				request.input("projectID", sql.Int, req.body.projectID)
 
-				request.query(qry1, function (err, preresults0, fields) {
-					request.query(qry, function (err, preresults, fields) {
-						request.query(qry2, function (err, preresults1, fields) {
-							request.query(qry3, function (err, preresults2, fields) {
-								request.query(qry4, function (err, preresults3, fields) {
-									request.query(qry5, function (err, preresults4, fields) {
-										request.query(qry6, function (err, preresults5, fields) {
-											request.query(qry7, function (err, preresults6, fields) {
-												
-													request.query(qry9, function (err, preresults8, fields) {
-														request.query(qry10, function (err, preresults9, fields) {
-															request.query(qry11, function (err, preresults10, fields) {
-																request.query(qry12, function (err, preresults11, fields) {
-															
-															var results0 = preresults0.recordset;
-															var results = preresults.recordset;
-															var results1 = preresults1.recordset;
-															var results2 = preresults2.recordset;
-															var results3 = preresults3.recordset;
-															var results4 = preresults4.recordset;
-															var results5 = preresults5.recordset;
-															var results6 = preresults6.recordset;
-															
-															var results8 = preresults8.recordset;
-															var results9 = preresults9.recordset;
-															var results10 = preresults10.recordset;
-															var results11 = preresults11.recordset;
+				request.query(qry1, function (err, results0, fields) {
+					request.query(qry, function (err, results, fields) {
+						request.query(qry2, function (err, results1, fields) {
+							request.query(qry3, function (err, results2, fields) {
+								request.query(qry4, function (err, results3, fields) {
+									request.query(qry5, function (err, results4, fields) {
+										request.query(qry6, function (err, results5, fields) {
+											request.query(qry7, function (err, results6, fields) {												
+												request.query(qry9, function (err, results8, fields) {
+													request.query(qry10, function (err, results9, fields) {
+														request.query(qry11, function (err, results10, fields) {
+															request.query(qry12, function (err, results11, fields) {											
 
-															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
+
+														});
 													});
 												});
 											});
-										});
 										});
 									});
 								});
@@ -242,40 +218,26 @@ router.post('/deleteProjectActivity', ensureAuthenticated, function (req, res) {
 				request.input("projectActivityID", sql.Int, req.body.projectActivityID)
 				request.input("projectID", sql.Int, req.body.projectID)
 
-				request.query(qry1, function (err, preresults0, fields) {
-					request.query(qry, function (err, preresults, fields) {
-						request.query(qry2,  function (err, preresults1, fields) {
-							request.query(qry3, function (err, preresults2, fields) {
-								request.query(qry4, function (err, preresults3, fields) {
-									request.query(qry5, function (err, preresults4, fields) {
-										request.query(qry6, function (err, preresults5, fields) {
-											request.query(qry7, function (err, preresults6, fields) {
-												
-													request.query(qry9, function (err, preresults8, fields) {
-														request.query(qry10, function (err, preresults9, fields) {
-															request.query(qry11, function (err, preresults10, fields) {
-																request.query(qry12, function (err, preresults11, fields) {
-															
-															var results0 = preresults0.recordset;
-															var results = preresults.recordset;
-															var results1 = preresults1.recordset;
-															var results2 = preresults2.recordset;
-															var results3 = preresults3.recordset;
-															var results4 = preresults4.recordset;
-															var results5 = preresults5.recordset;
-															var results6 = preresults6.recordset;
-
-															var results8 = preresults8.recordset;
-															var results9 = preresults9.recordset;
-															var results10 = preresults10.recordset;
-															var results11 = preresults11.recordset;
-
-															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8,  updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+				request.query(qry1, function (err, results0, fields) {
+					request.query(qry, function (err, results, fields) {
+						request.query(qry2,  function (err, results1, fields) {
+							request.query(qry3, function (err, results2, fields) {
+								request.query(qry4, function (err, results3, fields) {
+									request.query(qry5, function (err, results4, fields) {
+										request.query(qry6, function (err, results5, fields) {
+											request.query(qry7, function (err, results6, fields) {												
+												request.query(qry9, function (err, results8, fields) {
+													request.query(qry10, function (err, results9, fields) {
+														request.query(qry11, function (err, results10, fields) {
+															request.query(qry12, function (err, results11, fields) {
+														
+															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset,  updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
+
+														});
 													});
 												});
 											});
-										});
 										});
 									});
 								});
@@ -324,40 +286,26 @@ router.post('/newActionItem', ensureAuthenticated, function (req, res) {
 				request.input("actionItemNotes", sql.VarChar, req.body.actionItemNotes);
 				request.input("projectID", sql.Int, req.body.projectID);
 
-				request.query(qry1,  function (err, preresults0, fields) {
-					request.query(qry, function (err, preresults, fields) {
-						request.query(qry2, function (err, preresults1, fields) {
-							request.query(qry3, function (err, preresults2, fields) {
-								request.query(qry4, function (err, preresults3, fields) {
-									request.query(qry5, function (err, preresults4, fields) {
-										request.query(qry6, function (err, preresults5, fields) {
-											request.query(qry7, function (err, preresults6, fields) {
-												
-													request.query(qry9, function (err, preresults8, fields) {
-														request.query(qry10, function (err, preresults9, fields) {
-															request.query(qry11, function (err, preresults10, fields) {
-																request.query(qry11, function (err, preresults11, fields) {
+				request.query(qry1,  function (err, results0, fields) {
+					request.query(qry, function (err, results, fields) {
+						request.query(qry2, function (err, results1, fields) {
+							request.query(qry3, function (err, results2, fields) {
+								request.query(qry4, function (err, results3, fields) {
+									request.query(qry5, function (err, results4, fields) {
+										request.query(qry6, function (err, results5, fields) {
+											request.query(qry7, function (err, results6, fields) {										
+												request.query(qry9, function (err, results8, fields) {
+													request.query(qry10, function (err, results9, fields) {
+														request.query(qry11, function (err, results10, fields) {
+															request.query(qry11, function (err, results11, fields) {
 															
-															
-															var results = preresults.recordset;
-															var results1 = preresults1.recordset;
-															var results2 = preresults2.recordset;
-															var results3 = preresults3.recordset;
-															var results4 = preresults4.recordset;
-															var results5 = preresults5.recordset;
-															var results6 = preresults6.recordset;
-															var results8 = preresults8.recordset;
-															var results9 = preresults9.recordset;
-															var results10 = preresults10.recordset;
-															var results11 = preresults11.recordset;
-
-															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
+														});
 													});
 												});
 											});
-										});
 										});
 									});
 								});
@@ -407,41 +355,26 @@ router.post('/updateActionItem', ensureAuthenticated, function (req, res) {
 				request.input("kmsActionItemID", sql.Int, req.body.kmsActionItemID);
 				request.input("projectID", sql.Int, req.body.projectID);
 
-				request.query(qry1,  function (err, preresults0, fields) {
-					request.query(qry, function (err, preresults, fields) {
-						request.query(qry2, function (err, preresults1, fields) {
-							request.query(qry3, function (err, preresults2, fields) {
-								request.query(qry4, function (err, preresults3, fields) {
-									request.query(qry5, function (err, preresults4, fields) {
-										request.query(qry6, function (err, preresults5, fields) {
-											request.query(qry7, function (err, preresults6, fields) {
-												
-													request.query(qry9, function (err, preresults8, fields) {
-														request.query(qry10, function (err, preresults9, fields) {
-															request.query(qry11, function (err, preresults10, fields) {
-																request.query(qry12, function (err, preresults11, fields) {
-															
-															var results0 = preresults0.recordset;
-															var results = preresults.recordset;
-															var results1 = preresults1.recordset;
-															var results2 = preresults2.recordset;
-															var results3 = preresults3.recordset;
-															var results4 = preresults4.recordset;
-															var results5 = preresults5.recordset;
-															var results6 = preresults6.recordset;
-															
-															var results8 = preresults8.recordset;
-															var results9 = preresults9.recordset;
-															var results10 = preresults10.recordset;
-															var results11 = preresults11.recordset;
+				request.query(qry1,  function (err, results0, fields) {
+					request.query(qry, function (err, results, fields) {
+						request.query(qry2, function (err, results1, fields) {
+							request.query(qry3, function (err, results2, fields) {
+								request.query(qry4, function (err, results3, fields) {
+									request.query(qry5, function (err, results4, fields) {
+										request.query(qry6, function (err, results5, fields) {
+											request.query(qry7, function (err, results6, fields) {												
+												request.query(qry9, function (err, results8, fields) {
+													request.query(qry10, function (err, results9, fields) {
+														request.query(qry11, function (err, results10, fields) {
+															request.query(qry12, function (err, results11, fields) {											
 
-															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
+														});
 													});
 												});
 											});
-										});
 										});
 									});
 								});
@@ -485,41 +418,26 @@ router.post('/deleteActionItem', ensureAuthenticated, function (req, res) {
 				request.input("kmsActionItemID", sql.Int, req.body.kmsActionItemID);
 				request.input("projectID", sql.Int, req.body.projectID);
 
-				request.query(qry1,  function (err, preresults0, fields) {
-					request.query(qry, function (err, preresults, fields) {
-						request.query(qry2, function (err, preresults1, fields) {
-							request.query(qry3, function (err, preresults2, fields) {
-								request.query(qry4, function (err, preresults3, fields) {
-									request.query(qry5, function (err, preresults4, fields) {
-										request.query(qry6, function (err, preresults5, fields) {
-											request.query(qry7, function (err, preresults6, fields) {
-												
-													request.query(qry9, function (err, preresults8, fields) {
-														request.query(qry10, function (err, preresults9, fields) {
-															request.query(qry11, function (err, preresults10, fields) {
-																request.query(qry12, function (err, preresults11, fields) {
-															
-															var results0 = preresults0.recordset;
-															var results = preresults.recordset;
-															var results1 = preresults1.recordset;
-															var results2 = preresults2.recordset;
-															var results3 = preresults3.recordset;
-															var results4 = preresults4.recordset;
-															var results5 = preresults5.recordset;
-															var results6 = preresults6.recordset;
-															
-															var results8 = preresults8.recordset;
-															var results9 = preresults9.recordset;
-															var results10 = preresults10.recordset;
-															var results11 = preresults11.recordset;
+				request.query(qry1,  function (err, results0, fields) {
+					request.query(qry, function (err, results, fields) {
+						request.query(qry2, function (err, results1, fields) {
+							request.query(qry3, function (err, results2, fields) {
+								request.query(qry4, function (err, results3, fields) {
+									request.query(qry5, function (err, results4, fields) {
+										request.query(qry6, function (err, results5, fields) {
+											request.query(qry7, function (err, results6, fields) {											
+												request.query(qry9, function (err, results8, fields) {
+													request.query(qry10, function (err, results9, fields) {
+														request.query(qry11, function (err, results10, fields) {
+															request.query(qry12, function (err, results11, fields) {
 
-															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
+														});
 													});
 												});
 											});
-										});
 										});
 									});
 								});
@@ -568,41 +486,26 @@ router.post('/newExternalActionItem', ensureAuthenticated, function (req, res) {
 				request.input("actionItemNotes", sql.VarChar, req.body.actionItemNotes);
 				request.input("projectID", sql.Int, req.body.projectID);
 
-				request.query(qry1,  function (err, preresults0, fields) {
-					request.query(qry, function (err, preresults, fields) {
-						request.query(qry2, function (err, preresults1, fields) {
-							request.query(qry3, function (err, preresults2, fields) {
-								request.query(qry4, function (err, preresults3, fields) {
-									request.query(qry5, function (err, preresults4, fields) {
-										request.query(qry6, function (err, preresults5, fields) {
-											request.query(qry7, function (err, preresults6, fields) {
-												
-													request.query(qry9, function (err, preresults8, fields) {
-														request.query(qry10, function (err, preresults9, fields) {
-															request.query(qry11, function (err, preresults10, fields) {
-																request.query(qry12, function (err, preresults11, fields) {
-															
-															var results0 = preresults0.recordset;
-															var results = preresults.recordset;
-															var results1 = preresults1.recordset;
-															var results2 = preresults2.recordset;
-															var results3 = preresults3.recordset;
-															var results4 = preresults4.recordset;
-															var results5 = preresults5.recordset;
-															var results6 = preresults6.recordset;
+				request.query(qry1,  function (err, results0, fields) {
+					request.query(qry, function (err, results, fields) {
+						request.query(qry2, function (err, results1, fields) {
+							request.query(qry3, function (err, results2, fields) {
+								request.query(qry4, function (err, results3, fields) {
+									request.query(qry5, function (err, results4, fields) {
+										request.query(qry6, function (err, results5, fields) {
+											request.query(qry7, function (err, results6, fields) {											
+												request.query(qry9, function (err, results8, fields) {
+													request.query(qry10, function (err, results9, fields) {
+														request.query(qry11, function (err, results10, fields) {
+															request.query(qry12, function (err, results11, fields) {
 
-															var results8 = preresults8.recordset;
-															var results9 = preresults9.recordset;
-															var results10 = preresults10.recordset;
-															var results11 = preresults11.recordset;
-
-															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
+														});
 													});
 												});
 											});
-										});
 										});
 									});
 								});
@@ -652,41 +555,26 @@ router.post('/updateExternalActionItem', ensureAuthenticated, function (req, res
 				request.input("externalActionItemID", sql.Int, req.body.externalActionItemID);
 				request.input("projectID", sql.Int, req.body.projectID);
 
-				request.query(qry1,  function (err, preresults0, fields) {
-					request.query(qry, function (err, preresults, fields) {
-						request.query(qry2, function (err, preresults1, fields) {
-							request.query(qry3, function (err, preresults2, fields) {
-								request.query(qry4, function (err, preresults3, fields) {
-									request.query(qry5, function (err, preresults4, fields) {
-										request.query(qry6, function (err, preresults5, fields) {
-											request.query(qry7, function (err, preresults6, fields) {
-												
-													request.query(qry9, function (err, preresults8, fields) {
-														request.query(qry10, function (err, preresults9, fields) {
-															request.query(qry11, function (err, preresults10, fields) {
-																request.query(qry12, function (err, preresults11, fields) {
-															
-															var results0 = preresults0.recordset;
-															var results = preresults.recordset;
-															var results1 = preresults1.recordset;
-															var results2 = preresults2.recordset;
-															var results3 = preresults3.recordset;
-															var results4 = preresults4.recordset;
-															var results5 = preresults5.recordset;
-															var results6 = preresults6.recordset;
-															
-															var results8 = preresults8.recordset;
-															var results9 = preresults9.recordset;
-															var results10 = preresults10.recordset;
-															var results11 = preresults11.recordset;
+				request.query(qry1,  function (err, results0, fields) {
+					request.query(qry, function (err, results, fields) {
+						request.query(qry2, function (err, results1, fields) {
+							request.query(qry3, function (err, results2, fields) {
+								request.query(qry4, function (err, results3, fields) {
+									request.query(qry5, function (err, results4, fields) {
+										request.query(qry6, function (err, results5, fields) {
+											request.query(qry7, function (err, results6, fields) {												
+												request.query(qry9, function (err, results8, fields) {
+													request.query(qry10, function (err, results9, fields) {
+														request.query(qry11, function (err, results10, fields) {
+															request.query(qry12, function (err, results11, fields) {														
 
-															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
+														});
 													});
 												});
 											});
-										});
 										});
 									});
 								});
@@ -731,41 +619,26 @@ router.post('/deleteExternalActionItem', ensureAuthenticated, function (req, res
 				request.input("externalActionItemID", sql.Int, req.body.externalActionItemID);
 				request.input("projectID", sql.Int, req.body.projectID);
 
-				request.query(qry1,  function (err, preresults0, fields) {
-					request.query(qry, function (err, preresults, fields) {
-						request.query(qry2, function (err, preresults1, fields) {
-							request.query(qry3, function (err, preresults2, fields) {
-								request.query(qry4, function (err, preresults3, fields) {
-									request.query(qry5, function (err, preresults4, fields) {
-										request.query(qry6, function (err, preresults5, fields) {
-											request.query(qry7, function (err, preresults6, fields) {
-												
-													request.query(qry9, function (err, preresults8, fields) {
-														request.query(qry10, function (err, preresults9, fields) {
-															request.query(qry11, function (err, preresults10, fields) {
-																request.query(qry12, function (err, preresults11, fields) {
-															
-															var results0 = preresults0.recordset;
-															var results = preresults.recordset;
-															var results1 = preresults1.recordset;
-															var results2 = preresults2.recordset;
-															var results3 = preresults3.recordset;
-															var results4 = preresults4.recordset;
-															var results5 = preresults5.recordset;
-															var results6 = preresults6.recordset;
-															
-															var results8 = preresults8.recordset;
-															var results9 = preresults9.recordset;
-															var results10 = preresults10.recordset;
-															var results11 = preresults11.recordset;
+				request.query(qry1,  function (err, results0, fields) {
+					request.query(qry, function (err, results, fields) {
+						request.query(qry2, function (err, results1, fields) {
+							request.query(qry3, function (err, results2, fields) {
+								request.query(qry4, function (err, results3, fields) {
+									request.query(qry5, function (err, results4, fields) {
+										request.query(qry6, function (err, results5, fields) {
+											request.query(qry7, function (err, results6, fields) {												
+												request.query(qry9, function (err, results8, fields) {
+													request.query(qry10, function (err, results9, fields) {
+														request.query(qry11, function (err, results10, fields) {
+															request.query(qry12, function (err, results11, fields) {
 
-															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
+														});
 													});
 												});
 											});
-										});
 										});
 									});
 								});
@@ -787,6 +660,17 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
 	//Establishing connection to the database
     const conn = new sql.ConnectionPool(sqlconfig);
 	var request = new sql.Request(conn);
+
+	var budget = req.body.budget
+	var originalContractValue = req.body.originalContractValue
+	var changeOrders = req.body.changeOrders
+	var actualCostToDate = req.body.actualCostToDate
+
+	//Places a null value in each of the fields if there is not a value entered
+	if (req.body.budget == ""){budget = null};
+	if (req.body.originalContractValue == ""){originalContractValue = null};
+	if (req.body.changeOrders == ""){changeOrders = null};
+	if (req.body.actualCostToDate == ""){actualCostToDate = null};
 	
 	conn.connect(
 
@@ -800,47 +684,32 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
                 
 				request.input("divisionCategory", sql.VarChar, req.body.divisionCategory);
 				request.input("lineItemBreakdown", sql.VarChar, req.body.lineItemBreakdown);
-				request.input("originalContractValue", sql.Decimal, req.body.originalContractValue);
-				request.input("budget", sql.Decimal, req.body.budget);
-				request.input("changeOrders", sql.Decimal, req.body.changeOrders);
-				request.input("actualCostToDate", sql.Decimal, req.body.actualCostToDate);
+				request.input("originalContractValue", sql.Decimal, originalContractValue);
+				request.input("budget", sql.Decimal, budget);
+				request.input("changeOrders", sql.Decimal, changeOrders);
+				request.input("actualCostToDate", sql.Decimal, actualCostToDate);
 				request.input("projectID", sql.Int, req.body.projectID);
 
-				request.query(qry1, function (err, preresults0, fields) {
-					request.query(qry, function (err, preresults, fields) {
-						request.query(qry2, function (err, preresults1, fields) {
-							request.query(qry3, function (err, preresults2, fields) {
-								request.query(qry4, function (err, preresults3, fields) {
-									request.query(qry5, function (err, preresults4, fields) {
-										request.query(qry6, function (err, preresults5, fields) {
-											request.query(qry7, function (err, preresults6, fields) {
-												
-													request.query(qry9, function (err, preresults8, fields) {
-														request.query(qry10, function (err, preresults9, fields) {
-															request.query(qry11, function (err, preresults10, fields) {
-																request.query(qry12, function (err, preresults11, fields) {
-															
-															var results0 = preresults0.recordset;
-															var results = preresults.recordset;
-															var results1 = preresults1.recordset;
-															var results2 = preresults2.recordset;
-															var results3 = preresults3.recordset;
-															var results4 = preresults4.recordset;
-															var results5 = preresults5.recordset;
-															var results6 = preresults6.recordset;
-															
-															var results8 = preresults8.recordset;
-															var results9 = preresults9.recordset;
-															var results10 = preresults10.recordset;
-															var results11 = preresults11.recordset;
+				request.query(qry1, function (err, results0, fields) {					
+					request.query(qry, function (err, results, fields) {						
+						request.query(qry2, function (err, results1, fields) {							
+							request.query(qry3, function (err, results2, fields) {								
+								request.query(qry4, function (err, results3, fields) {
+									request.query(qry5, function (err, results4, fields) {
+										request.query(qry6, function (err, results5, fields) {
+											request.query(qry7, function (err, results6, fields) {												
+												request.query(qry9, function (err, results8, fields) {
+													request.query(qry10, function (err, results9, fields) {
+														request.query(qry11, function (err, results10, fields) {
+															request.query(qry12, function (err, results11, fields) {										
 
-															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
+														});
 													});
 												});
 											});
-										});
 										});
 									});
 								});
@@ -864,6 +733,17 @@ router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
     const conn = new sql.ConnectionPool(sqlconfig);
 	var request = new sql.Request(conn);
 	
+	var budget = req.body.budget
+	var originalContractValue = req.body.originalContractValue
+	var changeOrders = req.body.changeOrders
+	var actualCostToDate = requ.body.actualCostToDate
+
+	//Places a null value in each of the fields if there is not a value entered
+	if (req.body.budget == ""){budget = null};
+	if (req.body.originalContractValue == ""){originalContractValue = null};
+	if (req.body.changeOrders == ""){changeOrders = null};
+	if (req.body.actualCostToDate == ""){actualCostToDate = null};
+
 	conn.connect(
 
 		function (err) {
@@ -876,48 +756,33 @@ router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
                 
 				request.input("divisionCategory", sql.VarChar, req.body.divisionCategory);
 				request.input("lineItemBreakdown", sql.VarChar, req.body.lineItemBreakdown);
-				request.input("originalContractValue", sql.Decimal, req.body.originalContractValue);
-				request.input("budget", sql.Decimal, req.body.budget);
-				request.input("changeOrders", sql.Decimal, req.body.changeOrders);
-				request.input("actualCostToDate", sql.Decimal, req.body.actualCostToDate);
+				request.input("originalContractValue", sql.Decimal, originalContractValue);
+				request.input("budget", sql.Decimal, budget);
+				request.input("changeOrders", sql.Decimal, changeOrders);
+				request.input("actualCostToDate", sql.Decimal, actualCostToDate);
 				request.input("lineItemID", sql.Int, req.body.lineItemID);
 				request.input("projectID", sql.Int, req.body.projectID);
 
-				request.query(qry1,  function (err, preresults0, fields) {
-					request.query(qry, function (err, preresults, fields) {
-						request.query(qry2, function (err, preresults1, fields) {
-							request.query(qry3, function (err, preresults2, fields) {
-								request.query(qry4, function (err, preresults3, fields) {
-									request.query(qry5, function (err, preresults4, fields) {
-										request.query(qry6, function (err, preresults5, fields) {
-											request.query(qry7, function (err, preresults6, fields) {
-												
-													request.query(qry9, function (err, preresults8, fields) {
-														request.query(qry10, function (err, preresults9, fields) {
-															request.query(qry11, function (err, preresults10, fields) {
-																request.query(qry12, function (err, preresults11, fields) {
-															
-															var results0 = preresults0.recordset;
-															var results = preresults.recordset;
-															var results1 = preresults1.recordset;
-															var results2 = preresults2.recordset;
-															var results3 = preresults3.recordset;
-															var results4 = preresults4.recordset;
-															var results5 = preresults5.recordset;
-															var results6 = preresults6.recordset;
-															
-															var results8 = preresults8.recordset;
-															var results9 = preresults9.recordset;
-															var results10 = preresults10.recordset;
-															var results11 = preresults11.recordset;
+				request.query(qry1,  function (err, results0, fields) {
+					request.query(qry, function (err, results, fields) {
+						request.query(qry2, function (err, results1, fields) {
+							request.query(qry3, function (err, results2, fields) {
+								request.query(qry4, function (err, results3, fields) {
+									request.query(qry5, function (err, results4, fields) {
+										request.query(qry6, function (err, results5, fields) {
+											request.query(qry7, function (err, results6, fields) {												
+												request.query(qry9, function (err, results8, fields) {
+													request.query(qry10, function (err, results9, fields) {
+														request.query(qry11, function (err, results10, fields) {
+															request.query(qry12, function (err, results11, fields) {
 
-															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
+														});
 													});
 												});
 											});
-										});
 										});
 									});
 								});
@@ -953,41 +818,26 @@ router.post('/deleteCostSummary', ensureAuthenticated, function (req, res) {
 				request.input("lineItemID", sql.Int, req.body.lineItemID);
 				request.input("projectID", sql.Int, req.body.projectID);
 
-				request.query(qry1,  function (err, preresults0, fields) {
-					request.query(qry, function (err, preresults, fields) {
-						request.query(qry2, function (err, preresults1, fields) {
-							request.query(qry3, function (err, preresults2, fields) {
-								request.query(qry4, function (err, preresults3, fields) {
-									request.query(qry5, function (err, preresults4, fields) {
-										request.query(qry6, function (err, preresults5, fields) {
-											request.query(qry7, function (err, preresults6, fields) {
-												
-													request.query(qry9, function (err, preresults8, fields) {
-														request.query(qry10, function (err, preresults9, fields) {
-															request.query(qry11, function (err, preresults10, fields) {
-																request.query(qry12, function (err, preresults11, fields) {
-															
-															var results0 = preresults0.recordset;
-															var results = preresults.recordset;
-															var results1 = preresults1.recordset;
-															var results2 = preresults2.recordset;
-															var results3 = preresults3.recordset;
-															var results4 = preresults4.recordset;
-															var results5 = preresults5.recordset;
-															var results6 = preresults6.recordset;
-															
-															var results8 = preresults8.recordset;
-															var results9 = preresults9.recordset;
-															var results10 = preresults10.recordset;
-															var results11 = preresults11.recordset;
+				request.query(qry1,  function (err, results0, fields) {
+					request.query(qry, function (err, results, fields) {
+						request.query(qry2, function (err, results1, fields) {
+							request.query(qry3, function (err, results2, fields) {
+								request.query(qry4, function (err, results3, fields) {
+									request.query(qry5, function (err, results4, fields) {
+										request.query(qry6, function (err, results5, fields) {
+											request.query(qry7, function (err, results6, fields) {												
+												request.query(qry9, function (err, results8, fields) {
+													request.query(qry10, function (err, results9, fields) {
+														request.query(qry11, function (err, results10, fields) {
+															request.query(qry12, function (err, results11, fields) {
 
-															res.render('project_details', {results10: results10, results11: results11, results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
+															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
+														});
 													});
 												});
 											});
-										});
 										});
 									});
 								});
@@ -1007,11 +857,21 @@ router.post('/newPCO', ensureAuthenticated, function (req, res) {
 	var toKMSDate = req.body.toKMSDate
 	var kmsReviewedDate = req.body.kmsReviewedDate
 	var clientApprovedDate = req.body.clientApprovedDate
+	var pcoValue = req.body.pcoValue
+	var contingencyAmount = req.body.contingencyAmount
+	var costSavingsAmount = req.body.costSavingsAmount
+	var changeOrders = req.body.changeOrders
+	var pcoNumber = req.body.pcoNumber
 
-	if (req.body.dueDate == ""){activityStartDate = null};
-	if (req.body.toKMSDate == ""){targetCompletionDate = null};
-	if (req.body.kmsReviewedDate == ""){actualCompletionDate = null};
+	if (req.body.dueDate == ""){dueDate = null};
+	if (req.body.toKMSDate == ""){toKMSDate = null};
+	if (req.body.kmsReviewedDate == ""){kmsReviewedDate = null};
 	if (req.body.clientApprovedDate == ""){clientApprovedDate = null};
+	if (req.body.pcoValue == ""){pcoValue = null};
+	if (req.body.contingencyAmount == ""){contingencyAmount = null};
+	if (req.body.costSavingsAmount == ""){costSavingsAmount = null};
+	if (req.body.changeOrders == ""){changeOrders = null};
+	if (req.body.pcoNumber == ""){pcoNumber = null};
 
 	//Inserts data into the pco table within the database
 	var qry1 = 'INSERT INTO pco (pcoNumber, pcoDescription, dueDate, toKMSDate, kmsReviewedDate, clientApprovedDate, pcoValue, contingencyAmount, costSavingsAmount, changeOrders, pcoStatus, comments, projectID) VALUES (@pcoNumber, @pcoDescription, @dueDate, @toKMSDate, @kmsReviewedDate, @clientApprovedDate, @pcoValue, @contingencyAmount, @costSavingsAmount, @changeOrders, @pcoStatus, @comments, @projectID)'
@@ -1031,49 +891,36 @@ router.post('/newPCO', ensureAuthenticated, function (req, res) {
 			else {
                 console.log("Connection established.");
                 
-				request.input("pcoNumber", sql.Int, req.body.pcoNumber);
+				request.input("pcoNumber", sql.Int, pcoNumber);
 				request.input("pcoDescription", sql.VarChar, req.body.pcoDescription);
 				request.input("dueDate", sql.Date, dueDate);
 				request.input("toKMSDate", sql.Date, toKMSDate);
 				request.input("kmsReviewedDate", sql.Date, kmsReviewedDate);
 				request.input("clientApprovedDate", sql.Date, clientApprovedDate);
-				request.input("pcoValue", sql.Decimal, req.body.pcoValue);
-				request.input("contingencyAmount", sql.Decimal, req.body.contingencyAmount);
-				request.input("costSavingsAmount", sql.Decimal, req.body.costSavingsAmount);
-				request.input("changeOrders", sql.Decimal, req.body.changeOrders);
+				request.input("pcoValue", sql.Decimal, pcoValue);
+				request.input("contingencyAmount", sql.Decimal, contingencyAmount);
+				request.input("costSavingsAmount", sql.Decimal, costSavingsAmount);
+				request.input("changeOrders", sql.Decimal, changeOrders);
 				request.input("pcoStatus", sql.VarChar, req.body.pcoStatus);
 				request.input("comments", sql.VarChar, req.body.comments);
 				request.input("projectID", sql.Int, req.body.projectID);
 
-				request.query(qry1,  function (err, preresults0, fields) {
-					request.query(qry, function (err, preresults, fields) {
-						request.query(qry2, function (err, preresults1, fields) {
-							request.query(qry3, function (err, preresults2, fields) {
-								request.query(qry4, function (err, preresults3, fields) {
-									request.query(qry5, function (err, preresults4, fields) {
-										request.query(qry6, function (err, preresults5, fields) {
-											request.query(qry7, function (err, preresults6, fields) {
-												
-													request.query(qry9, function (err, preresults8, fields) {
-														request.query(qry10, function (err, preresults9, fields) {
-															
-															var results0 = preresults0.recordset;
-															var results = preresults.recordset;
-															var results1 = preresults1.recordset;
-															var results2 = preresults2.recordset;
-															var results3 = preresults3.recordset;
-															var results4 = preresults4.recordset;
-															var results5 = preresults5.recordset;
-															var results6 = preresults6.recordset;
-															
-															var results8 = preresults8.recordset;
-															var results9 = preresults9.recordset;
+				request.query(qry1,  function (err, results0, fields) {
+					request.query(qry, function (err, results, fields) {
+						request.query(qry2, function (err, results1, fields) {
+							request.query(qry3, function (err, results2, fields) {
+								request.query(qry4, function (err, results3, fields) {
+									request.query(qry5, function (err, results4, fields) {
+										request.query(qry6, function (err, results5, fields) {
+											request.query(qry7, function (err, results6, fields) {												
+												request.query(qry9, function (err, results8, fields) {
+													request.query(qry10, function (err, results9, fields) {
 
-															res.render('project_details', {results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
-															conn.close();
+													res.render('project_details', {results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+													conn.close();
 
-													});
 												});
+											});
 										});
 									});
 								});
@@ -1096,11 +943,21 @@ router.post('/updatePCO', ensureAuthenticated, function (req, res) {
 	var toKMSDate = req.body.toKMSDate
 	var kmsReviewedDate = req.body.kmsReviewedDate
 	var clientApprovedDate = req.body.clientApprovedDate
+	var pcoValue = req.body.pcoValue
+	var contingencyAmount = req.body.contingencyAmount
+	var costSavingsAmount = req.body.costSavingsAmount
+	var changeOrders = req.body.changeOrders
+	var pcoNumber = req.body.pcoNumber
 
-	if (req.body.dueDate == ""){activityStartDate = null};
-	if (req.body.toKMSDate == ""){targetCompletionDate = null};
-	if (req.body.kmsReviewedDate == ""){actualCompletionDate = null};
+	if (req.body.dueDate == ""){dueDate = null};
+	if (req.body.toKMSDate == ""){toKMSDate = null};
+	if (req.body.kmsReviewedDate == ""){kmsReviewedDate = null};
 	if (req.body.clientApprovedDate == ""){clientApprovedDate = null};
+	if (req.body.pcoValue == ""){pcoValue = null};
+	if (req.body.contingencyAmount == ""){contingencyAmount = null};
+	if (req.body.costSavingsAmount == ""){costSavingsAmount = null};
+	if (req.body.changeOrders == ""){changeOrders = null};
+	if (req.body.pcoNumber == ""){pcoNumber = null};
 
 	//Establishing connection to the database
     const conn = new sql.ConnectionPool(sqlconfig);
@@ -1116,51 +973,37 @@ router.post('/updatePCO', ensureAuthenticated, function (req, res) {
 			else {
                 console.log("Connection established.");
                 
-				request.input("pcoNumber", sql.Int, req.body.pcoNumber);
+				request.input("pcoNumber", sql.Int, pcoNumber);
 				request.input("pcoDescription", sql.VarChar, req.body.pcoDescription);
 				request.input("dueDate", sql.Date, dueDate);
 				request.input("toKMSDate", sql.Date, toKMSDate);
 				request.input("kmsReviewedDate", sql.Date, kmsReviewedDate);
 				request.input("clientApprovedDate", sql.Date, clientApprovedDate);
-				request.input("pcoValue", sql.Decimal, req.body.pcoValue);
-				request.input("contingencyAmount", sql.Decimal, req.body.contingencyAmount);
-				request.input("costSavingsAmount", sql.Decimal, req.body.costSavingsAmount);
-				request.input("changeOrders", sql.Decimal, req.body.changeOrders);
+				request.input("pcoValue", sql.Decimal, pcoValue);
+				request.input("contingencyAmount", sql.Decimal, contingencyAmount);
+				request.input("costSavingsAmount", sql.Decimal, costSavingsAmount);
+				request.input("changeOrders", sql.Decimal, changeOrders);
 				request.input("pcoStatus", sql.VarChar, req.body.pcoStatus);
 				request.input("comments", sql.VarChar, req.body.comments);
 				request.input("pcoID", sql.Int, req.body.pcoID)
 				request.input("projectID", sql.Int, req.body.projectID);
 
-				request.query(qry1,  function (err, preresults0, fields) {
-					request.query(qry, function (err, preresults, fields) {
-						request.query(qry2, function (err, preresults1, fields) {
-							request.query(qry3, function (err, preresults2, fields) {
-								request.query(qry4, function (err, preresults3, fields) {
-									request.query(qry5, function (err, preresults4, fields) {
-										request.query(qry6, function (err, preresults5, fields) {
-											request.query(qry7, function (err, preresults6, fields) {
-												
-													request.query(qry9, function (err, preresults8, fields) {
-														request.query(qry10, function (err, preresults9, fields) {
-															
-															var results0 = preresults0.recordset;
-															var results = preresults.recordset;
-															var results1 = preresults1.recordset;
-															var results2 = preresults2.recordset;
-															var results3 = preresults3.recordset;
-															var results4 = preresults4.recordset;
-															var results5 = preresults5.recordset;
-															var results6 = preresults6.recordset;
-															
-															var results8 = preresults8.recordset;
-															var results9 = preresults9.recordset;
+				request.query(qry1,  function (err, results0, fields) {
+					request.query(qry, function (err, results, fields) {
+						request.query(qry2, function (err, results1, fields) {
+							request.query(qry3, function (err, results2, fields) {
+								request.query(qry4, function (err, results3, fields) {
+									request.query(qry5, function (err, results4, fields) {
+										request.query(qry6, function (err, results5, fields) {
+											request.query(qry7, function (err, results6, fields) {												
+												request.query(qry9, function (err, results8, fields) {
+													request.query(qry10, function (err, results9, fields) {
 
-															res.render('project_details', {results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
-															conn.close();
+													res.render('project_details', {results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+													conn.close();
 
-													});
 												});
-											;
+											});											
 										});
 									});
 								});
@@ -1197,31 +1040,19 @@ router.post('/deletePCO', ensureAuthenticated, function (req, res) {
 				request.input("pcoID", sql.Int, req.body.pcoID)
 				request.input("projectID", sql.Int, req.body.projectID);
 
-				request.query(qry1,  function (err, preresults0, fields) {
-					request.query(qry, function (err, preresults, fields) {
-						request.query(qry2, function (err, preresults1, fields) {
-							request.query(qry3, function (err, preresults2, fields) {
-								request.query(qry4, function (err, preresults3, fields) {
-									request.query(qry5, function (err, preresults4, fields) {
-										request.query(qry6, function (err, preresults5, fields) {
-											request.query(qry7, function (err, preresults6, fields) {
-												
-													request.query(qry9, function (err, preresults8, fields) {
-														request.query(qry10, function (err, preresults9, fields) {
-															
-															
-															var results = preresults.recordset;
-															var results1 = preresults1.recordset;
-															var results2 = preresults2.recordset;
-															var results3 = preresults3.recordset;
-															var results4 = preresults4.recordset;
-															var results5 = preresults5.recordset;
-															var results6 = preresults6.recordset;															
-															var results8 = preresults8.recordset;
-															var results9 = preresults9.recordset;
+				request.query(qry1,  function (err, results0, fields) {
+					request.query(qry, function (err, results, fields) {
+						request.query(qry2, function (err, results1, fields) {
+							request.query(qry3, function (err, results2, fields) {
+								request.query(qry4, function (err, results3, fields) {
+									request.query(qry5, function (err, results4, fields) {
+										request.query(qry6, function (err, results5, fields) {
+											request.query(qry7, function (err, results6, fields) {												
+												request.query(qry9, function (err, results8, fields) {
+													request.query(qry10, function (err, results9, fields) {															
 
-															res.render('project_details', {results9: results9, results8: results8, updateType: updateType, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
-															conn.close();
+													res.render('project_details', {results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+													conn.close();
 
 												});
 											});											
@@ -1259,18 +1090,14 @@ router.get('/project', ensureAuthenticated, function (req, res) {
                 
 				request.input("projectID", sql.Int, req.body.projectID);
 
-				request.query(tempqry, function (err, preresults, fields) {
-					request.query(tempqry2, function (err, preresults1, fields) {
+				request.query(tempqry, function (err, results, fields) {
+					request.query(tempqry2, function (err, results1, fields) {
 
-
-						var results = preresults.recordset;
-						var results1 = preresults1.recordset;
-
-						res.render('project', { results: results, results1: results1 });
+						res.render('project', { results: results.recordset, results1: results1.recordset });
 						conn.close();
 					});
 				});
-		}
+			}
 	});	
 });
 
@@ -1292,46 +1119,33 @@ router.post('/project_details', ensureAuthenticated, function (req, res) {
                 console.log("Connection established.");
                 
 				request.input("projectID", sql.Int, req.body.projectID);
+								
+				request.query(qry, function (err, results, fields) {
+					request.query(qry2, function (err, results1, fields) {
+						request.query(qry3, function (err, results2, fields) {
+							request.query(qry4, function (err, results3, fields) {
+								request.query(qry5, function (err, results4, fields) {
+									request.query(qry6, function (err, results5, fields) {
+										request.query(qry7, function (err, results6, fields) {											
+											request.query(qry9, function (err, results8, fields) {
+												request.query(qry10, function (err, results9, fields) {
+													request.query(qry11, function (err, results10, fields) {
+														request.query(qry12, function (err, results11, fields) {
+																													
+														res.render('project_details', {results11: results11.recordset, results10: results10.recordset, results9: results9.recordset, results8: results8.recordset, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+														conn.close();
 
-				request.query(qry, function (err, preresults, fields) {
-					request.query(qry2, function (err, preresults1, fields) {
-						request.query(qry3, function (err, preresults2, fields) {
-							request.query(qry4, function (err, preresults3, fields) {
-								request.query(qry5, function (err, preresults4, fields) {
-									request.query(qry6, function (err, preresults5, fields) {
-										request.query(qry7, function (err, preresults6, fields) {											
-											request.query(qry9, function (err, preresults8, fields) {
-												request.query(qry10, function (err, preresults9, fields) {
-													request.query(qry11, function (err, preresults10, fields) {
-														request.query(qry12, function (err, preresults11, fields) {
-																
-																
-																var results = preresults.recordset;
-																var results1 = preresults1.recordset;
-																var results2 = preresults2.recordset;
-																var results3 = preresults3.recordset;
-																var results4 = preresults4.recordset;
-																var results5 = preresults5.recordset;
-																var results6 = preresults6.recordset;
-																
-																var results8 = preresults8.recordset;
-																var results9 = preresults9.recordset;
-																var results10 = preresults10.recordset;
-																var results11 = preresults11.recordset;
-
-																res.render('project_details', {results11: results11, results10: results10, results9: results9, results8: results8, results: results, results1: results1, results2: results2, results3: results3, results4: results4, results5: results5, results6: results6 });
-																conn.close();
-															});
 													});
 												});
-											});										
+											});
+										});										
 									});
 								});
 							});
 						});
 					});
-				});
-			});				
+				});				
+			}); 
 		}
 	});	
 });
