@@ -13,6 +13,7 @@ var flash = require('connect-flash');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var moment = require('moment');
+var sql = require('mssql');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -21,6 +22,16 @@ var admin = require('./routes/admin');
 
 // Init App
 var app = express();
+
+var sqlconfig = {
+	user: 'kmsadmin',
+    password: 'KMSproject1',
+    server: 'kempmspilot.database.windows.net', 
+    database: 'kmspilot',
+	options: {
+		encrypt: true
+	}
+}
 
 // View Engine
 app.set('views', path.join(__dirname, 'views'));
@@ -47,6 +58,8 @@ Handlebars.registerHelper('formatTime', function (date, format) {
 });
 
 
+
+
 // Express Session
 app.use(session({
 
@@ -55,7 +68,6 @@ app.use(session({
     secret: 'secret',
     saveUninitialized: false,
     resave: false,
-    store: new MsSqlStore()
 }));
 
 // Passport init

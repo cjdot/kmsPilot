@@ -232,7 +232,7 @@ router.post('/updateProject', ensureAuthenticated, function(req, res){
                 request.input("serviceType", sql.VarChar, req.body.serviceType);
             	request.input("targetStartDate", sql.Date, targetStartDate);
                 request.input("targetCompletionDate", sql.Date, targetCompletionDate);
-                request.input("projectedBudget", sql.Decimal, .projectedBudget);
+                request.input("projectedBudget", sql.Decimal, projectedBudget);
 				request.input("contractAmount", sql.Decimal, contractAmount);
 				request.input("projectID", sql.Int, req.body.projectID);
 
