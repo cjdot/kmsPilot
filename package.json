@@ -20,6 +20,7 @@
     "express-session": "*",
     "express-validator": "*",
     "express-mysql-session": "*",
+    "mssql-session-store": "*",
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",

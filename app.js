@@ -8,6 +8,7 @@ var HandlebarsIntl = require('handlebars-intl');
 var expressValidator = require('express-validator');
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session') (session);
+var MsSqlStore = require('mssql-session-store')(session);
 var flash = require('connect-flash');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -53,7 +54,8 @@ app.use(session({
     //NEEDS TO BE SOMETHING THAT NO ONE CAN GUESS 'asdlfkhj34087yfkjasf023rhb'
     secret: 'secret',
     saveUninitialized: false,
-    resave: false
+    resave: false,
+    store: new MsSqlStore()
 }));
 
 // Passport init

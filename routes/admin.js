@@ -150,9 +150,13 @@ router.post('/registerProject', ensureAuthenticated, function(req, res){
     
 	var targetCompletionDate = req.body.targetCompletionDate
 	var targetStartDate = req.body.targetStartDate
+	var projectedBudget = req.body.projectedBudget
+	var contractAmount = req.body.contractAmount
 
 	if (req.body.targetStartDate == ""){targetStartDate = null};
     if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
+	if (req.body.projectedBudget == ""){projectedBudget = null};
+	if (req.body.contractAmount == ""){contractAmount = null};
 
 	//Establishing connection to the database
     const conn = new sql.ConnectionPool(sqlconfig);
@@ -173,8 +177,8 @@ router.post('/registerProject', ensureAuthenticated, function(req, res){
                 request.input("serviceType", sql.VarChar, req.body.serviceType);
             	request.input("targetStartDate", sql.Date, targetStartDate);
                 request.input("targetCompletionDate", sql.Date, targetCompletionDate);
-                request.input("projectedBudget", sql.Decimal, req.body.projectedBudget);
-				request.input("contractAmount", sql.Decimal, req.body.contractAmount);
+                request.input("projectedBudget", sql.Decimal, projectedBudget);
+				request.input("contractAmount", sql.Decimal, contractAmount);
 				
 				request.query(qry, function (err, resultss, fields) { 
                     request.query(qry1, function(err, preresults0, fields) {
@@ -197,9 +201,13 @@ router.post('/updateProject', ensureAuthenticated, function(req, res){
   
 	var targetCompletionDate = req.body.targetCompletionDate
 	var targetStartDate = req.body.targetStartDate
+	var projectedBudget = req.body.projectedBudget
+	var contractAmount = req.body.contractAmount
 
 	if (req.body.targetStartDate == ""){targetStartDate = null};
     if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
+	if (req.body.projectedBudget == ""){projectedBudget = null};
+	if (req.body.contractAmount == ""){contractAmount = null};
 
     var qry = 'UPDATE PROJECT SET clientName = @clientName, projectName = @projectName, location = @location, serviceType = @serviceType, targetStartDate = @targetStartDate, targetCompletionDate = @targetCompletionDate, projectedBudget = @projectedBudget, contractAmount = @contractAmount WHERE projectID = @projectID'
     var qry1 = 'SELECT * FROM users'
@@ -224,8 +232,8 @@ router.post('/updateProject', ensureAuthenticated, function(req, res){
                 request.input("serviceType", sql.VarChar, req.body.serviceType);
             	request.input("targetStartDate", sql.Date, targetStartDate);
                 request.input("targetCompletionDate", sql.Date, targetCompletionDate);
-                request.input("projectedBudget", sql.Decimal, req.body.projectedBudget);
-				request.input("contractAmount", sql.Decimal, req.body.contractAmount);
+                request.input("projectedBudget", sql.Decimal, .projectedBudget);
+				request.input("contractAmount", sql.Decimal, contractAmount);
 				request.input("projectID", sql.Int, req.body.projectID);
 
 				request.query(qry, function (err, resultss, fields) { 
