@@ -736,7 +736,7 @@ router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
 	var budget = req.body.budget
 	var originalContractValue = req.body.originalContractValue
 	var changeOrders = req.body.changeOrders
-	var actualCostToDate = requ.body.actualCostToDate
+	var actualCostToDate = req.body.actualCostToDate
 
 	//Places a null value in each of the fields if there is not a value entered
 	if (req.body.budget == ""){budget = null};

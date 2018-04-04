@@ -42,48 +42,47 @@
             <table>
             <tbody>
             <form method="post" class="form-inline" action="/users/register">
-                <tr>
-                <div class="form-group mb-2">
-                    <td><label for="firstName">First Name:  &nbsp  &nbsp</label></td>
-                    <td><input type="text" class="form-control" placeholder="First Name" name="firstName" /></td>
+                <div class="form-group">
+                    <td><label for="firstName">First Name:</label></td>
+                    <td><input type="text" class="form-control mb-2" placeholder="First Name" name="firstName" /></td>
                     <br> <br>
                 </div>
                 </tr>
                 <tr>
-                <div class="form-group mb-2">
+                <div class="form-group">
                     <td><label>Last Name:</label></td>
-                    <td><input type="text" class="form-control" placeholder="Last Name" name="lastName"></td>
+                    <td><input type="text" class="form-control mb-2" placeholder="Last Name" name="lastName"></td>
                 </div>
                 </tr>
                 <tr>
-                <div class="form-group mb-2">
+                <div class="form-group">
                     <td><label>Email:</label></td>
-                    <td><input type="email" class="form-control" placeholder="Email" name="email"></td>
+                    <td><input type="email" class="form-control mb-2" placeholder="Email" name="email"></td>
                 </div>
                 </tr>
                 <tr>
-                <div class="form-group mb-2">
+                <div class="form-group">
                     <td><label>Phone Number:</label></td>
-                    <td><input type="tel" class="form-control" placeholder="(123)-456-7890" name="phoneNumber"></td>
+                    <td><input type="tel" class="form-control mb-2" placeholder="(123)-456-7890" name="phoneNumber"></td>
                 </div>
                 </tr>
                 <tr>
                 
-                <div class="form-group mb-2">
+                <div class="form-group">
                     <td><label>Password:</label></td>
-                    <td><input title="Password must contain at least 7 characters, include both upper and lowercase letters, and numbers. Special characters are allowed, but not required." type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,25}" class="form-control" placeholder="Password" name="password" onchange="form.password2.pattern = RegExp.escape(this.value);"></td>
+                    <td><input title="Password must contain at least 7 characters, include both upper and lowercase letters, and numbers. Special characters are allowed, but not required." type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,25}" class="form-control mb-2" placeholder="Password" name="password" onchange="form.password2.pattern = RegExp.escape(this.value);"></td>
                 </div>
                 </tr>
                 <tr>
-                <div class="form-group mb-2">
+                <div class="form-group">
                     <td><label>Confirm Password:</label></td>
-                    <td><input title="Please enter the same password as above." type="password" class="form-control" placeholder="Password" name="password2"></td>
+                    <td><input title="Please enter the same password as above." type="password" class="form-control mb-2" placeholder="Password" name="password2"></td>
                 </div>
                 </tr>
                 <tr>
-                <div class="form-group mb-2">
+                <div class="form-group">
                     <td><label>Permission Level:</label></td>
-                    <td><select class="form-control" name="permission">
+                    <td><select class="form-control mb-2" name="permission">
                         <option value="read"> Read </option>
                         <option value="write"> Write </option>
                         <option value="admin"> Admin </option>
@@ -101,7 +100,7 @@
 
             <div id="editUser" class="tab-pane">
                 <br><h2>Edit Users</h2>
-                <table class="table table-striped">
+                <table class="table table-striped table-sm">
                     <thead>
                         <tr>
                             <th>First Name</th>
@@ -155,7 +154,7 @@
                 </table>
             </div>
             <div id="readUser" class="tab-pane">
-                <table class="table table-striped">
+                <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>First Name</th>
