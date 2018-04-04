@@ -5,6 +5,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var mysql = require('mysql2');
 var bcrypt = require('bcryptjs');
 var sql = require('mssql');
+const nodemailer = require('nodemailer');
 
 var User = require('../models/user');
 
@@ -191,19 +192,10 @@ router.post('/login', function(req, res) {
 
 router.post('/forgot', function(req, res){
 
-	/*
-		I don't really know what I'm doing here, so feel free to rectify.
-		The goal is to:
-			- Compare forgot_email to the emails in the DB
-			- If there is a match, change the password to a random string
-			- Then execute the send function
-			- Notify the user of success or failure
-		Currently I am just trying to get it to give me something.
-	*/
-
 	//Email input present
 	req.checkBody('forgot_email', 'Email is required for password reset').notEmpty();
 	req.checkBody('forgot_email', 'Email is not valid').isEmail();
+	req.checkBody('spy', 'Bot input detected.').isEmpty();
 
 	var errors = req.validationErrors();
 
@@ -257,11 +249,43 @@ router.post('/forgot', function(req, res){
 										}
 
 										var results4 = preresults4.recordset;
-										req.flash('success_msg', 'Temporary password assigned. Please check your email.');
 										console.log("Password reset complete.")
-										//Email.send("jkemp@kempms.net",req.body.forgot_email,"KMS Web App Forgot Password","Here is your password: " + temp_password,"smtp.elasticemail.com","labmx_vlsc@outlook.com","773c4bdc-5ae8-4e83-85b9-08402c8ae308");
+										
+										nodemailer.createTestAccount((err, account) => {
+											// create reusable transporter object using the default SMTP transport
+											let transporter = nodemailer.createTransport({
+												host: 'smtp.elasticemail.com',
+												port: 2525,
+												secure: false, // true for 465, false for other ports
+												auth: {
+													user: 'labmx_vlsc@outlook.com',
+													pass: '773c4bdc-5ae8-4e83-85b9-08402c8ae308'
+												}
+											});
+										
+											// setup email data with unicode symbols
+											let mailOptions = {
+												from: '"James Kemp" <jkemp@kempms.net>', //Sender address
+												to: req.body.forgot_email, //Receiver address
+												subject: 'KMS Web App Password Reset', // Subject line
+												text: 'Here is your temporary password: ' + temp_password, // plain text body
+												html: '<b>Here is your temporary password: </b>' + temp_password + '<br><br>After logging in with this password, go to Settings, then enter in your new password.' // html body, often goes to spam if removed
+											};
+										
+											// send mail with defined transport object
+											transporter.sendMail(mailOptions, (error, info) => {
+												if (error) {
+													return console.log(error);
+												}
+												console.log('Message sent: %s', info.messageId);
+											});
+										});
+										
 										conn.close();
 									});
+
+								req.flash('info_msg', 'Email sent. Please check your indox and spam folder.');
+								res.redirect('/users/login');
 							} else {
 								req.flash('error_msg', 'Email does not exist for any current user.');
 								res.redirect('/users/login');

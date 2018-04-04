@@ -17,16 +17,17 @@
     "express": "*",
     "express-handlebars": "*",
     "express-messages": "*",
+    "express-mysql-session": "*",
     "express-session": "*",
     "express-validator": "*",
-    "express-mysql-session": "*",
+    "handlebars-intl": "*",
+    "moment": "*",
+    "mssql": "*",
     "mssql-session-store": "*",
+    "mysql2": "*",
+    "nodemailer": "^4.6.4",
     "passport": "*",
     "passport-http": "*",
-    "passport-local": "*",
-    "mysql2": "*",
-    "mssql": "*",
-    "handlebars-intl": "*",
-    "moment": "*"
+    "passport-local": "*"
   }
 }
