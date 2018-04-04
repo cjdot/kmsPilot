@@ -10,11 +10,12 @@
 
      <table>
         <tbody>
+            {{#each results}}
             <form method="post" class="form-inline" action="/users/register">
                 <tr>
                 <div class="form-group mb-2">
                     <td><label for="firstName">First Name:  &nbsp  &nbsp</label></td>
-                    <td><input type="text" class="form-control" placeholder="First Name" name="firstName" /></td>
+                    <td><input type="text" class="form-control" value={{firstName}} name="firstName" /></td>
                     <br> <br>
                 </div>
                 </tr>
@@ -63,6 +64,7 @@
                 <button type="submit" class="btn btn-outline-info my-2 my-sm-0">Submit</button>
                 </td></tr>
             </form>
+            {{/each}}
         </tbody>
     </table>
 </div>
