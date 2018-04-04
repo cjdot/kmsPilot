@@ -18,7 +18,6 @@ router.get('/', ensureAuthenticated, function(req, res){
     console.log(req.user);
 	
 	var qry1 = 'SELECT * FROM users WHERE email = @email'
-	var qry2 = 'SELECT * FROM project'
 	
 	//Establishing connection to the database
     const conn = new sql.ConnectionPool(sqlconfig);
@@ -31,11 +30,13 @@ router.get('/', ensureAuthenticated, function(req, res){
 				throw err;
 			}
 			else {
-                console.log("Connection established.");
+				console.log("Connection established.");
+				
+				request.input("email", sql.VarChar, req.user);
                 				
                 request.query(qry1, function(err, results, fields) {
 							
-					res.render('settings', {results: results.recordset});	
+					res.render('settings', {results: results.recordset});
 					conn.close();					              
                 });
                  				

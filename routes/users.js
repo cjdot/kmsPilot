@@ -258,7 +258,7 @@ router.post('/forgot', function(req, res){
 
 									/*request.query(qry4, function (err, preresults4) {
 										var results4 = preresults4.recordset;
-										req.flash('success_msg', 'New User has been registered');			
+										req.flash('success_msg', 'Temporary password assigned. Please check your email.');			
 										conn.close();	
 									});*/
 
