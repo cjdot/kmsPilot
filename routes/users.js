@@ -213,7 +213,7 @@ router.post('/forgot', function(req, res){
 		});
 	} else {
 		var qry3 = "SELECT email FROM users WHERE email = @forgot_email";
-		var qry4 = "UPDATE users SET password = @temp_password WHERE email = @email"
+		var qry4 = "UPDATE users SET password = @hash WHERE email = @forgot_email"
 		
 		//Establishing connection to the database
 		const conn = new sql.ConnectionPool(sqlconfig);
@@ -236,12 +236,6 @@ router.post('/forgot', function(req, res){
 
 							if (results.length > 0){								
 								console.log(results);
-								
-								var expr = /req.body.forgot_email/;
-								var email_match = expr.test(results[0].email);
-								console.log(email_match)
-
-								if (email_match == true) {
 
 									var temp_password = "";
 									var possible = "ABCEFGHJKLMNPQRSTWXYZabcdefghijkmnpqrstuvwxyz23456789";
@@ -251,19 +245,23 @@ router.post('/forgot', function(req, res){
 									}
 
 									let hash = bcrypt.hashSync(temp_password, 10);
-									//request.input("password", sql.VarChar, hash);
+
+									request.input("hash", sql.VarChar, hash);
 
 									console.log(temp_password) //Test
 									console.log(hash) //Test
 
-									/*request.query(qry4, function (err, preresults4) {
-										var results4 = preresults4.recordset;
-										req.flash('success_msg', 'Temporary password assigned. Please check your email.');			
-										conn.close();	
-									});*/
+									request.query(qry4, function (err, preresults4) {
+										if (err) {
+											console.log(err)
+										}
 
-									conn.close();
-								}
+										var results4 = preresults4.recordset;
+										req.flash('success_msg', 'Temporary password assigned. Please check your email.');
+										console.log("Password reset complete.")
+										//Email.send("jkemp@kempms.net",req.body.forgot_email,"KMS Web App Forgot Password","Here is your password: " + temp_password,"smtp.elasticemail.com","labmx_vlsc@outlook.com","773c4bdc-5ae8-4e83-85b9-08402c8ae308");
+										conn.close();
+									});
 							} else {
 								req.flash('error_msg', 'Email does not exist for any current user.');
 								res.redirect('/users/login');
