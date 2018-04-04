@@ -29,18 +29,17 @@
 </form>
 </div>
 
-<br><br><br>
-<h2 class="page-header">Forgot Password</h2>
-
 <div class="col-6 col-sm-5 placeholder">
+<br><br>
+<button data-toggle="collapse" class="btn btn-default" data-target="#forgot">Forgot Password</button>
 
-<form method="post" action="/users/forgot">
+<form method="post" id="forgot" class="collapse" action="/users/forgot">
   <div class="form-group">
     <input id="spy" type="text" class="form-control" value="">
-    <label>Enter email:</label>
+    <br><label>Enter email:</label>
     <input id="forgot_email" type="text" class="form-control" name="forgot_email" placeholder="Email">
   </div>
-  <button id="forgot_button" type="submit" class="btn btn-default">Reset Password</button>
+  <button id="forgot_button" type="submit" class="btn btn-info">Reset Password</button>
 </form>
 </div>
 
