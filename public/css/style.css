@@ -2,6 +2,19 @@ td.costsummarystyle {
   border-color: #cccccc;
 }
 
+th.pointer {
+  cursor: pointer;
+}
+
+a.fontbigger {
+  font-size: 18px;
+  padding-right: 45px;
+}
+
+li {
+  margin-top: -7px;
+  margin-bottom: -7px;
+}
 
 /* Space out content a bit */
 body {
