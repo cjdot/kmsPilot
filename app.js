@@ -19,6 +19,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var projects = require('./routes/projects');
 var admin = require('./routes/admin');
+var settings = require('./routes/settings');
 
 // Init App
 var app = express();
@@ -111,6 +112,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/projects', projects);
 app.use('/admin', admin);
+app.use('/settings', settings);
 
 app.use(express.static('public/css'));
 

@@ -203,42 +203,74 @@ router.post('/forgot', function(req, res){
 
 	//Email input present
 	req.checkBody('forgot_email', 'Email is required for password reset').notEmpty();
+	req.checkBody('forgot_email', 'Email is not valid').isEmail();
 
 	var errors = req.validationErrors();
-	var qry3 = 'SELECT email FROM users WHERE email = @forgot_email'
 
 	if(errors){
 		res.render('login',{
 			errors:errors
 		});
 	} else {
+		var qry3 = "SELECT email FROM users WHERE email = @forgot_email";
+		var qry4 = "UPDATE users SET password = @temp_password WHERE email = @email"
+		
 		//Establishing connection to the database
 		const conn = new sql.ConnectionPool(sqlconfig);
 		var request = new sql.Request(conn);
-		/*
+		
 		conn.connect(
 			function (err) {
 				if (err) {
-					console.log("Cannot initiate forgot password function.")
+					console.log("Forgot Password: connection cannot be made")
 					throw err;
 				}
 				else {
-					console.log("Forgot password function initiated...");
-					request.query(qry3, function(err, preresults3, fields) {
+						console.log("Forgot Password: connection made");
+						request.input("forgot_email", sql.VarChar, req.body.forgot_email);
 
-						var results3 = preresults3.recordset; // !!! SOMETHING BREAKS HERE !!!
+						request.query(qry3, function(err, preresults, fields) {
+							if (err) throw err;
 
-						if (results3.length > 0) {
-							res.render('login', {results3: results3, results3: results3});	
-							conn.close();
-							console.log(forgot_email)	
-						} else {
-							console.log("No email match.")
-							conn.close();
-						}
-					});
+							results = preresults.recordset;
+
+							if (results.length > 0){								
+								console.log(results);
+								
+								var expr = /req.body.forgot_email/;
+								var email_match = expr.test(results[0].email);
+								console.log(email_match)
+
+								if (email_match == true) {
+
+									var temp_password = "";
+									var possible = "ABCEFGHJKLMNPQRSTWXYZabcdefghijkmnpqrstuvwxyz23456789";
+
+									for (var i = 0; i < 7; i++) {
+										temp_password += possible.charAt(Math.floor(Math.random() * possible.length));
+									}
+
+									let hash = bcrypt.hashSync(temp_password, 10);
+									//request.input("password", sql.VarChar, hash);
+
+									console.log(temp_password) //Test
+									console.log(hash) //Test
+
+									/*request.query(qry4, function (err, preresults4) {
+										var results4 = preresults4.recordset;
+										req.flash('success_msg', 'New User has been registered');			
+										conn.close();	
+									});*/
+
+									conn.close();
+								}
+							} else {
+								req.flash('error_msg', 'Email does not exist for any current user.');
+								res.redirect('/users/login');
+							}	              
+					});             				
 				}
-		}); */           				
+		});
 	}
 });
 
