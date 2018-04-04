@@ -109,7 +109,7 @@ router.post('/deleteUser', ensureAuthenticated, function(req, res){
 	
     var qry = 'DELETE FROM USERS WHERE userID = @userID'
     var qry1 = 'SELECT * FROM users'
-    var qry2 = 'SELECT * FROM project'
+	var qry2 = 'SELECT * FROM project'
 
 	//Establishing connection to the database
     const conn = new sql.ConnectionPool(sqlconfig);

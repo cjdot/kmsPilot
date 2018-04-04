@@ -246,13 +246,13 @@
                 <tr>
                 <div class="form-group">
                     <td><label>Projected Budget:</label></td>
-                    <td><input type="number" class="form-control mb-2" placeholder="500,000" name="projectedBudget"></td>
+                    <td><input type="number" step="0.01" class="form-control mb-2" placeholder="500,000" name="projectedBudget"></td>
                 </div>
                 </tr>
                 <tr>
                 <div class="form-group">
                     <td><label>Contract Amount:</label></td>
-                    <td><input type="number" class="form-control mb-2" placeholder="500,000" name="contractAmount"></td>
+                    <td><input type="number" step="0.01" class="form-control mb-2" placeholder="500,000" name="contractAmount"></td>
                 </div>
                 </tr>
                 <tr>
@@ -286,7 +286,7 @@
 
             <div id="editProject" class="tab-pane">
                 <br><h2>Edit Projects</h2>
-                <table class="table table-striped">
+                <table class="table table-striped table-sm">
                     <thead>
                         <tr>
                             <th>Open?</th>
@@ -340,10 +340,10 @@
                                 <input type="date" class="form-control" id="targetStartDate" name="targetCompletionDate" value="{{#if targetCompletionDate}}{{formatTime targetCompletionDate "YYYY-MM-DD"}}{{/if}}">
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="projectedBudget" name="projectedBudget" value="{{projectedBudget}}">
+                                <input type="number" step="0.01" class="form-control" id="projectedBudget" name="projectedBudget" value="{{projectedBudget}}">
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="contractAmount" name="contractAmount" value="{{contractAmount}}">
+                                <input type="number" step="0.01" class="form-control" id="contractAmount" name="contractAmount" value="{{contractAmount}}">
                             </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/admin/updateProject">Update</button>
@@ -359,7 +359,7 @@
             </div>
 
             <div id="readProject" class="tab-pane">
-                <table class="table table-striped">
+                <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>Client Name</th>

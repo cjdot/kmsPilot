@@ -667,10 +667,10 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
 	var actualCostToDate = req.body.actualCostToDate
 
 	//Places a null value in each of the fields if there is not a value entered
-	if (req.body.budget == ""){budget = null};
-	if (req.body.originalContractValue == ""){originalContractValue = null};
-	if (req.body.changeOrders == ""){changeOrders = null};
-	if (req.body.actualCostToDate == ""){actualCostToDate = null};
+	if (req.body.budget == ""){budget = 0};
+	if (req.body.originalContractValue == ""){originalContractValue = 0};
+	if (req.body.changeOrders == ""){changeOrders = 0};
+	if (req.body.actualCostToDate == ""){actualCostToDate = 0};
 	
 	conn.connect(
 

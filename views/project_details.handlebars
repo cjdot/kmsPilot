@@ -82,11 +82,12 @@
             </tr>
         </div>
         <div class="col-lg-3">
+            {{#each ../results9}}
             <tr>
                 <td class="costsummarystyle" style="font-size: 20px;"><strong>Projected Budget:</strong></td>
-                <td align="center" class="costsummarystyle">${{#if projectedBudget}}{{formatNumber projectedBudget}}{{/if}}</td>
+                <td align="center" class="costsummarystyle">${{#if budget}}{{formatNumber budget}}{{/if}}</td>
             </tr>
-            {{#each ../results9}}
+            
             <tr>
                 <td class="costsummarystyle" style="font-size: 20px;"><strong>Original Contract Value:</strong></td>
                 <td align="center" class="costsummarystyle">${{#if originalContractValue}}{{formatNumber originalContractValue}}{{/if}}</td>
@@ -194,7 +195,7 @@
         <br><br><h4>Add New Project Activity</h4>
 
         
-        <table class="table table-striped ">
+        <table class="table table-striped table-sm">
             <thead>
                 <tr>
                     <th>Activity Description</th>
@@ -241,7 +242,7 @@
             </tbody>
         </table>
         <br><br><h4>Update Project Activity</h4>
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm table-bordered">
             <thead>
                 <tr>
                     <th>Activity Description</th>
@@ -343,7 +344,7 @@
 
             <br><br><h4>Add New KMS Action Item</h4>
 
-            <table class="table table-striped ">    
+            <table class="table table-striped table-sm table-bordered">    
                 <thead>
                     <tr>
                         <th>Action Item Description</th>
@@ -386,7 +387,7 @@
             </tbody>
         </table>
         <br><br><h4>Update KMS Action Item</h4>
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm table-bordered">
             <thead>
                 <tr>
                     <th>Action Item Description</th>
@@ -487,7 +488,7 @@
         <br><br><h4>Add New External Action Item</h4>
 
         
-        <table class="table table-striped ">
+        <table class="table table-striped table-sm table-bordered">
             <thead>
                 <tr>
                     <th>Action Item Description</th>
@@ -530,7 +531,7 @@
             </tbody>
         </table>
         <br><br><h4>Update External Action Item</h4>
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm table-bordered">
             <thead>
                 <tr>
                     <th>Action Item Description</th>
@@ -714,14 +715,14 @@
         <table class="table table-bordered table-sm">
             <thead>
                 <tr>
-                    <th style="border-color: #cccccc">Line Item</th>
-                    <th style="border-color: #cccccc">Budget</th>
-                    <th style="border-color: #cccccc">Original Contract Value</th>
-                    <th style="border-color: #cccccc">Change Orders</th>
-                    <th style="border-color: #cccccc">Revised Contract Value</th>
-                    <th style="border-color: #cccccc">Variance</th>
-                    <th bgcolor="#adebad" style="border-color: #cccccc">Actual Cost To Date</th>
-                    <th bgcolor="#adebad" style="border-color: #cccccc">Remaining Contract Value</th>
+                    <th class="text-center" style="border-color: #cccccc">Line Item</th>
+                    <th class="text-center" style="border-color: #cccccc">Budget</th>
+                    <th class="text-center" style="border-color: #cccccc">Original Contract Value</th>
+                    <th class="text-center" style="border-color: #cccccc">Change Orders</th>
+                    <th class="text-center" style="border-color: #cccccc">Revised Contract Value</th>
+                    <th class="text-center" style="border-color: #cccccc">Variance</th>
+                    <th bgcolor="#adebad" class="text-center" style="border-color: #cccccc">Actual Cost To Date</th>
+                    <th bgcolor="#adebad" class="text-center" style="border-color: #cccccc">Remaining Contract Value</th>
                 </tr>
             </thead>
             
@@ -1159,7 +1160,7 @@
 
         {{#each ../results4}}
         <tr>
-            {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}}
+            {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}}
             {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
             {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
             {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}} 
@@ -1842,7 +1843,7 @@
         <br><br><h4>Add New Cost Summary Line Item</h4>
 
         
-        <table class="table table-striped">
+        <table class="table table-striped table-sm table-bordered">
             <thead>
                 <tr>
                     <th>Division Category</th>
@@ -1891,16 +1892,16 @@
                                 <input type="text" class="form-control" id="lineItemBreakdown" name="lineItemBreakdown" value="{{lineItemBreakdown}}">
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="budget" name="budget" value="{{budget}}"> 
+                                <input type="number" step="0.01" class="form-control" id="budget" name="budget" value="{{budget}}"> 
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="originalContractValue" name="originalContractValue" value="{{originalContractValue}}"> 
+                                <input type="number" step="0.01" class="form-control" id="originalContractValue" name="originalContractValue" value="{{originalContractValue}}"> 
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="changeOrders" name="changeOrders" value="{{changeOrders}}">
+                                <input type="number" step="0.01" class="form-control" id="changeOrders" name="changeOrders" value="{{changeOrders}}">
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="actualCostToDate" name="actualCostToDate" value="{{actualCostToDate}}">
+                                <input type="number" step="0.01" class="form-control" id="actualCostToDate" name="actualCostToDate" value="{{actualCostToDate}}">
                             </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update">Insert</button>
@@ -1911,7 +1912,7 @@
             </tbody>
         </table>
         <br><br><h4>Update Cost Summary Line Item</h4>
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm table-bordered">
                     <thead>
                         <tr>
                             <th>Division Category</th>
@@ -1961,16 +1962,16 @@
                                 <input type="text" class="form-control" id="lineItemBreakdown" name="lineItemBreakdown" value="{{lineItemBreakdown}}">
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="budget" name="budget" value="{{budget}}"> 
+                                <input type="number" step="0.01" class="form-control" id="budget" name="budget" value="{{budget}}"> 
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="originalContractValue" name="originalContractValue" value="{{originalContractValue}}"> 
+                                <input type="number" step="0.01" class="form-control" id="originalContractValue" name="originalContractValue" value="{{originalContractValue}}"> 
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="changeOrders" name="changeOrders" value="{{changeOrders}}">
+                                <input type="number" step="0.01" class="form-control" id="changeOrders" name="changeOrders" value="{{changeOrders}}">
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="actualCostToDate" name="actualCostToDate" value="{{actualCostToDate}}">
+                                <input type="number" step="0.01" class="form-control" id="actualCostToDate" name="actualCostToDate" value="{{actualCostToDate}}">
                             </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updateCostSummary">Update</button>
@@ -2048,7 +2049,7 @@
         <br><br><h4>Add New PCO</h4>
 
         
-        <table class="table table-striped ">
+        <table class="table table-striped table-sm table-bordered">
             <thead>
                 <tr>
                     <th>PCO #</th>
@@ -2072,25 +2073,25 @@
                         
                         <input type="hidden" class="form-control" id="projectID" name="projectID" value={{#each results}}"{{projectID}}"{{/each}}>
                             <td>
-                                <input type="text" class="form-control" id="pcoNumber" name="pcoNumber"> 
+                                <input type="text" class="form-control" id="pcoNumber" name="pcoNumber" style="width: 50px"> 
                             </td>
                             <td>
                                 <input type="text" class="form-control" id="pcoDescription" name="pcoDescription"> 
                             </td>
                             <td>
-                                <input type="date" class="form-control" id="dueDate" name="dueDate">
+                                <input type="date" class="form-control" id="dueDate" name="dueDate" style="width: 165px">
                             </td>
                             <td>
-                                <input type="date" class="form-control" id="toKMSDate" name="toKMSDate"> 
+                                <input type="date" class="form-control" id="toKMSDate" name="toKMSDate" style="width: 165px"> 
                             </td>
                             <td>
-                                <input type="date" class="form-control" id="kmsReviewedDate" name="kmsReviewedDate"> 
+                                <input type="date" class="form-control" id="kmsReviewedDate" name="kmsReviewedDate" style="width: 165px"> 
                             </td>
                              <td>
-                                <input type="date" class="form-control" id="kmsApprovedDate" name="kmsApprovedDate"> 
+                                <input type="date" class="form-control" id="kmsApprovedDate" name="kmsApprovedDate" style="width: 165px"> 
                             </td>
                             <td>
-                                <input type="date" class="form-control" id="clientApprovedDate" name="clientApprovedDate"> 
+                                <input type="date" class="form-control" id="clientApprovedDate" name="clientApprovedDate" style="width: 165px"> 
                             </td>
                             <td>
                                 <input type="number" class="form-control" id="pcoValue" name="pcoValue">
@@ -2123,7 +2124,7 @@
             </tbody>
         </table>
         <br><br><h4>Update PCO</h4>
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm table-bordered">
             <thead>
                 <tr>
                     <th>PCO #</th>
