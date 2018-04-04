@@ -1013,6 +1013,8 @@
         {{/ifEquals}}
         {{/each}}
         <br> <br>
+        
+        <!--CONSTRUCTION-->
        <table class="table">
                
             <tbody>
@@ -1035,7 +1037,6 @@
         </table>
 
         {{#each results6}} 
-
         {{#ifEquals orderSet 7}}
         <br>
         <strong>{{divisionCategory}}</strong>
@@ -1054,32 +1055,31 @@
                     <th bgcolor="#adebad" class="text-center" style="border-color: #cccccc">Remaining Contract Value</th>
                 </tr>
             </thead>
-            
             <tbody>
-            
             {{#each ../results4}}
-            <tr>
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions and Insurance'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions and Insurance'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions and Insurance'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions and Insurance'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions and Insurance'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions and Insurance'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions and Insurance'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions and Insurance'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}}
-            </tr>
+                <tr>
+                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}} 
+                </tr>
             {{/each}}
 
-            <tr  class="table-info">
+            <tr class="table-info">
                 {{#each ../results8}}
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions and Insurance'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions and Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions and Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions and Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions and Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions and Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions and Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions and Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{/if}}</strong></td>{{/ifEquals}}
+                
                 {{/each}}
             </tr>
 
