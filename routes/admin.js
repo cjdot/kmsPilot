@@ -236,7 +236,7 @@ router.post('/updateProject', ensureAuthenticated, function(req, res){
                 request.input("targetCompletionDate", sql.Date, targetCompletionDate);
                 request.input("projectedBudget", sql.Decimal, projectedBudget);
 				request.input("contractAmount", sql.Decimal, contractAmount);
-				request.input("openProject", sql.Bit, req.body.openProject);
+				request.input("openProject", sql.VarChar, req.body.openProject);
 				request.input("projectID", sql.Int, req.body.projectID);
 
 				request.query(qry, function (err, resultss, fields) { 
