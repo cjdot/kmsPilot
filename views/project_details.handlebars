@@ -644,7 +644,7 @@
                 <td align="center" style="border-color: black"><strong>SOFT COSTS</strong></td>
                 <td align="center" style="border-color: black">Budget: <strong>${{#if budget}}{{formatNumber budget}}{{/if}}</strong></td>
                 <td align="center" style="border-color: black">Original Contract Values: <strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{/if}}</strong></td>
-                <td align="center" style="border-color: black">Change Orders:<strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Change Orders: <strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{/if}}</strong></td>
                 <td align="center" style="border-color: black">Revised Contract Value: <strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{/if}}</strong></td>
                 <td align="center" style="border-color: black">Variance: <strong>${{#if variance}}{{formatNumber variance}}{{/if}}</strong></td> 
                 <td align="center" style="border-color: black">Actual Cost To Date: <strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{/if}}</strong></td>
@@ -1987,6 +1987,7 @@
     </div>
     </div>
     
+    <!--PCO LOG-->
             {{#ifEquals updateType 'updatePCO'}}
             <div id="menu6" class="tab-pane fade in active show">
             {{else}}
@@ -2010,18 +2011,17 @@
       <table id="pcoTable" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th onclick="sortTable(0, 'pcoTable')">PCO Number</th>
-                            <th onclick="sortTable(1, 'pcoTable')">PCO Description</th>
+                            <th onclick="sortTable(0, 'pcoTable')">PCO #</th>
+                            <th onclick="sortTable(1, 'pcoTable')">Description</th>
                             <th onclick="sortTable(2, 'pcoTable')">Due Date</th>
-                            <th onclick="sortTable(3, 'pcoTable')">To KMS Date</th>
-                            <th onclick="sortTable(4, 'pcoTable')">KMS Reviewed Date</th>
-                            <th onclick="sortTable(5, 'pcoTable')">Bank Approved Date</th>
-                            <th onclick="sortTable(6, 'pcoTable')">PCO Value</th>
-                            <th onclick="sortTable(7, 'pcoTable')">Contingency Amount</th>
-                            <th onclick="sortTable(8, 'pcoTable')">Cost Savings Amount</th>
-                            <th onclick="sortTable(9, 'pcoTable')">Change Orders</th>
-                            <th onclick="sortTable(10, 'pcoTable')">Status</th>
-                            <th onclick="sortTable(11, 'pcoTable')">Comments</th>
+                            <th onclick="sortTable(3, 'pcoTable')">To KMS</th>
+                            <th onclick="sortTable(4, 'pcoTable')">KMS Reviewed</th>
+                            <th onclick="sortTable(5, 'pcoTable')">KMS Approved</th>
+                            <th onclick="sortTable(6, 'pcoTable')">Client Approved</th>
+                            <th onclick="sortTable(7, 'pcoTable')">PCO Value</th>
+                            <th onclick="sortTable(8, 'pcoTable')">Status</th>
+                            <th onclick="sortTable(9, 'pcoTable')">Change Order Executed</th>
+                            <th onclick="sortTable(10, 'pcoTable')">Comments</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -2033,12 +2033,11 @@
                             <td>{{#if dueDate}}{{formatTime dueDate "MM/DD/YYYY"}}{{/if}}</td>
                             <td>{{#if toKMSDate}}{{formatTime toKMSDate "MM/DD/YYYY"}}{{/if}}</td>
                             <td>{{#if kmsReviewedDate}}{{formatTime kmsReviewedDate "MM/DD/YYYY"}}{{/if}}</td>
+                            <td>{{#if kmsApprovedDate}}{{formatTime kmsReviewedDate "MM/DD/YYYY"}}{{/if}}</td>
                             <td>{{#if clientApprovedDate}}{{formatTime clientApprovedDate "MM/DD/YYYY"}}{{/if}}</td>
                             <td>${{pcoValue}}</td>
-                            <td>${{contingencyAmount}}</td>
-                            <td>${{costSavingsAmount}}</td>
-                            <td>{{changeOrders}}</td>
                             <td>{{pcoStatus}}</td>
+                            <td>{{changeOrderExecuted}}</td>
                             <td>{{comments}}</td>
                         </tr>
                         {{/each}}
@@ -2052,17 +2051,16 @@
         <table class="table table-striped ">
             <thead>
                 <tr>
-                    <th>PCO Number</th>
-                    <th>PCO Description</th>
+                    <th>PCO #</th>
+                    <th>Description</th>
                     <th>Due Date</th>
-                    <th>To KMS Date</th>
-                    <th>KMS Reviewed Date</th>
-                    <th>Client Approved Date</th>
+                    <th>To KMS</th>
+                    <th>KMS Reviewed</th>
+                    <th>KMS Approved</th>
+                    <th>Client Approved</th>
                     <th>PCO Value</th>
-                    <th>Contingency Amount</th>
-                    <th>Cost Savings Amount</th>
-                    <th>Change Orders</th>
                     <th>Status</th>
+                    <th>Change Order Executed</th>
                     <th>Comments</th>
                     <th>Action</th>
                 </tr>
@@ -2086,23 +2084,30 @@
                                 <input type="date" class="form-control" id="toKMSDate" name="toKMSDate"> 
                             </td>
                             <td>
-                                <input type="date" class="form-control" id="kmsReviewedDate" name="kmsReviewedDate"> </td>
+                                <input type="date" class="form-control" id="kmsReviewedDate" name="kmsReviewedDate"> 
+                            </td>
+                             <td>
+                                <input type="date" class="form-control" id="kmsApprovedDate" name="kmsApprovedDate"> 
+                            </td>
                             <td>
-                                <input type="date" class="form-control" id="clientApprovedDate" name="clientApprovedDate"> </td>
+                                <input type="date" class="form-control" id="clientApprovedDate" name="clientApprovedDate"> 
+                            </td>
                             <td>
                                 <input type="number" class="form-control" id="pcoValue" name="pcoValue">
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="contingencyAmount" name="contingencyAmount">
+                                <select class="form-control" name="pcoStatus" id="pcoStatus">
+                                    <option value="Under Review">Under Review</option>
+                                    <option value="Approved">Approved</option>
+                                    <option value="Revised and Resubmit">Revised and Resubmit</option>
+                                    <option value="Rejected">Rejected</option>
+                                </select>
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="costSavingsAmount" name="costSavingsAmount">
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" id="changeOrders" name="changeOrders">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" id="pcoStatus" name="pcoStatus">
+                                <select class="form-control" name="changeOrderExecuted" id="changeOrderExecuted">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
                             </td>
                             <td>
                                 <input type="text" class="form-control" id="comments" name="comments">
@@ -2121,19 +2126,18 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th>PCO Number</th>
-                            <th>PCO Description</th>
-                            <th>Due Date</th>
-                            <th>To KMS Date</th>
-                            <th>KMS Reviewed Date</th>
-                            <th>Client Approved Date</th>
-                            <th>PCO Value</th>
-                            <th>Contingency Amount</th>
-                            <th>Cost Savings Amount</th>
-                            <th>Change Orders</th>
-                            <th>Status</th>
-                            <th>Comments</th>
-                            <th>Action</th>
+                    <th>PCO #</th>
+                    <th>Description</th>
+                    <th>Due Date</th>
+                    <th>To KMS</th>
+                    <th>KMS Reviewed</th>
+                    <th>KMS Approved</th>
+                    <th>Client Approved</th>
+                    <th>PCO Value</th>
+                    <th>Status</th>
+                    <th>Change Order Executed</th>
+                    <th>Comments</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -2156,24 +2160,31 @@
                                 <input type="date" class="form-control" id="toKMSDate" name="toKMSDate" value="{{#if toKMSDate}}{{formatTime toKMSDate "YYYY-MM-DD"}}{{/if}}"> 
                             </td>
                             <td>
-                                <input type="date" class="form-control" id="kmsReviewedDate" name="kmsReviewedDate" value="{{#if kmsReviewedDate}}{{formatTime kmsReviewedDate "YYYY-MM-DD"}}{{/if}}"> </td>
+                                <input type="date" class="form-control" id="kmsReviewedDate" name="kmsReviewedDate" value="{{#if kmsReviewedDate}}{{formatTime kmsReviewedDate "YYYY-MM-DD"}}{{/if}}"> 
+                            </td>
                             <td>
-                                <input type="date" class="form-control" id="clientApprovedDate" name="clientApprovedDate" value="{{#if clientApprovedDate}}{{formatTime clientApprovedDate "YYYY-MM-DD"}}{{/if}}"> </td>
+                                <input type="date" class="form-control" id="kmsApprovedDate" name="kmsApprovedDate" value="{{#if kmsApprovedDate}}{{formatTime kmsApprovedDate "YYYY-MM-DD"}}{{/if}}"> 
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" id="clientApprovedDate" name="clientApprovedDate" value="{{#if clientApprovedDate}}{{formatTime clientApprovedDate "YYYY-MM-DD"}}{{/if}}"> 
+                            </td>
                             
                             <td>
                                 <input type="number" class="form-control" id="pcoValue" name="pcoValue" value="{{pcoValue}}"> 
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="contingencyAmount" name="contingencyAmount" value="{{contingencyAmount}}"> 
+                                <select class="form-control" name="pcoStatus" id="pcoStatus">
+                                    <option value="Under Review" {{#ifEquals pcoStatus 'Under Review'}} selected {{/ifEquals}}>Under Review</option>
+                                    <option value="Approved" {{#ifEquals pcoStatus 'Approved'}} selected {{/ifEquals}}>Approved</option>
+                                    <option value="Revised and Resubmit" {{#ifEquals pcoStatus 'Revised and Resubmit'}} selected {{/ifEquals}}>Revised and Resubmit</option>
+                                    <option value="Rejected" {{#ifEquals pcoStatus 'Rejected'}} selected {{/ifEquals}}>Rejected</option>
+                                </select>
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="costSavingsAmount" name="costSavingsAmount" value="{{costSavingsAmount}}"> 
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" id="changeOrders" name="changeOrders" value="{{changeOrders}}"> 
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" id="pcoStatus" name="pcoStatus" value="{{pcoStatus}}"> 
+                                <select class="form-control" name="changeOrderExecuted" id="changeOrderExecuted">
+                                    <option value="Yes" {{#ifEquals changeOrderExecuted 'Yes'}} selected {{/ifEquals}}>Yes</option>
+                                    <option value="No" {{#ifEquals changeOrderExecuted 'No'}} selected {{/ifEquals}}>No</option>
+                                </select>
                             </td>
                             <td>
                                 <input type="text" class="form-control" id="comments" name="comments" value="{{comments}}"> 
@@ -2192,6 +2203,7 @@
         </div>
     </div>
     </div>
+
 
             <div id="menu7" class="tab-pane fade container-fluid flyer-builder">
 

@@ -856,25 +856,21 @@ router.post('/newPCO', ensureAuthenticated, function (req, res) {
 	var dueDate = req.body.dueDate
 	var toKMSDate = req.body.toKMSDate
 	var kmsReviewedDate = req.body.kmsReviewedDate
+	var kmsApprovedDate = req.body.kmsApprovedDate
 	var clientApprovedDate = req.body.clientApprovedDate
 	var pcoValue = req.body.pcoValue
-	var contingencyAmount = req.body.contingencyAmount
-	var costSavingsAmount = req.body.costSavingsAmount
-	var changeOrders = req.body.changeOrders
 	var pcoNumber = req.body.pcoNumber
 
 	if (req.body.dueDate == ""){dueDate = null};
 	if (req.body.toKMSDate == ""){toKMSDate = null};
 	if (req.body.kmsReviewedDate == ""){kmsReviewedDate = null};
+	if (req.body.kmsApprovedDate == ""){kmsApprovedDate = null};
 	if (req.body.clientApprovedDate == ""){clientApprovedDate = null};
 	if (req.body.pcoValue == ""){pcoValue = null};
-	if (req.body.contingencyAmount == ""){contingencyAmount = null};
-	if (req.body.costSavingsAmount == ""){costSavingsAmount = null};
-	if (req.body.changeOrders == ""){changeOrders = null};
 	if (req.body.pcoNumber == ""){pcoNumber = null};
 
 	//Inserts data into the pco table within the database
-	var qry1 = 'INSERT INTO pco (pcoNumber, pcoDescription, dueDate, toKMSDate, kmsReviewedDate, clientApprovedDate, pcoValue, contingencyAmount, costSavingsAmount, changeOrders, pcoStatus, comments, projectID) VALUES (@pcoNumber, @pcoDescription, @dueDate, @toKMSDate, @kmsReviewedDate, @clientApprovedDate, @pcoValue, @contingencyAmount, @costSavingsAmount, @changeOrders, @pcoStatus, @comments, @projectID)'
+	var qry1 = 'INSERT INTO pco (pcoNumber, pcoDescription, dueDate, toKMSDate, kmsReviewedDate, kmsApprovedDate, clientApprovedDate, pcoValue, pcoStatus, changeOrderExecuted, comments, projectID) VALUES (@pcoNumber, @pcoDescription, @dueDate, @toKMSDate, @kmsReviewedDate, @kmsApprovedDate, @clientApprovedDate, @pcoValue, @pcoStatus, @changeOrderExecuted, @comments, @projectID)'
 	var updateType = 'updatePCO'
 	
 	//Establishing connection to the database
@@ -896,12 +892,11 @@ router.post('/newPCO', ensureAuthenticated, function (req, res) {
 				request.input("dueDate", sql.Date, dueDate);
 				request.input("toKMSDate", sql.Date, toKMSDate);
 				request.input("kmsReviewedDate", sql.Date, kmsReviewedDate);
+				request.input("kmsApprovedDate", sql.Date, kmsApprovedDate);
 				request.input("clientApprovedDate", sql.Date, clientApprovedDate);
 				request.input("pcoValue", sql.Decimal, pcoValue);
-				request.input("contingencyAmount", sql.Decimal, contingencyAmount);
-				request.input("costSavingsAmount", sql.Decimal, costSavingsAmount);
-				request.input("changeOrders", sql.Decimal, changeOrders);
 				request.input("pcoStatus", sql.VarChar, req.body.pcoStatus);
+				request.input("changeOrderExecuted", sql.VarChar, req.body.changeOrderExecuted);
 				request.input("comments", sql.VarChar, req.body.comments);
 				request.input("projectID", sql.Int, req.body.projectID);
 
@@ -940,27 +935,23 @@ router.post('/newPCO', ensureAuthenticated, function (req, res) {
 router.post('/updatePCO', ensureAuthenticated, function (req, res) {
 	
 	
-	var qry1 = 'UPDATE pco SET pcoNumber = @pcoNumber, pcoDescription = @pcoDescription, dueDate = @dueDate, toKMSDate = @toKMSDate, kmsReviewedDate = @kmsReviewedDate, clientApprovedDate = @clientApprovedDate, pcoValue = @pcoValue, contingencyAmount = @contingencyAmount, costSavingsAmount = @costSavingsAmount, changeOrders = @changeOrders, pcoStatus = @pcoStatus, comments = @comments WHERE pcoID = @pcoID'
+	var qry1 = 'UPDATE pco SET pcoNumber = @pcoNumber, pcoDescription = @pcoDescription, dueDate = @dueDate, toKMSDate = @toKMSDate, kmsReviewedDate = @kmsReviewedDate, kmsApprovedDate = @kmsApprovedDate, clientApprovedDate = @clientApprovedDate, pcoValue = @pcoValue, pcoStatus = @pcoStatus, changeOrderExecuted = @changeOrderExecuted, comments = @comments WHERE pcoID = @pcoID'
 	var updateType = 'updatePCO'
 
 	var dueDate = req.body.dueDate
 	var toKMSDate = req.body.toKMSDate
 	var kmsReviewedDate = req.body.kmsReviewedDate
+	var kmsApprovedDate = req.body.kmsApprovedDate
 	var clientApprovedDate = req.body.clientApprovedDate
 	var pcoValue = req.body.pcoValue
-	var contingencyAmount = req.body.contingencyAmount
-	var costSavingsAmount = req.body.costSavingsAmount
-	var changeOrders = req.body.changeOrders
 	var pcoNumber = req.body.pcoNumber
 
 	if (req.body.dueDate == ""){dueDate = null};
 	if (req.body.toKMSDate == ""){toKMSDate = null};
 	if (req.body.kmsReviewedDate == ""){kmsReviewedDate = null};
+	if (req.body.kmsApprovedDate == ""){kmsApprovedDate = null};
 	if (req.body.clientApprovedDate == ""){clientApprovedDate = null};
 	if (req.body.pcoValue == ""){pcoValue = null};
-	if (req.body.contingencyAmount == ""){contingencyAmount = null};
-	if (req.body.costSavingsAmount == ""){costSavingsAmount = null};
-	if (req.body.changeOrders == ""){changeOrders = null};
 	if (req.body.pcoNumber == ""){pcoNumber = null};
 
 	//Establishing connection to the database
@@ -982,12 +973,11 @@ router.post('/updatePCO', ensureAuthenticated, function (req, res) {
 				request.input("dueDate", sql.Date, dueDate);
 				request.input("toKMSDate", sql.Date, toKMSDate);
 				request.input("kmsReviewedDate", sql.Date, kmsReviewedDate);
+				request.input("kmsApprovedDate", sql.Date, kmsApprovedDate);
 				request.input("clientApprovedDate", sql.Date, clientApprovedDate);
 				request.input("pcoValue", sql.Decimal, pcoValue);
-				request.input("contingencyAmount", sql.Decimal, contingencyAmount);
-				request.input("costSavingsAmount", sql.Decimal, costSavingsAmount);
-				request.input("changeOrders", sql.Decimal, changeOrders);
 				request.input("pcoStatus", sql.VarChar, req.body.pcoStatus);
+				request.input("changeOrderExecuted", sql.VarChar, req.body.changeOrderExecuted);
 				request.input("comments", sql.VarChar, req.body.comments);
 				request.input("pcoID", sql.Int, req.body.pcoID)
 				request.input("projectID", sql.Int, req.body.projectID);
