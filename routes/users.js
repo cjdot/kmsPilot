@@ -83,7 +83,7 @@ router.post('/register', function(req, res){
 	
 	//This code below hashes the password to store in database
 	let hash = bcrypt.hashSync(password, 10);
-
+	var updateType = 'updateUser'
 	//Establishing connection to the database
     const conn = new sql.ConnectionPool(sqlconfig);
 	var request = new sql.Request(conn);
@@ -119,7 +119,7 @@ router.post('/register', function(req, res){
 								var results = preresults2.recordset;
 
 								req.flash('success_msg', 'New User has been registered');		
-								res.render('admin', {results0:results0, results:results});	
+								res.render('admin', {results0:results0, results:results, updateType: updateType});	
 								conn.close();	
 
 							});		

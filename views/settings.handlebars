@@ -1,8 +1,8 @@
 <h2 class="page-header">User Settings</h2>
-<p><b>NOTE: WORK IN PROGRESS</b></p>
 
-<div class="col-12 col-sm-6 placeholder">
-<br>
+
+<div class="col-12 col-sm-12 placeholder">
+
 
     {{#if errors}} {{#each errors}}
     <div class="alert alert-danger">{{msg}}</div>
@@ -14,41 +14,41 @@
             <form method="post" class="form-inline" action="/settings/updateUser">
             <input type="hidden" class="form-control" id="userID" name="userID" value="{{userID}}">
                 <tr>
-                <div class="form-group mb-2">
+                <div class="form-group">
                     <td><label for="firstName">First Name:  &nbsp  &nbsp</label></td>
-                    <td><input type="text" class="form-control" value={{firstName}} name="firstName" /></td>
+                    <td><input type="text" class="form-control mb-2" value={{firstName}} name="firstName" /></td>
                     <br> <br>
                 </div>
                 </tr>
                 <tr>
-                <div class="form-group mb-2">
+                <div class="form-group">
                     <td><label>Last Name:</label></td>
-                    <td><input type="text" class="form-control" value={{lastName}} name="lastName"></td>
+                    <td><input type="text" class="form-control mb-2" value={{lastName}} name="lastName"></td>
                 </div>
                 </tr>
                 <tr>
-                <div class="form-group mb-2">
+                <div class="form-group">
                     <td><label>Email:</label></td>
-                    <td><input type="email" class="form-control" value={{email}} name="email"></td>
+                    <td><input type="email" class="form-control mb-2" value={{email}} name="email"></td>
                 </div>
                 </tr>
                 <tr>
-                <div class="form-group mb-2">
+                <div class="form-group">
                     <td><label>Phone Number:</label></td>
-                    <td><input type="tel" class="form-control" value={{cellNumber}} name="cellNumber"></td>
+                    <td><input type="tel" class="form-control mb-2" value={{cellNumber}} name="cellNumber"></td>
                 </div>
                 </tr>
                 <tr>
                 
-                <div class="form-group mb-2">
+                <div class="form-group">
                     <td><label>New Password:</label></td>
-                    <td><input title="Password must contain at least 7 characters, include both upper and lowercase letters, and numbers. Special characters are allowed, but not required." type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,25}" class="form-control" placeholder="Password" name="password" onchange="form.password2.pattern = RegExp.escape(this.value);"></td>
+                    <td><input title="Password must contain at least 7 characters, include both upper and lowercase letters, and numbers. Special characters are allowed, but not required." type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,25}" class="form-control mb-2" placeholder="Password" name="password" onchange="form.password2.pattern = RegExp.escape(this.value);"></td>
                 </div>
                 </tr>
                 <tr>
-                <div class="form-group mb-2">
+                <div class="form-group">
                     <td><label>Confirm New Password:</label></td>
-                    <td><input title="Please enter the same password as above." type="password" class="form-control" placeholder="Password" name="password2"></td>
+                    <td><input title="Please enter the same password as above." type="password" class="form-control mb-2" placeholder="Password" name="password2"></td>
                 </div>
                 </tr>
                 <tr>

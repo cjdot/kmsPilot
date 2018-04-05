@@ -68,6 +68,7 @@ router.post('/updateUser', function(req, res){
     var qry1 = 'SELECT * FROM users'
 	var qry2 = 'SELECT * FROM project'
 	
+	var updateType = 'updateUser'
 	//Establishing connection to the database
     const conn = new sql.ConnectionPool(sqlconfig);
 	var request = new sql.Request(conn);
@@ -95,7 +96,7 @@ router.post('/updateUser', function(req, res){
 							var results0 = preresults0.recordset;
 							var results = preresults.recordset;
 
-							res.render('admin', {results: results, results0: results0});	
+							res.render('admin', {results: results, results0: results0, updateType: updateType});	
 							conn.close();				
                         });				              
                     });
@@ -114,7 +115,7 @@ router.post('/deleteUser', ensureAuthenticated, function(req, res){
 	//Establishing connection to the database
     const conn = new sql.ConnectionPool(sqlconfig);
 	var request = new sql.Request(conn);
-	
+	var updateType = 'updateUser'
 	conn.connect(
 		function (err) {
 			if (err) {
@@ -133,7 +134,7 @@ router.post('/deleteUser', ensureAuthenticated, function(req, res){
 							var results0 = preresults0.recordset;
 							var results = preresults.recordset;
 
-							res.render('admin', {results: results, results0: results0});	
+							res.render('admin', {results: results, results0: results0, updateType: updateType});	
 							conn.close();				
                         });				              
                     });
@@ -158,6 +159,7 @@ router.post('/registerProject', ensureAuthenticated, function(req, res){
 	if (req.body.projectedBudget == ""){projectedBudget = null};
 	if (req.body.contractAmount == ""){contractAmount = null};
 
+	var updateType = 'updateProject'
 	//Establishing connection to the database
     const conn = new sql.ConnectionPool(sqlconfig);
 	var request = new sql.Request(conn);
@@ -188,7 +190,7 @@ router.post('/registerProject', ensureAuthenticated, function(req, res){
 							var results = preresults.recordset;
 							var results0 = preresults0.recordset;
 							
-							res.render('admin', {results: results, results0: results0});	
+							res.render('admin', {results: results, results0: results0, updateType: updateType});	
 							conn.close();				
                         });				              
                     });
@@ -215,6 +217,8 @@ router.post('/updateProject', ensureAuthenticated, function(req, res){
     var qry1 = 'SELECT * FROM users'
 	var qry2 = 'SELECT * FROM project'
 	
+	var updateType = 'updateProject'
+
 	//Establishing connection to the database
     const conn = new sql.ConnectionPool(sqlconfig);
 	var request = new sql.Request(conn);
@@ -246,7 +250,7 @@ router.post('/updateProject', ensureAuthenticated, function(req, res){
 							var results = preresults.recordset;
 							var results0 = preresults0.recordset;
 							
-							res.render('admin', {results: results, results0: results0});	
+							res.render('admin', {results: results, results0: results0, updateType: updateType});	
 							conn.close();				
                         });				              
                     });
@@ -269,7 +273,7 @@ router.post('/deleteProject', ensureAuthenticated, function(req, res){
     var qry1 = 'SELECT * FROM users'
     var qry2 = 'SELECT * FROM project'
 
-
+	var updateType = 'updateProject'
 	//Establishing connection to the database
     const conn = new sql.ConnectionPool(sqlconfig);
 	var request = new sql.Request(conn);
@@ -297,7 +301,7 @@ router.post('/deleteProject', ensureAuthenticated, function(req, res){
 												var results = preresults.recordset;
 												var results0 = preresults0.recordset;
 							
-												res.render('admin', {results: results, results0: results0});	
+												res.render('admin', {results: results, results0: results0, updateType: updateType});	
 												conn.close();
 											});
 										});

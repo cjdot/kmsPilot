@@ -7005,3 +7005,8 @@ node_modules/mssql-session-store/node_modules/tedious/lib/tracking-buffer/tracki
 node_modules/mssql-session-store/node_modules/tedious/lib/tracking-buffer/writable-tracking-buffer.js
 node_modules/mssql-session-store/test/index.js
 node_modules/mssql-session-store/test/mssqlConfig.json
+node_modules/bl/node_modules/string_decoder/LICENSE
+node_modules/bl/node_modules/string_decoder/.travis.yml
+node_modules/bl/node_modules/string_decoder/package.json
+node_modules/bl/node_modules/string_decoder/README.md
+node_modules/bl/node_modules/string_decoder/lib/string_decoder.js
