@@ -149,7 +149,7 @@ router.post('/login', function(req, res) {
 	} else {
 
 
-		var qry = 'SELECT email, password FROM users WHERE email = @email'
+		var qry = 'SELECT TOP 1 email, password, permissionLevel FROM users WHERE email = @email'
 		
 		//Establishing connection to the database
 		const conn = new sql.ConnectionPool(sqlconfig);
@@ -172,8 +172,12 @@ router.post('/login', function(req, res) {
 
 							if (results.length > 0){	
 								if (bcrypt.compareSync(req.body.password, results[0].password)){							
-									req.login(results[0].email, results[0].password, function(err) {				
+									req.login(results[0].email, results[0].password, function(err) {	
+										req.session.permission = results[0].permissionLevel;
+
+										console.log(results[0].permissionLevel + ' ' + req.session.permission)
 										res.redirect('/');
+										
 								})			
 							} else {
 								req.flash('error_msg', 'Incorrect Username or Password');

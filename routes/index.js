@@ -57,7 +57,9 @@ router.get('/', ensureAuthenticated, function(req, res){
 								var results1 = preresults1.recordset;
 								var results2 = preresults2.recordset;
 
-								res.render('index', {results0:results0, results:results, results1:results1, results2:results2});	
+								console.log(req.session.permission)
+
+								res.render('index', {results0:results0, results:results, results1:results1, results2:results2, permissionLevel: req.session.permission});	
 								conn.close();	
 							
 							});
@@ -146,7 +148,7 @@ router.post('/', ensureAuthenticated, function(req, res){
 								var results1 = preresults1.recordset;
 								var results2 = preresults2.recordset;
 
-								res.render('index', {results0:results0, results:results, results1:results1, results2:results2, updateType:updateType});	
+								res.render('index', {results0:results0, results:results, results1:results1, results2:results2, updateType:updateType, permissionLevel: req.session.permission});	
 								conn.close();	
 							
 							});

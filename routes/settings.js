@@ -37,7 +37,7 @@ router.get('/', ensureAuthenticated, function (req, res) {
 
 				request.query(qry1, function (err, results, fields) {
 
-					res.render('settings', { results: results.recordset });
+					res.render('settings', { permissionLevel: req.session.permission, results: results.recordset });
 					conn.close();
 				});
 
@@ -81,7 +81,7 @@ router.post('/updateUser', function (req, res) {
 
 						request.query(qry1, function (err, results, fields) {
 
-							res.render('settings', { results: results.recordset, errors: errors });
+							res.render('settings', { permissionLevel: req.session.permission, results: results.recordset, errors: errors });
 							conn.close();
 
 						});
@@ -109,7 +109,7 @@ router.post('/updateUser', function (req, res) {
 						request.query(qry, function (err, results0, fields) {
 							request.query(qry1, function (err, results, fields) {
 
-								res.render('settings', { results: results.recordset });
+								res.render('settings', { permissionLevel: req.session.permission, results: results.recordset });
 								conn.close();
 
 							});
@@ -143,7 +143,7 @@ router.post('/updateUser', function (req, res) {
 
 						request.query(qry, function (err, results, fields) {
 
-							res.render('settings', { results: results.recordset, errors: errors });
+							res.render('settings', { permissionLevel: req.session.permission, results: results.recordset, errors: errors });
 							conn.close();
 
 						});
@@ -171,7 +171,7 @@ router.post('/updateUser', function (req, res) {
 						request.query(qryy, function (err, results0, fields) {
 							request.query(qry1, function (err, results, fields) {
 
-								res.render('settings', { results: results.recordset });
+								res.render('settings', { permissionLevel: req.session.permission, results: results.recordset });
 								conn.close();
 
 							});

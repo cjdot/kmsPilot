@@ -3,7 +3,7 @@
 <h2><strong>Project Name:</strong> {{projectName}}</h2>
 <br>
 <h3><strong>Client:</strong> {{clientName}}</h3>
-
+<br>
 
 {{/each}}
 
@@ -150,6 +150,8 @@
     {{/ifEquals}}
     <br>
     <h3>Project Activities</h3>      
+
+    {{#ifEquals permissionLevel 'admin'}}
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#read" role="tab">Read</a>
@@ -158,7 +160,17 @@
                 <a class="nav-link" data-toggle="tab" href="#update" role="tab">Update</a>
             </li>
         </ul>
-
+    {{/ifEquals}}
+    {{#ifEquals permissionLevel 'write'}}
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#read" role="tab">Read</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#update" role="tab">Update</a>
+            </li>
+        </ul>
+    {{/ifEquals}}
         <!-- Tab panes -->
     <div class="tab-content">
     <div class="tab-pane active" id="read" role="tabpanel">
@@ -302,6 +314,8 @@
     {{/ifEquals}}
         <br>
         <h3>KMS Action Items</h3>
+
+        {{#ifEquals permissionLevel 'admin'}}
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#read1" role="tab">Read</a>
@@ -310,6 +324,17 @@
                 <a class="nav-link" data-toggle="tab" href="#update1" role="tab">Update</a>
             </li>
         </ul>
+        {{/ifEquals}}
+        {{#ifEquals permissionLevel 'write'}}
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#read1" role="tab">Read</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#update1" role="tab">Update</a>
+            </li>
+        </ul>
+        {{/ifEquals}}
 
     <!-- Tab panes -->
         <div class="tab-content">
@@ -446,7 +471,8 @@
                 <br>
                 <h3>External Action Items</h3>
 
-                <ul class="nav nav-tabs" role="tablist">
+        {{#ifEquals permissionLevel 'admin'}}
+        <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#read2" role="tab">Read</a>
             </li>
@@ -454,6 +480,17 @@
                 <a class="nav-link" data-toggle="tab" href="#update2" role="tab">Update</a>
             </li>
         </ul>
+        {{/ifEquals}}
+        {{#ifEquals permissionLevel 'write'}}
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#read2" role="tab">Read</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#update2" role="tab">Update</a>
+            </li>
+        </ul>
+        {{/ifEquals}}
 
     <!-- Tab panes -->
     <div class="tab-content">
@@ -588,7 +625,8 @@
                 <br>
                 <h3>Cost Summary</h3>
 
-                <ul class="nav nav-tabs" role="tablist">
+        {{#ifEquals permissionLevel 'admin'}}
+        <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#read3" role="tab">Read</a>
             </li>
@@ -596,6 +634,18 @@
                 <a class="nav-link" data-toggle="tab" href="#update3" role="tab">Update</a>
             </li>
         </ul>
+        {{/ifEquals}}
+
+        {{#ifEquals permissionLevel 'write'}}
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#read3" role="tab">Read</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#update3" role="tab">Update</a>
+            </li>
+        </ul>
+        {{/ifEquals}}
 
     <!-- Tab panes -->
     <div class="tab-content">
@@ -1997,7 +2047,8 @@
                 <br>
                 <h3>PCO Log</h3>
 
-                <ul class="nav nav-tabs" role="tablist">
+        {{#ifEquals permissionLevel 'admin'}}
+        <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#read4" role="tab">Read</a>
             </li>
@@ -2005,6 +2056,17 @@
                 <a class="nav-link" data-toggle="tab" href="#update4" role="tab">Update</a>
             </li>
         </ul>
+        {{/ifEquals}}
+        {{#ifEquals permissionLevel 'write'}}
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#read4" role="tab">Read</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#update4" role="tab">Update</a>
+            </li>
+        </ul>
+        {{/ifEquals}}
 
     <!-- Tab panes -->
     <div class="tab-content">

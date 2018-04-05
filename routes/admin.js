@@ -29,8 +29,12 @@ var config = {
 
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res){
-    console.log(req.user);
-	
+
+
+    console.log(req.session.permission)
+
+	if(req.session.permission != 'admin') { res.redirect('/') }
+	else {
 	var qry1 = 'SELECT * FROM users'
 	var qry2 = 'SELECT * FROM project'
 	
@@ -53,17 +57,22 @@ router.get('/', ensureAuthenticated, function(req, res){
 						var results = preresults.recordset;
 						var results0 = preresults0.recordset;
 							
-						res.render('admin', {results: results, results0: results0});	
+						res.render('admin', {results: results, results0: results0, permissionLevel: req.session.permission});	
 						conn.close();				
                     });				              
                 });
                  				
 		}
 	});	
+}
 });
 
 router.post('/updateUser', function(req, res){
+
 	
+	
+	
+	console.log('this happened')
 	var qry= 'UPDATE users SET firstName= @firstName, lastName = @lastname, email = @email, cellNumber = @cellNumber, permissionLevel = @permissionLevel WHERE userID = @userID'	
     var qry1 = 'SELECT * FROM users'
 	var qry2 = 'SELECT * FROM project'
@@ -96,13 +105,14 @@ router.post('/updateUser', function(req, res){
 							var results0 = preresults0.recordset;
 							var results = preresults.recordset;
 
-							res.render('admin', {results: results, results0: results0, updateType: updateType});	
+							res.render('admin', {results: results, results0: results0, updateType: updateType, permissionLevel: req.session.permission});	
 							conn.close();				
                         });				              
                     });
                 }); 				
 			}
 		});
+	
 });
 
 router.post('/deleteUser', ensureAuthenticated, function(req, res){
@@ -134,7 +144,7 @@ router.post('/deleteUser', ensureAuthenticated, function(req, res){
 							var results0 = preresults0.recordset;
 							var results = preresults.recordset;
 
-							res.render('admin', {results: results, results0: results0, updateType: updateType});	
+							res.render('admin', {results: results, results0: results0, updateType: updateType, permissionLevel: req.session.permission});	
 							conn.close();				
                         });				              
                     });
@@ -190,7 +200,7 @@ router.post('/registerProject', ensureAuthenticated, function(req, res){
 							var results = preresults.recordset;
 							var results0 = preresults0.recordset;
 							
-							res.render('admin', {results: results, results0: results0, updateType: updateType});	
+							res.render('admin', {results: results, results0: results0, updateType: updateType, permissionLevel: req.session.permission});	
 							conn.close();				
                         });				              
                     });
@@ -250,7 +260,7 @@ router.post('/updateProject', ensureAuthenticated, function(req, res){
 							var results = preresults.recordset;
 							var results0 = preresults0.recordset;
 							
-							res.render('admin', {results: results, results0: results0, updateType: updateType});	
+							res.render('admin', {results: results, results0: results0, updateType: updateType, permissionLevel: req.session.permission});	
 							conn.close();				
                         });				              
                     });
@@ -301,7 +311,7 @@ router.post('/deleteProject', ensureAuthenticated, function(req, res){
 												var results = preresults.recordset;
 												var results0 = preresults0.recordset;
 							
-												res.render('admin', {results: results, results0: results0, updateType: updateType});	
+												res.render('admin', {results: results, results0: results0, updateType: updateType, permissionLevel: req.session.permission});	
 												conn.close();
 											});
 										});

@@ -13,11 +13,7 @@
 <form method="post" action="/users/login">
 
   <div class="form-group">
-    {{#if errors}}
-      {{#each errors}}
-        <div class="alert alert-danger">{{msg}}</div>
-      {{/each}}
-{{/if}}
+    
     <label>Enter email:</label>
     <input type="text" class="form-control" name="email" placeholder="Email">
   </div>
@@ -27,6 +23,12 @@
   </div>
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
+<br>
+{{#if errors}}
+      {{#each errors}}
+        <div class="alert alert-danger" style="max-width: auto;">{{msg}}</div>
+      {{/each}}
+    {{/if}}
 </div>
 
 <div class="col-6 col-sm-5 placeholder">

@@ -99,7 +99,7 @@ router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 														request.query(qry11, function (err, results10, fields) {
 															request.query(qry12, function (err, results11, fields) {													
 																
-															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+															res.render('project_details', {permissionLevel: req.session.permission, results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 															
 														});
@@ -175,7 +175,7 @@ router.post('/updateProjectActivity', ensureAuthenticated, function (req, res) {
 														request.query(qry11, function (err, results10, fields) {
 															request.query(qry12, function (err, results11, fields) {											
 
-															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+															res.render('project_details', {permissionLevel: req.session.permission, results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
 														});
@@ -231,7 +231,7 @@ router.post('/deleteProjectActivity', ensureAuthenticated, function (req, res) {
 														request.query(qry11, function (err, results10, fields) {
 															request.query(qry12, function (err, results11, fields) {
 														
-															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset,  updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+															res.render('project_details', {permissionLevel: req.session.permission, results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset,  updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
 														});
@@ -299,7 +299,7 @@ router.post('/newActionItem', ensureAuthenticated, function (req, res) {
 														request.query(qry11, function (err, results10, fields) {
 															request.query(qry11, function (err, results11, fields) {
 															
-															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+															res.render('project_details', {permissionLevel: req.session.permission, results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
 														});
@@ -368,7 +368,7 @@ router.post('/updateActionItem', ensureAuthenticated, function (req, res) {
 														request.query(qry11, function (err, results10, fields) {
 															request.query(qry12, function (err, results11, fields) {											
 
-															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+															res.render('project_details', {permissionLevel: req.session.permission, results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
 														});
@@ -431,7 +431,7 @@ router.post('/deleteActionItem', ensureAuthenticated, function (req, res) {
 														request.query(qry11, function (err, results10, fields) {
 															request.query(qry12, function (err, results11, fields) {
 
-															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+															res.render('project_details', {permissionLevel: req.session.permission, results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
 														});
@@ -499,7 +499,7 @@ router.post('/newExternalActionItem', ensureAuthenticated, function (req, res) {
 														request.query(qry11, function (err, results10, fields) {
 															request.query(qry12, function (err, results11, fields) {
 
-															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+															res.render('project_details', {permissionLevel: req.session.permission, results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
 														});
@@ -568,7 +568,7 @@ router.post('/updateExternalActionItem', ensureAuthenticated, function (req, res
 														request.query(qry11, function (err, results10, fields) {
 															request.query(qry12, function (err, results11, fields) {														
 
-															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+															res.render('project_details', {permissionLevel: req.session.permission, results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
 														});
@@ -632,7 +632,7 @@ router.post('/deleteExternalActionItem', ensureAuthenticated, function (req, res
 														request.query(qry11, function (err, results10, fields) {
 															request.query(qry12, function (err, results11, fields) {
 
-															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+															res.render('project_details', {permissionLevel: req.session.permission, results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
 														});
@@ -703,7 +703,7 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
 														request.query(qry11, function (err, results10, fields) {
 															request.query(qry12, function (err, results11, fields) {										
 
-															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+															res.render('project_details', {permissionLevel: req.session.permission, results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
 														});
@@ -776,7 +776,7 @@ router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
 														request.query(qry11, function (err, results10, fields) {
 															request.query(qry12, function (err, results11, fields) {
 
-															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+															res.render('project_details', {permissionLevel: req.session.permission, results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
 														});
@@ -831,7 +831,7 @@ router.post('/deleteCostSummary', ensureAuthenticated, function (req, res) {
 														request.query(qry11, function (err, results10, fields) {
 															request.query(qry12, function (err, results11, fields) {
 
-															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+															res.render('project_details', {permissionLevel: req.session.permission, results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
 														});
@@ -913,7 +913,7 @@ router.post('/newPCO', ensureAuthenticated, function (req, res) {
 														request.query(qry11, function (err, results10, fields) {
 															request.query(qry12, function (err, results11, fields) {
 													
-																res.render('project_details', { results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+																res.render('project_details', { permissionLevel: req.session.permission, results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 																conn.close();
 															
 														});
@@ -995,7 +995,7 @@ router.post('/updatePCO', ensureAuthenticated, function (req, res) {
 														request.query(qry11, function (err, results10, fields) {
 															request.query(qry12, function (err, results11, fields){
 
-															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+															res.render('project_details', { permissionLevel: req.session.permission, results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 			
 														});
@@ -1051,7 +1051,7 @@ router.post('/deletePCO', ensureAuthenticated, function (req, res) {
 														request.query(qry11, function (err, results10, fields) {
 															request.query(qry12, function (err, results11, fields) {
 													
-															res.render('project_details', {results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+															res.render('project_details', { permissionLevel: req.session.permission, results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 															conn.close();
 
 														});
@@ -1095,7 +1095,7 @@ router.get('/project', ensureAuthenticated, function (req, res) {
 				request.query(tempqry, function (err, results, fields) {
 					request.query(tempqry2, function (err, results1, fields) {
 
-						res.render('project', { results: results.recordset, results1: results1.recordset });
+						res.render('project', { permissionLevel: req.session.permission, results: results.recordset, results1: results1.recordset });
 						conn.close();
 					});
 				});
@@ -1134,7 +1134,7 @@ router.post('/project_details', ensureAuthenticated, function (req, res) {
 													request.query(qry11, function (err, results10, fields) {
 														request.query(qry12, function (err, results11, fields) {
 																													
-														res.render('project_details', {results11: results11.recordset, results10: results10.recordset, results9: results9.recordset, results8: results8.recordset, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+														res.render('project_details', {permissionLevel: req.session.permission, results11: results11.recordset, results10: results10.recordset, results9: results9.recordset, results8: results8.recordset, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 														conn.close();
 
 													});
