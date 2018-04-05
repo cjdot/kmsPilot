@@ -4,8 +4,8 @@
     <li class="nav-item">
         <a class="nav-link {{#ifEquals updateType null}} active show {{/ifEquals}}{{#ifEquals updateType 'updateUser'}} active show {{/ifEquals}}" data-toggle="tab" href="#home">Users</a>
     </li>
-    <li class="nav-item {{#ifEquals updateType 'updateProject'}} active show {{/ifEquals}}">
-        <a class="nav-link " data-toggle="tab" href="#menu2">Projects</a>
+    <li class="nav-item">
+        <a class="nav-link {{#ifEquals updateType 'updateProject'}} active show {{/ifEquals}}" data-toggle="tab" href="#menu2">Projects</a>
     </li>
 </ul>
 
@@ -24,13 +24,13 @@
         <br>
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#register">Register User</a>
+                <a class="nav-link {{#ifEquals updateType 'updateProject'}} active show {{/ifEquals}}" data-toggle="tab" href="#register">Register User</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#editUser">Edit Users</a>
             </li>
-            <li class="nav-item {{#ifEquals updateType 'updateUser'}} active show {{/ifEquals}}">
-                <a class="nav-link" data-toggle="tab" href="#readUser">User List</a>
+            <li class="nav-item">
+                <a class="nav-link {{#ifEquals updateType 'updateUser'}} active show {{/ifEquals}}" data-toggle="tab" href="#readUser">User List</a>
             </li>
         </ul>
 
@@ -40,7 +40,7 @@
             <div id="register" class="tab-pane fade in">
             {{/ifEquals}}
             {{#ifEquals updateType 'updateProject'}}
-            <div id="register" class="tab-pane fade in">
+            <div id="register" class="tab-pane fade in active show">
             {{/ifEquals}}
             {{#ifEquals updateType null}}
             <div id="register" class="tab-pane fade in active show">
@@ -214,7 +214,7 @@
         <br>
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#registerProject">Register Project</a>
+                <a class="nav-link  {{#ifEquals updateType 'updateUser'}} active show {{/ifEquals}}" data-toggle="tab" href="#registerProject">Register Project</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#editProject">Edit Projects</a>
@@ -227,7 +227,7 @@
         <div class="tab-content">
 
             {{#ifEquals updateType 'updateUser'}}
-            <div id="registerProject" class="tab-pane fade in">
+            <div id="registerProject" class="tab-pane fade in active show">
             {{/ifEquals}}
             {{#ifEquals updateType 'updateProject'}}
             <div id="registerProject" class="tab-pane fade in">
