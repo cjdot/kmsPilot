@@ -9,9 +9,12 @@
   <link rel="icon" href="../../favicon.ico">
 
   <title>KMS Project Management</title>
+  <!-- linked Bootsrap css for 4.0 functionality -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <!-- Bootstrap core CSS -->
   <link href="/css/bootstrap.css" rel="stylesheet">
+  <!-- Linking awesome fonts for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Custom styles for this template -->
   <link href="/css/dashboard.css" rel="stylesheet">
   <link href="/css/style.css" rel="stylesheet">
@@ -55,20 +58,20 @@
 
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <a class="nav-link fontbigger" align="right" href="/">Dashboard</a>
+            <a class="nav-link fontbigger" align="right" href="/">Dashboard  <i class="fa fa-tachometer" aria-hidden="true"></i> </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fontbigger" align="right" href="/projects/project">Projects</a>
+            <a class="nav-link fontbigger" align="right" href="/projects/project">Projects  <i class="fa fa-tasks" aria-hidden="true"></i></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fontbigger" align="right" href="/settings">Settings</a>
+            <a class="nav-link fontbigger" align="right" href="/settings">Settings  <i class="fa fa-cogs" aria-hidden="true"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fontbigger" align="right" href="#">Reports</a>
+            <a class="nav-link fontbigger" align="right" href="#">Reports  <i class="fa fa-id-card" aria-hidden="true"></i></a>
           </li>
           {{#ifEquals permissionLevel 'admin'}}
           <li class="nav-item">
-            <a class="nav-link fontbigger" align="right" href="/admin">Admin Console</a>
+            <a class="nav-link fontbigger" align="right" href="/admin">Admin Console  <i class="fa fa-lock" aria-hidden="true"></i></a>
           </li>
           {{/ifEquals}}
         </ul>
