@@ -41,6 +41,8 @@ var qry9 = 'SELECT divisionCategory, SUM(budget) AS budget, SUM(originalContract
 var qry10 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, SUM(remainingContractValue) AS remainingContractValue FROM lineitem WHERE projectID = @projectID; '
 var qry11 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE (divisionCategory=\'Allowances\' OR divisionCategory=\'FF&E\' OR divisionCategory=\'IT\' OR divisionCategory=\'Security\' OR divisionCategory=\'Consultants\' OR divisionCategory=\'Contingency\' OR divisionCategory=\'Owner Supplied Equipment\') AND projectID = @projectID; '
 var qry12 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE (divisionCategory=\'Division 1 - General Conditions and Insurance\' OR divisionCategory=\'Division 2 - Site Construction\' OR divisionCategory=\'Division 3 - Concrete\' OR divisionCategory=\'Division 4 - Masonry\' OR divisionCategory=\'Division 5 - Metals\' OR divisionCategory=\'Division 6 - Carpentry and Millwork\' OR divisionCategory=\'Division 7 - Thermal and Moisture Protection\' OR divisionCategory=\'Division 8 - Doors and Windows\' OR divisionCategory=\'Division 9 - Finishes\' OR divisionCategory=\'Division 10 - Specialties\' OR divisionCategory=\'Division 11 - Equipment\' OR divisionCategory=\'Division 12 - Furnishings\' OR divisionCategory=\'Division 13 - Special Construction\' OR divisionCategory=\'Division 14 - Conveying Systems\' OR divisionCategory=\'Division 15 - Mechanical, Plumbing, HVAC, and Fire\' OR divisionCategory=\'Division 16 - Electrical\' ) AND projectID = @projectID; '
+var qry13 = 'SELECT CONCAT(firstName, \' \', lastName) AS name, userID FROM users; '
+var qry14 = 'SELECT DISTINCT users.firstName, users.lastName, users.userID, projectassignment.projectID FROM projectassignment INNER JOIN users ON projectassignment.userID = users.userID WHERE projectID = @projectID'
 
 router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 		
@@ -98,10 +100,14 @@ router.post('/newProjectActivity', ensureAuthenticated, function (req, res) {
 													request.query(qry10, function (err, results9, fields) {
 														request.query(qry11, function (err, results10, fields) {
 															request.query(qry12, function (err, results11, fields) {													
+																request.query(qry13, function (err, results12, fields) {	
+																	request.query(qry14, function (err, results13, fields) {	
+																	
+																	res.render('project_details', {permissionLevel: req.session.permission, results10: results10.recordset, results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
 																
-															res.render('project_details', {permissionLevel: req.session.permission, results10: results10.recordset, results11: results11.recordset, results9: results9.recordset, results8: results8.recordset, updateType: updateType, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
-															conn.close();
-															
+																	conn.close();
+																});
+															});
 														});
 													});
 												});
@@ -1133,10 +1139,14 @@ router.post('/project_details', ensureAuthenticated, function (req, res) {
 												request.query(qry10, function (err, results9, fields) {
 													request.query(qry11, function (err, results10, fields) {
 														request.query(qry12, function (err, results11, fields) {
-																													
-														res.render('project_details', {permissionLevel: req.session.permission, results11: results11.recordset, results10: results10.recordset, results9: results9.recordset, results8: results8.recordset, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
-														conn.close();
+															request.query(qry13, function (err, results12, fields) {	
+																request.query(qry14, function (err, results13, fields) {	
+																
+																	res.render('project_details', {permissionLevel: req.session.permission, results13: results13.recordset, results12: results12.recordset, results11: results11.recordset, results10: results10.recordset, results9: results9.recordset, results8: results8.recordset, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+																	conn.close();
 
+															});
+														});
 													});
 												});
 											});
@@ -1152,7 +1162,118 @@ router.post('/project_details', ensureAuthenticated, function (req, res) {
 	});	
 });
 
+router.post('/newProjectAssignment', ensureAuthenticated, function (req, res) {
 
+	var tempqry = 'INSERT INTO projectassignment (userID, projectID) VALUES (@userID, @projectID)'
+	
+	//Establishing connection to the database
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
+	
+	conn.connect(
+
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!!! Error")
+				throw err;
+			}
+			else {
+                console.log("Connection established.");
+                
+				request.input("projectID", sql.Int, req.body.projectID);
+				request.input("userID", sql.Int, req.body.projectAssignment);
+				
+				request.query(tempqry, function (err, resultsss, fields) {
+				request.query(qry, function (err, results, fields) {
+					request.query(qry2, function (err, results1, fields) {
+						request.query(qry3, function (err, results2, fields) {
+							request.query(qry4, function (err, results3, fields) {
+								request.query(qry5, function (err, results4, fields) {
+									request.query(qry6, function (err, results5, fields) {
+										request.query(qry7, function (err, results6, fields) {											
+											request.query(qry9, function (err, results8, fields) {
+												request.query(qry10, function (err, results9, fields) {
+													request.query(qry11, function (err, results10, fields) {
+														request.query(qry12, function (err, results11, fields) {
+															request.query(qry13, function (err, results12, fields) {	
+																request.query(qry14, function (err, results13, fields) {
+																	
+																res.render('project_details', {permissionLevel: req.session.permission, results13: results13.recordset, results12: results12.recordset, results11: results11.recordset, results10: results10.recordset, results9: results9.recordset, results8: results8.recordset, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });															
+																conn.close();
+
+															});
+														});
+													});
+												});
+											});
+										});										
+									});
+								});
+							});
+						});
+					});
+				});				
+			}); 
+		});
+		}
+	});	
+});
+
+router.post('/deleteProjectAssignment', ensureAuthenticated, function (req, res) {
+
+	var tempqry = 'DELETE FROM projectassignment WHERE userID = @userID AND projectID = @projectID'
+	
+	//Establishing connection to the database
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
+	
+	conn.connect(
+
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!!! Error")
+				throw err;
+			}
+			else {
+                console.log("Connection established.");
+                
+				request.input("projectID", sql.Int, req.body.projectID);
+				request.input("userID", sql.Int, req.body.userID);
+
+				request.query(tempqry, function (err, resultssss, fields) {
+				request.query(qry, function (err, results, fields) {
+					request.query(qry2, function (err, results1, fields) {
+						request.query(qry3, function (err, results2, fields) {
+							request.query(qry4, function (err, results3, fields) {
+								request.query(qry5, function (err, results4, fields) {
+									request.query(qry6, function (err, results5, fields) {
+										request.query(qry7, function (err, results6, fields) {											
+											request.query(qry9, function (err, results8, fields) {
+												request.query(qry10, function (err, results9, fields) {
+													request.query(qry11, function (err, results10, fields) {
+														request.query(qry12, function (err, results11, fields) {
+															request.query(qry13, function (err, results12, fields) {	
+																request.query(qry14, function (err, results13, fields) {
+															
+																	res.render('project_details', {permissionLevel: req.session.permission, results13: results13.recordset, results12: results12.recordset, results11: results11.recordset, results10: results10.recordset, results9: results9.recordset, results8: results8.recordset, results: results.recordset, results1: results1.recordset, results2: results2.recordset, results3: results3.recordset, results4: results4.recordset, results5: results5.recordset, results6: results6.recordset });
+																	conn.close();
+															});
+														});
+													});
+												});
+											});
+										});										
+									});
+								});
+							});
+						});
+					});
+				});				
+			}); 
+		});
+		}
+	});	
+});
 router.get('/myProjects', ensureAuthenticated, function (req, res) {
 
 	//Establishing connection to the database

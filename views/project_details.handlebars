@@ -44,12 +44,12 @@
     <h3>Project Overview</h3>
     <br>
     <section class="row text-left">
-        <div class="col-lg-3">
+        <div class="col-lg-6">
 
 
 
 
-<table class="table table-bordered " style="width: 600px" >   
+<table class="table table-bordered " style="width: 600px;" >   
    
             <tbody>
              {{#each results}}
@@ -66,8 +66,8 @@
                 <td class="costsummarystyle" style="font-size: 20px;"><strong>Location:</strong></td>
                 <td align="center" class="costsummarystyle">&nbsp {{location}}</td>
             </tr>
-        </div>
-        <div class="col-lg-3" >
+        
+        
             <tr>
                 <td class="costsummarystyle" style="font-size: 20px;"><strong>Service Type:</strong></td>
                 <td align="center" class="costsummarystyle"> {{serviceType}}</td>
@@ -80,8 +80,8 @@
                 <td class="costsummarystyle" style="font-size: 20px;"><strong>Target Completion Date:</strong></td>
                 <td align="center" class="costsummarystyle">{{#if targetCompletionDate}}{{formatTime targetCompletionDate "MM/DD/YYYY"}}{{/if}}</td>
             </tr>
-        </div>
-        <div class="col-lg-3">
+        
+        
             {{#each ../results9}}
             <tr>
                 <td class="costsummarystyle" style="font-size: 20px;"><strong>Projected Budget:</strong></td>
@@ -98,46 +98,50 @@
             </tr>
              {{/each}}
              {{/each}}
-        </div>
+       
             </tbody>
         </table>
-
-
-
-
-<!-- The old Project Overview code -->
-<!--
-
-            {{#each results}}
-            <h4 style="display: inline-block;">Client Name: </h4> &nbsp {{clientName}}
-            <br> <br>
-            <h4 style="display: inline-block;">Project Name: </h4> &nbsp {{projectName}}
-            <br> <br>
-            <h4 style="display: inline-block;">Location: </h4> &nbsp {{location}}
+        
         </div>
-        <div class="col-lg-3">
-            
-            <h4 style="display: inline-block;">Service Type: </h4> &nbsp {{serviceType}}
-            <br> <br>
-            <h4 style="display: inline-block;">Target Start Date: </h4> &nbsp {{#if targetStartDate}}{{formatTime targetStartDate "MM/DD/YYYY"}}{{/if}}
-            <br> <br>
-            <h4 style="display: inline-block;">Target Completion Date: </h4> &nbsp {{#if targetCompletionDate}}{{formatTime targetCompletionDate "MM/DD/YYYY"}}{{/if}}
-        </div>
-        <div class="col-lg-3">
-            <h4 style="display: inline-block;">Projected Budget: </h4> &nbsp ${{#if projectedBudget}}{{formatNumber projectedBudget}}{{/if}}
-            <br> <br>
-            {{#each ../results9}}
-            <h4 style="display: inline-block;">Original Contract Value: </h4> &nbsp ${{#if originalContractValue}}{{formatNumber originalContractValue}}{{/if}}
-            <br> <br>
-            <h4 style="display: inline-block;">Current Contract Value: </h4> &nbsp${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{/if}}
-            {{/each}}
-            {{/each}}
-        </div>
--->
 
+        <div class="col-lg-6">
 
+        <table class="table table-bordered " style="width: 600px" >   
+            <tbody>          
+                <tr>
+                    <td class="costsummarystyle" style="font-size: 20px;"><strong>Add Team Members:</strong></td>
+                    <td  align="center" class="costsummarystyle">
+                        <form action="/projects/newProjectAssignment" method="POST">
+                        {{#each results}}<input type= "hidden" name="projectID", id="projectID" value="{{projectID}}">{{/each}}
+                        <select class="form-control" name="projectAssignment" id="projectAssignment" onchange="this.form.submit()">
+                            <option value=""></option>
+                            {{#each results12}}
+                                    <option value="{{userID}}">{{name}}</option>
+                                    
+                            {{/each}}
+                        </select>
+                        </form>
+                    </td>
+                </tr>   
+                {{#each results13}}       
+                <tr>
+                    <form action="/projects/deleteProjectAssignment" method="POST">
+                    <input type= "hidden" name="projectID", id="projectID" value="{{projectID}}">
+                    <input type= "hidden" name="userID", id="userID" value="{{userID}}">
+                    <td class="costsummarystyle" style="font-size: 20px;">{{firstName}} {{lastName}}</td>
+                    <td>
+                    <button type="submit" name="actionType" class="form-control" value="DELETE">Remove</button>
+                    </td>
+                    </form>
+                </tr>  
+                {{/each}}
+            </tbody>
+        </table>
+        
+        </div>
         </section>
-   
+    
+    
    
     </div>
 
@@ -196,7 +200,7 @@
                     <td>{{#if actualStartDate}}{{formatTime actualStartDate "MM/DD/YYYY"}}{{/if}}</td>
                     <td>{{#if targetCompletionDate}}{{formatTime targetCompletionDate "MM/DD/YYYY"}}{{/if}}</td>
                     <td>{{#if actualCompletionDate}}{{formatTime actualCompletionDate "MM/DD/YYYY"}}{{/if}}</td>
-                    <td>{{#if progress}}{{progress}}{{else}}0%{{/if}}%</td>
+                    <td>{{#if progress}}{{progress}}{{else}}0{{/if}}%</td>
                     <td>{{activityNotes}}</td>
                 </tr>
                 {{/each}}
@@ -391,7 +395,11 @@
                                 <input type="text" class="form-control" id="actionItemDescription" name="actionItemDescription"> 
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="activityOwner" name="activityOwner">
+                                <select class="form-control"  id="activityOwner" name="activityOwner">
+                                    {{#each results12}}
+                                    <option value="{{name}}">{{name}}</option>
+                                    {{/each}}
+                                </select>
                             </td>
                             <td>
                                 <input type="date" class="form-control" id="activityStartDate" name="activityStartDate"> 
@@ -434,7 +442,13 @@
                                 <input type="text" class="form-control" id="actionItemDescription" name="actionItemDescription" value="{{actionItemDescription}}"> 
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="activityOwner" name="activityOwner" value="{{activityOwner}}"> 
+                                <select class="form-control"  id="activityOwner" name="activityOwner">
+                                    {{#each ../results12}}
+                                    
+                                    <option value="{{name}}"{{#ifEquals name ../activityOwner}} selected="selected"{{/ifEquals}}>{{name}}</option>
+                                    {{/each}}
+                                </select>
+                                
                             </td>
                             <td>
                                 <input type="date" class="form-control" id="activityStartDate" name="activityStartDate" value="{{#if activityStartDate}}{{formatTime activityStartDate "YYYY-MM-DD"}}{{/if}}"> 
