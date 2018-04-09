@@ -56,22 +56,29 @@
       <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar"  >
         <p align="center" id="biglogo"><img src='/images/kms-logo.svg' alt='KMS Logo' style="margin : 15%;"/></p>
 
-        <ul class="nav nav-pills flex-column">
+        <ul class="nav nav-pills flex-column" style="text-align:right;">
           <li class="nav-item">
-            <a class="nav-link fontbigger" align="right" href="/">Dashboard  <i class="fa fa-tachometer" aria-hidden="true"></i> </a>
+            <a class="nav-link fontbigger" align="right" href="/">Dashboard&nbsp;&nbsp;<i class="fa fa-tachometer" aria-hidden="true"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fontbigger" align="right" href="/projects/project">Projects  <i class="fa fa-tasks" aria-hidden="true"></i></i></a>
+            <a class="nav-link fontbigger" align="right" href="/projects/project">Projects&nbsp;&nbsp;<i class="fa fa-tasks" aria-hidden="true"></i></a>
           </li>
           <li class="nav-item">
+<<<<<<< HEAD
             <a class="nav-link fontbigger" align="right" href="#">Reports  <i class="fa fa-id-card" aria-hidden="true"></i></a>
           </li>
           <li class="nav-item">
             <a class="nav-link fontbigger" align="right" href="/settings">Settings  <i class="fa fa-cogs" aria-hidden="true"></i></a>
+=======
+            <a class="nav-link fontbigger" align="right" href="/settings">Settings&nbsp;&nbsp;<i class="fa fa-cogs" aria-hidden="true"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fontbigger" align="right" href="/report">Reports&nbsp;&nbsp;<i class="fa fa-file-text" aria-hidden="true"></i></a>
+>>>>>>> 7b7cdfd698206542fb45c243e2ac15fbf99c653b
           </li>
           {{#ifEquals permissionLevel 'admin'}}
           <li class="nav-item">
-            <a class="nav-link fontbigger" align="right" href="/admin">Admin Console  <i class="fa fa-lock" aria-hidden="true"></i></a>
+            <a class="nav-link fontbigger" align="right" href="/admin">Admin Console&nbsp;&nbsp;<i class="fa fa-lock" aria-hidden="true"></i></a>
           </li>
           {{/ifEquals}}
         </ul>
