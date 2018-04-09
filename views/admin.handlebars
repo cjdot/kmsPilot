@@ -281,18 +281,6 @@
                 </tr>
                 <tr>
                 <div class="form-group">
-                    <td><label>Projected Budget:</label></td>
-                    <td><input type="number" step="0.01" class="form-control mb-2" placeholder="500,000" name="projectedBudget"></td>
-                </div>
-                </tr>
-                <tr>
-                <div class="form-group">
-                    <td><label>Contract Amount:</label></td>
-                    <td><input type="number" step="0.01" class="form-control mb-2" placeholder="500,000" name="contractAmount"></td>
-                </div>
-                </tr>
-                <tr>
-                <div class="form-group">
                     <td><label>Service Type: </label></td>
                     <td><select class="form-control" name="serviceType">
                         <option value = "Consulting">Consulting</option>
@@ -332,8 +320,6 @@
                             <th>Service Type</th>
                             <th>Target Start Date</th>
                             <th>Target Completion Date</th>
-                            <th>Projected Budget</th>
-                            <th>Contract Amount</th>
                             <th colspan="2">Action</th>
                         </tr>
                     </thead>
@@ -376,12 +362,6 @@
                                 <input type="date" class="form-control" id="targetStartDate" name="targetCompletionDate" value="{{#if targetCompletionDate}}{{formatTime targetCompletionDate "YYYY-MM-DD"}}{{/if}}">
                             </td>
                             <td>
-                                <input type="number" step="0.01" class="form-control" id="projectedBudget" name="projectedBudget" value="{{projectedBudget}}">
-                            </td>
-                            <td>
-                                <input type="number" step="0.01" class="form-control" id="contractAmount" name="contractAmount" value="{{contractAmount}}">
-                            </td>
-                            <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/admin/updateProject">Update</button>
                             </td>
                             <td>
@@ -412,8 +392,6 @@
                             <th class="pointer" onclick="sortTable(3, 'projectsTable')">Service Type</th>
                             <th class="pointer" onclick="sortTable(4, 'projectsTable')">Target Start Date</th>
                             <th class="pointer" onclick="sortTable(5, 'projectsTable')">Target Completion Date</th>
-                            <th class="pointer" onclick="sortTable(6, 'projectsTable')">Projected Budget</th>
-                            <th class="pointer" onclick="sortTable(7, 'projectsTable')">Contract Amount</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -425,8 +403,6 @@
                             <td>{{serviceType}}</td>                           
                             <td>{{#if targetStartDate}}{{formatTime targetStartDate "MM/DD/YYYY"}}{{/if}}</td>                           
                             <td>{{#if targetCompletionDate}}{{formatTime targetCompletionDate "MM/DD/YYYY"}}{{/if}}</td>
-                            <td>{{#if projectedBudget}}${{formatNumber projectedBudget}}{{/if}}</td>
-                            <td>{{#if contractAmount}}${{formatNumber contractAmount}}{{/if}}</td>
                         </tr>                       
                     {{/each}}
                     </tbody>   
