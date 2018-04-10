@@ -155,19 +155,15 @@ router.post('/deleteUser', ensureAuthenticated, function(req, res){
 
 router.post('/registerProject', ensureAuthenticated, function(req, res){
 
-    var qry = 'INSERT INTO PROJECT (clientName, projectName, location, serviceType, targetStartDate, targetCompletionDate, projectedBudget, contractAmount, openProject) VALUES (@clientName, @projectName, @location, @serviceType, @targetStartDate, @targetCompletionDate, @projectedBudget, @contractAmount , 1) DECLARE @ID int set @ID = SCOPE_IDENTITY() INSERT INTO kmsActionItem (actionItemDescription, projectID) VALUES(\'Contract Signed\', @ID), (\'Business Plan Complete\', @ID), (\'Project Management Plan Complete\', @ID)';
+    var qry = 'INSERT INTO PROJECT (clientName, projectName, location, serviceType, targetStartDate, targetCompletionDate, openProject, projectNumber) VALUES (@clientName, @projectName, @location, @serviceType, @targetStartDate, @targetCompletionDate, \'open\', @projectNumber) DECLARE @ID int set @ID = SCOPE_IDENTITY() INSERT INTO kmsActionItem (actionItemDescription, projectID) VALUES(\'Contract Signed\', @ID), (\'Business Plan Complete\', @ID), (\'Project Management Plan Complete\', @ID)';
 	var qry1 = 'SELECT * FROM users'
     var qry2 = 'SELECT * FROM project'
     
 	var targetCompletionDate = req.body.targetCompletionDate
 	var targetStartDate = req.body.targetStartDate
-	var projectedBudget = req.body.projectedBudget
-	var contractAmount = req.body.contractAmount
 
 	if (req.body.targetStartDate == ""){targetStartDate = null};
     if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
-	if (req.body.projectedBudget == ""){projectedBudget = null};
-	if (req.body.contractAmount == ""){contractAmount = null};
 
 	var updateType = 'updateProject'
 	//Establishing connection to the database
@@ -189,9 +185,8 @@ router.post('/registerProject', ensureAuthenticated, function(req, res){
             	request.input("location", sql.VarChar, req.body.location);
                 request.input("serviceType", sql.VarChar, req.body.serviceType);
             	request.input("targetStartDate", sql.Date, targetStartDate);
-                request.input("targetCompletionDate", sql.Date, targetCompletionDate);
-                request.input("projectedBudget", sql.Decimal, projectedBudget);
-				request.input("contractAmount", sql.Decimal, contractAmount);
+				request.input("targetCompletionDate", sql.Date, targetCompletionDate);
+				request.input("projectNumber", sql.VarChar, req.body.projectNumber);
 				
 				request.query(qry, function (err, resultss, fields) { 
                     request.query(qry1, function(err, preresults0, fields) {
@@ -215,15 +210,11 @@ router.post('/updateProject', ensureAuthenticated, function(req, res){
 
 	var targetCompletionDate = req.body.targetCompletionDate
 	var targetStartDate = req.body.targetStartDate
-	var projectedBudget = req.body.projectedBudget
-	var contractAmount = req.body.contractAmount
 
 	if (req.body.targetStartDate == ""){targetStartDate = null};
     if (req.body.targetCompletionDate == ""){targetCompletionDate = null};
-	if (req.body.projectedBudget == ""){projectedBudget = null};
-	if (req.body.contractAmount == ""){contractAmount = null};
 
-    var qry = 'UPDATE PROJECT SET openProject = @openProject, clientName = @clientName, projectName = @projectName, location = @location, serviceType = @serviceType, targetStartDate = @targetStartDate, targetCompletionDate = @targetCompletionDate, projectedBudget = @projectedBudget, contractAmount = @contractAmount WHERE projectID = @projectID'
+    var qry = 'UPDATE PROJECT SET openProject = @openProject, clientName = @clientName, projectName = @projectName, location = @location, serviceType = @serviceType, targetStartDate = @targetStartDate, targetCompletionDate = @targetCompletionDate, projectNumber = @projectNumber WHERE projectID = @projectID'
     var qry1 = 'SELECT * FROM users'
 	var qry2 = 'SELECT * FROM project'
 	
@@ -248,9 +239,8 @@ router.post('/updateProject', ensureAuthenticated, function(req, res){
                 request.input("serviceType", sql.VarChar, req.body.serviceType);
             	request.input("targetStartDate", sql.Date, targetStartDate);
                 request.input("targetCompletionDate", sql.Date, targetCompletionDate);
-                request.input("projectedBudget", sql.Decimal, projectedBudget);
-				request.input("contractAmount", sql.Decimal, contractAmount);
 				request.input("openProject", sql.VarChar, req.body.openProject);
+				request.input("projectNumber", sql.VarChar, req.body.projectNumber);
 				request.input("projectID", sql.Int, req.body.projectID);
 
 				request.query(qry, function (err, resultss, fields) { 
