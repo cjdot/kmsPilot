@@ -27,9 +27,11 @@
     <li class="nav-item">
         <a class="nav-link {{#ifEquals updateType 'updatePCO'}} active show {{/ifEquals}}" data-toggle="tab" href="#menu6" role="tab">PCO Log</a>
     </li>
+    {{#ifEquals permissionLevel 'admin'}}
     <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#menu7" role="tab">Client Report</a>
     </li>
+    {{/ifEquals}}
 </ul>
 
 <div class="tab-content">
@@ -104,6 +106,7 @@
         
         </div>
 
+        {{#ifEquals permissionLevel 'admin'}}
         <div class="col-lg-6">
 
         <table class="table table-bordered " style="width: 600px" >   
@@ -139,6 +142,7 @@
         </table>
         
         </div>
+        {{/ifEquals}}
         </section>
     
     
