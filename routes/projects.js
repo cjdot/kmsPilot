@@ -1077,38 +1077,6 @@ router.post('/deletePCO', ensureAuthenticated, function (req, res) {
 });
 
 
-router.get('/project', ensureAuthenticated, function (req, res) {
-
-	//Establishing connection to the database
-    const conn = new sql.ConnectionPool(sqlconfig);
-	var request = new sql.Request(conn);
-
-	var tempqry = 'SELECT * FROM project'
-	var tempqry2 = 'SELECT * FROM project'
-
-	conn.connect(
-
-		function (err) {
-			if (err) {
-				console.log("!!!! Cannot Connect !!!! Error")
-				throw err;
-			}
-			else {
-                console.log("Connection established.");
-                
-				request.input("projectID", sql.Int, req.body.projectID);
-
-				request.query(tempqry, function (err, results, fields) {
-					request.query(tempqry2, function (err, results1, fields) {
-
-						res.render('project', { permissionLevel: req.session.permission, results: results.recordset, results1: results1.recordset });
-						conn.close();
-					});
-				});
-			}
-	});	
-});
-
 router.post('/project_details', ensureAuthenticated, function (req, res) {
 
 	
@@ -1274,26 +1242,473 @@ router.post('/deleteProjectAssignment', ensureAuthenticated, function (req, res)
 		}
 	});	
 });
-router.get('/myProjects', ensureAuthenticated, function (req, res) {
+
+
+router.get('/project', ensureAuthenticated, function (req, res) {
 
 	//Establishing connection to the database
-	const conn = new mysql.createConnection(config);
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
+
+	var tempqry = 'SELECT * FROM project'
+	var tempqry2 = 'SELECT * FROM project'
+
 	conn.connect(
+
 		function (err) {
 			if (err) {
-				console.log("!!!! Cannot Connect !!! Error:");
+				console.log("!!!! Cannot Connect !!!! Error")
 				throw err;
 			}
 			else {
-				console.log("Connection established.");
+                console.log("Connection established.");
+                
+				request.input("projectID", sql.Int, req.body.projectID);
+
+				request.query(tempqry, function (err, results, fields) {
+					res.render('project', { permissionLevel: req.session.permission, results: results.recordset});
+					conn.close();
+				});
+		}
+	});	
+});
+
+router.get('/myProjects', ensureAuthenticated, function (req, res) {
+
+	var qry = 'SELECT project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
+	'FROM project ' +
+	'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+	'LEFT JOIN projectassignment ON project.projectID = projectassignment.projectID ' +
+	'INNER JOIN users ON projectassignment.userID = users.userID ' +
+	'WHERE users.email = @email ' +
+	'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
+	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY; ' 
+	
+	if (req.session.counter != 0) {
+		req.session.counter = 0
+	}
+
+	var updateType = 'myProjects'
+	//Establishing connection to the database
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
+	
+	conn.connect(
+
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!!! Error")
+				throw err;
 			}
-		});
+			else {
+                console.log("Connection established.");
+                
+				request.input("email", sql.VarChar, req.user);
 
-	var tempqry = 'SELECT project.projectID, project.clientName, project.projectName, project.projectedBudget, project.serviceType, project.location FROM project INNER JOIN projectassignment ON project.projectID = projectassignment.projectID INNER JOIN user ON projectassignment.userID = user.userID WHERE email = ?'
+				request.query(qry, function (err, results, fields) {
+					if(err){console.log(err)}
+					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, counter: req.session.counter, updateType: updateType});
+					conn.close();	
 
-	conn.query(tempqry, req.user, function (err, results, fields) {
-		res.render('project', { results: results });
-	});
+				});
+			}
+		});	
+});
+
+router.post('/myProjects', ensureAuthenticated, function (req, res) {
+
+	var qry = 'SELECT project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
+	'FROM project ' +
+	'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+	'LEFT JOIN projectassignment ON project.projectID = projectassignment.projectID ' +
+	'INNER JOIN users ON projectassignment.userID = users.userID ' +
+	'WHERE users.email = @email ' +
+	'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
+	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY; ' 
+	
+	console.log(req.body.forwardType + ' ' + req.session.counter.toString());
+	if(req.body.forwardType){
+		if(req.body.forwardType == 'previous'){
+			console.log('previous happened here')
+			console.log(req.session.counter)
+			req.session.counter -= 3;
+			console.log(req.session.counter)
+			var qry = 'SELECT project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
+					'FROM project ' +
+					'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+					'LEFT JOIN projectassignment ON project.projectID = projectassignment.projectID ' +
+					'INNER JOIN users ON projectassignment.userID = users.userID ' +
+					'WHERE users.email = @email ' +
+					'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
+					'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 3 ROWS ONLY' 			
+		}
+		if(req.body.forwardType == 'next'){
+			console.log('next happened here')
+			req.session.counter += 3;
+			console.log(req.session.counter)
+			var qry = 'SELECT project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
+					'FROM project ' +
+					'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+					'LEFT JOIN projectassignment ON project.projectID = projectassignment.projectID ' +
+					'INNER JOIN users ON projectassignment.userID = users.userID ' +
+					'WHERE users.email = @email ' +
+					'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
+					'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 3 ROWS ONLY' 	
+			
+		}
+	} else {
+			req.session.counter = 0
+	}
+
+	var updateType = 'myProjects'
+	//Establishing connection to the database
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
+	
+	conn.connect(
+
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!!! Error")
+				throw err;
+			}
+			else {
+                console.log("Connection established.");
+                
+				request.input("email", sql.VarChar, req.user);
+
+				request.query(qry, function (err, results, fields) {
+					if(err){console.log(err)}
+					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, counter: req.session.counter, updateType: updateType});
+					conn.close();	
+
+				});
+			}
+		});	
+});
+
+router.get('/myOpenProjects', ensureAuthenticated, function (req, res) {
+
+	var qry = 'SELECT project.openProject, project.projectnumber, project.clientName, project.location, project.serviceType, project.projectID, project.projectName, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
+	'FROM project ' +
+	'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+	'LEFT JOIN projectassignment ON project.projectID = projectassignment.projectID ' +
+	'INNER JOIN users ON projectassignment.userID = users.userID ' +
+	'WHERE users.email = @email AND project.openProject = \'open\'' +
+	'GROUP BY project.openProject, project.projectNumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
+	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY; '
+	
+	updateType = 'myOpenProjects'
+	//Establishing connection to the database
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
+	
+	if (req.session.counter != 0) {
+		req.session.counter = 0
+	}
+	conn.connect(
+
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!!! Error")
+				throw err;
+			}
+			else {
+                console.log("Connection established.");
+                
+				request.input("email", sql.VarChar, req.user);
+
+				request.query(qry, function (err, results, fields) {
+					if(err){console.log(err)}
+					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, updateType: updateType});
+					conn.close();	
+
+				});
+			}
+		});	
+});
+
+router.post('/myOpenProjects', ensureAuthenticated, function (req, res) {
+
+	var qry = 'SELECT project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
+	'FROM project ' +
+	'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+	'LEFT JOIN projectassignment ON project.projectID = projectassignment.projectID ' +
+	'INNER JOIN users ON projectassignment.userID = users.userID ' +
+	'WHERE users.email = @email AND project.openProject = \'open\'' +
+	'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
+	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY; ' 
+	
+	console.log(req.body.forwardType + ' ' + req.session.counter.toString());
+	if(req.body.forwardType){
+		if(req.body.forwardType == 'previous'){
+			console.log('previous happened here')
+			console.log(req.session.counter)
+			req.session.counter -= 3;
+			console.log(req.session.counter)
+			var qry = 'SELECT project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
+					'FROM project ' +
+					'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+					'LEFT JOIN projectassignment ON project.projectID = projectassignment.projectID ' +
+					'INNER JOIN users ON projectassignment.userID = users.userID ' +
+					'WHERE users.email = @email AND project.openProject = \'open\'' +
+					'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
+					'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 3 ROWS ONLY' 			
+		}
+		if(req.body.forwardType == 'next'){
+			console.log('next happened here')
+			req.session.counter += 3;
+			console.log(req.session.counter)
+			var qry = 'SELECT project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
+					'FROM project ' +
+					'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+					'LEFT JOIN projectassignment ON project.projectID = projectassignment.projectID ' +
+					'INNER JOIN users ON projectassignment.userID = users.userID ' +
+					'WHERE users.email = @email AND project.openProject = \'open\'' +
+					'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
+					'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 3 ROWS ONLY' 	
+			
+		}
+	} else {
+			req.session.counter = 0
+	}
+
+	var updateType = 'myOpenProjects'
+	//Establishing connection to the database
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
+	
+	conn.connect(
+
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!!! Error")
+				throw err;
+			}
+			else {
+                console.log("Connection established.");
+                
+				request.input("email", sql.VarChar, req.user);
+
+				request.query(qry, function (err, results, fields) {
+					if(err){console.log(err)}
+					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, counter: req.session.counter, updateType: updateType});
+					conn.close();	
+
+				});
+			}
+		});	
+});
+
+router.get('/myClosedProjects', ensureAuthenticated, function (req, res) {
+
+	var qry = 'SELECT project.openProject, project.projectnumber, project.clientName, project.location, project.serviceType, project.projectID, project.projectName, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
+	'FROM project ' +
+	'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+	'LEFT JOIN projectassignment ON project.projectID = projectassignment.projectID ' +
+	'INNER JOIN users ON projectassignment.userID = users.userID ' +
+	'WHERE users.email = @email AND project.openProject = \'closed\'' +
+	'GROUP BY project.openProject, project.projectNumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
+	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY; ' 
+	
+	updateType = 'myClosedProjects'
+	//Establishing connection to the database
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
+	if (req.session.counter != 0) {
+		req.session.counter = 0
+	}
+	conn.connect(
+
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!!! Error")
+				throw err;
+			}
+			else {
+                console.log("Connection established.");
+                
+				request.input("email", sql.VarChar, req.user);
+
+				request.query(qry, function (err, results, fields) {
+					if(err){console.log(err)}
+					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, updateType: updateType});
+					conn.close();	
+
+				});
+			}
+		});	
+});
+
+router.post('/myClosedProjects', ensureAuthenticated, function (req, res) {
+
+	var qry = 'SELECT project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
+	'FROM project ' +
+	'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+	'LEFT JOIN projectassignment ON project.projectID = projectassignment.projectID ' +
+	'INNER JOIN users ON projectassignment.userID = users.userID ' +
+	'WHERE users.email = @email AND project.openProject = \'closed\'' +
+	'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
+	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY; ' 
+	
+	console.log(req.body.forwardType + ' ' + req.session.counter.toString());
+	if(req.body.forwardType){
+		if(req.body.forwardType == 'previous'){
+			console.log('previous happened here')
+			console.log(req.session.counter)
+			req.session.counter -= 3;
+			console.log(req.session.counter)
+			var qry = 'SELECT project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
+					'FROM project ' +
+					'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+					'LEFT JOIN projectassignment ON project.projectID = projectassignment.projectID ' +
+					'INNER JOIN users ON projectassignment.userID = users.userID ' +
+					'WHERE users.email = @email AND project.openProject = \'closed\'' +
+					'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
+					'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 3 ROWS ONLY' 			
+		}
+		if(req.body.forwardType == 'next'){
+			console.log('next happened here')
+			req.session.counter += 3;
+			console.log(req.session.counter)
+			var qry = 'SELECT project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
+					'FROM project ' +
+					'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+					'LEFT JOIN projectassignment ON project.projectID = projectassignment.projectID ' +
+					'INNER JOIN users ON projectassignment.userID = users.userID ' +
+					'WHERE users.email = @email AND project.openProject = \'closed\'' +
+					'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
+					'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 3 ROWS ONLY' 	
+			
+		}
+	} else {
+			req.session.counter = 0
+	}
+
+	var updateType = 'myClosedProjects'
+	//Establishing connection to the database
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
+	
+	conn.connect(
+
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!!! Error")
+				throw err;
+			}
+			else {
+                console.log("Connection established.");
+                
+				request.input("email", sql.VarChar, req.user);
+
+				request.query(qry, function (err, results, fields) {
+					if(err){console.log(err)}
+					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, counter: req.session.counter, updateType: updateType});
+					conn.close();	
+
+				});
+			}
+		});	
+});
+
+router.get('/allProjects', ensureAuthenticated, function (req, res) {
+
+	var qry = 'SELECT project.projectID, project.projectnumber, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' +
+	'FROM project ' +
+	'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+	'GROUP BY project.projectID, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, project.projectnumber ' +
+	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY; '
+	if (req.session.counter != 0) {
+		req.session.counter = 0
+	}
+	updateType = 'allProjects'
+	//Establishing connection to the database
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
+	
+	conn.connect(
+
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!!! Error")
+				throw err;
+			}
+			else {
+                console.log("Connection established.");
+                
+				request.input("email", sql.VarChar, req.user);
+
+				request.query(qry, function (err, results, fields) {
+					if(err){console.log(err)}
+					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, updateType: updateType});
+					conn.close();	
+
+				});
+			}
+		});	
+});
+
+router.post('/allProjects', ensureAuthenticated, function (req, res) {
+
+	var qry = 'SELECT project.projectID, project.projectnumber, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' +
+	'FROM project ' +
+	'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+	'GROUP BY project.projectID, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, project.projectnumber ' +
+	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY; ' 
+	
+	console.log(req.body.forwardType + ' ' + req.session.counter.toString());
+	if(req.body.forwardType){
+		if(req.body.forwardType == 'previous'){
+			console.log('previous happened here')
+			
+			req.session.counter -= 3;
+			
+			qry = 'SELECT project.projectID, project.projectnumber, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' +
+				'FROM project ' +
+				'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+				'GROUP BY project.projectID, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, project.projectnumber ' +
+				'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 3 ROWS ONLY' 			
+		}
+		if(req.body.forwardType == 'next'){
+			console.log('next happened here')
+			req.session.counter += 3;
+			qry = 'SELECT project.projectID, project.projectnumber, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' +
+				'FROM project ' +
+				'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+				'GROUP BY project.projectID, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, project.projectnumber ' +
+				'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 3 ROWS ONLY' 	
+			
+		}
+	} else {
+			req.session.counter = 0
+	}
+
+	var updateType = 'allProjects'
+	//Establishing connection to the database
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
+	
+	conn.connect(
+
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!!! Error")
+				throw err;
+			}
+			else {
+                console.log("Connection established.");
+                
+				request.input("email", sql.VarChar, req.user);
+
+				request.query(qry, function (err, results, fields) {
+					if(err){console.log(err)}
+					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, counter: req.session.counter, updateType: updateType});
+					conn.close();	
+
+				});
+			}
+		});	
 });
 
 //This searches the projects on the project search page. Could use some optimization to include searching client names as well as project naem

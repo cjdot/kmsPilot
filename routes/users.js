@@ -174,7 +174,7 @@ router.post('/login', function(req, res) {
 								if (bcrypt.compareSync(req.body.password, results[0].password)){							
 									req.login(results[0].email, results[0].password, function(err) {	
 										req.session.permission = results[0].permissionLevel;
-
+										req.session.counter = 0;
 										console.log(results[0].permissionLevel + ' ' + req.session.permission)
 										res.redirect('/');
 										

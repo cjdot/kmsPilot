@@ -54,6 +54,10 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
 
+Handlebars.registerHelper('ifGreater', function(arg1, arg2, options) {
+  return (arg1 > arg2) ? options.fn(this) : options.inverse(this);
+});
+
 Handlebars.registerHelper('formatTime', function (date, format) {
   var mmnt = moment(date);
   return mmnt.format(format);
