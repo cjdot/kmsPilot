@@ -64,6 +64,10 @@
                 <td class="costsummarystyle" style="font-size: 20px;"><strong>Project Name:</strong></td>
                 <td align="center" class="costsummarystyle">&nbsp {{projectName}}</td>
             </tr>
+            <tr>  
+                <td class="costsummarystyle" style="font-size: 20px;"><strong>Project #:</strong></td>
+                <td align="center" class="costsummarystyle">&nbsp {{projectNumber}}</td>
+            </tr>
             <tr>
                 <td class="costsummarystyle" style="font-size: 20px;"><strong>Location:</strong></td>
                 <td align="center" class="costsummarystyle">&nbsp {{location}}</td>
@@ -82,8 +86,6 @@
                 <td class="costsummarystyle" style="font-size: 20px;"><strong>Target Completion Date:</strong></td>
                 <td align="center" class="costsummarystyle">{{#if targetCompletionDate}}{{formatTime targetCompletionDate "MM/DD/YYYY"}}{{/if}}</td>
             </tr>
-        
-        
             {{#each ../results9}}
             <tr>
                 <td class="costsummarystyle" style="font-size: 20px;"><strong>Projected Budget:</strong></td>
@@ -143,6 +145,51 @@
         
         </div>
         {{/ifEquals}}
+
+         {{#ifEquals permissionLevel 'write'}}
+        <div class="col-lg-6">
+
+        <table class="table table-bordered " style="width: 300px" >   
+            <tbody>          
+                <tr>
+                    <td class="costsummarystyle" style="font-size: 20px;"><strong>Team Members:</strong></td>
+                </tr>   
+                {{#each results13}}       
+                <tr>
+                    <input type= "hidden" name="projectID", id="projectID" value="{{projectID}}">
+                    <input type= "hidden" name="userID", id="userID" value="{{userID}}">
+                    <td class="costsummarystyle" style="font-size: 18px;">{{firstName}} {{lastName}}</td>
+                    </form>
+                </tr>  
+                {{/each}}
+            </tbody>
+        </table>
+        
+        </div>
+        {{/ifEquals}}
+
+         {{#ifEquals permissionLevel 'read'}}
+        <div class="col-lg-6">
+
+        <table class="table table-bordered " style="width: 300px" >   
+            <tbody>          
+                <tr>
+                    <td class="costsummarystyle" style="font-size: 20px;"><strong>Team Members:</strong></td>
+                </tr>   
+                {{#each results13}}       
+                <tr>
+                    <input type= "hidden" name="projectID", id="projectID" value="{{projectID}}">
+                    <input type= "hidden" name="userID", id="userID" value="{{userID}}">
+                    <td class="costsummarystyle" style="font-size: 18px;">{{firstName}} {{lastName}}</td>
+                    </form>
+                </tr>  
+                {{/each}}
+            </tbody>
+        </table>
+        
+        </div>
+        {{/ifEquals}}
+
         </section>
     
     
@@ -675,10 +722,12 @@
             <tbody>
              
             {{#each results9}}
+            {{#each ../results}}
             <tr>
                 <td class="costsummarystyle">Project #:</td>
-                <td bgcolor="#d9d9d9" align="center" class="costsummarystyle">PA - 9</td>
+                <td bgcolor="#d9d9d9" align="center" class="costsummarystyle">{{projectNumber}}</td>
             </tr>
+            {{/each}}
             <tr>  
                 <td class="costsummarystyle"><strong>PROJECT BUDGET:</strong></td>
                 <td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{/if}}</strong></td>
@@ -689,7 +738,7 @@
             </tr>
             <tr>
                 <td class="costsummarystyle">Budget Variance <sub>(Anticipated Cost - Budget)</sub>:</td>
-                <td align="center" class="costsummarystyle">${{#if variance}}{{formatNumber variance}}{{/if}}</td>
+                <td align="center" class="costsummarystyle"><span style="{{#ifLess variance 0}} color: #009900; {{/ifLess}}{{#ifGreater variance 0}} color: #cc0000; {{/ifGreater}}">${{#if variance}}{{formatNumber variance}}{{/if}}</span></td>
             </tr>
             <tr>
                 <td class="costsummarystyle"><strong>ACTUAL COST TO DATE:</strong></td>
@@ -2174,7 +2223,7 @@
                                 <input type="date" class="form-control" id="clientApprovedDate" name="clientApprovedDate" style="width: 165px"> 
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="pcoValue" name="pcoValue">
+                                <input type="number" step="0.01" class="form-control" id="pcoValue" name="pcoValue">
                             </td>
                             <td>
                                 <select class="form-control" name="pcoStatus" id="pcoStatus">
@@ -2249,9 +2298,8 @@
                             <td>
                                 <input type="date" class="form-control" id="clientApprovedDate" name="clientApprovedDate" value="{{#if clientApprovedDate}}{{formatTime clientApprovedDate "YYYY-MM-DD"}}{{/if}}"> 
                             </td>
-                            
                             <td>
-                                <input type="number" class="form-control" id="pcoValue" name="pcoValue" value="{{pcoValue}}"> 
+                                <input type="number" step="0.01" class="form-control" id="pcoValue" name="pcoValue" value="{{pcoValue}}"> 
                             </td>
                             <td>
                                 <select class="form-control" name="pcoStatus" id="pcoStatus">
