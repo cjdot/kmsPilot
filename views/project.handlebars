@@ -32,7 +32,7 @@
           <strong>Service Type:</strong> {{serviceType}} <br>
           <strong>Budget:</strong> ${{#if projectedBudget}}{{formatNumber projectedBudget price="USD"}}{{/if}} <br>
           <strong>Contract Amount:</strong> ${{#if contractAmount}}{{formatNumber contractAmount price="USD"}}{{/if}} <br>
-          <span style="{{#ifEquals openProject 'open'}} color: #006314; {{/ifEquals}}{{#ifEquals openProject 'closed'}} color: #a50101; {{/ifEquals}}"><strong>Open?:</strong> {{openProject}}</span> <br>
+          <span style="text-transform: uppercase; {{#ifEquals openProject 'open'}} color: #006314; {{/ifEquals}}{{#ifEquals openProject 'closed'}} color: #a50101; {{/ifEquals}}"><strong style="text-transform: capitalize;">Status:&nbsp;</strong> {{openProject}}</span> <br>
           <br>           
         </div>
       <form action= "/projects/project_details" method="POST">
