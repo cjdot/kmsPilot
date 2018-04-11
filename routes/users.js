@@ -258,12 +258,12 @@ router.post('/forgot', function(req, res){
 										nodemailer.createTestAccount((err, account) => {
 											// create reusable transporter object using the default SMTP transport
 											let transporter = nodemailer.createTransport({
-												host: 'smtp.elasticemail.com',
-												port: 2525,
+												host: 'smtp.ethereal.email',
+												port: 587,
 												secure: false, // true for 465, false for other ports
 												auth: {
-													user: 'labmx_vlsc@outlook.com',
-													pass: '773c4bdc-5ae8-4e83-85b9-08402c8ae308'
+													user: 'i5af5oi3t3dmcvwf@ethereal.email',
+													pass: 'SYNKbQJZwYwURQJEfs'
 												}
 											});
 										
@@ -282,6 +282,7 @@ router.post('/forgot', function(req, res){
 													return console.log(error);
 												}
 												console.log('Message sent: %s', info.messageId);
+												console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info)); //Ethereal only
 											});
 										});
 										
