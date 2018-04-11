@@ -137,12 +137,39 @@ app.listen(app.get('port'), function(){
 });
 
 //Email Notification Push
-var date = new Date().toLocaleString();
-console.log(date);
-
 //https://stackoverflow.com/questions/20499225/i-need-a-nodejs-scheduler-that-allows-for-tasks-at-different-intervals
 
-cron.schedule('* * * * * *', function(){
+cron.schedule('*/7 * * * * *', function(){
+
+  var d = new Date();
+  var month = d.getMonth()+1;
+  var day = d.getDate();
+  var current_date = d.getFullYear() + '-' + (month<10 ? '0' : '') + month + '-' + (day<10 ? '0' : '') + day;
+  console.log(current_date);
+
+  var qryPush = 'SELECT * FROM kmsactionitem WHERE targetCompletionDate = @current_date';
+  const conn = new sql.ConnectionPool(sqlconfig);
+  var request = new sql.Request(conn);
+/*
+  conn.connect(
+		function (err) {
+			if (err) {
+				console.log("!!!! Cannot Connect !!!! Error")
+				throw err;
+			}
+			else {
+        console.log("Connection established.");
+
+        request.input("current_date", sql.date, current_date);
+				request.query(qryPush, function (err, preResultsPush, fields) {
+          var resultsPush = preResultsPush.recordset;
+          res.render('login', {permissionLevel: req.session.permission, resultsPush: resultsPush.recordset});
+          console.log(resultsPush);					
+					conn.close();
+			}); 
+		}
+	});
+*/
 /*
   nodemailer.createTestAccount((err, account) => {
     // create reusable transporter object using the default SMTP transport
