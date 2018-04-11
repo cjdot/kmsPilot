@@ -1,7 +1,8 @@
 
-
-<button type="button" class="btn btn-active"><a href="/projects/myProjects">My Projects</a></button>
-<button type="button" class="btn btn-active"><a href="/projects/allProjects">All Projects</a></button>
+{{#ifEquals permissionLevel 'admin'}}
+<button type="button" class="btn btn-active"><a href="/projects/allOpenProjects">All Open Projects</a></button>
+<button type="button" class="btn btn-active"><a href="/projects/allClosedProjects">All Closed Projects</a></button>
+{{/ifEquals}}
 <button type="button" class="btn btn-active"><a href="/projects/myOpenProjects">My Open Projects</a></button>
 <button type="button" class="btn btn-active"><a href="/projects/myClosedProjects">My Closed Projects</a></button>
 <br> <br>
@@ -13,8 +14,8 @@
 </form>
 <br>
 
-{{#ifEquals updateType 'myProjects'}}<h2 class="page-header">My Projects</h2>{{/ifEquals}}
-{{#ifEquals updateType 'allProjects'}}<h2 class="page-header">All Projects</h2>{{/ifEquals}}
+{{#ifEquals updateType 'allOpenProjects'}}<h2 class="page-header">All Open Projects</h2>{{/ifEquals}}
+{{#ifEquals updateType 'allClosedProjects'}}<h2 class="page-header">All Closed Projects</h2>{{/ifEquals}}
 {{#ifEquals updateType 'myOpenProjects'}}<h2 class="page-header">My Open Projects</h2>{{/ifEquals}}
 {{#ifEquals updateType 'myClosedProjects'}}<h2 class="page-header">My Closed Projects</h2>{{/ifEquals}}
 <br>
@@ -45,27 +46,34 @@
 </section>
 
 {{#ifEquals counter null}}
-<form action= "{{#ifEquals updateType null}}/projects/myProjects{{/ifEquals}}{{#ifEquals updateType 'myProjects'}}/projects/myProjects{{/ifEquals}}{{#ifEquals updateType 'allProjects'}}/projects/allProjects{{/ifEquals}}{{#ifEquals updateType 'myOpenProjects'}}/projects/myOpenProjects{{/ifEquals}}{{#ifEquals updateType 'myClosedProjects'}}/projects/myClosedProjects{{/ifEquals}}" method="POST">
+<form action= "{{#ifEquals updateType 'searchProjects'}}/projects/searchProject{{/ifEquals}}{{#ifEquals updateType null}}/projects/allOpenProjects{{/ifEquals}}{{#ifEquals updateType 'allOpenProjects'}}/projects/allOpenProjects{{/ifEquals}}{{#ifEquals updateType 'allClosedProjects'}}/projects/allClosedProjects{{/ifEquals}}{{#ifEquals updateType 'myOpenProjects'}}/projects/myOpenProjects{{/ifEquals}}{{#ifEquals updateType 'myClosedProjects'}}/projects/myClosedProjects{{/ifEquals}}" method="POST">
         <input type= "hidden" name="forwardType", id="forwardType" value="next">
         <button style="max-width: 100%; word-wrap: break-word; display: block; margin: 0 auto;" class="btn btn-outline-info my-2 my-sm-0" type="submit">Next</button>
 </form>
 {{/ifEquals}}
 {{#ifEquals counter 0}}
-  <form action= "{{#ifEquals updateType null}}/projects/myProjects{{/ifEquals}}{{#ifEquals updateType 'myProjects'}}/projects/myProjects{{/ifEquals}}{{#ifEquals updateType 'allProjects'}}/projects/allProjects{{/ifEquals}}{{#ifEquals updateType 'myOpenProjects'}}/projects/myOpenProjects{{/ifEquals}}{{#ifEquals updateType 'myClosedProjects'}}/projects/myClosedProjects{{/ifEquals}}" method="POST">
+  <form action= "{{#ifEquals updateType 'searchProjects'}}/projects/searchProject{{/ifEquals}}{{#ifEquals updateType null}}/projects/allOpenProjects{{/ifEquals}}{{#ifEquals updateType 'allOpenProjects'}}/projects/allOpenProjects{{/ifEquals}}{{#ifEquals updateType 'allClosedProjects'}}/projects/allClosedProjects{{/ifEquals}}{{#ifEquals updateType 'myOpenProjects'}}/projects/myOpenProjects{{/ifEquals}}{{#ifEquals updateType 'myClosedProjects'}}/projects/myClosedProjects{{/ifEquals}}" method="POST">
         <input type= "hidden" name="forwardType", id="forwardType" value="next">
         <button style="max-width: 100%; word-wrap: break-word; display: block; margin: 0 auto;" class="btn btn-outline-info my-2 my-sm-0" type="submit">Next</button>
 </form>   
 {{/ifEquals}}
 
 {{#ifGreater counter 0}}
-<form action= "{{#ifEquals updateType null}}/projects/myProjects{{/ifEquals}}{{#ifEquals updateType 'myProjects'}}/projects/myProjects{{/ifEquals}}{{#ifEquals updateType 'allProjects'}}/projects/allProjects{{/ifEquals}}{{#ifEquals updateType 'myOpenProjects'}}/projects/myOpenProjects{{/ifEquals}}{{#ifEquals updateType 'myClosedProjects'}}/projects/myClosedProjects{{/ifEquals}}" method="POST">
+{{#ifGreater rowsAffected 0}}
+{{#ifLess rowsAffected 6}}
+
+{{else}}
+<form action= "{{#ifEquals updateType 'searchProjects'}}/projects/searchProject{{/ifEquals}}{{#ifEquals updateType null}}/projects/allOpenProjects{{/ifEquals}}{{#ifEquals updateType 'allOpenProjects'}}/projects/allOpenProjects{{/ifEquals}}{{#ifEquals updateType 'allClosedProjects'}}/projects/allClosedProjects{{/ifEquals}}{{#ifEquals updateType 'myOpenProjects'}}/projects/myOpenProjects{{/ifEquals}}{{#ifEquals updateType 'myClosedProjects'}}/projects/myClosedProjects{{/ifEquals}}" method="POST">
         <input type= "hidden" name="forwardType", id="forwardType" value="next">
         <button style="max-width: 100%; word-wrap: break-word; display: block; margin: 0 auto;" class="btn btn-outline-info my-2 my-sm-0" type="submit">Next</button>
 </form> <br>
-<form action= "{{#ifEquals updateType null}}/projects/myProjects{{/ifEquals}}{{#ifEquals updateType 'myProjects'}}/projects/myProjects{{/ifEquals}}{{#ifEquals updateType 'allProjects'}}/projects/allProjects{{/ifEquals}}{{#ifEquals updateType 'myOpenProjects'}}/projects/myOpenProjects{{/ifEquals}}{{#ifEquals updateType 'myClosedProjects'}}/projects/myClosedProjects{{/ifEquals}}" method="POST">
+{{/ifLess}}
+{{/ifGreater}}
+<form action= "{{#ifEquals updateType 'searchProjects'}}/projects/searchProject{{/ifEquals}}{{#ifEquals updateType null}}/projects/allOpenProjects{{/ifEquals}}{{#ifEquals updateType 'allOpenProjects'}}/projects/allOpenProjects{{/ifEquals}}{{#ifEquals updateType 'allClosedProjects'}}/projects/allClosedProjects{{/ifEquals}}{{#ifEquals updateType 'myOpenProjects'}}/projects/myOpenProjects{{/ifEquals}}{{#ifEquals updateType 'myClosedProjects'}}/projects/myClosedProjects{{/ifEquals}}" method="POST">
         <input type= "hidden" name="forwardType", id="forwardType" value="previous">
         <button style="max-width: 100%; word-wrap: break-word; display: block; margin: 0 auto;" class="btn btn-outline-info my-2 my-sm-0" type="submit">Previous</button>
 </form>
+
 {{/ifGreater}}
      
 <script src="handlebars/dist/handlebars.min.js"></script>

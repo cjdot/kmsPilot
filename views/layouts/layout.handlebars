@@ -61,7 +61,7 @@
             <a class="nav-link fontbigger" align="right" href="/">Dashboard&nbsp;&nbsp;<i class="fa fa-tachometer" aria-hidden="true"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fontbigger" align="right" href="{{#ifEquals permissionLevel 'admin'}}/projects/myProjects{{else}}/projects/myOpenProjects{{/ifEquals}}">Projects&nbsp;&nbsp;<i class="fa fa-tasks" aria-hidden="true"></i></a>
+            <a class="nav-link fontbigger" align="right" href="{{#ifEquals permissionLevel 'admin'}}/projects/allOpenProjects{{else}}/projects/myOpenProjects{{/ifEquals}}">Projects&nbsp;&nbsp;<i class="fa fa-tasks" aria-hidden="true"></i></a>
           </li>
            <li class="nav-item">
             <a class="nav-link fontbigger" align="right" href="/report">Reports&nbsp;&nbsp;<i class="fa fa-bar-chart" aria-hidden="true"></i></a>

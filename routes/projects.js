@@ -1273,22 +1273,21 @@ router.get('/project', ensureAuthenticated, function (req, res) {
 	});	
 });
 
-router.get('/myProjects', ensureAuthenticated, function (req, res) {
+router.get('/allOpenProjects', ensureAuthenticated, function (req, res) {
 
+	if (req.session.permission = 'admin'){
 	var qry = 'SELECT project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
 	'FROM project ' +
 	'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
-	'LEFT JOIN projectassignment ON project.projectID = projectassignment.projectID ' +
-	'INNER JOIN users ON projectassignment.userID = users.userID ' +
-	'WHERE users.email = @email ' +
+	'WHERE project.openProject = \'open\' ' +
 	'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
-	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY; ' 
+	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 6 ROWS ONLY; ' 
 	
 	if (req.session.counter != 0) {
 		req.session.counter = 0
 	}
 
-	var updateType = 'myProjects'
+	var updateType = 'allOpenProjects'
 	//Establishing connection to the database
     const conn = new sql.ConnectionPool(sqlconfig);
 	var request = new sql.Request(conn);
@@ -1307,60 +1306,59 @@ router.get('/myProjects', ensureAuthenticated, function (req, res) {
 
 				request.query(qry, function (err, results, fields) {
 					if(err){console.log(err)}
-					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, counter: req.session.counter, updateType: updateType});
+					console.log(results.rowsAffected)
+					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, counter: req.session.counter, updateType: updateType, rowsAffected: results.rowsAffected});
 					conn.close();	
 
 				});
 			}
 		});	
+	} else {
+		res.redirect('/')
+	}
 });
 
-router.post('/myProjects', ensureAuthenticated, function (req, res) {
-
+router.post('/allOpenProjects', ensureAuthenticated, function (req, res) {
+	
+	if (req.session.permission = 'admin'){
 	var qry = 'SELECT project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
 	'FROM project ' +
 	'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
-	'LEFT JOIN projectassignment ON project.projectID = projectassignment.projectID ' +
-	'INNER JOIN users ON projectassignment.userID = users.userID ' +
-	'WHERE users.email = @email ' +
+	'WHERE project.openProject = \'open\' ' +
 	'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
-	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY; ' 
+	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 6 ROWS ONLY; ' 
 	
 	console.log(req.body.forwardType + ' ' + req.session.counter.toString());
 	if(req.body.forwardType){
 		if(req.body.forwardType == 'previous'){
 			console.log('previous happened here')
 			console.log(req.session.counter)
-			req.session.counter -= 3;
+			req.session.counter -= 6;
 			console.log(req.session.counter)
 			var qry = 'SELECT project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
 					'FROM project ' +
 					'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
-					'LEFT JOIN projectassignment ON project.projectID = projectassignment.projectID ' +
-					'INNER JOIN users ON projectassignment.userID = users.userID ' +
-					'WHERE users.email = @email ' +
+					'WHERE project.openProject = \'open\' ' +
 					'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
-					'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 3 ROWS ONLY' 			
+					'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 6 ROWS ONLY' 			
 		}
 		if(req.body.forwardType == 'next'){
 			console.log('next happened here')
-			req.session.counter += 3;
+			req.session.counter += 6;
 			console.log(req.session.counter)
 			var qry = 'SELECT project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
 					'FROM project ' +
 					'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
-					'LEFT JOIN projectassignment ON project.projectID = projectassignment.projectID ' +
-					'INNER JOIN users ON projectassignment.userID = users.userID ' +
-					'WHERE users.email = @email ' +
+					'WHERE project.openProject = \'open\' ' +
 					'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
-					'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 3 ROWS ONLY' 	
+					'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 6 ROWS ONLY' 	
 			
 		}
 	} else {
 			req.session.counter = 0
 	}
 
-	var updateType = 'myProjects'
+	var updateType = 'allOpenProjects'
 	//Establishing connection to the database
     const conn = new sql.ConnectionPool(sqlconfig);
 	var request = new sql.Request(conn);
@@ -1379,12 +1377,16 @@ router.post('/myProjects', ensureAuthenticated, function (req, res) {
 
 				request.query(qry, function (err, results, fields) {
 					if(err){console.log(err)}
-					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, counter: req.session.counter, updateType: updateType});
+					console.log(results.rowsAffected)
+					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, counter: req.session.counter, updateType: updateType, rowsAffected: results.rowsAffected});
 					conn.close();	
 
 				});
 			}
 		});	
+	} else {
+		res.redirect('/')
+	}
 });
 
 router.get('/myOpenProjects', ensureAuthenticated, function (req, res) {
@@ -1396,7 +1398,7 @@ router.get('/myOpenProjects', ensureAuthenticated, function (req, res) {
 	'INNER JOIN users ON projectassignment.userID = users.userID ' +
 	'WHERE users.email = @email AND project.openProject = \'open\'' +
 	'GROUP BY project.openProject, project.projectNumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
-	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY; '
+	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 6 ROWS ONLY; '
 	
 	updateType = 'myOpenProjects'
 	//Establishing connection to the database
@@ -1420,7 +1422,7 @@ router.get('/myOpenProjects', ensureAuthenticated, function (req, res) {
 
 				request.query(qry, function (err, results, fields) {
 					if(err){console.log(err)}
-					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, updateType: updateType});
+					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, updateType: updateType, rowsAffected: results.rowsAffected});
 					conn.close();	
 
 				});
@@ -1437,14 +1439,14 @@ router.post('/myOpenProjects', ensureAuthenticated, function (req, res) {
 	'INNER JOIN users ON projectassignment.userID = users.userID ' +
 	'WHERE users.email = @email AND project.openProject = \'open\'' +
 	'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
-	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY; ' 
+	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 6 ROWS ONLY; ' 
 	
 	console.log(req.body.forwardType + ' ' + req.session.counter.toString());
 	if(req.body.forwardType){
 		if(req.body.forwardType == 'previous'){
 			console.log('previous happened here')
 			console.log(req.session.counter)
-			req.session.counter -= 3;
+			req.session.counter -= 6;
 			console.log(req.session.counter)
 			var qry = 'SELECT project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
 					'FROM project ' +
@@ -1453,11 +1455,11 @@ router.post('/myOpenProjects', ensureAuthenticated, function (req, res) {
 					'INNER JOIN users ON projectassignment.userID = users.userID ' +
 					'WHERE users.email = @email AND project.openProject = \'open\'' +
 					'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
-					'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 3 ROWS ONLY' 			
+					'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 6 ROWS ONLY' 			
 		}
 		if(req.body.forwardType == 'next'){
 			console.log('next happened here')
-			req.session.counter += 3;
+			req.session.counter += 6;
 			console.log(req.session.counter)
 			var qry = 'SELECT project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
 					'FROM project ' +
@@ -1466,7 +1468,7 @@ router.post('/myOpenProjects', ensureAuthenticated, function (req, res) {
 					'INNER JOIN users ON projectassignment.userID = users.userID ' +
 					'WHERE users.email = @email AND project.openProject = \'open\'' +
 					'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
-					'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 3 ROWS ONLY' 	
+					'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 6 ROWS ONLY' 	
 			
 		}
 	} else {
@@ -1492,7 +1494,7 @@ router.post('/myOpenProjects', ensureAuthenticated, function (req, res) {
 
 				request.query(qry, function (err, results, fields) {
 					if(err){console.log(err)}
-					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, counter: req.session.counter, updateType: updateType});
+					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, counter: req.session.counter, updateType: updateType, rowsAffected: results.rowsAffected});
 					conn.close();	
 
 				});
@@ -1509,7 +1511,7 @@ router.get('/myClosedProjects', ensureAuthenticated, function (req, res) {
 	'INNER JOIN users ON projectassignment.userID = users.userID ' +
 	'WHERE users.email = @email AND project.openProject = \'closed\'' +
 	'GROUP BY project.openProject, project.projectNumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
-	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY; ' 
+	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 6 ROWS ONLY; ' 
 	
 	updateType = 'myClosedProjects'
 	//Establishing connection to the database
@@ -1532,7 +1534,7 @@ router.get('/myClosedProjects', ensureAuthenticated, function (req, res) {
 
 				request.query(qry, function (err, results, fields) {
 					if(err){console.log(err)}
-					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, updateType: updateType});
+					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, updateType: updateType, rowsAffected: results.rowsAffected});
 					conn.close();	
 
 				});
@@ -1549,14 +1551,14 @@ router.post('/myClosedProjects', ensureAuthenticated, function (req, res) {
 	'INNER JOIN users ON projectassignment.userID = users.userID ' +
 	'WHERE users.email = @email AND project.openProject = \'closed\'' +
 	'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
-	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY; ' 
+	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 6 ROWS ONLY; ' 
 	
 	console.log(req.body.forwardType + ' ' + req.session.counter.toString());
 	if(req.body.forwardType){
 		if(req.body.forwardType == 'previous'){
 			console.log('previous happened here')
 			console.log(req.session.counter)
-			req.session.counter -= 3;
+			req.session.counter -= 6;
 			console.log(req.session.counter)
 			var qry = 'SELECT project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
 					'FROM project ' +
@@ -1565,11 +1567,11 @@ router.post('/myClosedProjects', ensureAuthenticated, function (req, res) {
 					'INNER JOIN users ON projectassignment.userID = users.userID ' +
 					'WHERE users.email = @email AND project.openProject = \'closed\'' +
 					'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
-					'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 3 ROWS ONLY' 			
+					'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 6 ROWS ONLY' 			
 		}
 		if(req.body.forwardType == 'next'){
 			console.log('next happened here')
-			req.session.counter += 3;
+			req.session.counter += 6;
 			console.log(req.session.counter)
 			var qry = 'SELECT project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' + 
 					'FROM project ' +
@@ -1578,7 +1580,7 @@ router.post('/myClosedProjects', ensureAuthenticated, function (req, res) {
 					'INNER JOIN users ON projectassignment.userID = users.userID ' +
 					'WHERE users.email = @email AND project.openProject = \'closed\'' +
 					'GROUP BY project.openProject, project.projectnumber, project.projectName, project.clientName, project.location, project.serviceType, project.projectID ' +
-					'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 3 ROWS ONLY' 	
+					'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 6 ROWS ONLY' 	
 			
 		}
 	} else {
@@ -1604,7 +1606,7 @@ router.post('/myClosedProjects', ensureAuthenticated, function (req, res) {
 
 				request.query(qry, function (err, results, fields) {
 					if(err){console.log(err)}
-					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, counter: req.session.counter, updateType: updateType});
+					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, counter: req.session.counter, updateType: updateType, rowsAffected: results.rowsAffected});
 					conn.close();	
 
 				});
@@ -1612,17 +1614,19 @@ router.post('/myClosedProjects', ensureAuthenticated, function (req, res) {
 		});	
 });
 
-router.get('/allProjects', ensureAuthenticated, function (req, res) {
+router.get('/allClosedProjects', ensureAuthenticated, function (req, res) {
 
+	if (req.session.permission = 'admin'){
 	var qry = 'SELECT project.projectID, project.projectnumber, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' +
 	'FROM project ' +
 	'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+	'WHERE project.openProject = \'closed\' ' +
 	'GROUP BY project.projectID, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, project.projectnumber ' +
-	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY; '
+	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 6 ROWS ONLY; '
 	if (req.session.counter != 0) {
 		req.session.counter = 0
 	}
-	updateType = 'allProjects'
+	updateType = 'allClosedProjects'
 	//Establishing connection to the database
     const conn = new sql.ConnectionPool(sqlconfig);
 	var request = new sql.Request(conn);
@@ -1641,50 +1645,56 @@ router.get('/allProjects', ensureAuthenticated, function (req, res) {
 
 				request.query(qry, function (err, results, fields) {
 					if(err){console.log(err)}
-					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, updateType: updateType});
+					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, updateType: updateType, rowsAffected: results.rowsAffected});
 					conn.close();	
 
 				});
 			}
 		});	
+	} else {
+		res.redirect('/')
+	}
 });
 
-router.post('/allProjects', ensureAuthenticated, function (req, res) {
-
+router.post('/allClosedProjects', ensureAuthenticated, function (req, res) {
+	if (req.session.permission = 'admin'){
 	var qry = 'SELECT project.projectID, project.projectnumber, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' +
 	'FROM project ' +
 	'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+	'WHERE project.openProject = \'closed\' ' +
 	'GROUP BY project.projectID, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, project.projectnumber ' +
-	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY; ' 
+	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 6 ROWS ONLY; ' 
 	
 	console.log(req.body.forwardType + ' ' + req.session.counter.toString());
 	if(req.body.forwardType){
 		if(req.body.forwardType == 'previous'){
 			console.log('previous happened here')
 			
-			req.session.counter -= 3;
+			req.session.counter -= 6;
 			
 			qry = 'SELECT project.projectID, project.projectnumber, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' +
 				'FROM project ' +
 				'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+				'WHERE project.openProject = \'closed\' ' +
 				'GROUP BY project.projectID, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, project.projectnumber ' +
-				'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 3 ROWS ONLY' 			
+				'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 6 ROWS ONLY' 			
 		}
 		if(req.body.forwardType == 'next'){
 			console.log('next happened here')
-			req.session.counter += 3;
+			req.session.counter += 6;
 			qry = 'SELECT project.projectID, project.projectnumber, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' +
 				'FROM project ' +
 				'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+				'WHERE project.openProject = \'closed\' ' +
 				'GROUP BY project.projectID, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, project.projectnumber ' +
-				'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 3 ROWS ONLY' 	
+				'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 6 ROWS ONLY' 	
 			
 		}
 	} else {
 			req.session.counter = 0
 	}
 
-	var updateType = 'allProjects'
+	var updateType = 'allClosedProjects'
 	//Establishing connection to the database
     const conn = new sql.ConnectionPool(sqlconfig);
 	var request = new sql.Request(conn);
@@ -1703,38 +1713,88 @@ router.post('/allProjects', ensureAuthenticated, function (req, res) {
 
 				request.query(qry, function (err, results, fields) {
 					if(err){console.log(err)}
-					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, counter: req.session.counter, updateType: updateType});
+					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, counter: req.session.counter, updateType: updateType, rowsAffected: results.rowsAffected});
 					conn.close();	
 
 				});
 			}
 		});	
+	} else {
+		res.redirect('/')
+	}
 });
 
 //This searches the projects on the project search page. Could use some optimization to include searching client names as well as project naem
 router.post('/searchProject', ensureAuthenticated, function (req, res) {
 
-	const conn = new mysql.createConnection(config);
+	var qry = 'SELECT project.projectID, project.projectnumber, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' +
+	'FROM project ' +
+	'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+	'WHERE project.clientName LIKE @search OR project.location LIKE @search  OR project.projectNumber LIKE @search OR project.projectName LIKE @search ' +
+	'GROUP BY project.projectID, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, project.projectnumber ' +
+	'ORDER BY project.projectID OFFSET 0 ROWS FETCH NEXT 6 ROWS ONLY; ' 
+	
+	console.log(req.body.forwardType + ' ' + req.session.counter.toString());
+	if(req.body.forwardType){
+		if(req.body.forwardType == 'previous'){
+			console.log('previous happened here')
+			
+			req.session.counter -= 6;
+			
+			qry = 'SELECT project.projectID, project.projectnumber, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' +
+				'FROM project ' +
+				'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+				'WHERE project.clientName LIKE @search OR project.location LIKE @search  OR project.projectNumber LIKE @search OR project.projectName LIKE @search ' +
+				'GROUP BY project.projectID, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, project.projectnumber ' +
+				'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 6 ROWS ONLY' 			
+		}
+		if(req.body.forwardType == 'next'){
+			console.log('next happened here')
+			req.session.counter += 6;
+			qry = 'SELECT project.projectID, project.projectnumber, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, SUM(lineitem.budget) AS projectedBudget, SUM(lineitem.originalContractValue) AS contractAmount ' +
+				'FROM project ' +
+				'LEFT JOIN lineitem ON project.projectID = lineitem.projectID ' +
+				'WHERE project.clientName LIKE @search OR project.location LIKE @search  OR project.projectNumber LIKE @search OR project.projectName LIKE @search ' +
+				'GROUP BY project.projectID, project.openProject, project.projectName, project.clientName, project.location, project.serviceType, project.projectnumber ' +
+				'ORDER BY project.projectID OFFSET ' + req.session.counter.toString() + ' ROWS FETCH NEXT 6 ROWS ONLY' 	
+			
+		}
+	} else {
+			req.session.counter = 0
+	}
+
+	if(req.body.searchForm){
+		req.session.search = '%' + req.body.searchForm + '%';
+	}
+
+
+	var updateType = 'searchProjects'
+
+	
+	//Establishing connection to the database
+    const conn = new sql.ConnectionPool(sqlconfig);
+	var request = new sql.Request(conn);
+	
 	conn.connect(
+
 		function (err) {
 			if (err) {
-				console.log("!!!! Cannot Connect !!! Error:");
+				console.log("!!!! Cannot Connect !!!! Error")
 				throw err;
 			}
 			else {
-				console.log("Connection established.");
+                console.log("Connection established.");
+                
+				request.input("search", sql.VarChar, req.session.search);
+
+				request.query(qry, function (err, results, fields) {
+					if(err){console.log(err)}
+					res.render('project', {permissionLevel: req.session.permission, results: results.recordset, counter: req.session.counter, updateType: updateType, rowsAffected: results.rowsAffected});
+					conn.close();	
+
+				});
 			}
-		});
-
-	var tempsearch = '%' + req.body.searchForm + '%'
-	var tempqry = 'SELECT * FROM project WHERE projectName LIKE ?'
-	var tempqry2 = 'SELECT * FROM project WHERE projectName LIKE ?'
-
-	conn.query(tempqry, tempsearch, function (err, results, fields) {
-		conn.query(tempqry2, tempsearch, function (err, results1, fields) {
-			res.render('project', { results: results, results1: results1 });
-		});
-	});
+		});	
 });
 
 
