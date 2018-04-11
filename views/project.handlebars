@@ -21,7 +21,6 @@
 <section class="row text-left">
 {{#each results}}
 
-
 <div class="col-6 col-sm-3 placeholder" style="border-radius: 15px; border: 2px solid #BFBFBF; padding: 10px;  margin: 10px; ">
       <br>
       <h4>Project Number: {{projectnumber}}</h4>
@@ -32,7 +31,7 @@
           <strong>Service Type:</strong> {{serviceType}} <br>
           <strong>Budget:</strong> ${{#if projectedBudget}}{{formatNumber projectedBudget price="USD"}}{{/if}} <br>
           <strong>Contract Amount:</strong> ${{#if contractAmount}}{{formatNumber contractAmount price="USD"}}{{/if}} <br>
-          <span style="text-transform: uppercase; {{#ifEquals openProject 'open'}} color: #006314; {{/ifEquals}}{{#ifEquals openProject 'closed'}} color: #a50101; {{/ifEquals}}"><strong style="text-transform: capitalize;">Status:&nbsp;</strong> {{openProject}}</span> <br>
+          <span style="text-transform: uppercase; {{#ifEquals openProject 'open'}} color: #006314; {{/ifEquals}}{{#ifEquals openProject 'closed'}} color: #a50101; {{/ifEquals}}"><strong style="text-transform: capitalize;">Status:&nbsp;</strong>{{openProject}}</span> <br>
           <br>           
         </div>
       <form action= "/projects/project_details" method="POST">
