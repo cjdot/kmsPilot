@@ -444,6 +444,7 @@
                             </td>
                             <td>
                                 <select class="form-control"  id="activityOwner" name="activityOwner">
+                                    <option value=""></option>
                                     {{#each results12}}
                                     <option value="{{name}}">{{name}}</option>
                                     {{/each}}
@@ -491,6 +492,7 @@
                             </td>
                             <td>
                                 <select class="form-control"  id="activityOwner" name="activityOwner">
+                                    <option value=""></option>
                                     {{#each ../results12}}
                                     
                                     <option value="{{name}}"{{#ifEquals name ../activityOwner}} selected="selected"{{/ifEquals}}>{{name}}</option>

@@ -4,13 +4,15 @@
 
 
 {{#each results1}}
-    <input type= "hidden" name="totalTarget", id="totalTarget" value="{{totalTarget}}">
-    <input type= "hidden" name="totalActual", id="totalActual" value="{{totalActual}}">
+    <input type= "hidden" name="complete", id="complete" value="{{complete}}">
+    <input type= "hidden" name="inProgress", id="inProgress" value="{{inProgress}}">
+    <input type= "hidden" name="notStarted", id="notStarted" value="{{notStarted}}">
 {{/each}}
 
 {{#each results2}}
-    <input type= "hidden" name="totalTarget2", id="totalTarget2" value="{{totalTarget2}}">
-    <input type= "hidden" name="totalActual2", id="totalActual2" value="{{totalActual2}}">
+    <input type= "hidden" name="complete2", id="complete2" value="{{complete}}">
+    <input type= "hidden" name="inProgress2", id="inProgress2" value="{{inProgress}}">
+    <input type= "hidden" name="notStarted2", id="notStarted2" value="{{notStarted}}">
 {{/each}}
 
 
@@ -18,15 +20,18 @@
 window.onload = function() {
 CanvasJS.addColorSet("kmsTone",
     [
+    "#333333",
     "#0698D5",
     "#AAC998"
     ]);
 
-var inProgress_AI = $('#totalTarget').val();
-var completed_AI = $('#totalActual').val();
+var complete = $('#complete').val();
+var inProgress = $('#inProgress').val();
+var notStarted = $('#notStarted').val();
 
-var inProgress_AI2 = $('#totalTarget2').val();
-var completed_AI2 = $('#totalActual2').val();
+var complete2 = $('#complete2').val();
+var inProgress2 = $('#inProgress2').val();
+var notStarted2 = $('#notStarted2').val();
 
 
 
@@ -43,8 +48,9 @@ var chart = new CanvasJS.Chart("chartContainer1", {
 		startAngle: 270,
 		indexLabel: "{label} {y}",
 		dataPoints: [
-			{y: inProgress_AI, label: "In Progress"},
-			{y: completed_AI, label: "Completed"}
+            {y: notStarted, label: "Not Started"},
+			{y: inProgress, label: "In Progress"},
+			{y: complete, label: "Completed"}
 		]
 	}]
 });
@@ -62,8 +68,9 @@ var chart = new CanvasJS.Chart("chartContainer2", {
 		startAngle: 270,
 		indexLabel: "{label} {y}",
 		dataPoints: [
-			{y: inProgress_AI2, label: "In Progress"},
-			{y: completed_AI2, label: "Completed"}
+            {y: notStarted2, label: "Not Started"},
+			{y: inProgress2, label: "In Progress"},
+			{y: complete2, label: "Completed"}
 		]
 	}]
 });
