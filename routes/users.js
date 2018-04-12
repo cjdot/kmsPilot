@@ -149,7 +149,7 @@ router.post('/login', function(req, res) {
 	} else {
 
 
-		var qry = 'SELECT TOP 1 email, password, permissionLevel FROM users WHERE email = @email'
+		var qry = 'SELECT TOP 1 email, password, permissionLevel, userID FROM users WHERE email = @email'
 		
 		//Establishing connection to the database
 		const conn = new sql.ConnectionPool(sqlconfig);
@@ -175,6 +175,7 @@ router.post('/login', function(req, res) {
 									req.login(results[0].email, results[0].password, function(err) {	
 										req.session.permission = results[0].permissionLevel;
 										req.session.counter = 0;
+										req.session.userID = results[0].userID
 										console.log(results[0].permissionLevel + ' ' + req.session.permission)
 										res.redirect('/');
 										
