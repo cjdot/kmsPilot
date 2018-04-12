@@ -48,35 +48,33 @@
     <section class="row text-left">
         <div class="col-lg-6">
 
-
-
-
-<table class="table table-bordered " style="width: 600px;" >   
+    <table class="table table-bordered " style="width: 600px;" >   
    
             <tbody>
              {{#each results}}
-            
            <tr>
                 <td class="costsummarystyle" style="font-size: 20px;"><strong>Client Name:</strong></td>
-                <td  align="center" class="costsummarystyle">&nbsp {{clientName}}</td>
+                <td  align="center" class="costsummarystyle">{{clientName}}</td>
             </tr>
             <tr>  
                 <td class="costsummarystyle" style="font-size: 20px;"><strong>Project Name:</strong></td>
-                <td align="center" class="costsummarystyle">&nbsp {{projectName}}</td>
+                <td align="center" class="costsummarystyle">{{projectName}}</td>
             </tr>
             <tr>  
-                <td class="costsummarystyle" style="font-size: 20px;"><strong>Project #:</strong></td>
-                <td align="center" class="costsummarystyle">&nbsp {{projectNumber}}</td>
+                <td class="costsummarystyle" style="font-size: 20px;"><strong>Project Number:</strong></td>
+                <td align="center" class="costsummarystyle">{{projectNumber}}</td>
+            </tr>
+            <tr>
+                <td class="costsummarystyle" style="font-size: 20px;"><strong>Status:</strong></td>
+                <td align="center" class="costsummarystyle" style="text-transform: capitalize">{{openProject}}</td>
             </tr>
             <tr>
                 <td class="costsummarystyle" style="font-size: 20px;"><strong>Location:</strong></td>
-                <td align="center" class="costsummarystyle">&nbsp {{location}}</td>
+                <td align="center" class="costsummarystyle">{{location}}</td>
             </tr>
-        
-        
             <tr>
                 <td class="costsummarystyle" style="font-size: 20px;"><strong>Service Type:</strong></td>
-                <td align="center" class="costsummarystyle"> {{serviceType}}</td>
+                <td align="center" class="costsummarystyle">{{serviceType}}</td>
             </tr>
             <tr>
                 <td class="costsummarystyle" style="font-size: 20px;"><strong>Target Start Date:</strong></td>
@@ -102,7 +100,6 @@
             </tr>
              {{/each}}
              {{/each}}
-       
             </tbody>
         </table>
         
@@ -319,7 +316,7 @@
                     <th>Actual Completion Date</th>
                     <th>Progress</th>
                     <th>Activity Notes</th>
-                    <th>Action</th>
+                    <th colspan="2"><center>Action</center></th>
                 </tr>
             </thead>
             <tbody>
@@ -480,7 +477,7 @@
                     <th>Target Completion Date</th>
                     <th>Actual Completion Date</th>
                     <th>Action Item Notes</th>
-                    <th>Action</th>
+                    <th colspan="2"><center>Action</center></th>
                 </tr>
             </thead>
             <tbody>
@@ -642,7 +639,7 @@
                     <th>Target Completion Date</th>
                     <th>Actual Completion Date</th>
                     <th>Action Item Notes</th>
-                    <th>Action</th>
+                    <th colspan="2"><center>Action</center></th>
                 </tr>
             </thead>
             <tbody>
@@ -2038,7 +2035,7 @@
                             <th>Original Contract Value</th>
                             <th>Change Orders</th>
                             <th>Actual Cost To Date</th>
-                            <th>Action</th>
+                            <th colspan="2"><center>Action</center></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -2267,7 +2264,7 @@
                     <th>Status</th>
                     <th>Change Order Executed</th>
                     <th>Comments</th>
-                    <th>Action</th>
+                    <th colspan="2"><center>Action</center></th>
                 </tr>
             </thead>
             <tbody>
