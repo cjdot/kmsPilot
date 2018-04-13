@@ -721,10 +721,10 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
                 
 				request.input("divisionCategory", sql.VarChar, req.body.divisionCategory);
 				request.input("lineItemBreakdown", sql.VarChar, req.body.lineItemBreakdown);
-				request.input("originalContractValue", sql.Decimal, originalContractValue);
-				request.input("budget", sql.Decimal, budget);
-				request.input("changeOrders", sql.Decimal, changeOrders);
-				request.input("actualCostToDate", sql.Decimal, actualCostToDate);
+				request.input("originalContractValue", sql.Decimal(18, 2), originalContractValue);
+				request.input("budget", sql.Decimal(18, 2), budget);
+				request.input("changeOrders", sql.Decimal(18, 2), changeOrders);
+				request.input("actualCostToDate", sql.Decimal(18, 2), actualCostToDate);
 				request.input("projectID", sql.Int, req.body.projectID);
 
 				request.query(qry1, function (err, results0, fields) {					
@@ -796,10 +796,10 @@ router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
                 
 				request.input("divisionCategory", sql.VarChar, req.body.divisionCategory);
 				request.input("lineItemBreakdown", sql.VarChar, req.body.lineItemBreakdown);
-				request.input("originalContractValue", sql.Decimal, originalContractValue);
-				request.input("budget", sql.Decimal, budget);
-				request.input("changeOrders", sql.Decimal, changeOrders);
-				request.input("actualCostToDate", sql.Decimal, actualCostToDate);
+				request.input("originalContractValue", sql.Decimal(18, 2), originalContractValue);
+				request.input("budget", sql.Decimal(18, 2), budget);
+				request.input("changeOrders", sql.Decimal(18, 2), changeOrders);
+				request.input("actualCostToDate", sql.Decimal(18, 2), actualCostToDate);
 				request.input("lineItemID", sql.Int, req.body.lineItemID);
 				request.input("projectID", sql.Int, req.body.projectID);
 
@@ -942,7 +942,7 @@ router.post('/newPCO', ensureAuthenticated, function (req, res) {
 				request.input("kmsReviewedDate", sql.Date, kmsReviewedDate);
 				request.input("kmsApprovedDate", sql.Date, kmsApprovedDate);
 				request.input("clientApprovedDate", sql.Date, clientApprovedDate);
-				request.input("pcoValue", sql.Decimal, pcoValue);
+				request.input("pcoValue", sql.Decimal(18,2), pcoValue);
 				request.input("pcoStatus", sql.VarChar, req.body.pcoStatus);
 				request.input("changeOrderExecuted", sql.VarChar, req.body.changeOrderExecuted);
 				request.input("comments", sql.VarChar, req.body.comments);
@@ -1027,7 +1027,7 @@ router.post('/updatePCO', ensureAuthenticated, function (req, res) {
 				request.input("kmsReviewedDate", sql.Date, kmsReviewedDate);
 				request.input("kmsApprovedDate", sql.Date, kmsApprovedDate);
 				request.input("clientApprovedDate", sql.Date, clientApprovedDate);
-				request.input("pcoValue", sql.Decimal, pcoValue);
+				request.input("pcoValue", sql.Decimal(18, 2), pcoValue);
 				request.input("pcoStatus", sql.VarChar, req.body.pcoStatus);
 				request.input("changeOrderExecuted", sql.VarChar, req.body.changeOrderExecuted);
 				request.input("comments", sql.VarChar, req.body.comments);
