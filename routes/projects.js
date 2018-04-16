@@ -40,7 +40,7 @@ var qry7 = 'SELECT * FROM orderset WHERE projectID = @projectID ORDER BY orderSe
 var qry9 = 'SELECT divisionCategory, SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE projectID = @projectID GROUP BY divisionCategory; '
 var qry10 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, SUM(remainingContractValue) AS remainingContractValue FROM lineitem WHERE projectID = @projectID; '
 var qry11 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE (divisionCategory=\'Allowances\' OR divisionCategory=\'FF&E\' OR divisionCategory=\'IT\' OR divisionCategory=\'Security\' OR divisionCategory=\'Consultants\' OR divisionCategory=\'Contingency\' OR divisionCategory=\'Owner Supplied Equipment\') AND projectID = @projectID; '
-var qry12 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE (divisionCategory=\'Division 1 - General Conditions and Insurance\' OR divisionCategory=\'Division 2 - Site Construction\' OR divisionCategory=\'Division 3 - Concrete\' OR divisionCategory=\'Division 4 - Masonry\' OR divisionCategory=\'Division 5 - Metals\' OR divisionCategory=\'Division 6 - Carpentry and Millwork\' OR divisionCategory=\'Division 7 - Thermal and Moisture Protection\' OR divisionCategory=\'Division 8 - Doors and Windows\' OR divisionCategory=\'Division 9 - Finishes\' OR divisionCategory=\'Division 10 - Specialties\' OR divisionCategory=\'Division 11 - Equipment\' OR divisionCategory=\'Division 12 - Furnishings\' OR divisionCategory=\'Division 13 - Special Construction\' OR divisionCategory=\'Division 14 - Conveying Systems\' OR divisionCategory=\'Division 15 - Mechanical, Plumbing, HVAC, and Fire\' OR divisionCategory=\'Division 16 - Electrical\' ) AND projectID = @projectID; '
+var qry12 = 'SELECT SUM(budget) AS budget, SUM(originalContractValue) AS originalContractValue, SUM(changeOrders) AS changeOrders, SUM(revisedContractValue) AS revisedContractValue, SUM(variance) AS variance, SUM(actualCostToDate) AS actualCostToDate, sum(remainingContractValue) remainingContractValue FROM lineitem WHERE (divisionCategory=\'Division 1 - General Conditions & Insurance\' OR divisionCategory=\'Division 2 - Site Construction\' OR divisionCategory=\'Division 3 - Concrete\' OR divisionCategory=\'Division 4 - Masonry\' OR divisionCategory=\'Division 5 - Metals\' OR divisionCategory=\'Division 6 - Carpentry and Millwork\' OR divisionCategory=\'Division 7 - Thermal and Moisture Protection\' OR divisionCategory=\'Division 8 - Doors and Windows\' OR divisionCategory=\'Division 9 - Finishes\' OR divisionCategory=\'Division 10 - Specialties\' OR divisionCategory=\'Division 11 - Equipment\' OR divisionCategory=\'Division 12 - Furnishings\' OR divisionCategory=\'Division 13 - Special Construction\' OR divisionCategory=\'Division 14 - Conveying Systems\' OR divisionCategory=\'Division 15 - Mechanical, Plumbing, HVAC, and Fire\' OR divisionCategory=\'Division 16 - Electrical\' ) AND projectID = @projectID; '
 var qry13 = 'SELECT CONCAT(firstName, \' \', lastName) AS name, userID FROM users; '
 var qry14 = 'SELECT DISTINCT users.firstName, users.lastName, users.userID, projectassignment.projectID FROM projectassignment INNER JOIN users ON projectassignment.userID = users.userID WHERE projectID = @projectID'
 
@@ -721,10 +721,10 @@ router.post('/newCostSummary', ensureAuthenticated, function (req, res) {
                 
 				request.input("divisionCategory", sql.VarChar, req.body.divisionCategory);
 				request.input("lineItemBreakdown", sql.VarChar, req.body.lineItemBreakdown);
-				request.input("originalContractValue", sql.Decimal, originalContractValue);
-				request.input("budget", sql.Decimal, budget);
-				request.input("changeOrders", sql.Decimal, changeOrders);
-				request.input("actualCostToDate", sql.Decimal, actualCostToDate);
+				request.input("originalContractValue", sql.Decimal(18, 2), originalContractValue);
+				request.input("budget", sql.Decimal(18, 2), budget);
+				request.input("changeOrders", sql.Decimal(18, 2), changeOrders);
+				request.input("actualCostToDate", sql.Decimal(18, 2), actualCostToDate);
 				request.input("projectID", sql.Int, req.body.projectID);
 
 				request.query(qry1, function (err, results0, fields) {					
@@ -796,10 +796,10 @@ router.post('/updateCostSummary', ensureAuthenticated, function (req, res) {
                 
 				request.input("divisionCategory", sql.VarChar, req.body.divisionCategory);
 				request.input("lineItemBreakdown", sql.VarChar, req.body.lineItemBreakdown);
-				request.input("originalContractValue", sql.Decimal, originalContractValue);
-				request.input("budget", sql.Decimal, budget);
-				request.input("changeOrders", sql.Decimal, changeOrders);
-				request.input("actualCostToDate", sql.Decimal, actualCostToDate);
+				request.input("originalContractValue", sql.Decimal(18, 2), originalContractValue);
+				request.input("budget", sql.Decimal(18, 2), budget);
+				request.input("changeOrders", sql.Decimal(18, 2), changeOrders);
+				request.input("actualCostToDate", sql.Decimal(18, 2), actualCostToDate);
 				request.input("lineItemID", sql.Int, req.body.lineItemID);
 				request.input("projectID", sql.Int, req.body.projectID);
 
@@ -942,7 +942,7 @@ router.post('/newPCO', ensureAuthenticated, function (req, res) {
 				request.input("kmsReviewedDate", sql.Date, kmsReviewedDate);
 				request.input("kmsApprovedDate", sql.Date, kmsApprovedDate);
 				request.input("clientApprovedDate", sql.Date, clientApprovedDate);
-				request.input("pcoValue", sql.Decimal, pcoValue);
+				request.input("pcoValue", sql.Decimal(18,2), pcoValue);
 				request.input("pcoStatus", sql.VarChar, req.body.pcoStatus);
 				request.input("changeOrderExecuted", sql.VarChar, req.body.changeOrderExecuted);
 				request.input("comments", sql.VarChar, req.body.comments);
@@ -1027,7 +1027,7 @@ router.post('/updatePCO', ensureAuthenticated, function (req, res) {
 				request.input("kmsReviewedDate", sql.Date, kmsReviewedDate);
 				request.input("kmsApprovedDate", sql.Date, kmsApprovedDate);
 				request.input("clientApprovedDate", sql.Date, clientApprovedDate);
-				request.input("pcoValue", sql.Decimal, pcoValue);
+				request.input("pcoValue", sql.Decimal(18, 2), pcoValue);
 				request.input("pcoStatus", sql.VarChar, req.body.pcoStatus);
 				request.input("changeOrderExecuted", sql.VarChar, req.body.changeOrderExecuted);
 				request.input("comments", sql.VarChar, req.body.comments);
