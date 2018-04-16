@@ -29,6 +29,7 @@
     "nodemailer": "^4.6.4",
     "passport": "*",
     "passport-http": "*",
-    "passport-local": "*"
+    "passport-local": "*",
+    "handlebars.numeral": "*"
   }
 }
