@@ -14,6 +14,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var moment = require('moment');
 var sql = require('mssql');
+var NumeralHelper = require("handlebars.numeral");
 
 var cron = require('node-cron');
 const nodemailer = require('nodemailer');
@@ -24,6 +25,7 @@ var projects = require('./routes/projects');
 var admin = require('./routes/admin');
 var settings = require('./routes/settings');
 var report = require('./routes/report');
+
 
 // Init App
 var app = express();
@@ -53,6 +55,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 HandlebarsIntl.registerWith(Handlebars);
+NumeralHelper.registerHelpers(Handlebars);
 Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });

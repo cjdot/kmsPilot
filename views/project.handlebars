@@ -30,8 +30,8 @@
           <strong>Client Name:</strong> {{clientName}} <br>
           <strong>Location:</strong> {{location}} <br>
           <strong>Service Type:</strong> {{serviceType}} <br>
-          <strong>Budget:</strong> ${{#if projectedBudget}}{{formatNumber projectedBudget price="USD"}}{{/if}} <br>
-          <strong>Contract Amount:</strong> ${{#if contractAmount}}{{formatNumber contractAmount price="USD"}}{{/if}} <br>
+          <strong>Budget:</strong> ${{#if projectedBudget}}{{number projectedBudget }}{{/if}} <br>
+          <strong>Contract Amount:</strong> ${{#if contractAmount}}{{number contractAmount }}{{/if}} <br>
           <span style="text-transform: uppercase; {{#ifEquals openProject 'open'}} color: #006314; {{/ifEquals}}{{#ifEquals openProject 'closed'}} color: #a50101; {{/ifEquals}}"><strong style="text-transform: capitalize;">Status:&nbsp;</strong>{{openProject}}</span> <br>
           <br>           
         </div>

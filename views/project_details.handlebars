@@ -87,16 +87,16 @@
             {{#each ../results9}}
             <tr>
                 <td class="costsummarystyle" style="font-size: 20px;"><strong>Projected Budget:</strong></td>
-                <td align="center" class="costsummarystyle">${{#if budget}}{{formatNumber budget}}{{/if}}</td>
+                <td align="center" class="costsummarystyle">${{#if budget}}{{number budget}}{{/if}}</td>
             </tr>
             
             <tr>
                 <td class="costsummarystyle" style="font-size: 20px;"><strong>Original Contract Value:</strong></td>
-                <td align="center" class="costsummarystyle">${{#if originalContractValue}}{{formatNumber originalContractValue}}{{/if}}</td>
+                <td align="center" class="costsummarystyle">${{#if originalContractValue}}{{number originalContractValue}}{{/if}}</td>
             </tr>
             <tr>
                 <td class="costsummarystyle" style="font-size: 20px;"><strong>Current Contract Value:</strong></td>
-                <td align="center" class="costsummarystyle">${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{/if}}</td>
+                <td align="center" class="costsummarystyle">${{#if revisedContractValue}}{{number revisedContractValue}}{{/if}}</td>
             </tr>
              {{/each}}
              {{/each}}
@@ -729,23 +729,23 @@
             {{/each}}
             <tr>  
                 <td class="costsummarystyle"><strong>PROJECT BUDGET:</strong></td>
-                <td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>
+                <td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget }}{{else}}0{{/if}}</strong></td>
             </tr>
             <tr>
                 <td class="costsummarystyle"><strong>REVISED CONTRACT VALUE:</strong></td>
-                <td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>
+                <td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>
             </tr>
             <tr>
                 <td class="costsummarystyle">Budget Variance <sub>(Anticipated Cost - Budget)</sub>:</td>
-                <td align="center" class="costsummarystyle"><span style="{{#ifLess variance 0}} color: #009900; {{/ifLess}}{{#ifGreater variance 0}} color: #cc0000; {{/ifGreater}}">${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</span></td>
+                <td align="center" class="costsummarystyle"><span style="{{#ifLess variance 0}} color: #009900; {{/ifLess}}{{#ifGreater variance 0}} color: #cc0000; {{/ifGreater}}">${{#if variance}}{{number variance}}{{else}}0{{/if}}</span></td>
             </tr>
             <tr>
                 <td class="costsummarystyle"><strong>ACTUAL COST TO DATE:</strong></td>
-                <td align="center" class="costsummarystyle">${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</td>
+                <td align="center" class="costsummarystyle">${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</td>
             </tr>
             <tr>
                 <td class="costsummarystyle"><strong>REMAINING CONTRACT VALUE:</strong></td>
-                <td align="center" class="costsummarystyle">${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</td>
+                <td align="center" class="costsummarystyle">${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</td>
             </tr>
              {{/each}}
              
@@ -759,13 +759,13 @@
             {{#each results10}}
             <tr style="background-color: #64c3e5">
                 <td align="center" style="border-color: black"><strong>SOFT COSTS</strong></td>
-                <td align="center" style="border-color: black">Budget: <strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>
-                <td align="center" style="border-color: black">Original Contract Value: <strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>
-                <td align="center" style="border-color: black">Change Orders: <strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>
-                <td align="center" style="border-color: black">Revised Contract Value: <strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>
-                <td align="center" style="border-color: black">Variance: <strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td> 
-                <td align="center" style="border-color: black">Actual Cost To Date: <strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>
-                <td align="center" style="border-color: black">Remaining Contract Value: <strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Budget: <strong>${{#if budget}}{{number budget }}{{else}}0{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Original Contract Value: <strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Change Orders: <strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Revised Contract Value: <strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Variance: <strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td> 
+                <td align="center" style="border-color: black">Actual Cost To Date: <strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Remaining Contract Value: <strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>
             </tr>
             {{/each}}
             
@@ -797,26 +797,26 @@
             {{#each ../results4}}
             <tr>
                 {{#ifEquals divisionCategory 'Allowances'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}} 
             </tr>
             {{/each}}
 
             <tr class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Allowances'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Allowances'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 {{/each}}
             </tr>
 
@@ -847,26 +847,26 @@
             {{#each ../results4}}
             <tr>
                 {{#ifEquals divisionCategory 'FF&E'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}} 
             </tr>
             {{/each}}
 
             <tr  class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'FF&E'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'FF&E'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 {{/each}}
             </tr>
 
@@ -898,26 +898,26 @@
             {{#each ../results4}}
             <tr>
                 {{#ifEquals divisionCategory 'IT'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}} 
             </tr>
             {{/each}}
 
             <tr  class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'IT'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'IT'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 {{/each}}
             </tr>
 
@@ -949,26 +949,26 @@
             {{#each ../results4}}
             <tr>
                 {{#ifEquals divisionCategory 'Security'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}} 
             </tr>
             {{/each}}
 
             <tr  class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Security'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Security'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 {{/each}}
             </tr>
 
@@ -1000,26 +1000,26 @@
             {{#each ../results4}}
             <tr>
                 {{#ifEquals divisionCategory 'Consultants'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}} 
             </tr>
             {{/each}}
 
             <tr  class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Consultants'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Consultants'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 {{/each}}
             </tr>
 
@@ -1051,26 +1051,26 @@
             {{#each ../results4}}
             <tr>
                 {{#ifEquals divisionCategory 'Contingency'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}} 
             </tr>
             {{/each}}
 
             <tr  class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Contingency'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Contingency'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 {{/each}}
             </tr>
 
@@ -1102,26 +1102,26 @@
             {{#each ../results4}}
             <tr>
                 {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}} 
             </tr>
             {{/each}}
 
             <tr  class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Owner Supplied Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 {{/each}}
             </tr>
 
@@ -1139,13 +1139,13 @@
             {{#each results11}}
             <tr style="background-color: #64c3e5">
                 <td align="center" style="border-color: black"><strong>CONSTRUCTION</strong></td>
-                <td align="center" style="border-color: black">Budget: <strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>
-                <td align="center" style="border-color: black">Original Contract Value: <strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>
-                <td align="center" style="border-color: black">Change Orders: <strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>
-                <td align="center" style="border-color: black">Revised Contract Value: <strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>
-                <td align="center" style="border-color: black">Variance: <strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td> 
-                <td align="center" style="border-color: black">Actual Cost To Date: <strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>
-                <td align="center" style="border-color: black">Remaining Contract Value: <strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Budget: <strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Original Contract Value: <strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Change Orders: <strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Revised Contract Value: <strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Variance: <strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td> 
+                <td align="center" style="border-color: black">Actual Cost To Date: <strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>
+                <td align="center" style="border-color: black">Remaining Contract Value: <strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>
             </tr>
             {{/each}}
             
@@ -1176,26 +1176,26 @@
             {{#each ../results4}}
                 <tr>
                     {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}} 
-                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}} 
                 </tr>
             {{/each}}
 
             <tr class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 1 - General Conditions & Insurance'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 
                 {{/each}}
             </tr>
@@ -1226,26 +1226,26 @@
             {{#each ../results4}}
                 <tr>
                     {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-                    {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-                    {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-                    {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}} 
-                    {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-                    {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-                    {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-                    {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+                    {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}} 
                 </tr>
             {{/each}}
 
             <tr class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 2 - Site Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 
                 {{/each}}
             </tr>
@@ -1277,26 +1277,26 @@
         {{#each ../results4}}
         <tr>
             {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}}
-            {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}}
+            {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}}
         </tr>
         {{/each}}
 
         <tr class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 3 - Concrete'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 
                 {{/each}}
             </tr>
@@ -1326,26 +1326,26 @@
         {{#each ../results4}}
         <tr>
             {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}}
-            {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}}
+            {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}}
+            {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}}
         </tr>
         {{/each}}
 
         <tr class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 4 - Masonry'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 
                 {{/each}}
             </tr>
@@ -1376,26 +1376,26 @@
         {{#each ../results4}}
         <tr>
             {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}}
+            {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}}
         </tr>
         {{/each}}
 
         <tr class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 5 - Metals'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 
                 {{/each}}
             </tr>
@@ -1425,26 +1425,26 @@
         {{#each ../results4}}
         <tr>
             {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}}
-            {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}}
+            {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}}
+            {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}}
         </tr>
         {{/each}}
 
         <tr class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 6 - Carpentry and Millwork'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 
                 {{/each}}
             </tr>
@@ -1475,13 +1475,13 @@
         {{#each ../results4}}
         <tr>
             {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}} 
             
         </tr>
         {{/each}}
@@ -1489,13 +1489,13 @@
         <tr class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 7 - Thermal and Moisture Protection'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 
                 {{/each}}
             </tr>
@@ -1526,13 +1526,13 @@
         {{#each ../results4}}
         <tr>
             {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}}
+            {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}}
             
         </tr>
         {{/each}}
@@ -1540,13 +1540,13 @@
         <tr class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 8 - Doors and Windows'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 
                 {{/each}}
             </tr>
@@ -1577,13 +1577,13 @@
         {{#each ../results4}}
         <tr>
             {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}}
+            {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}}
             
         </tr>
         {{/each}}
@@ -1591,13 +1591,13 @@
         <tr class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 9 - Finishes'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 
                 {{/each}}
             </tr>
@@ -1628,26 +1628,26 @@
         {{#each ../results4}}
         <tr>
             {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}}
+            {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}}
         </tr>
         {{/each}}
 
         <tr class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 10 - Specialties'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 
                 {{/each}}
             </tr>
@@ -1678,26 +1678,26 @@
         {{#each ../results4}}
         <tr>
             {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}} 
         </tr>
         {{/each}}
 
         <tr class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 11 - Equipment'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 
                 {{/each}}
             </tr>
@@ -1728,26 +1728,26 @@
         {{#each ../results4}}
         <tr>
             {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}}
+            {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}}
         </tr>
         {{/each}}
 
         <tr class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 12 - Furnishings'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 
                 {{/each}}
             </tr>
@@ -1778,26 +1778,26 @@
         {{#each ../results4}}
         <tr>
             {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}}
+            {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}}
         </tr>
         {{/each}}
 
         <tr class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 13 - Special Construction'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 
                 {{/each}}
             </tr>
@@ -1828,26 +1828,26 @@
         {{#each ../results4}}
         <tr>
             {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}} 
         </tr>
         {{/each}}
 
         <tr class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 14 - Conveying Systems'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 
                 {{/each}}
             </tr>
@@ -1877,26 +1877,26 @@
         {{#each ../results4}}
         <tr>
             {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}} 
         </tr>
         {{/each}}
 
         <tr class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 15 - Mechanical, Plumbing, HVAC, and Fire'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 
                 {{/each}}
             </tr>
@@ -1926,26 +1926,26 @@
         {{#each ../results4}}
         <tr>
             {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td class="costsummarystyle">{{lineItemBreakdown}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle">${{budget}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle">${{originalContractValue}}</td>{{/ifEquals}}
-            {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle">${{changeOrders}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle">${{revisedContractValue}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle">${{variance}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle">${{actualCostToDate}}</td>{{/ifEquals}} 
-            {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle">${{remainingContractValue}}</td>{{/ifEquals}}
+            {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle">${{number budget}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle">${{number originalContractValue}}</td>{{/ifEquals}}
+            {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle">${{number changeOrders}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle">${{number revisedContractValue}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle">${{number variance}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle">${{number actualCostToDate}}</td>{{/ifEquals}} 
+            {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle">${{number remainingContractValue}}</td>{{/ifEquals}}
         </tr>
         {{/each}}
 
         <tr class="table-info">
                 {{#each ../results8}}
                 {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td class="costsummarystyle"><strong>Subtotal:</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{formatNumber budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{formatNumber originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{formatNumber changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
-                {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{formatNumber revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{formatNumber variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{formatNumber actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
-                {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{formatNumber remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle"><strong>${{#if budget}}{{number budget}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle"><strong>${{#if originalContractValue}}{{number originalContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle"><strong>${{#if changeOrders}}{{number changeOrders}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
+                {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle"><strong>${{#if revisedContractValue}}{{number revisedContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle"><strong>${{#if variance}}{{number variance}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle"><strong>${{#if actualCostToDate}}{{number actualCostToDate}}{{else}}0{{/if}}</strong></td>{{/ifEquals}} 
+                {{#ifEquals divisionCategory 'Division 16 - Electrical'}}<td align="center" class="costsummarystyle"><strong>${{#if remainingContractValue}}{{number remainingContractValue}}{{else}}0{{/if}}</strong></td>{{/ifEquals}}
                 
                 {{/each}}
             </tr>
