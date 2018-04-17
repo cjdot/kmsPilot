@@ -140,9 +140,7 @@ app.listen(app.get('port'), function(){
 });
 
 //Email Notification Push
-//https://stackoverflow.com/questions/20499225/i-need-a-nodejs-scheduler-that-allows-for-tasks-at-different-intervals
-
-cron.schedule('*/10 * * * * *', function(){ //00 00 04 * * 0-6 Runs every day at 04:00:00 AM
+cron.schedule('00 00 04 * * 0-6', function(){ //Runs every day at 04:00:00 AM | FOR TESTING USE: */15 * * * * *
 
   var qryPush = "DECLARE @NewLineChar AS CHAR(2) = CHAR(13) + CHAR(10) SELECT kmsactionitem.activityOwner, kmsactionitem.targetCompletionDate, STRING_AGG(CONCAT('Project Number: ', project.projectNumber, ' Project Name: ', project.projectName, ' Description: ', kmsactionitem.actionItemDescription), @NewLineChar) AS activityDescription, users.email, kmsactionitem.notified FROM kmsactionitem INNER JOIN users ON kmsactionitem.activityOwner = users.firstName + ' ' + users.lastName INNER JOIN  project ON kmsactionitem.projectID = project.projectID WHERE kmsactionitem.targetCompletionDate IS NOT NULL AND DATEADD(day, 2, CONVERT(date, GETDATE())) = kmsactionitem.targetCompletionDate AND kmsactionitem.notified IS NULL GROUP BY users.email, kmsactionitem.activityOwner, kmsactionitem.targetCompletionDate, kmsactionitem.notified";
   var qryPush2 = "UPDATE kmsactionitem SET kmsactionitem.notified = '1' WHERE kmsactionitem.targetCompletionDate IS NOT NULL AND DATEADD(day, 2, CONVERT(date, GETDATE())) = kmsactionitem.targetCompletionDate AND kmsactionitem.notified IS NULL";
@@ -166,6 +164,16 @@ cron.schedule('*/10 * * * * *', function(){ //00 00 04 * * 0-6 Runs every day at
           var owner = '';
           var description = '';
 
+          let transporter = nodemailer.createTransport({
+            host: 'smtp.ethereal.email',
+            port: 587,
+            secure: false,
+            auth: {
+              user: 'i5af5oi3t3dmcvwf@ethereal.email',
+              pass: 'SYNKbQJZwYwURQJEfs'
+            }
+          });
+
           for(var i = 0; i < (resultsPush.length); i++) {
             console.log(i);
             email = resultsPush[i].email;
@@ -174,40 +182,22 @@ cron.schedule('*/10 * * * * *', function(){ //00 00 04 * * 0-6 Runs every day at
             console.log(owner);
             description = resultsPush[i].activityDescription;
             console.log(description);
-          
-          /*//Email function start
-          nodemailer.createTestAccount((err, account) => {
-            let transporter = nodemailer.createTransport({
-              host: 'smtp.ethereal.email',
-              port: 587,
-              secure: false, // true for 465, false for other ports
-              auth: {
-                user: 'i5af5oi3t3dmcvwf@ethereal.email',
-                pass: 'SYNKbQJZwYwURQJEfs'
-              }
-            });
 
-            let mailOptions = {
-              from: '"James Kemp" <jkemp@kempms.net>', //Sender address
-              to: email, //Receiver address
-              subject: 'KMS Action Item Notice', // Subject line
-              text: 'Hello ' + owner + ',\r\n\r\nIn two days, you have the following action item(s) due:\r\n\r\n' + description, // plain text body
-            };
-          
-            // send mail with defined transport object
-            transporter.sendMail(mailOptions, (error, info) => {
-              if (error) {
-                return console.log(error);
-              }
-              console.log(owner);
-              console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info)); //Ethereal only
-            });
-          });
-          //Email function end*/
+            transporter.sendMail({from: 'jkemp@kempms.net',
+                                  to: resultsPush[i].email,
+                                  subject: 'KMS Action Item Notice',
+                                  text: 'Hello ' + owner + ',\r\n\r\nIn two days, you have the following action item(s) due:\r\n\r\n' + description
+                                 }, (error, info) => {
+                                  if (error) {
+                                    return console.log(error);
+                                  }
+                                  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info)); //Ethereal only
+                                }); 
           };
-					conn.close();
+          request.query(qryPush2, function (err, preResultsPush2, fields) {
+            conn.close();
+          });
 			}); 
 		}
-	});
-  console.log('Email batch pushed.');
+  });
 });
