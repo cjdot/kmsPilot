@@ -46,9 +46,9 @@
     <h3>Project Overview</h3>
     <br>
     <section class="row text-left">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
 
-    <table class="table table-bordered " style="width: 600px;" >   
+    <table class="table table-bordered " style="float: left; width: 600px; margin-right: 10px" >   
    
             <tbody>
              {{#each results}}
@@ -102,13 +102,8 @@
              {{/each}}
             </tbody>
         </table>
-        
-        </div>
-
         {{#ifEquals permissionLevel 'admin'}}
-        <div class="col-lg-6">
-
-        <table class="table table-bordered " style="width: 600px" >   
+        <table class="table table-bordered " style="float: left; width: 600px;" >   
             <tbody>          
                 <tr>
                     <td class="costsummarystyle" style="font-size: 20px;"><strong>Add Team Members:</strong></td>
@@ -139,17 +134,14 @@
                 {{/each}}
             </tbody>
         </table>
-        
-        </div>
         {{/ifEquals}}
-
          {{#ifEquals permissionLevel 'write'}}
-        <div class="col-lg-6">
+       
 
         <table class="table table-bordered " style="width: 300px" >   
             <tbody>          
                 <tr>
-                    <td class="costsummarystyle" style="font-size: 20px;"><strong>Team Members:</strong></td>
+                    <td class="costsummarystyle" style="float: left; font-size: 20px;"><strong>Team Members:</strong></td>
                 </tr>   
                 {{#each results13}}       
                 <tr>
@@ -162,13 +154,13 @@
             </tbody>
         </table>
         
-        </div>
+        
         {{/ifEquals}}
 
          {{#ifEquals permissionLevel 'read'}}
-        <div class="col-lg-6">
+        
 
-        <table class="table table-bordered " style="width: 300px" >   
+        <table class="table table-bordered " style="float: left; width: 300px" >   
             <tbody>          
                 <tr>
                     <td class="costsummarystyle" style="font-size: 20px;"><strong>Team Members:</strong></td>
@@ -184,9 +176,9 @@
             </tbody>
         </table>
         
-        </div>
+        
         {{/ifEquals}}
-
+        </div>
         </section>
     
     
