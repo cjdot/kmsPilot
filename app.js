@@ -142,8 +142,14 @@ app.listen(app.get('port'), function(){
 //Email Notification Push
 cron.schedule('00 00 04 * * 0-6', function(){ //Runs every day at 04:00:00 AM | FOR TESTING USE: */15 * * * * *
 
+  //Gets KMS action items due in two days
   var qryPush = "DECLARE @NewLineChar AS CHAR(2) = CHAR(13) + CHAR(10) SELECT kmsactionitem.activityOwner, kmsactionitem.targetCompletionDate, STRING_AGG(CONCAT('Project Number: ', project.projectNumber, ' Project Name: ', project.projectName, ' Description: ', kmsactionitem.actionItemDescription), @NewLineChar) AS activityDescription, users.email, kmsactionitem.notified FROM kmsactionitem INNER JOIN users ON kmsactionitem.activityOwner = users.firstName + ' ' + users.lastName INNER JOIN  project ON kmsactionitem.projectID = project.projectID WHERE kmsactionitem.targetCompletionDate IS NOT NULL AND DATEADD(day, 2, CONVERT(date, GETDATE())) = kmsactionitem.targetCompletionDate AND kmsactionitem.notified IS NULL GROUP BY users.email, kmsactionitem.activityOwner, kmsactionitem.targetCompletionDate, kmsactionitem.notified";
+  //Disables two day due notification for KMS action items
   var qryPush2 = "UPDATE kmsactionitem SET kmsactionitem.notified = '1' WHERE kmsactionitem.targetCompletionDate IS NOT NULL AND DATEADD(day, 2, CONVERT(date, GETDATE())) = kmsactionitem.targetCompletionDate AND kmsactionitem.notified IS NULL";
+  //Gets KMS action items added yesterday
+  var qryPush3 = "DECLARE @NewLineChar AS CHAR(2) = CHAR(13) + CHAR(10) SELECT kmsactionitem.activityOwner, CONVERT(date, kmsactionitem.dateStampKMSActionItem) AS dateAdded, STRING_AGG(CONCAT('Project Number: ', project.projectNumber, ' Project Name: ', project.projectName, ' Description: ', kmsactionitem.actionItemDescription), @NewLineChar) AS activityDescription, users.email, kmsactionitem.addNotified FROM kmsactionitem INNER JOIN users ON kmsactionitem.activityOwner = users.firstName + ' ' + users.lastName INNER JOIN  project ON kmsactionitem.projectID = project.projectID WHERE kmsactionitem.addNotified IS NULL AND CONVERT(date, kmsactionitem.dateStampKMSActionItem) = DATEADD(day, -1, CONVERT(date, GETDATE())) GROUP BY users.email, kmsactionitem.activityOwner, kmsactionitem.addNotified, kmsactionitem.dateStampKMSActionItem";
+  //Disables day after add notification for KMS action items
+  var qryPush4 = "UPDATE kmsactionitem SET kmsactionitem.addNotified = '1' WHERE kmsactionitem.addNotified IS NULL";
 
   const conn = new sql.ConnectionPool(sqlconfig);
   var request = new sql.Request(conn);
@@ -160,10 +166,6 @@ cron.schedule('00 00 04 * * 0-6', function(){ //Runs every day at 04:00:00 AM | 
 				request.query(qryPush, function (err, preResultsPush, fields) {
           var resultsPush = preResultsPush.recordset;
 
-          var email = '';
-          var owner = '';
-          var description = '';
-
           let transporter = nodemailer.createTransport({
             host: 'smtp.ethereal.email',
             port: 587,
@@ -175,18 +177,11 @@ cron.schedule('00 00 04 * * 0-6', function(){ //Runs every day at 04:00:00 AM | 
           });
 
           for(var i = 0; i < (resultsPush.length); i++) {
-            console.log(i);
-            email = resultsPush[i].email;
-            console.log(email);
-            owner = resultsPush[i].activityOwner;
-            console.log(owner);
-            description = resultsPush[i].activityDescription;
-            console.log(description);
 
             transporter.sendMail({from: 'jkemp@kempms.net',
                                   to: resultsPush[i].email,
                                   subject: 'KMS Action Item Notice',
-                                  text: 'Hello ' + owner + ',\r\n\r\nIn two days, you have the following action item(s) due:\r\n\r\n' + description
+                                  text: 'Hello ' + resultsPush[i].activityOwner + ',\r\n\r\nIn two days, you have the following action item(s) due:\r\n\r\n' + resultsPush[i].activityDescription
                                  }, (error, info) => {
                                   if (error) {
                                     return console.log(error);
@@ -195,9 +190,31 @@ cron.schedule('00 00 04 * * 0-6', function(){ //Runs every day at 04:00:00 AM | 
                                 }); 
           };
           request.query(qryPush2, function (err, preResultsPush2, fields) {
-            conn.close();
+            request.query(qryPush3, function (err, preResultsPush3, fields) {
+
+              var resultsPush3 = preResultsPush3.recordset;
+
+              for(var a = 0; a < (resultsPush3.length); a++) {
+
+                transporter.sendMail({from: 'jkemp@kempms.net',
+                                      to: resultsPush3[a].email,
+                                      subject: 'KMS Action Item Notice',
+                                      text: 'Hello ' + resultsPush3[a].activityOwner + ',\r\n\r\nYesterday, you were assigned to the following action item(s):\r\n\r\n' + resultsPush3[a].activityDescription
+                                     }, (error, info) => {
+                                      if (error) {
+                                        return console.log(error);
+                                      }
+                                      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info)); //Ethereal only
+                                    }); 
+              };
+
+              request.query(qryPush4, function (err, preResultsPush4, fields) {
+                conn.close();
+              });
+            });
           });
-			}); 
-		}
-  });
+			  }); 
+		  }
+    }
+  );
 });
