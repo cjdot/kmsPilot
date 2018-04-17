@@ -14,6 +14,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var moment = require('moment');
 var sql = require('mssql');
+var NumeralHelper = require("handlebars.numeral");
 
 var cron = require('node-cron');
 const nodemailer = require('nodemailer');
@@ -24,6 +25,7 @@ var projects = require('./routes/projects');
 var admin = require('./routes/admin');
 var settings = require('./routes/settings');
 var report = require('./routes/report');
+
 
 // Init App
 var app = express();
@@ -53,6 +55,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 HandlebarsIntl.registerWith(Handlebars);
+NumeralHelper.registerHelpers(Handlebars);
 Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
@@ -137,20 +140,20 @@ app.listen(app.get('port'), function(){
 });
 
 //Email Notification Push
-//https://stackoverflow.com/questions/20499225/i-need-a-nodejs-scheduler-that-allows-for-tasks-at-different-intervals
+cron.schedule('00 00 04 * * 0-6', function(){ //Runs every day at 04:00:00 AM | FOR TESTING USE: */15 * * * * *
 
-cron.schedule('*/7 * * * * *', function(){
+  //Gets KMS action items due in two days
+  var qryPush = "DECLARE @NewLineChar AS CHAR(2) = CHAR(13) + CHAR(10) SELECT kmsactionitem.activityOwner, kmsactionitem.targetCompletionDate, STRING_AGG(CONCAT('Project Number: ', project.projectNumber, ' Project Name: ', project.projectName, ' Description: ', kmsactionitem.actionItemDescription), @NewLineChar) AS activityDescription, users.email, kmsactionitem.notified FROM kmsactionitem INNER JOIN users ON kmsactionitem.activityOwner = users.firstName + ' ' + users.lastName INNER JOIN  project ON kmsactionitem.projectID = project.projectID WHERE kmsactionitem.targetCompletionDate IS NOT NULL AND DATEADD(day, 2, CONVERT(date, GETDATE())) = kmsactionitem.targetCompletionDate AND kmsactionitem.notified IS NULL GROUP BY users.email, kmsactionitem.activityOwner, kmsactionitem.targetCompletionDate, kmsactionitem.notified";
+  //Disables two day due notification for KMS action items
+  var qryPush2 = "UPDATE kmsactionitem SET kmsactionitem.notified = '1' WHERE kmsactionitem.targetCompletionDate IS NOT NULL AND DATEADD(day, 2, CONVERT(date, GETDATE())) = kmsactionitem.targetCompletionDate AND kmsactionitem.notified IS NULL";
+  //Gets KMS action items added yesterday
+  var qryPush3 = "DECLARE @NewLineChar AS CHAR(2) = CHAR(13) + CHAR(10) SELECT kmsactionitem.activityOwner, CONVERT(date, kmsactionitem.dateStampKMSActionItem) AS dateAdded, STRING_AGG(CONCAT('Project Number: ', project.projectNumber, ' Project Name: ', project.projectName, ' Description: ', kmsactionitem.actionItemDescription), @NewLineChar) AS activityDescription, users.email, kmsactionitem.addNotified FROM kmsactionitem INNER JOIN users ON kmsactionitem.activityOwner = users.firstName + ' ' + users.lastName INNER JOIN  project ON kmsactionitem.projectID = project.projectID WHERE kmsactionitem.addNotified IS NULL AND CONVERT(date, kmsactionitem.dateStampKMSActionItem) = DATEADD(day, -1, CONVERT(date, GETDATE())) GROUP BY users.email, kmsactionitem.activityOwner, kmsactionitem.addNotified, kmsactionitem.dateStampKMSActionItem";
+  //Disables day after add notification for KMS action items
+  var qryPush4 = "UPDATE kmsactionitem SET kmsactionitem.addNotified = '1' WHERE kmsactionitem.addNotified IS NULL";
 
-  var d = new Date();
-  var month = d.getMonth()+1;
-  var day = d.getDate();
-  var current_date = d.getFullYear() + '-' + (month<10 ? '0' : '') + month + '-' + (day<10 ? '0' : '') + day;
-  console.log(current_date);
-
-  var qryPush = 'SELECT * FROM kmsactionitem WHERE targetCompletionDate = @current_date';
   const conn = new sql.ConnectionPool(sqlconfig);
   var request = new sql.Request(conn);
-/*
+
   conn.connect(
 		function (err) {
 			if (err) {
@@ -160,47 +163,58 @@ cron.schedule('*/7 * * * * *', function(){
 			else {
         console.log("Connection established.");
 
-        request.input("current_date", sql.date, current_date);
 				request.query(qryPush, function (err, preResultsPush, fields) {
           var resultsPush = preResultsPush.recordset;
-          res.render('login', {permissionLevel: req.session.permission, resultsPush: resultsPush.recordset});
-          console.log(resultsPush);					
-					conn.close();
-			}); 
-		}
-	});
-*/
-/*
-  nodemailer.createTestAccount((err, account) => {
-    // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
-      host: 'smtp.ethereal.email',
-      port: 587,
-      secure: false, // true for 465, false for other ports
-      auth: {
-        user: 'i5af5oi3t3dmcvwf@ethereal.email',
-        pass: 'SYNKbQJZwYwURQJEfs'
-      }
-    });
-  
-    // setup email data with unicode symbols
-    let mailOptions = {
-      from: '"James Kemp" <jkemp@kempms.net>', //Sender address
-      to: 'fake@email.com', //Receiver address
-      subject: 'KMS Action Item Notice', // Subject line
-      text: 'You have ' + 'text_number' + ' action items due soon.', // plain text body
-      html: 'You have ' + 'text_number' + ' action items due soon.' // html body, often goes to spam if removed
-    };
-  
-    // send mail with defined transport object
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        return console.log(error);
-      }
-      console.log('Message sent: %s', info.messageId);
-      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info)); //Ethereal only
-    });
-  });
-*/
-  console.log('Email batch pushed.');
+
+          let transporter = nodemailer.createTransport({
+            host: 'smtp.ethereal.email',
+            port: 587,
+            secure: false,
+            auth: {
+              user: 'i5af5oi3t3dmcvwf@ethereal.email',
+              pass: 'SYNKbQJZwYwURQJEfs'
+            }
+          });
+
+          for(var i = 0; i < (resultsPush.length); i++) {
+
+            transporter.sendMail({from: 'jkemp@kempms.net',
+                                  to: resultsPush[i].email,
+                                  subject: 'KMS Action Item Notice',
+                                  text: 'Hello ' + resultsPush[i].activityOwner + ',\r\n\r\nIn two days, you have the following action item(s) due:\r\n\r\n' + resultsPush[i].activityDescription
+                                 }, (error, info) => {
+                                  if (error) {
+                                    return console.log(error);
+                                  }
+                                  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info)); //Ethereal only
+                                }); 
+          };
+          request.query(qryPush2, function (err, preResultsPush2, fields) {
+            request.query(qryPush3, function (err, preResultsPush3, fields) {
+
+              var resultsPush3 = preResultsPush3.recordset;
+
+              for(var a = 0; a < (resultsPush3.length); a++) {
+
+                transporter.sendMail({from: 'jkemp@kempms.net',
+                                      to: resultsPush3[a].email,
+                                      subject: 'KMS Action Item Notice',
+                                      text: 'Hello ' + resultsPush3[a].activityOwner + ',\r\n\r\nYesterday, you were assigned to the following action item(s):\r\n\r\n' + resultsPush3[a].activityDescription
+                                     }, (error, info) => {
+                                      if (error) {
+                                        return console.log(error);
+                                      }
+                                      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info)); //Ethereal only
+                                    }); 
+              };
+
+              request.query(qryPush4, function (err, preResultsPush4, fields) {
+                conn.close();
+              });
+            });
+          });
+			  }); 
+		  }
+    }
+  );
 });
