@@ -34,6 +34,12 @@
     {{/ifEquals}}
 </ul>
 
+<script>
+    function deleteFunction() {
+        confirm("Are you sure you wish to delete this item?");
+    }
+</script>
+
 <div class="tab-content">
 
     <!-- Project Overview Tab -->
@@ -127,7 +133,7 @@
                     <input type= "hidden" name="userID", id="userID" value="{{userID}}">
                     <td class="costsummarystyle" style="font-size: 18px;">{{firstName}} {{lastName}}</td>
                     <td>
-                    <button type="submit" name="actionType" class="form-control" value="DELETE">Remove</button>
+                    <button type="submit" name="actionType" class="form-control" onclick="deleteFunction()" value="DELETE">Remove</button>
                     </td>
                     </form>
                 </tr>  
@@ -341,7 +347,7 @@
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updateProjectActivity">Update</button>
                             </td>
                             <td>
-                                <button type="submit" name="actionType" class="form-control" value="Delete" formAction="/projects/deleteProjectActivity">Delete</button>
+                                <button type="submit" name="actionType" class="form-control" onclick="deleteFunction()" value="Delete" formAction="/projects/deleteProjectActivity">Delete</button>
                             </td>
                     </tr>
                 </form>
@@ -433,10 +439,10 @@
                         
                         <input type="hidden" class="form-control" id="projectID" name="projectID" value={{#each results}}"{{projectID}}"{{/each}}>
                             <td>
-                                <textarea class="form-control" id="actionItemDescription" name="actionItemDescription" rows="1"></textarea> 
+                                <textarea class="form-control" id="actionItemDescription" name="actionItemDescription" rows="1" cols="30" style="width: 275px"></textarea> 
                             </td>
                             <td>
-                                <select class="form-control"  id="activityOwner" name="activityOwner">
+                                <select class="form-control"  id="activityOwner" name="activityOwner" style="width:175px">
                                     <option value=""></option>
                                     {{#each results12}}
                                     <option value="{{name}}">{{name}}</option>
@@ -451,7 +457,7 @@
                             <td>
                                 <input type="date" class="form-control" id="actualCompletionDate" name="actualCompletionDate"> </td>
                             <td>
-                                <textarea class="form-control" id="actionItemNotes" name="actionItemNotes" rows="1"></textarea>
+                                <textarea class="form-control" id="actionItemNotes" name="actionItemNotes" rows="1" cols="30" style="width: 275px"></textarea>
                             </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update">Insert</button>
@@ -508,7 +514,7 @@
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updateActionItem">Update</button>
                             </td>
                             <td>
-                                <button type="submit" name="actionType" class="form-control" value="Delete" formAction="/projects/deleteActionItem">Delete</button>
+                                <button type="submit" name="actionType" class="form-control" onclick="deleteFunction()" value="Delete" formAction="/projects/deleteActionItem">Delete</button>
                             </td>
                     </tr>
                 </form>
@@ -664,7 +670,7 @@
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updateExternalActionItem">Update</button>
                             </td>
                             <td>
-                                <button type="submit" name="actionType" class="form-control" value="Delete" formAction="/projects/deleteExternalActionItem">Delete</button>
+                                <button type="submit" name="actionType" class="form-control" onclick="deleteFunction()" value="Delete" formAction="/projects/deleteExternalActionItem">Delete</button>
                             </td>
                     </tr>
                 </form>
@@ -2086,7 +2092,7 @@
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updateCostSummary">Update</button>
                             </td>
                             <td>
-                                <button type="submit" name="actionType" class="form-control" value="Delete" formAction="/projects/deleteCostSummary">Delete</button>
+                                <button type="submit" name="actionType" class="form-control" onclick="deleteFunction()" value="Delete" formAction="/projects/deleteCostSummary">Delete</button>
                             </td>
                     </tr>
                 </form>
@@ -2314,7 +2320,7 @@
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updatePCO">Update</button>
                             </td>
                             <td>
-                                <button type="submit" name="actionType" class="form-control" value="Delete" formAction="/projects/deletePCO">Delete</button>
+                                <button type="submit" name="actionType" class="form-control" onclick="deleteFunction()" value="Delete" formAction="/projects/deletePCO">Delete</button>
                             </td>
                     </tr>
                 </form>
