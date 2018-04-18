@@ -48,54 +48,54 @@
     <section class="row text-left">
         <div class="col-lg-12">
 
-    <table class="table table-bordered " style="float: left; width: 500px; margin-right: 10px" >   
+    <table class="table table-bordered " style="float: left; width: 450px; margin-right: 10px" >   
    
             <tbody>
              {{#each results}}
            <tr>
-                <td class="costsummarystyle" style="font-size: 20px;"><strong>Client Name:</strong></td>
+                <td class="costsummarystyle" style="font-size: 18px;"><strong>Client Name:</strong></td>
                 <td  align="center" class="costsummarystyle">{{clientName}}</td>
             </tr>
             <tr>  
-                <td class="costsummarystyle" style="font-size: 20px;"><strong>Project Name:</strong></td>
+                <td class="costsummarystyle" style="font-size: 18px;"><strong>Project Name:</strong></td>
                 <td align="center" class="costsummarystyle">{{projectName}}</td>
             </tr>
             <tr>  
-                <td class="costsummarystyle" style="font-size: 20px;"><strong>Project Number:</strong></td>
+                <td class="costsummarystyle" style="font-size: 18px;"><strong>Project Number:</strong></td>
                 <td align="center" class="costsummarystyle">{{projectNumber}}</td>
             </tr>
             <tr>
-                <td class="costsummarystyle" style="font-size: 20px;"><strong>Status:</strong></td>
+                <td class="costsummarystyle" style="font-size: 18px;"><strong>Status:</strong></td>
                 <td align="center" class="costsummarystyle" style="text-transform: capitalize">{{openProject}}</td>
             </tr>
             <tr>
-                <td class="costsummarystyle" style="font-size: 20px;"><strong>Location:</strong></td>
+                <td class="costsummarystyle" style="font-size: 18px;"><strong>Location:</strong></td>
                 <td align="center" class="costsummarystyle">{{location}}</td>
             </tr>
             <tr>
-                <td class="costsummarystyle" style="font-size: 20px;"><strong>Service Type:</strong></td>
+                <td class="costsummarystyle" style="font-size: 18px;"><strong>Service Type:</strong></td>
                 <td align="center" class="costsummarystyle">{{serviceType}}</td>
             </tr>
             <tr>
-                <td class="costsummarystyle" style="font-size: 20px;"><strong>Target Start Date:</strong></td>
+                <td class="costsummarystyle" style="font-size: 18px;"><strong>Target Start Date:</strong></td>
                 <td align="center" class="costsummarystyle"> {{#if targetStartDate}}{{formatTime targetStartDate "MM/DD/YYYY"}}{{/if}}</td>
             </tr>
             <tr>
-                <td class="costsummarystyle" style="font-size: 20px;"><strong>Target Completion Date:</strong></td>
+                <td class="costsummarystyle" style="font-size: 18px;"><strong>Target Completion Date:</strong></td>
                 <td align="center" class="costsummarystyle">{{#if targetCompletionDate}}{{formatTime targetCompletionDate "MM/DD/YYYY"}}{{/if}}</td>
             </tr>
             {{#each ../results9}}
             <tr>
-                <td class="costsummarystyle" style="font-size: 20px;"><strong>Projected Budget:</strong></td>
+                <td class="costsummarystyle" style="font-size: 18px;"><strong>Projected Budget:</strong></td>
                 <td align="center" class="costsummarystyle">${{#if budget}}{{number budget}}{{/if}}</td>
             </tr>
             
             <tr>
-                <td class="costsummarystyle" style="font-size: 20px;"><strong>Original Contract Value:</strong></td>
+                <td class="costsummarystyle" style="font-size: 18px;"><strong>Original Contract Value:</strong></td>
                 <td align="center" class="costsummarystyle">${{#if originalContractValue}}{{number originalContractValue}}{{/if}}</td>
             </tr>
             <tr>
-                <td class="costsummarystyle" style="font-size: 20px;"><strong>Current Contract Value:</strong></td>
+                <td class="costsummarystyle" style="font-size: 18px;"><strong>Current Contract Value:</strong></td>
                 <td align="center" class="costsummarystyle">${{#if revisedContractValue}}{{number revisedContractValue}}{{/if}}</td>
             </tr>
              {{/each}}
@@ -103,10 +103,10 @@
             </tbody>
         </table>
         {{#ifEquals permissionLevel 'admin'}}
-        <table class="table table-bordered " style="float: left; width: 500px;" >   
+        <table class="table table-bordered " style="float: left; width: 400px;" >   
             <tbody>          
                 <tr>
-                    <td class="costsummarystyle" style="font-size: 20px;"><strong>Add Team Members:</strong></td>
+                    <td class="costsummarystyle" style="font-size: 18px;"><strong>Add Team Members:</strong></td>
                     <td  align="center" class="costsummarystyle">
                         <form action="/projects/newProjectAssignment" method="POST">
                         {{#each results}}<input type= "hidden" name="projectID", id="projectID" value="{{projectID}}">{{/each}}
@@ -125,7 +125,7 @@
                     <form action="/projects/deleteProjectAssignment" method="POST">
                     <input type= "hidden" name="projectID", id="projectID" value="{{projectID}}">
                     <input type= "hidden" name="userID", id="userID" value="{{userID}}">
-                    <td class="costsummarystyle" style="font-size: 20px;">{{firstName}} {{lastName}}</td>
+                    <td class="costsummarystyle" style="font-size: 18px;">{{firstName}} {{lastName}}</td>
                     <td>
                     <button type="submit" name="actionType" class="form-control" value="DELETE">Remove</button>
                     </td>
