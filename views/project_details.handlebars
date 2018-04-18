@@ -271,7 +271,7 @@
                         
                         <input type="hidden" class="form-control" id="projectID" name="projectID" value={{#each results}}"{{projectID}}"{{/each}}>
                             <td>
-                                <input type="text" class="form-control" id="activityDescription" name="activityDescription"> 
+                                <textarea class="form-control" id="activityDescription" name="activityDescription" rows="1"></textarea> 
                             </td>
                             <td>
                                 <input type="date" class="form-control" id="targetStartDate" name="targetStartDate">
@@ -287,7 +287,7 @@
                                 <input type="number" class="form-control" id="progress" name="progress">
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="activityNotes" name="activityNotes">
+                                <textarea class="form-control" id="activityNotes" name="activityNotes" rows="1"></textarea>
                             </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update">Insert</button>
@@ -318,7 +318,7 @@
                         <input type="hidden" class="form-control" id="projectActivityID" name="projectActivityID" value="{{projectActivityID}}">
                         <input type="hidden" class="form-control" id="projectID" name="projectID" value="{{projectID}}">
                             <td class="col-xs-4">
-                                <input type="text" class="form-control" id="activityDescription" name="activityDescription" value="{{activityDescription}}"> 
+                                <textarea class="form-control" id="activityDescription" name="activityDescription" value="{{activityDescription}}" rows="1"></textarea> 
                             </td>
                             <td>
                                 <input size= "25" type="date" class="form-control" id="targetStartDate" name="targetStartDate" value="{{#if targetStartDate}}{{formatTime targetStartDate "YYYY-MM-DD"}}{{/if}}">
@@ -335,7 +335,8 @@
                                         value="{{#if progress}}{{progress}}{{else}}0%{{/if}}">
                             </td>
                             <td class="col-xs-4"> 
-                                <input type="text" class="form-control" id="activityNotes" name="activityNotes" placeholder="{{activityNotes}}" value="{{activityNotes}}"> </td>
+                                <textarea class="form-control" id="activityNotes" name="activityNotes" placeholder="{{activityNotes}}" value="{{activityNotes}}" rows="1"></textarea> 
+                            </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updateProjectActivity">Update</button>
                             </td>
@@ -432,7 +433,7 @@
                         
                         <input type="hidden" class="form-control" id="projectID" name="projectID" value={{#each results}}"{{projectID}}"{{/each}}>
                             <td>
-                                <input type="text" class="form-control" id="actionItemDescription" name="actionItemDescription"> 
+                                <textarea class="form-control" id="actionItemDescription" name="actionItemDescription" rows="1"></textarea> 
                             </td>
                             <td>
                                 <select class="form-control"  id="activityOwner" name="activityOwner">
@@ -450,7 +451,7 @@
                             <td>
                                 <input type="date" class="form-control" id="actualCompletionDate" name="actualCompletionDate"> </td>
                             <td>
-                                <input type="text" class="form-control" id="actionItemNotes" name="actionItemNotes">
+                                <textarea class="form-control" id="actionItemNotes" name="actionItemNotes" rows="1"></textarea>
                             </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update">Insert</button>
@@ -480,7 +481,7 @@
                         <input type="hidden" class="form-control" id="kmsActionItemID" name="kmsActionItemID" value="{{kmsActionItemID}}">
                         <input type="hidden" class="form-control" id="projectID" name="projectID" value="{{projectID}}">
                             <td>
-                                <input type="text" class="form-control" id="actionItemDescription" name="actionItemDescription" value="{{actionItemDescription}}"> 
+                                <textarea class="form-control" id="actionItemDescription" name="actionItemDescription" value="{{actionItemDescription}}" rows="1"></textarea>
                             </td>
                             <td>
                                 <select class="form-control"  id="activityOwner" name="activityOwner">
@@ -501,7 +502,7 @@
                                 <input type="date" class="form-control" id="actualCompletionDate" name="actualCompletionDate" value="{{#if actualCompletionDate}}{{formatTime actualCompletionDate "YYYY-MM-DD"}}{{/if}}"> </td>
                             
                             <td>
-                                <input type="text" class="form-control" id="actionItemNotes" name="actionItemNotes"  value="{{actionItemNotes}}"> 
+                                <textarea class="form-control" id="actionItemNotes" name="actionItemNotes"  value="{{actionItemNotes}}" rows="1"></textarea> 
                             </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updateActionItem">Update</button>
@@ -600,10 +601,10 @@
                         
                         <input type="hidden" class="form-control" id="projectID" name="projectID" value={{#each results}}"{{projectID}}"{{/each}}>
                             <td>
-                                <input type="text" class="form-control" id="actionItemDescription" name="actionItemDescription"> 
+                                <textarea class="form-control" id="actionItemDescription" name="actionItemDescription" rows="1"></textarea> 
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="activityOwner" name="activityOwner">
+                                <textarea class="form-control" id="activityOwner" name="activityOwner" rows="1"></textarea>
                             </td>
                             <td>
                                 <input type="date" class="form-control" id="targetCompletionDate" name="targetCompletionDate"> </td>
@@ -613,7 +614,7 @@
                             <td>
                                 <input type="date" class="form-control" id="actualCompletionDate" name="actualCompletionDate"> </td>
                             <td>
-                                <input type="text" class="form-control" id="actionItemNotes" name="actionItemNotes">
+                                <textarea class="form-control" id="actionItemNotes" name="actionItemNotes" rows="1"></textarea>
                             </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update">Insert</button>
@@ -643,7 +644,7 @@
                         <input type="hidden" class="form-control" id="externalActionItem" name="externalActionItemID" value="{{externalActionItemID}}">
                         <input type="hidden" class="form-control" id="projectID" name="projectID" value="{{projectID}}">
                             <td>
-                                <input type="text" class="form-control" id="actionItemDescription" name="actionItemDescription" value="{{actionItemDescription}}"> 
+                                <textarea class="form-control" id="actionItemDescription" name="actionItemDescription" value="{{actionItemDescription}}" rows="1"></textarea> 
                             </td>
                             <td>
                                 <input type="text" class="form-control" id="activityOwner" name="activityOwner" value="{{activityOwner}}"> 
@@ -657,7 +658,7 @@
                                 <input type="date" class="form-control" id="actualCompletionDate" name="actualCompletionDate" value="{{#if actualCompletionDate}}{{formatTime actualCompletionDate "YYYY-MM-DD"}}{{/if}}"> </td>
                             
                             <td>
-                                <input type="text" class="form-control" id="actionItemNotes" name="actionItemNotes"  value="{{actionItemNotes}}"> 
+                                <textarea class="form-control" id="actionItemNotes" name="actionItemNotes"  value="{{actionItemNotes}}" rows="1"></textarea> 
                             </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updateExternalActionItem">Update</button>
@@ -2196,7 +2197,7 @@
                                 <input type="text" class="form-control" id="pcoNumber" name="pcoNumber" style="width: 50px"> 
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="pcoDescription" name="pcoDescription"> 
+                                <textarea class="form-control" id="pcoDescription" name="pcoDescription" style="width: 150px" rows="1"></textarea> 
                             </td>
                             <td>
                                 <input type="date" class="form-control" id="dueDate" name="dueDate" style="width: 165px">
@@ -2214,10 +2215,10 @@
                                 <input type="date" class="form-control" id="clientApprovedDate" name="clientApprovedDate" style="width: 165px"> 
                             </td>
                             <td>
-                                <input type="number" step="0.01" class="form-control" id="pcoValue" name="pcoValue">
+                                <input type="number" step="0.01" class="form-control" id="pcoValue" name="pcoValue" style="width: 75px">
                             </td>
                             <td>
-                                <select class="form-control" name="pcoStatus" id="pcoStatus">
+                                <select class="form-control" name="pcoStatus" id="pcoStatus" style="width: 75px">
                                     <option value="Under Review">Under Review</option>
                                     <option value="Approved">Approved</option>
                                     <option value="Revised and Resubmit">Revised and Resubmit</option>
@@ -2225,13 +2226,13 @@
                                 </select>
                             </td>
                             <td>
-                                <select class="form-control" name="changeOrderExecuted" id="changeOrderExecuted">
+                                <select class="form-control" name="changeOrderExecuted" id="changeOrderExecuted" style="width: 75px">
                                     <option value="Yes">Yes</option>
                                     <option value="No">No</option>
                                 </select>
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="comments" name="comments">
+                                <textarea class="form-control" id="comments" name="comments" style="width: 200px" rows="1"></textarea>
                             </td>
                             
                             <td>
@@ -2269,31 +2270,31 @@
                         <input type="hidden" class="form-control" id="projectID" name="projectID" value="{{projectID}}">
                         <input type="hidden" class="form-control" id="pcoID" name="pcoID" value="{{pcoID}}">
                             <td>
-                                <input type="text" class="form-control" id="pcoNumber" name="pcoNumber" value="{{pcoNumber}}">
+                                <input type="text" class="form-control" id="pcoNumber" name="pcoNumber" value="{{pcoNumber}}" style="width: 50px">
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="pcoDescription" name="pcoDescription" value="{{pcoDescription}}"> 
+                                <textarea class="form-control" id="pcoDescription" name="pcoDescription" value="{{pcoDescription}}" style="width: 150px" rows="1"></textarea> 
                             </td>
                             <td>
-                                <input type="date" class="form-control" id="dueDate" name="dueDate" value="{{#if dueDate}}{{formatTime dueDate "YYYY-MM-DD"}}{{/if}}"> 
+                                <input type="date" class="form-control" id="dueDate" name="dueDate" value="{{#if dueDate}}{{formatTime dueDate "YYYY-MM-DD"}}{{/if}}" style="width: 165px"> 
                             </td>
                             <td>
-                                <input type="date" class="form-control" id="toKMSDate" name="toKMSDate" value="{{#if toKMSDate}}{{formatTime toKMSDate "YYYY-MM-DD"}}{{/if}}"> 
+                                <input type="date" class="form-control" id="toKMSDate" name="toKMSDate" value="{{#if toKMSDate}}{{formatTime toKMSDate "YYYY-MM-DD"}}{{/if}}" style="width: 165px"> 
                             </td>
                             <td>
-                                <input type="date" class="form-control" id="kmsReviewedDate" name="kmsReviewedDate" value="{{#if kmsReviewedDate}}{{formatTime kmsReviewedDate "YYYY-MM-DD"}}{{/if}}"> 
+                                <input type="date" class="form-control" id="kmsReviewedDate" name="kmsReviewedDate" value="{{#if kmsReviewedDate}}{{formatTime kmsReviewedDate "YYYY-MM-DD"}}{{/if}}" style="width: 165px"> 
                             </td>
                             <td>
-                                <input type="date" class="form-control" id="kmsApprovedDate" name="kmsApprovedDate" value="{{#if kmsApprovedDate}}{{formatTime kmsApprovedDate "YYYY-MM-DD"}}{{/if}}"> 
+                                <input type="date" class="form-control" id="kmsApprovedDate" name="kmsApprovedDate" value="{{#if kmsApprovedDate}}{{formatTime kmsApprovedDate "YYYY-MM-DD"}}{{/if}}" style="width: 165px"> 
                             </td>
                             <td>
-                                <input type="date" class="form-control" id="clientApprovedDate" name="clientApprovedDate" value="{{#if clientApprovedDate}}{{formatTime clientApprovedDate "YYYY-MM-DD"}}{{/if}}"> 
+                                <input type="date" class="form-control" id="clientApprovedDate" name="clientApprovedDate"  value="{{#if clientApprovedDate}}{{formatTime clientApprovedDate "YYYY-MM-DD"}}{{/if}}" style="width: 165px"> 
                             </td>
                             <td>
-                                <input type="number" step="0.01" class="form-control" id="pcoValue" name="pcoValue" value="{{pcoValue}}"> 
+                                <input type="number" step="0.01" class="form-control" id="pcoValue" name="pcoValue" value="{{pcoValue}}" style="width: 75px"> 
                             </td>
                             <td>
-                                <select class="form-control" name="pcoStatus" id="pcoStatus">
+                                <select class="form-control" name="pcoStatus" id="pcoStatus" style="width: 75px">
                                     <option value="Under Review" {{#ifEquals pcoStatus 'Under Review'}} selected {{/ifEquals}}>Under Review</option>
                                     <option value="Approved" {{#ifEquals pcoStatus 'Approved'}} selected {{/ifEquals}}>Approved</option>
                                     <option value="Revised and Resubmit" {{#ifEquals pcoStatus 'Revised and Resubmit'}} selected {{/ifEquals}}>Revised and Resubmit</option>
@@ -2301,13 +2302,13 @@
                                 </select>
                             </td>
                             <td>
-                                <select class="form-control" name="changeOrderExecuted" id="changeOrderExecuted">
+                                <select class="form-control" name="changeOrderExecuted" id="changeOrderExecuted" style="width: 75px">
                                     <option value="Yes" {{#ifEquals changeOrderExecuted 'Yes'}} selected {{/ifEquals}}>Yes</option>
                                     <option value="No" {{#ifEquals changeOrderExecuted 'No'}} selected {{/ifEquals}}>No</option>
                                 </select>
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="comments" name="comments" value="{{comments}}"> 
+                                <textarea  class="form-control" id="comments" name="comments" value="{{comments}}" rows="1" style="width: 200px"></textarea>
                             </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updatePCO">Update</button>
