@@ -142,10 +142,10 @@ app.listen(app.get('port'), function(){
 //Email Notification Push
 cron.schedule('00 00 04 * * 0-6', function(){ //Runs every day at 04:00:00 AM | FOR TESTING USE: */15 * * * * *
 
-  //Gets KMS action items due in two days
-  var qryPush = "DECLARE @NewLineChar AS CHAR(2) = CHAR(13) + CHAR(10) SELECT kmsactionitem.activityOwner, kmsactionitem.targetCompletionDate, STRING_AGG(CONCAT('Project Number: ', project.projectNumber, ' Project Name: ', project.projectName, ' Description: ', kmsactionitem.actionItemDescription), @NewLineChar) AS activityDescription, users.email, kmsactionitem.notified FROM kmsactionitem INNER JOIN users ON kmsactionitem.activityOwner = users.firstName + ' ' + users.lastName INNER JOIN  project ON kmsactionitem.projectID = project.projectID WHERE kmsactionitem.targetCompletionDate IS NOT NULL AND DATEADD(day, 2, CONVERT(date, GETDATE())) = kmsactionitem.targetCompletionDate AND kmsactionitem.notified IS NULL GROUP BY users.email, kmsactionitem.activityOwner, kmsactionitem.targetCompletionDate, kmsactionitem.notified";
-  //Disables two day due notification for KMS action items
-  var qryPush2 = "UPDATE kmsactionitem SET kmsactionitem.notified = '1' WHERE kmsactionitem.targetCompletionDate IS NOT NULL AND DATEADD(day, 2, CONVERT(date, GETDATE())) = kmsactionitem.targetCompletionDate AND kmsactionitem.notified IS NULL";
+  //Gets KMS action items due in one week
+  var qryPush = "DECLARE @NewLineChar AS CHAR(2) = CHAR(13) + CHAR(10) SELECT kmsactionitem.activityOwner, kmsactionitem.targetCompletionDate, STRING_AGG(CONCAT('Project Number: ', project.projectNumber, ' Project Name: ', project.projectName, ' Description: ', kmsactionitem.actionItemDescription), @NewLineChar) AS activityDescription, users.email, kmsactionitem.notified FROM kmsactionitem INNER JOIN users ON kmsactionitem.activityOwner = users.firstName + ' ' + users.lastName INNER JOIN  project ON kmsactionitem.projectID = project.projectID WHERE kmsactionitem.targetCompletionDate IS NOT NULL AND DATEADD(day, 6, CONVERT(date, GETDATE())) = kmsactionitem.targetCompletionDate AND kmsactionitem.notified IS NULL GROUP BY users.email, kmsactionitem.activityOwner, kmsactionitem.targetCompletionDate, kmsactionitem.notified";
+  //Disables due in one week notification for KMS action items
+  var qryPush2 = "UPDATE kmsactionitem SET kmsactionitem.notified = '1' WHERE kmsactionitem.targetCompletionDate IS NOT NULL AND DATEADD(day, 6, CONVERT(date, GETDATE())) = kmsactionitem.targetCompletionDate AND kmsactionitem.notified IS NULL";
   //Gets KMS action items added yesterday
   var qryPush3 = "DECLARE @NewLineChar AS CHAR(2) = CHAR(13) + CHAR(10) SELECT kmsactionitem.activityOwner, CONVERT(date, kmsactionitem.dateStampKMSActionItem) AS dateAdded, STRING_AGG(CONCAT('Project Number: ', project.projectNumber, ' Project Name: ', project.projectName, ' Description: ', kmsactionitem.actionItemDescription), @NewLineChar) AS activityDescription, users.email, kmsactionitem.addNotified FROM kmsactionitem INNER JOIN users ON kmsactionitem.activityOwner = users.firstName + ' ' + users.lastName INNER JOIN  project ON kmsactionitem.projectID = project.projectID WHERE kmsactionitem.addNotified IS NULL AND CONVERT(date, kmsactionitem.dateStampKMSActionItem) = DATEADD(day, -1, CONVERT(date, GETDATE())) GROUP BY users.email, kmsactionitem.activityOwner, kmsactionitem.addNotified, kmsactionitem.dateStampKMSActionItem";
   //Disables day after add notification for KMS action items
@@ -181,7 +181,7 @@ cron.schedule('00 00 04 * * 0-6', function(){ //Runs every day at 04:00:00 AM | 
             transporter.sendMail({from: 'jkemp@kempms.net',
                                   to: resultsPush[i].email,
                                   subject: 'KMS Action Item Notice',
-                                  text: 'Hello ' + resultsPush[i].activityOwner + ',\r\n\r\nIn two days, you have the following action item(s) due:\r\n\r\n' + resultsPush[i].activityDescription
+                                  text: 'Hello ' + resultsPush[i].activityOwner + ',\r\n\r\nIn one week, you have the following action item(s) due:\r\n\r\n' + resultsPush[i].activityDescription
                                  }, (error, info) => {
                                   if (error) {
                                     return console.log(error);

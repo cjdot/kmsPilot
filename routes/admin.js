@@ -76,6 +76,8 @@ router.post('/updateUser', function(req, res){
 	var qry= 'UPDATE users SET firstName= @firstName, lastName = @lastname, email = @email, cellNumber = @cellNumber, permissionLevel = @permissionLevel WHERE userID = @userID'	
     var qry1 = 'SELECT * FROM users'
 	var qry2 = 'SELECT * FROM project'
+	var updateQry1 = 'SELECT * FROM users WHERE userID = @userID'
+	var updateQry2 = 'UPDATE kmsactionitem SET activityOwner = @activityOwner WHERE activityOwner = @oldActivityOwner'
 	
 	var updateType = 'updateUser'
 	//Establishing connection to the database
@@ -97,16 +99,25 @@ router.post('/updateUser', function(req, res){
 				request.input("cellNumber", sql.VarChar, req.body.cellNumber);
 				request.input("permissionLevel", sql.VarChar, req.body.permissionLevel);
 				request.input("userID", sql.Int, req.body.userID)
+				request.input("activityOwner", sql.VarChar, req.body.firstName + ' ' + req.body.lastName)
 
-				request.query(qry, function (err, resultss, fields) { 
-                    request.query(qry1, function(err, preresults0, fields) {
-                        request.query(qry2, function(err, preresults, fields) {	
+				request.query(updateQry1, function (err, results8, fields) {
+					
+					request.input("oldActivityOwner", sql.VarChar, results8.recordset[0].firstName + ' ' + results8.recordset[0].lastName)
+
+					request.query(updateQry2, function (err, resultsss, fields) {
+						request.query(qry, function (err, resultss, fields) { 
+                    		request.query(qry1, function(err, preresults0, fields) {
+                        		request.query(qry2, function(err, preresults, fields) {	
 														
-							var results0 = preresults0.recordset;
-							var results = preresults.recordset;
+									var results0 = preresults0.recordset;
+									var results = preresults.recordset;
 
-							res.render('admin', {results: results, results0: results0, updateType: updateType, permissionLevel: req.session.permission});	
-							conn.close();				
+									res.render('admin', {results: results, results0: results0, updateType: updateType, permissionLevel: req.session.permission});	
+									conn.close();		
+
+								});
+							});
                         });				              
                     });
                 }); 				
