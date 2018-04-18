@@ -50,6 +50,7 @@ router.post('/updateUser', function (req, res) {
 	var qry = 'UPDATE users SET firstName= @firstName, lastName = @lastname, email = @email, cellNumber = @cellNumber WHERE userID = @userID'
 	var qryy = 'UPDATE users SET firstName= @firstName, lastName = @lastname, email = @email, cellNumber = @cellNumber, password = @password WHERE userID = @userID'
 	var qry1 = 'SELECT * FROM users WHERE userID = @userID'
+	var updateNameqry = 'UPDATE kmsactionitem SET activityOwner = @activityOwner WHERE activityOwner = @oldActivityOwner'
 
 	//Establishing connection to the database
 	const conn = new sql.ConnectionPool(sqlconfig);
@@ -78,12 +79,13 @@ router.post('/updateUser', function (req, res) {
 						console.log("Connection established.");
 
 						request.input("userID", sql.Int, req.body.userID);
+						
 
 						request.query(qry1, function (err, results, fields) {
 
 							res.render('settings', { permissionLevel: req.session.permission, results: results.recordset, errors: errors });
 							conn.close();
-
+							
 						});
 					}
 				});
@@ -105,13 +107,21 @@ router.post('/updateUser', function (req, res) {
 						request.input("email", sql.VarChar, req.body.email);
 						request.input("cellNumber", sql.VarChar, req.body.cellNumber);
 						request.input("userID", sql.Int, req.body.userID)
+						request.input("activityOwner", sql.VarChar, req.body.firstName + ' ' + req.body.lastName)
 
-						request.query(qry, function (err, results0, fields) {
-							request.query(qry1, function (err, results, fields) {
+						request.query(qry1, function (err, results8, fields) {
+							
+							request.input("oldActivityOwner", sql.VarChar, results8.recordset[0].firstName + ' ' + results8.recordset[0].lastName)
 
-								res.render('settings', { permissionLevel: req.session.permission, results: results.recordset });
-								conn.close();
+							request.query(updateNameqry, function (err, resultsss, fields) {
+								request.query(qry, function (err, results0, fields) {
+									request.query(qry1, function (err, results, fields) {
 
+									res.render('settings', { permissionLevel: req.session.permission, results: results.recordset });
+									conn.close();
+
+									});
+								});
 							});
 						});
 					}
@@ -140,6 +150,7 @@ router.post('/updateUser', function (req, res) {
 						console.log("Connection established.");
 
 						request.input("email", sql.VarChar, req.user);
+						
 
 						request.query(qry, function (err, results, fields) {
 
@@ -167,13 +178,21 @@ router.post('/updateUser', function (req, res) {
 						request.input("cellNumber", sql.VarChar, req.body.cellNumber);
 						request.input("userID", sql.Int, req.body.userID);
 						request.input("password", sql.VarChar, hash);
+						request.input("activityOwner", sql.VarChar, req.body.firstName + ' ' + req.body.lastName)
 
-						request.query(qryy, function (err, results0, fields) {
-							request.query(qry1, function (err, results, fields) {
+						request.query(qry1, function (err, results8, fields) {
 
-								res.render('settings', { permissionLevel: req.session.permission, results: results.recordset });
-								conn.close();
+							request.input("oldActivityOwner", sql.VarChar, results8.recordset[0].firstName + ' ' + results8.recordset[0].lastName)
 
+							request.query(updateNameqry, function (err, resultsss, fields) {
+								request.query(qryy, function (err, results0, fields) {
+									request.query(qry1, function (err, results, fields) {
+
+									res.render('settings', { permissionLevel: req.session.permission, results: results.recordset });
+									conn.close();
+									
+									});
+								});
 							});
 						});
 					}
