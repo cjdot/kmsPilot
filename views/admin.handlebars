@@ -159,7 +159,7 @@
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/admin/updateUser">Update</button>
                             </td>
                             <td>
-                                <button type="submit" name="actionType" class="form-control" value="Delete" formAction="/admin/deleteUser">Delete</button>
+                                <button type="submit" name="actionType" class="form-control" value="Delete" onclick="deleteFunction()" formAction="/admin/deleteUser">Delete</button>
                             </td>
                     </tr>
                 </form>
@@ -367,7 +367,7 @@
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/admin/updateProject">Update</button>
                             </td>
                             <td>
-                                <button type="submit" name="actionType" class="form-control" value="Delete" formAction="/admin/deleteProject">Delete</button>
+                                <button type="submit" name="actionType" class="form-control" value="Delete" onclick="deleteFunction()" formAction="/admin/deleteProject">Delete</button>
                             </td>
                         </tr>
                         </form>
@@ -423,5 +423,11 @@
         RegExp.escape = function(s) {
             return String(s).replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
         };
+    }
+</script>
+
+<script>
+    function deleteFunction() {
+        confirm("Are you sure you wish to delete this item?");
     }
 </script>

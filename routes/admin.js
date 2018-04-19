@@ -275,6 +275,7 @@ router.post('/deleteProject', ensureAuthenticated, function(req, res){
 
 	
 	var delqry1 = 'DELETE FROM projectactivity WHERE projectID = @projectID'
+	var delqry7 = 'DELETE FROM lineitem WHERE projectID = @projectID'
 	var delqry2 = 'DELETE FROM kmsActionItem WHERE projectID = @projectID'
 	var delqry3 = 'DELETE FROM externalactionitem WHERE projectID = @projectID'
 	var delqry4 = 'DELETE FROM costsummary WHERE projectID = @projectID'
@@ -302,22 +303,25 @@ router.post('/deleteProject', ensureAuthenticated, function(req, res){
 				request.input("projectID", sql.Int, req.body.projectID);
 
 				request.query(delqry1, function (err, resultss, fields) { 
+					request.query(delqry7, function (err, resultssss, fields) { 
 					request.query(delqry2, function (err, resultss, fields) { 
 						request.query(delqry3, function (err, resultss, fields) {
 							request.query(delqry4, function (err, resultss, fields) {
 								request.query(delqry5, function (err, resultss, fields) {
 									request.query(delqry6, function (err, resultss, fields) {
-										if(err){console.log(err)}
+										
 										request.query(delqry, function (err, resultss, fields) {	
-											if(err){console.log(err)}									
+																				
 											request.query(qry1, function(err, preresults0, fields) {
                         						request.query(qry2, function(err, preresults, fields) {	
 							
-													var results = preresults.recordset;
-													var results0 = preresults0.recordset;
+														var results = preresults.recordset;
+														var results0 = preresults0.recordset;
 							
-													res.render('admin', {results: results, results0: results0, updateType: updateType, permissionLevel: req.session.permission});	
-													conn.close();
+														res.render('admin', {results: results, results0: results0, updateType: updateType, permissionLevel: req.session.permission});	
+														conn.close();
+
+													});
 												});
 											});
 										});
