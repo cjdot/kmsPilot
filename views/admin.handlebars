@@ -101,6 +101,7 @@
                     <td><select class="form-control mb-2" name="permission">
                         <option value="read"> Read </option>
                         <option value="write"> Write </option>
+                        <option value="project manager"> Project Manager </option>
                         <option value="admin"> Admin </option>
                     </select></td>                   
                 </div>
@@ -151,6 +152,7 @@
                                 <select class="form-control" name="permissionLevel" id="permissionLevel">
                                     <option value = "read" {{#ifEquals permissionLevel 'read'}} selected {{/ifEquals}}>Read</option>
                                     <option value = "write" {{#ifEquals permissionLevel 'write'}} selected {{/ifEquals}}>Write</option>
+                                    <option value = "project manager" {{#ifEquals permissionLevel 'project manager'}} selected {{/ifEquals}}>Project Manager</option>
                                     <option value = "admin" {{#ifEquals permissionLevel 'admin'}} selected {{/ifEquals}}>Admin</option>
                                 </select>
                                 

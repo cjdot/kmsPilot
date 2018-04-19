@@ -3,6 +3,11 @@
 <button type="button" class="btn btn-active"><a href="/projects/allOpenProjects">All Open Projects</a></button>
 <button type="button" class="btn btn-active"><a href="/projects/allClosedProjects">All Closed Projects</a></button>
 {{/ifEquals}}
+
+{{#ifEquals permissionLevel 'project manager'}}
+<button type="button" class="btn btn-active"><a href="/projects/allOpenProjects">All Open Projects</a></button>
+<button type="button" class="btn btn-active"><a href="/projects/allClosedProjects">All Closed Projects</a></button>
+{{/ifEquals}}
 <button type="button" class="btn btn-active"><a href="/projects/myOpenProjects">My Open Projects</a></button>
 <button type="button" class="btn btn-active"><a href="/projects/myClosedProjects">My Closed Projects</a></button>
 <br> <br>

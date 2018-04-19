@@ -33,7 +33,7 @@ router.get('/', ensureAuthenticated, function(req, res){
 
     console.log(req.session.permission)
 
-	if(req.session.permission != 'admin') { res.redirect('/') }
+	if(req.session.permission != 'admin' || req.session.permission != 'project manager') { res.redirect('/') }
 	else {
 	var qry1 = 'SELECT * FROM users'
 	var qry2 = 'SELECT * FROM project'

@@ -74,6 +74,11 @@
             <a class="nav-link fontbigger" align="right" href="/admin">Admin Console&nbsp;&nbsp;<i class="fa fa-lock" aria-hidden="true"></i></a>
           </li>
           {{/ifEquals}}
+          {{#ifEquals permissionLevel 'project manager'}}
+          <li class="nav-item">
+            <a class="nav-link fontbigger" align="right" href="/admin">Admin Console&nbsp;&nbsp;<i class="fa fa-lock" aria-hidden="true"></i></a>
+          </li>
+          {{/ifEquals}}
         </ul>
         
       </nav>
