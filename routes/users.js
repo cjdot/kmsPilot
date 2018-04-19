@@ -77,10 +77,11 @@ router.post('/register', function(req, res){
 	req.checkBody('permission', 'Permission Level is required').notEmpty();
 
 	var errors = req.validationErrors();
+	
 	var qry= 'INSERT INTO users (firstName, lastName, email, password, cellNumber, permissionLevel) VALUES( @firstName, @lastName, @email, @password, @cellNumber, @permissionLevel )'
 	var qry1 = 'SELECT * FROM users'
 	var qry2 = 'SELECT * FROM project'
-	
+	var preqry1 = 'SELECT * FROM users WHERE email = @email'
 	//This code below hashes the password to store in database
 	let hash = bcrypt.hashSync(password, 10);
 	var updateType = 'updateUser'
@@ -111,19 +112,38 @@ router.post('/register', function(req, res){
 					request.input("cellNumber", sql.VarChar, req.body.phoneNumber);
 					request.input("permissionLevel", sql.VarChar, req.body.permission);
 					
-					request.query(qry, function (err, preresults0) {
+					request.query(preqry1, function (err, resultss) {
 						request.query(qry1, function (err, preresults1) {
 							request.query(qry2, function (err, preresults2) {
-							
+								
 								var results0 = preresults1.recordset;
 								var results = preresults2.recordset;
+								console.log(resultss.recordset.length)
+							
+								if (resultss.recordset.length == 0){
+									request.query(qry, function (err, preresults0) {
+									
+										var results0 = preresults1.recordset;
+										var results = preresults2.recordset;
+										
+												
+										res.render('admin', { results0:results0, results:results, updateType: updateType, permissionLevel: req.session.permission});	
+										conn.close();	
+								
+									});
+						
+								} 
+								else {							
+									
+									var temperr = 'Email must be unique'
 
-								req.flash('success_msg', 'New User has been registered');		
-								res.render('admin', {results0:results0, results:results, updateType: updateType});	
-								conn.close();	
-
+									res.render('admin', {errors: temperr, results0:results0, results:results, updateType: updateType, permissionLevel: req.session.permission});
+									
+							}
 							});		
 						});
+						
+						
 					}); 				
 				}
 			});
