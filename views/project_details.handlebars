@@ -2279,7 +2279,7 @@
                                 <input type="text" class="form-control" id="pcoNumber" name="pcoNumber" value="{{pcoNumber}}" style="width: 50px">
                             </td>
                             <td>
-                                <textarea class="form-control" id="pcoDescription" name="pcoDescription" value="{{pcoDescription}}" style="width: 150px" rows="1"></textarea> 
+                                <textarea class="form-control" id="pcoDescription" name="pcoDescription" style="width: 150px" rows="1">{{pcoDescription}}</textarea> 
                             </td>
                             <td>
                                 <input type="date" class="form-control" id="dueDate" name="dueDate" value="{{#if dueDate}}{{formatTime dueDate "YYYY-MM-DD"}}{{/if}}" style="width: 165px"> 
@@ -2314,7 +2314,7 @@
                                 </select>
                             </td>
                             <td>
-                                <textarea  class="form-control" id="comments" name="comments" value="{{comments}}" rows="1" style="width: 200px"></textarea>
+                                <textarea  class="form-control" id="comments" name="comments" rows="1" style="width: 200px">{{comments}}</textarea>
                             </td>
                             <td>
                                 <button type="submit" name="actionType" class="form-control" value="Update" formAction="/projects/updatePCO">Update</button>
