@@ -141,6 +141,41 @@
             </tbody>
         </table>
         {{/ifEquals}}
+
+        {{#ifEquals permissionLevel 'project manager'}}
+        <table class="table table-bordered " style="float: left; width: 600px;" >   
+            <tbody>          
+                <tr>
+                    <td class="costsummarystyle" style="font-size: 20px;"><strong>Add Team Members:</strong></td>
+                    <td  align="center" class="costsummarystyle">
+                        <form action="/projects/newProjectAssignment" method="POST">
+                        {{#each results}}<input type= "hidden" name="projectID", id="projectID" value="{{projectID}}">{{/each}}
+                        <select class="form-control" name="projectAssignment" id="projectAssignment" onchange="this.form.submit()">
+                            <option value=""></option>
+                            {{#each results12}}
+                                    <option value="{{userID}}">{{name}}</option>
+                                    
+                            {{/each}}
+                        </select>
+                        </form>
+                    </td>
+                </tr>   
+                {{#each results13}}       
+                <tr>
+                    <form action="/projects/deleteProjectAssignment" method="POST">
+                    <input type= "hidden" name="projectID", id="projectID" value="{{projectID}}">
+                    <input type= "hidden" name="userID", id="userID" value="{{userID}}">
+                    <td class="costsummarystyle" style="font-size: 20px;">{{firstName}} {{lastName}}</td>
+                    <td>
+                    <button type="submit" name="actionType" class="form-control" value="DELETE">Remove</button>
+                    </td>
+                    </form>
+                </tr>  
+                {{/each}}
+            </tbody>
+        </table>
+        {{/ifEquals}}
+
          {{#ifEquals permissionLevel 'write'}}
        
 
