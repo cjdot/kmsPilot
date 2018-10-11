@@ -19,7 +19,7 @@
     "express-messages": "*",
     "express-mysql-session": "*",
     "express-session": "*",
-    "express-validator": "*",
+    "express-validator": "5.0.0",
     "handlebars-intl": "*",
     "moment": "*",
     "mssql": "*",
