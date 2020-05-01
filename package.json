@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "Capstone Team 5",
   "license": "ISC",
@@ -30,6 +32,8 @@
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
-    "handlebars.numeral": "*"
-  }
+    "handlebars.numeral": "*",
+    "snyk": "^1.316.1"
+  },
+  "snyk": true
 }
