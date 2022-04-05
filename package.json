@@ -21,7 +21,7 @@
     "express-session": "*",
     "express-validator": "*",
     "handlebars-intl": "*",
-    "moment": "*",
+    "moment": "2.29.2",
     "mssql": "*",
     "mssql-session-store": "*",
     "mysql2": "*",
