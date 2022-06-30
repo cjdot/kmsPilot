@@ -27,7 +27,7 @@
     "mysql2": "*",
     "node-cron": "^1.2.1",
     "nodemailer": "^4.6.4",
-    "passport": "*",
+    "passport": "0.6.0",
     "passport-http": "*",
     "passport-local": "*",
     "handlebars.numeral": "*"
