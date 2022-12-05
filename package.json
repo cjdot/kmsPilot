@@ -11,10 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "*",
-    "body-parser": "*",
+    "body-parser": "1.19.2",
     "connect-flash": "*",
     "cookie-parser": "^1.4.1",
-    "express": "*",
+    "express": "4.17.3",
     "express-handlebars": "*",
     "express-messages": "*",
     "express-mysql-session": "*",
