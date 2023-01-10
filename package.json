@@ -22,7 +22,7 @@
     "express-validator": "*",
     "handlebars-intl": "*",
     "moment": "*",
-    "mssql": "*",
+    "mssql": "4.2.0",
     "mssql-session-store": "*",
     "mysql2": "*",
     "node-cron": "^1.2.1",
