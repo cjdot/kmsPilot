@@ -24,7 +24,7 @@
     "moment": "*",
     "mssql": "*",
     "mssql-session-store": "*",
-    "mysql2": "*",
+    "mysql2": "3.9.4",
     "node-cron": "^1.2.1",
     "nodemailer": "^4.6.4",
     "passport": "*",
