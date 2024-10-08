@@ -17,7 +17,7 @@
     "express": "*",
     "express-handlebars": "*",
     "express-messages": "*",
-    "express-mysql-session": "*",
+    "express-mysql-session": "3.0.0",
     "express-session": "*",
     "express-validator": "*",
     "handlebars-intl": "*",
